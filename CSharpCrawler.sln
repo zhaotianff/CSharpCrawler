@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_GetHTMLSourceCode", "1_GetHTMLSourceCode\1_GetHTMLSourceCode.csproj", "{72FBCE46-6AC5-4E77-93F6-A62295F3B6EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_SgmlReaderDemo", "2_SgmlReaderDemo\2_SgmlReaderDemo.csproj", "{34BBDEE3-8C5E-46B8-B73E-2F78CA444135}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72FBCE46-6AC5-4E77-93F6-A62295F3B6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FBCE46-6AC5-4E77-93F6-A62295F3B6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FBCE46-6AC5-4E77-93F6-A62295F3B6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FBCE46-6AC5-4E77-93F6-A62295F3B6EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34BBDEE3-8C5E-46B8-B73E-2F78CA444135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34BBDEE3-8C5E-46B8-B73E-2F78CA444135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34BBDEE3-8C5E-46B8-B73E-2F78CA444135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34BBDEE3-8C5E-46B8-B73E-2F78CA444135}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

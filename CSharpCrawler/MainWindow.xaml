@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="C#网络爬虫示例程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="F:\我的文档\Codes\ImageSource\第二季语文作业\luoli_878.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="timg.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>

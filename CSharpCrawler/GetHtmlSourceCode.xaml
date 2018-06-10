@@ -16,7 +16,7 @@
             <Label Content="网址" VerticalContentAlignment="Center"/>
             <TextBox Margin="40,0,180,0" Name="tbx_Url" VerticalContentAlignment="Center"/>
             <Button Content="同步方式获取" HorizontalAlignment="Right" Margin="0,0,90,0" Name="btn_Sync" Click="btn_Sync_Click"/>
-            <Button Content="异常方式获取" HorizontalAlignment="Right" Name="btn_Async" Click="btn_Async_Click"/>
+            <Button Content="异步方式获取" HorizontalAlignment="Right" Name="btn_Async" Click="btn_Async_Click"/>
         </Grid>
         
         <RichTextBox Grid.Row="1" Name="rtbx_Content" ScrollViewer.VerticalScrollBarVisibility="Auto"/>

@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Util\Urls.cs" />
     <Page Include="GetHtmlSourceCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

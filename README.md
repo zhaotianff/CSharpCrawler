@@ -7,7 +7,7 @@
 </ul>
 
 ### 开发环境
-Visual Studio 2013 + .Net 4.5
+Visual Studio 2013 + .Net 4.5<br/>
 需要安装Expression Blend，否则会提示System.Windows.Interactivity dll找不到
 
 ### 软件截图

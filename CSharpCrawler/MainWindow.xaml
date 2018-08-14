@@ -1,19 +1,10 @@
 ﻿<Window x:Class="CSharpCrawler.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="C#网络爬虫示例程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
-    <Window.Background>
-        <ImageBrush ImageSource="timg.jpg" Stretch="UniformToFill"/>
-    </Window.Background>
+        Title="C#网络爬虫程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}">
+  
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <WrapPanel>
-            <Button Content="获取网页源代码" Name="btn_GetHtmlSourceCode" Click="btn_GetHtmlSourceCode_Click"/>
-
-        </WrapPanel>
-        <Frame Grid.Column="1" Name="main"/>
+       
+       
     </Grid>
 </Window>

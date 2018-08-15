@@ -2,9 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="C#网络爬虫程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}">
-  
     <Grid>
-       
-       
+        <TabControl>
+            <TabControl.Background>
+                <SolidColorBrush Color="White" Opacity=".3"/>
+            </TabControl.Background>
+            <TabItem Header="图片抓取">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Canvas Grid.Row="0">
+                        <Label Content="Url" Height="30" VerticalContentAlignment="Center" Canvas.Left="10"/>
+                        <TextBox Width="700" Height="30" VerticalContentAlignment="Center" Canvas.Left="50"/>
+                        <Button Width="88" Height="28" Content="Surfing" Canvas.Left="780" Canvas.Top="1" Name="btn_Surfing" Click="btn_Surfing_Click"/>
+                    </Canvas>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

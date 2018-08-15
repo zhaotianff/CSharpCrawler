@@ -36,27 +36,27 @@
 
     <DataTemplate x:Key="Minimize">
         <Grid>
-            <Path Data="M 7.2 14.2 L19.2 14.2" Width="26.4"  Height="26.4" VerticalAlignment="Center"  HorizontalAlignment="Center"  Stroke="Black" StrokeThickness="1" />
+            <Path Data="M 7.2 14.2 L19.2 14.2" Width="26.4"  Height="26.4" VerticalAlignment="Center"  HorizontalAlignment="Center"  Stroke="White" StrokeThickness="1" />
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="Maximize">
         <Grid>
-            <Rectangle Width="10" Height="10" Stroke="Black" StrokeThickness="1" Margin="0,1,0,0"/>
+            <Rectangle Width="10" Height="10" Stroke="White" StrokeThickness="1" Margin="0,1,0,0"/>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="Restore">
         <Grid>
-            <Rectangle Width="10" Height="10" Stroke="Black" StrokeThickness="1" Margin="0,3,3,0"/>
-            <Rectangle Width="8" Height="8" Stroke="Black" StrokeThickness="1" Margin="5,0,0,5"/>
+            <Rectangle Width="10" Height="10" Stroke="White" StrokeThickness="1" Margin="0,3,3,0"/>
+            <Rectangle Width="8" Height="8" Stroke="White" StrokeThickness="1" Margin="5,0,0,5"/>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="Close">
         <Grid Width="15.6" Height="15.4">
-            <Path Data="M 12,12 L16.4,16.4"  Stretch="Fill" Stroke="Black" StrokeThickness="1"/>
-            <Path Data="M 12,16.4 L 16.4,12 "  Stretch="Fill" Stroke="Black" StrokeThickness="1"/>
+            <Path Data="M 12,12 L16.4,16.4"  Stretch="Fill" Stroke="White" StrokeThickness="1"/>
+            <Path Data="M 12,16.4 L 16.4,12 "  Stretch="Fill" Stroke="White" StrokeThickness="1"/>
         </Grid>
     </DataTemplate>
 

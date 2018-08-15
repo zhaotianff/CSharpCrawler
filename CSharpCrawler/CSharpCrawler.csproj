@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Util\Urls.cs" />
     <Compile Include="Util\WebUtil.cs" />
     <Page Include="MainWindow.xaml">
@@ -114,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ScreenShots\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="HTTP相关.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

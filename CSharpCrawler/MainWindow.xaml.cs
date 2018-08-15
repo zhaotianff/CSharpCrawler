@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,5 +81,9 @@ namespace CSharpCrawler
         }
         #endregion
 
+        private async void btn_Surfing_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

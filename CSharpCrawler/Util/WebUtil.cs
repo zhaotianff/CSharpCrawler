@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using CSharpCrawler.Model;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace CSharpCrawler.Util
 {
@@ -17,6 +18,7 @@ namespace CSharpCrawler.Util
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     return new HttpHeader()
@@ -42,19 +44,38 @@ namespace CSharpCrawler.Util
             return GetHeader(url).StatusCode == HttpStatusCode.OK;
         }
 
-        public static async Task<string> GetHtmlSource(string url,Encoding encoding)
+        public static async Task<string> GetHtmlSource(string url,Encoding encoding = null)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             WebResponse response =await request.GetResponseAsync();
+
+            string encodingStr = ((HttpWebResponse)response).CharacterSet;
+            Encoding tempEncoding;
+
+            if(encoding == null)
+            {
+                tempEncoding = Encoding.GetEncoding(encodingStr);
+            }
+            else
+            {
+                tempEncoding = encoding;
+            }
+
             
             using (Stream stream = response.GetResponseStream())
             {
-                using (StreamReader sr = new StreamReader(stream, encoding))
+                using (StreamReader sr = new StreamReader(stream, tempEncoding))
                 {
                     return sr.ReadToEnd();
                 }
             }                       
         }
+
+        public static string GetHtmlEncoding(string url)
+        {
+            return "";
+        }
+
 
 
         public async Task<List<string>> FetchImage(string source)
@@ -64,6 +85,19 @@ namespace CSharpCrawler.Util
             await Task.Run(()=> {
 
             });
+
+            return list;
+        }
+
+        public static List<string> MatchResult(string html,string pattern)
+        {
+            List<string> list = new List<string>();
+            MatchCollection mc = Regex.Matches(html, pattern);
+
+            foreach (Match item in mc)
+            {
+                list.Add(item.Value);
+            }
 
             return list;
         }

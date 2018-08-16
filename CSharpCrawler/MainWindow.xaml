@@ -17,7 +17,7 @@
 
                     <Canvas Grid.Row="0">
                         <Label Content="Url" Height="30" VerticalContentAlignment="Center" Canvas.Left="10"/>
-                        <TextBox Width="700" Height="30" VerticalContentAlignment="Center" Canvas.Left="50"/>
+                        <TextBox Width="700" Height="30" VerticalContentAlignment="Center" Canvas.Left="50" Name="tbox_Url"/>
                         <Button Width="88" Height="28" Content="Surfing" Canvas.Left="780" Canvas.Top="1" Name="btn_Surfing" Click="btn_Surfing_Click"/>
                     </Canvas>
                 </Grid>

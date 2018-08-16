@@ -1,4 +1,5 @@
-﻿using CSharpCrawler.Util;
+﻿using CSharpCrawler.Model;
+using CSharpCrawler.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,9 +82,9 @@ namespace CSharpCrawler
         }
         #endregion
 
-        private async void btn_Surfing_Click(object sender, RoutedEventArgs e)
+        private async  void btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
-            
+            string encoding = WebUtil.GetHeader(this.tbox_Url.Text).ContentEncoding;
         }
     }
 }

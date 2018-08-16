@@ -1,0 +1,15 @@
+﻿1、HTTP 1.1提供的请求方法
+
+GET   请求获取特定的资源 
+POST  请求向指定资源提交数据进行处理（提交表单或上传文件等），请求的数据被包含在请求体里
+PUT   向指定资源位置上传其最新内容
+
+2、HTTP常用状态码
+200 OK
+304 NOT MODIFIED
+401 UNAUTHORIZED
+403 FORBIDDEN
+404 NOT FOUND
+405 METHOD NOT ALLOWED
+501 NOT IMPLEMENTED
+

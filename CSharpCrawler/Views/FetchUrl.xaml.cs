@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 
 using CSharpCrawler.Model;
 using CSharpCrawler.Util;
+using System.Threading;
 
 namespace CSharpCrawler.Views
 {
@@ -26,8 +27,12 @@ namespace CSharpCrawler.Views
     public partial class FetchUrl : Page
     {
         ObservableCollection<UrlStruct> urlCollection = new ObservableCollection<UrlStruct>();
+        List<UrlStruct> ToVisitList = new List<UrlStruct>();
+        List<UrlStruct> VisitedList = new List<UrlStruct>();
+
         object obj = new object();
         int globalIndex = 1;
+        string globalUrl = "";
 
         public FetchUrl()
         {
@@ -71,23 +76,20 @@ namespace CSharpCrawler.Views
         {
             Reset();
 
-            string html = await WebUtil.GetHtmlSource(url);
-
-            MatchCollection mc = RegexUtil.Match(html, RegexPattern.TagAPattern);
-            foreach (Match item in mc)
+            try
             {
-                AddToCollection(new UrlStruct() { Description = "", Id = globalIndex, Status = "", Url = item.Value });
-                System.Threading.Interlocked.Increment(ref globalIndex);
-            }
+                globalUrl = url;
+                string html = await WebUtil.GetHtmlSource(url);
 
-            mc = Regex.Matches(html, RegexPattern.MatchUrlWithHttpsPattern,RegexOptions.Multiline);
-            foreach (Match item in mc)
+                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrl));
+                extractThread.IsBackground = true;
+                extractThread.Start(html);
+            }
+            catch(Exception ex)
             {
-                AddToCollection(new UrlStruct() { Description = "", Id = globalIndex, Status = "", Url = item.Value });
-                System.Threading.Interlocked.Increment(ref globalIndex);
+                //TODO
+                ShowStatusText(ex.Message);
             }
-
-            ShowStatusText("");
         }
 
 
@@ -95,7 +97,12 @@ namespace CSharpCrawler.Views
         {
             lock(obj)
             {
-                urlCollection.Add(urlStruct);
+                var query = urlCollection.Where(x=>x.Url == urlStruct.Url).FirstOrDefault();
+                if (query != null)
+                    return;
+                Dispatcher.Invoke(()=> {
+                    urlCollection.Add(urlStruct);
+                }); 
             }
         }
 
@@ -109,6 +116,34 @@ namespace CSharpCrawler.Views
         {
             ClearCollection();
             globalIndex = 1;
+            ShowStatusText("");
+        }
+
+        private void ExtractUrl(object html)
+        {
+            string value = "";
+
+            MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagAPattern);
+            foreach (Match item in mc)
+            {
+                value = item.Groups["url"].Value;
+
+                if (value.StartsWith("http://") || value.StartsWith("https://") || value.StartsWith("ftp://"))
+                {
+                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = item.Groups["url"].Value });
+                    IncrementCount();
+                }
+                else if(value.StartsWith("/"))
+                {
+                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url =globalUrl + item.Groups["url"].Value });
+                    IncrementCount();
+                }
+            }       
+        }
+
+        private void IncrementCount()
+        {
+            System.Threading.Interlocked.Increment(ref globalIndex);
         }
     }
 }

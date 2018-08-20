@@ -46,38 +46,47 @@ namespace CSharpCrawler.Util
 
         public static async Task<string> GetHtmlSource(string url,Encoding encoding = null)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            WebResponse response =await request.GetResponseAsync();
-
-            string encodingStr = ((HttpWebResponse)response).CharacterSet;
-
-            if (encodingStr == "ISO-8859-1")
-                encodingStr = "utf-8";
-
-            Encoding tempEncoding;
-
-            if(encoding == null)
+            try
             {
-                tempEncoding = Encoding.GetEncoding(encodingStr);
-            }
-            else
-            {
-                tempEncoding = encoding;
-            }
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                WebResponse response = await request.GetResponseAsync();
 
-            
-            using (Stream stream = response.GetResponseStream())
-            {
-                using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                string encodingStr = GetHtmlEncoding(url);
+
+                Encoding tempEncoding;
+
+                if (encoding == null)
                 {
-                    return sr.ReadToEnd();
+                    tempEncoding = Encoding.GetEncoding(encodingStr);
                 }
-            }                       
+                else
+                {
+                    tempEncoding = encoding;
+                }
+
+
+                using (Stream stream = response.GetResponseStream())
+                {
+                    using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }                   
         }
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string GetHtmlEncoding(string url)
         {
-            return "";
+            return "utf-8";
         }
 
 
@@ -89,19 +98,6 @@ namespace CSharpCrawler.Util
             await Task.Run(()=> {
 
             });
-
-            return list;
-        }
-
-        public static List<string> MatchResult(string html,string pattern)
-        {
-            List<string> list = new List<string>();
-            MatchCollection mc = Regex.Matches(html, pattern);
-
-            foreach (Match item in mc)
-            {
-                list.Add(item.Value);
-            }
 
             return list;
         }

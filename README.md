@@ -4,7 +4,7 @@
 
 ### 功能介绍
 <ul>
-  <li>Url抓取></li>
+  <li>Url抓取</li>
   <li>图片抓取</li>
 </ul>
 

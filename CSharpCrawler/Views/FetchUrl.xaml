@@ -1,0 +1,42 @@
+﻿<Page x:Class="CSharpCrawler.Views.FetchUrl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CSharpCrawler.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="FetchUrl">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
+            <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0"/>
+            <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click"/>
+            <TextBox VerticalContentAlignment="Center" Name="tbox_Url"/>
+        </DockPanel>
+
+        <ListView Grid.Row="1" Name="listview_Url">
+            <ListView.Background>
+                <SolidColorBrush Color="White" Opacity=".6"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
+                    <GridViewColumn Header="链接" DisplayMemberBinding="{Binding Url}" Width="1000"/>
+                    <GridViewColumn Header="状态" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+        </Grid>
+        
+    </Grid>
+</Page>

@@ -50,6 +50,10 @@ namespace CSharpCrawler.Util
             WebResponse response =await request.GetResponseAsync();
 
             string encodingStr = ((HttpWebResponse)response).CharacterSet;
+
+            if (encodingStr == "ISO-8859-1")
+                encodingStr = "utf-8";
+
             Encoding tempEncoding;
 
             if(encoding == null)

@@ -8,6 +8,11 @@ namespace CSharpCrawler.Util
 {
     class RegexPattern
     {
-        public static string HTTPUrlPattern = "<a(\\s+(href=\"(?<url>([^\"])*)\"|'([^'])*'|\\w+=\"(([^\"])*)\"|'([^'])*'))+>(?<text>(.*?))</a>";
+        //匹配网址 RegexOptions.Multiline
+        public static string MatchUrlWithHttpPattern = "^http://\\w+\\.\\w+\\.(cn|com|org|gov|net|top|club|xin|xyz|vip|cc|com\\.cn|gov\\.cn)$";
+        public static string MatchUrlWithHttpsPattern = "^https://\\w+\\.\\w+\\.(cn|com|org|gov|net|top|club|xin|xyz|vip|cc|com\\.cn|gov\\.cn)$";
+        public static string MatchUrlNoHttpPattern = "^\\w+\\.\\w+\\.(cn|com|org|gov|net|top|club|xin|xyz|vip|cc|com\\.cn|gov\\.cn)$";
+
+        public static string TagAPattern = "<a(\\s+(href=\"(?<url>([^\"])*)\"|'([^'])*'|\\w+=\"(([^\"])*)\"|'([^'])*'))+>(?<text>(.*?))</a>";
     }
 }

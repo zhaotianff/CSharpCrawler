@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using CSharpCrawler.Views;
+
 namespace CSharpCrawler
 {
     /// <summary>
@@ -21,6 +23,9 @@ namespace CSharpCrawler
     /// </summary>
     public partial class MainWindow : Window
     {
+        FetchImage imagePage = new FetchImage();
+        FetchUrl urlPage = new FetchUrl();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -82,9 +87,14 @@ namespace CSharpCrawler
         }
         #endregion
 
-        private async  void btn_Surfing_Click(object sender, RoutedEventArgs e)
+        private void btn_FetchUrl_Click(object sender, RoutedEventArgs e)
         {
-            string encoding = WebUtil.GetHeader(this.tbox_Url.Text).ContentEncoding;
+            this.frame.Content = urlPage;
+        }
+
+        private void btn_FetchImage_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = imagePage;
         }
     }
 }

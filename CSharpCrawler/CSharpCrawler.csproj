@@ -58,8 +58,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\UrlStruct.cs" />
+    <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
     <Compile Include="Util\Urls.cs" />

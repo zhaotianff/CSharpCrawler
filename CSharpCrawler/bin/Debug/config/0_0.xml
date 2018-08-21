@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Crawler>
+	<FetchUrl>
+		<Depth>1</Depth>
+		<IgnoreUrlCheck>1</IgnoreUrlCheck>
+	</FetchUrl>
+</Crawler>

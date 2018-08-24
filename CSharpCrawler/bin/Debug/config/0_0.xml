@@ -2,6 +2,6 @@
 <Crawler>
 	<FetchUrl>
 		<Depth>1</Depth>
-		<IgnoreUrlCheck>1</IgnoreUrlCheck>
+		<IgnoreUrlCheck>true</IgnoreUrlCheck>
 	</FetchUrl>
 </Crawler>

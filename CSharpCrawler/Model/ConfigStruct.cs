@@ -18,7 +18,7 @@ namespace CSharpCrawler.Model
     struct FetchUrlConfig
     {
         public string Depth;
-        public string IgnoreUrlCheck;
+        public bool IgnoreUrlCheck;
     }
 
     struct FetchImageConfig

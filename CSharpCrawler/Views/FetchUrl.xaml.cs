@@ -30,6 +30,8 @@ namespace CSharpCrawler.Views
         List<UrlStruct> ToVisitList = new List<UrlStruct>();
         List<UrlStruct> VisitedList = new List<UrlStruct>();
 
+        GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
+
         object obj = new object();
         int globalIndex = 1;
         string globalUrl = "";
@@ -51,10 +53,13 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-            if(RegexUtil.IsUrl(url,out isStartWithHttp) == false)
+            if (globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck == false)
             {
-                ShowStatusText("网址输入有误");
-                return;
+                if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
+                {
+                    ShowStatusText("网址输入有误");
+                    return;
+                }
             }
 
             if(isStartWithHttp == false)

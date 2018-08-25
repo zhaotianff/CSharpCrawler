@@ -17,19 +17,40 @@
         <DockPanel>
             <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
             <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0"/>
-            <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0"/>
-            <TextBox VerticalContentAlignment="Center"  Name="tbox_Page1"/>
+            <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click"/>
+            <TextBox VerticalContentAlignment="Center"  Name="tbox_Url"/>
         </DockPanel>
 
-        <ListView Grid.Row="1">
-            <ListView.Background>
-                <SolidColorBrush Color="White" Opacity=".6"/>
-            </ListView.Background>
-            <ListView.View>
-                <GridView>
-                   
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged">
+                <ListView.Background>
+                    <SolidColorBrush Color="White" Opacity=".6"/>
+                </ListView.Background>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="链接" Width="700" DisplayMemberBinding="{Binding Url}"/>
+                        <GridViewColumn Header="标题" Width="200" DisplayMemberBinding="{Binding Title}"/>
+                        <GridViewColumn Header="状态" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Grid.Column="1">
+                <Label Height="30"/>
+                <Label Height="30"/>
+                <Label Height="30"/>
+                <Label Height="120"/>
+                <Image Height="500" Name="imgage_Thumbnail" Stretch="Uniform"></Image>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+        </Grid>
     </Grid>
 </Page>

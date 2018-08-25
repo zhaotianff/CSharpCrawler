@@ -56,22 +56,33 @@ namespace CSharpCrawler.Util
             FetchUrlConfig urlConfig = new FetchUrlConfig()
             {
                 Depth = "1",
-                IgnoreUrlCheck = true
+                IgnoreUrlCheck = false
             };
             FetchImageConfig imageConfig = new FetchImageConfig()
             {
-                
+                Depth = "1",
+                IgnoreUrlCheck = false,
+                MaxResolution = "0",
+                MinResolution = "0",
+                MaxSize = 0,
+                MinSize = 0
             };
 
             try
             {
                 XDocument doc = XDocument.Load(ConfigPath);
                 XElement eleUrl = doc.Root.Element("FetchUrl");
+                XElement eleImage = doc.Root.Element("FetchImage");
 
                 urlConfig.Depth = eleUrl.Element("Depth").Value;
                 urlConfig.IgnoreUrlCheck = Convert.ToBoolean(eleUrl.Element("IgnoreUrlCheck").Value);
 
-
+                imageConfig.Depth = eleImage.Element("Depth").Value;
+                imageConfig.IgnoreUrlCheck = Convert.ToBoolean(eleImage.Element("IgnoreUrlCheck").Value);
+                imageConfig.MaxResolution = eleImage.Element("MaxResolution").Value;
+                imageConfig.MinResolution = eleImage.Element("MinResolution").Value;
+                imageConfig.MinSize = Convert.ToInt32(eleImage.Element("MinSize").Value);
+                imageConfig.MaxSize = Convert.ToInt32(eleImage.Element("MaxSize").Value);
             }
             catch(Exception ex)
             {

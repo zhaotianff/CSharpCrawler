@@ -27,7 +27,16 @@ namespace CSharpCrawler.Util
             return result;
         }
 
-        public static MatchCollection Match(string text,string pattern)
+        public static bool IsUrl(string urlStr)
+        {
+            if (Regex.IsMatch(urlStr, RegexPattern.MatchUrlNoHttpPattern)
+                || Regex.IsMatch(urlStr, RegexPattern.MatchUrlWithHttpPattern)
+                || Regex.IsMatch(urlStr, RegexPattern.MatchUrlWithHttpsPattern))
+                return true;
+            return false;
+        }
+
+        public static MatchCollection Match(string text, string pattern)
         {
             return Regex.Matches(text, pattern);
         }

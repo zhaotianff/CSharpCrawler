@@ -53,6 +53,7 @@ namespace CSharpCrawler.Views
                 return;
             }
 
+            //判断Url
             if (globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck == false)
             {
                 if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
@@ -60,13 +61,14 @@ namespace CSharpCrawler.Views
                     ShowStatusText("网址输入有误");
                     return;
                 }
+
+                if (isStartWithHttp == false)
+                {
+                    url = "http://" + url;
+                }
             }
 
-            if(isStartWithHttp == false)
-            {
-                url = "http://" + url;
-            }
-
+            Reset();
             Surfing(url);
         }
 
@@ -78,9 +80,7 @@ namespace CSharpCrawler.Views
         }
 
         public async void Surfing(string url)
-        {
-            Reset();
-
+        {  
             try
             {
                 globalUrl = url;
@@ -107,6 +107,7 @@ namespace CSharpCrawler.Views
                     return;
                 Dispatcher.Invoke(()=> {
                     urlCollection.Add(urlStruct);
+                    ToVisitList.Add(urlStruct);
                 }); 
             }
         }
@@ -124,9 +125,10 @@ namespace CSharpCrawler.Views
             ShowStatusText("");
         }
 
-        private void ExtractUrl(object html)
+        private async void ExtractUrl(object html)
         {
             string value = "";
+            string source = "";
 
             MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagAPattern);
             foreach (Match item in mc)
@@ -138,12 +140,33 @@ namespace CSharpCrawler.Views
                     AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = item.Groups["url"].Value });
                     IncrementCount();
                 }
-                else if(value.StartsWith("/"))
+                else if (value.StartsWith("/"))
                 {
-                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url =globalUrl + item.Groups["url"].Value });
+                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = globalUrl + item.Groups["url"].Value });
                     IncrementCount();
                 }
-            }       
+            }
+
+            for (int i = 0; i < urlCollection.Count; i++)
+            {
+                try
+                {
+                    source = await WebUtil.GetHtmlSource(urlCollection[i].Url);
+                }
+                catch (Exception ex)
+                {
+                    ShowStatusText(ex.Message);
+                    continue;
+                }
+
+                mc = RegexUtil.Match(source, RegexPattern.TagTitlePattern);
+                if (mc.Count > 0)
+                {
+                    urlCollection[i].Title = mc[0].Groups["title"].Value;
+                }
+
+                Surfing(urlCollection[i].Url);
+            }
         }
 
         private void IncrementCount()

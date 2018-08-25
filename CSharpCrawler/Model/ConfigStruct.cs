@@ -23,7 +23,12 @@ namespace CSharpCrawler.Model
 
     struct FetchImageConfig
     {
-
+        public string Depth;
+        public bool IgnoreUrlCheck;
+        public int MinSize;  //KB
+        public int MaxSize;  
+        public string MinResolution;//e.g. 800,600
+        public string MaxResolution;
     }
 
 

@@ -2,6 +2,14 @@
 <Crawler>
 	<FetchUrl>
 		<Depth>1</Depth>
-		<IgnoreUrlCheck>true</IgnoreUrlCheck>
+		<IgnoreUrlCheck>false</IgnoreUrlCheck>
 	</FetchUrl>
+	<FetchImage>
+		<Depth>1</Depth>
+		<IgnoreUrlCheck>false</IgnoreUrlCheck>
+		<MinSize>0</MinSize>
+		<MaxSize>0</MaxSize>
+		<MinResolution>0</MinResolution>
+		<MaxResolution>0</MaxResolution>
+	</FetchImage>
 </Crawler>

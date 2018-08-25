@@ -7,6 +7,7 @@ using System.Net;
 using CSharpCrawler.Model;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Net.Security;
 
 namespace CSharpCrawler.Util
 {
@@ -48,28 +49,32 @@ namespace CSharpCrawler.Util
         {
             try
             {
+                //不受信任的HTTPS
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((a,b,c,d)=> { return true; });
+
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                WebResponse response = await request.GetResponseAsync();
-
-                string encodingStr = GetHtmlEncoding(url);
-
-                Encoding tempEncoding;
-
-                if (encoding == null)
+                using (WebResponse response = await request.GetResponseAsync())
                 {
-                    tempEncoding = Encoding.GetEncoding(encodingStr);
-                }
-                else
-                {
-                    tempEncoding = encoding;
-                }
+                    string encodingStr = GetHtmlEncoding(url);
 
+                    Encoding tempEncoding;
 
-                using (Stream stream = response.GetResponseStream())
-                {
-                    using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                    if (encoding == null)
                     {
-                        return sr.ReadToEnd();
+                        tempEncoding = Encoding.GetEncoding(encodingStr);
+                    }
+                    else
+                    {
+                        tempEncoding = encoding;
+                    }
+
+
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                        {
+                            return sr.ReadToEnd();
+                        }
                     }
                 }
             }

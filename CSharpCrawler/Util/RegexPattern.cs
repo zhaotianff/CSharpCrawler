@@ -17,5 +17,8 @@ namespace CSharpCrawler.Util
         public static string TagAPattern = "<a(\\s+(href=\"(?<url>([^\"])*)\"|'([^'])*'|\\w+=\"(([^\"])*)\"|'([^'])*'))+>(?<text>(.*?))</a>";
         //title标签
         public static string TagTitlePattern = "<title>(?<title>\\S+)</title>";
+        //img标签
+        //<img data-lazy-src="https://res6.vmallres.com/pimages//product/GB3102150044301/428_428_1534934426769mp.png" alt="摩飞（Morphyrichards）MR9500便携式榨汁机 （蓝色）"/>
+        public static string TagImgPattern = @"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<image>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>";
     }
 }

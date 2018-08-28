@@ -56,12 +56,14 @@ namespace CSharpCrawler.Util
             FetchUrlConfig urlConfig = new FetchUrlConfig()
             {
                 Depth = "1",
-                IgnoreUrlCheck = false
+                IgnoreUrlCheck = false,
+                DynamicGrab = false
             };
             FetchImageConfig imageConfig = new FetchImageConfig()
             {
                 Depth = "1",
                 IgnoreUrlCheck = false,
+                DynamicGrab = false,
                 MaxResolution = "0",
                 MinResolution = "0",
                 MaxSize = 0,
@@ -76,6 +78,7 @@ namespace CSharpCrawler.Util
 
                 urlConfig.Depth = eleUrl.Element("Depth").Value;
                 urlConfig.IgnoreUrlCheck = eleUrl.Element("IgnoreUrlCheck").Value == "1" ? true : false;
+                urlConfig.DynamicGrab = eleUrl.Element("DynamicGrab").Value == "1" ? true : false;
 
                 imageConfig.Depth = eleImage.Element("Depth").Value;
                 imageConfig.IgnoreUrlCheck = eleImage.Element("IgnoreUrlCheck").Value == "1" ? true : false;

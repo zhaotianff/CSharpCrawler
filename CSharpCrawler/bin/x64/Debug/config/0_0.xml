@@ -2,12 +2,13 @@
 <Crawler>
 	<FetchUrl>
 		<Depth>1</Depth>
+		<DynamicGrab>0</DynamicGrab>
 		<IgnoreUrlCheck>0</IgnoreUrlCheck>
 	</FetchUrl>
 	<FetchImage>
 		<Depth>1</Depth>
-		<IgnoreUrlCheck>0</IgnoreUrlCheck>
-		<DynamicGrab>0</DynamicGrab>
+		<IgnoreUrlCheck>1</IgnoreUrlCheck>
+		<DynamicGrab>1</DynamicGrab>
 		<MinSize>0</MinSize>
 		<MaxSize>0</MaxSize>
 		<MinResolution>0</MinResolution>

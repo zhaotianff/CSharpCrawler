@@ -76,10 +76,28 @@ namespace CSharpCrawler.Views
             });
         }
 
-        public async void Surfing(string url)
+        public void Surfing(string url)
+        {
+            if(globalData.CrawlerConfig.ImageConfig.DynamicGrab == true)
+            {
+                SurfingByCEF(url);
+            }
+            else
+            {
+                SurfingByFCL(url);
+            }
+        }
+
+        private void SurfingByCEF(string url)
+        {
+            string html = CEFUtil.GetInstance().GetHtmlSourceDynamic(url);
+            MessageBox.Show(html);
+        }
+
+        private async void SurfingByFCL(string url)
         {
             try
-            {             
+            {
                 string html = await WebUtil.GetHtmlSource(url);
 
                 Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractImage));

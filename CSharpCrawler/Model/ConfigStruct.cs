@@ -25,6 +25,7 @@ namespace CSharpCrawler.Model
     {
         public string Depth;
         public bool IgnoreUrlCheck;
+        public bool DynamicGrab;
         public int MinSize;  //KB
         public int MaxSize;  
         public string MinResolution;//e.g. 800,600

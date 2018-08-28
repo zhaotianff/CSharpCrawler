@@ -75,10 +75,11 @@ namespace CSharpCrawler.Util
                 XElement eleImage = doc.Root.Element("FetchImage");
 
                 urlConfig.Depth = eleUrl.Element("Depth").Value;
-                urlConfig.IgnoreUrlCheck = Convert.ToBoolean(eleUrl.Element("IgnoreUrlCheck").Value);
+                urlConfig.IgnoreUrlCheck = eleUrl.Element("IgnoreUrlCheck").Value == "1" ? true : false;
 
                 imageConfig.Depth = eleImage.Element("Depth").Value;
-                imageConfig.IgnoreUrlCheck = Convert.ToBoolean(eleImage.Element("IgnoreUrlCheck").Value);
+                imageConfig.IgnoreUrlCheck = eleImage.Element("IgnoreUrlCheck").Value == "1" ? true : false;
+                imageConfig.DynamicGrab = eleImage.Element("DynamicGrab").Value == "1" ? true : false;
                 imageConfig.MaxResolution = eleImage.Element("MaxResolution").Value;
                 imageConfig.MinResolution = eleImage.Element("MinResolution").Value;
                 imageConfig.MinSize = Convert.ToInt32(eleImage.Element("MinSize").Value);

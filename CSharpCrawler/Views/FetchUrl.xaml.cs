@@ -79,8 +79,25 @@ namespace CSharpCrawler.Views
             });
         }
 
-        public async void Surfing(string url)
+        public void Surfing(string url)
         {  
+            if(globalData.CrawlerConfig.ImageConfig.DynamicGrab == true)
+            {
+                SurfingByCEF(url);
+            }
+            else
+            {
+                SurfingByFCL(url);
+            }
+        }
+
+        public void SurfingByCEF(string url)
+        {
+
+        }
+
+        public async void SurfingByFCL(string url)
+        {
             try
             {
                 globalUrl = url;
@@ -90,7 +107,7 @@ namespace CSharpCrawler.Views
                 extractThread.IsBackground = true;
                 extractThread.Start(html);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //TODO
                 ShowStatusText(ex.Message);

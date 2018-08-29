@@ -90,8 +90,8 @@ namespace CSharpCrawler.Views
 
         private void SurfingByCEF(string url)
         {
-            string html = CEFUtil.GetInstance().GetHtmlSourceDynamic(url);
-            MessageBox.Show(html);
+            globalData.Browser.GetHtmlSourceDynamic(url);
+            
         }
 
         private async void SurfingByFCL(string url)

@@ -85,12 +85,14 @@
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\UrlStruct.cs" />
-    <Compile Include="Util\CEFUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
     <Compile Include="Util\Urls.cs" />
     <Compile Include="Util\WebUtil.cs" />
+    <Compile Include="Views\ChromiumBrowser.xaml.cs">
+      <DependentUpon>ChromiumBrowser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchImage.xaml.cs">
       <DependentUpon>FetchImage.xaml</DependentUpon>
     </Compile>
@@ -114,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\WindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChromiumBrowser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

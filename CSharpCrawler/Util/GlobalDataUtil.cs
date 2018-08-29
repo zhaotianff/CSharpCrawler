@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using CefSharp.Wpf;
+using CSharpCrawler.Views;
 
 namespace CSharpCrawler.Util
 {
@@ -15,8 +17,9 @@ namespace CSharpCrawler.Util
 
         private static object obj = new object();
         private static GlobalDataUtil _instance;
-
+     
         private ConfigStruct crawlerConfig;
+        private ChromiumBrowser browser;
 
         internal ConfigStruct CrawlerConfig
         {
@@ -28,6 +31,19 @@ namespace CSharpCrawler.Util
             private set
             {
                 crawlerConfig = value;
+            }
+        }
+
+        public ChromiumBrowser Browser
+        {
+            get
+            {
+                return browser;
+            }
+
+            set
+            {
+                browser = value;
             }
         }
 
@@ -46,6 +62,9 @@ namespace CSharpCrawler.Util
 
         public GlobalDataUtil()
         {
+            browser = new ChromiumBrowser();
+            browser.Show();
+
             CrawlerConfig = LoadConfig();
         }
 

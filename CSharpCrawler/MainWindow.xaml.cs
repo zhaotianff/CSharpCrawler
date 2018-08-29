@@ -96,5 +96,11 @@ namespace CSharpCrawler
         {
             this.frame.Content = imagePage;
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (GlobalDataUtil.GetInstance().Browser != null)
+                GlobalDataUtil.GetInstance().Browser.Close();
+        }
     }
 }

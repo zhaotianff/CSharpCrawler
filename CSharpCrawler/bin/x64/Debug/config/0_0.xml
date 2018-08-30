@@ -3,7 +3,7 @@
 	<FetchUrl>
 		<Depth>1</Depth>
 		<DynamicGrab>0</DynamicGrab>
-		<IgnoreUrlCheck>0</IgnoreUrlCheck>
+		<IgnoreUrlCheck>1</IgnoreUrlCheck>
 	</FetchUrl>
 	<FetchImage>
 		<Depth>1</Depth>

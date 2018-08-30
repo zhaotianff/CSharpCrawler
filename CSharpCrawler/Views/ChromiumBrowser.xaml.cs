@@ -22,8 +22,7 @@ namespace CSharpCrawler.Views
     public partial class ChromiumBrowser : Window
     {
         private AutoResetEvent waitEvent = new AutoResetEvent(false);
-
-        string globalSource = "";   
+        private Action<string> extractImageCallBack;               
         
         public ChromiumBrowser()
         {
@@ -37,20 +36,23 @@ namespace CSharpCrawler.Views
             return browser.GetSourceAsync();
         }
 
-        public void GetHtmlSourceDynamic(string url)
+        public void GetHtmlSourceDynamic(string url,Action<string> act)
         {
             ThreadPool.QueueUserWorkItem((object obj) => {            
                 this.Dispatcher.Invoke(()=> {
-                    browser.Address = url;                
-                }); 
-                
+                    browser.Address = url;
+                    extractImageCallBack = act;          
+                });                
             });                   
         }
 
         private async void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
         {
-            globalSource = await browser.GetSourceAsync();         
-            MessageBox.Show(globalSource);
+            string source = await browser.GetSourceAsync();
+
+            if (extractImageCallBack != null)
+                extractImageCallBack(source);       
+            
         }
     }
 }

@@ -90,8 +90,7 @@ namespace CSharpCrawler.Views
 
         private void SurfingByCEF(string url)
         {
-            globalData.Browser.GetHtmlSourceDynamic(url);
-            
+            globalData.Browser.GetHtmlSourceDynamic(url,ExtractImageCallBack);            
         }
 
         private async void SurfingByFCL(string url)
@@ -99,10 +98,7 @@ namespace CSharpCrawler.Views
             try
             {
                 string html = await WebUtil.GetHtmlSource(url);
-
-                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractImage));
-                extractThread.IsBackground = true;
-                extractThread.Start(html);
+                StartExtractThread(html);
             }
             catch (Exception ex)
             {
@@ -122,10 +118,19 @@ namespace CSharpCrawler.Views
                 AddToCollection(new UrlStruct() {Id = globalIndex,Status = "",Title = "",Url = value });
                 IncrementCount();
             }
-
-
         }
 
+        private void StartExtractThread(object html)
+        {
+            Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractImage));
+            extractThread.IsBackground = true;
+            extractThread.Start(html);
+        }
+
+        private void ExtractImageCallBack(string html)
+        {
+            StartExtractThread(html);
+        }
 
         public void AddToCollection(UrlStruct urlStruct)
         {
@@ -165,7 +170,14 @@ namespace CSharpCrawler.Views
             int index = this.listview_Image.SelectedIndex;
             if(index != -1)
             {
-                this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imageCollection[index].Url));
+                try
+                {
+                    this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imageCollection[index].Url));
+                }
+                catch(Exception ex)
+                {
+                    //TODO
+                }
             }
         }
     }

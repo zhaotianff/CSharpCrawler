@@ -98,20 +98,21 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
                                     <Button VerticalAlignment="Center" Margin="7,0,5,0"  Height="{x:Static SystemParameters.SmallIconHeight}" Width="{x:Static SystemParameters.SmallIconWidth}" WindowChrome.IsHitTestVisibleInChrome="True"                                         
-                                    IsTabStop="False" >
+                                    IsTabStop="False" Command="{Binding Source={x:Static SystemCommands.ShowSystemMenuCommand}}" >
                                         <Button.Template>
                                             <ControlTemplate>
                                                 <Image Name="btnbg" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="UniformToFill" Source="../crawler.png" Width="26.4" Height="26.4"/>
                                             </ControlTemplate>
                                         </Button.Template>
-                                        <i:Interaction.Triggers>
+                                        <!--CEF 64位不支持，暂未找到解决办法-->
+                                        <!--<i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Click">
                                                 <i:InvokeCommandAction Command="{x:Static SystemCommands.ShowSystemMenuCommand}" />
                                             </i:EventTrigger>
                                             <i:EventTrigger EventName="MouseDoubleClick">
                                                 <i:InvokeCommandAction Command="{x:Static SystemCommands.CloseWindowCommand}" />
                                             </i:EventTrigger>
-                                        </i:Interaction.Triggers>
+                                        </i:Interaction.Triggers>-->
                                     </Button>
                                     <ContentControl IsTabStop="False"
                                                     Foreground="Pink"

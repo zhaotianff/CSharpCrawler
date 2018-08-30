@@ -81,7 +81,7 @@ namespace CSharpCrawler.Views
 
         public void Surfing(string url)
         {  
-            if(globalData.CrawlerConfig.ImageConfig.DynamicGrab == true)
+            if(globalData.CrawlerConfig.UrlConfig.DynamicGrab == true)
             {
                 SurfingByCEF(url);
             }

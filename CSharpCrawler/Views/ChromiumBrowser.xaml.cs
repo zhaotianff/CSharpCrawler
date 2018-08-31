@@ -51,8 +51,7 @@ namespace CSharpCrawler.Views
             string source = await browser.GetSourceAsync();
 
             if (extractImageCallBack != null)
-                extractImageCallBack(source);       
-            
+                extractImageCallBack(source);                   
         }
     }
 }

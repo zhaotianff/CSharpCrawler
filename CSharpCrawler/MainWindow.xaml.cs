@@ -25,6 +25,7 @@ namespace CSharpCrawler
     {
         FetchImage imagePage = new FetchImage();
         FetchUrl urlPage = new FetchUrl();
+        FetchResource resourcePage = new FetchResource();
 
         public MainWindow()
         {
@@ -97,10 +98,17 @@ namespace CSharpCrawler
             this.frame.Content = imagePage;
         }
 
+        private void btn_FetchResource_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = resourcePage;
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             if (GlobalDataUtil.GetInstance().Browser != null)
                 GlobalDataUtil.GetInstance().Browser.Close();
         }
+
+      
     }
 }

@@ -3,16 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="C#网络爬虫程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}" Closed="Window_Closed">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <WrapPanel Grid.Row="0">
-            <Button Width="88" Height="28" Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click"/>
-            <Button Width="88" Height="28" Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click"/>
-        </WrapPanel>
+        <Border Grid.Column="0" BorderBrush="Silver" BorderThickness="0,0,1,0" >
+            <WrapPanel Grid.Row="0">
+                <Button Content="获取网页源代码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}"/>
+                <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
+                <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
+            </WrapPanel>
+        </Border>
 
-        <Frame NavigationUIVisibility="Hidden" Name="frame" Grid.Row="1"/>
+        <Frame NavigationUIVisibility="Hidden" Name="frame" Grid.Column="1"/>
     </Grid>
 </Window>

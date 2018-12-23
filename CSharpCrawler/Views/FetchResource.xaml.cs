@@ -74,11 +74,13 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private void GetHeaderInfo(string url)
+        private async void GetHeaderInfo(string url)
         {
             try
             {
                 HttpHeader header =  WebUtil.GetHeader(url);
+                string sourceCode =await WebUtil.GetHtmlSource(url);
+
                 Label charsetLabel = new Label();
                 charsetLabel.Margin = new Thickness(0, 3, 0, 3);
                 charsetLabel.Content = "Charset:" + header.CharSet;
@@ -88,10 +90,19 @@ namespace CSharpCrawler.Views
                 Label contentTypeLabel = new Label();
                 contentTypeLabel.Margin = new Thickness(0, 3, 0, 3);
                 contentTypeLabel.Content = "ContentType:" + header.ContentType;
+                Label serverNameLabel = new Label();
+                serverNameLabel.Margin = new Thickness(0, 3, 0, 3);
+                serverNameLabel.Content = "Server:" + header.Server;
+                RichTextBox richTextBox = new RichTextBox();
+                richTextBox.Height = this.stackpanel.ActualHeight - 180;
+                richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                richTextBox.Document = new FlowDocument(new Paragraph(new Run(sourceCode)));
 
                 this.stackpanel.Children.Add(charsetLabel);
                 this.stackpanel.Children.Add(contentEncodingLabel);
                 this.stackpanel.Children.Add(contentTypeLabel);
+                this.stackpanel.Children.Add(serverNameLabel);
+                this.stackpanel.Children.Add(richTextBox);
             }
             catch(Exception ex)
             {

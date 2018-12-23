@@ -8,5 +8,10 @@ namespace CSharpCrawler.Util
     class Urls
     {
         public const string BaiduUrl = "http://www.baidu.com/s?wd=%s";
+
+        public static bool IsEmpty(string url)
+        {
+            return string.IsNullOrEmpty(url);
+        }
     }
 }

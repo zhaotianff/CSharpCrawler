@@ -106,5 +106,24 @@ namespace CSharpCrawler.Util
 
             return list;
         }
+
+        /// <summary>
+        /// 获取服务器IP
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static IPAddress[] GetHostIP(string url,bool showIPV6Flag = false)
+        {
+            url = url.Replace("http://", "");
+            url = url.Replace("https://", "");
+            if (showIPV6Flag == true)
+            {
+                return Dns.GetHostEntry(url).AddressList;
+            }
+            else
+            {
+                return Dns.GetHostEntry(url).AddressList.ToList().Where(x=>x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToArray();
+            }
+        }
     }
 }

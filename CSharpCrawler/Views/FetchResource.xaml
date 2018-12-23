@@ -5,10 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="FetchResource">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Label Content="输入网址" VerticalAlignment="Center"></Label>
+            <TextBox Margin="60,0,100,0" VerticalContentAlignment="Center" Name="tbox_Url"></TextBox>
+            <Button Content="获取" HorizontalAlignment="Right" Margin="0,0,10,0" Width="80" Name="btn_Fetch" Click="btn_Fetch_Click"></Button>
+        </Grid>
+
+        <StackPanel Name="stackpanel" Grid.Row="1">
+            
+        </StackPanel>
     </Grid>
 </Page>

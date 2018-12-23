@@ -8,6 +8,7 @@ using CSharpCrawler.Model;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Net.Security;
+using System.IO.Compression;
 
 namespace CSharpCrawler.Util
 {
@@ -15,7 +16,6 @@ namespace CSharpCrawler.Util
     {
         public static HttpHeader GetHeader(string url)
         {
-
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -53,6 +53,7 @@ namespace CSharpCrawler.Util
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((a,b,c,d)=> { return true; });
 
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET"; //默认就是GET
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     string encodingStr = GetHtmlEncoding(url);
@@ -68,20 +69,35 @@ namespace CSharpCrawler.Util
                         tempEncoding = encoding;
                     }
 
+                    Stream stream = response.GetResponseStream();
 
-                    using (Stream stream = response.GetResponseStream())
+                    //GZIP流
+                    if (((HttpWebResponse)response).ContentEncoding.ToLower().Contains("gzip"))
                     {
-                        using (StreamReader sr = new StreamReader(stream, tempEncoding))
-                        {
-                            return sr.ReadToEnd();
-                        }
+                        stream = new GZipStream(stream, CompressionMode.Decompress);
                     }
+
+                    using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                    {
+                        return sr.ReadToEnd();
+                    }
+
                 }
             }
             catch(Exception ex)
             {
                 throw ex;
             }                   
+        }
+
+        public static async Task<string> GetDynamicHtmlSourceWithIE(string url,Encoding encoding = null)
+        {
+            return "";
+        }
+
+        public static async Task<string> GetDynamicHtmlSourceWithChromium(string url,Encoding encoding = null)
+        {
+            return "";
         }
 
         /// <summary>

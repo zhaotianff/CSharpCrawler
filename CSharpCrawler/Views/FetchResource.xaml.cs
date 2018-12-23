@@ -82,14 +82,26 @@ namespace CSharpCrawler.Views
                 Label charsetLabel = new Label();
                 charsetLabel.Margin = new Thickness(0, 3, 0, 3);
                 charsetLabel.Content = "Charset:" + header.CharSet;
-
+                Label contentEncodingLabel = new Label();
+                contentEncodingLabel.Margin = new Thickness(0, 3, 0, 3);
+                contentEncodingLabel.Content = "ContentEncoding:" + header.ContentEncoding; //不准确
+                Label contentTypeLabel = new Label();
+                contentTypeLabel.Margin = new Thickness(0, 3, 0, 3);
+                contentTypeLabel.Content = "ContentType:" + header.ContentType;
 
                 this.stackpanel.Children.Add(charsetLabel);
+                this.stackpanel.Children.Add(contentEncodingLabel);
+                this.stackpanel.Children.Add(contentTypeLabel);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void GetSource(string url)
+        {
+
         }
     }
 }

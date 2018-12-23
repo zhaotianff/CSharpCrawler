@@ -16,6 +16,7 @@
 Visual Studio 2013 + .Net 4.5<br/>
 
 **如果没有安装Blend，GAC中没有System.Windows.Interactivity.dll，需要自己引用bin/x64/Debug目录下的System.Windows.Interactivity.dll**
+
 **编译时可能会显示各种库找不到，Nuget还原下包就可以正常编译了**
 
 ### 使用的三方组件

@@ -22,5 +22,8 @@ namespace CSharpCrawler.Util
         //<img hidefocus="true" src="//www.baidu.com/img/bd_logo1.png" width="270" height="129"></img>
         public static string TagImgPattern = @"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<image>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>";
         public static string TagImgPattern2 = "<img\\s+src=\"(?<image>\\S+)\"(.*)/>";
+
+        //charset
+        public static string CharsetPattern = @"<meta[\s\S]+?charset=(?<charset>(.*?))""[\s\S]+?>";
     }
 }

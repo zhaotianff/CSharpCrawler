@@ -164,9 +164,7 @@ namespace CSharpCrawler.Util
         /// <param name="url"></param>
         /// <returns></returns>
         public static IPAddress[] GetHostIP(string url,bool showIPV6Flag = false)
-        {
-            url = url.Replace("http://", "");
-            url = url.Replace("https://", "");
+        {           
             if (showIPV6Flag == true)
             {
                 return Dns.GetHostEntry(url).AddressList;

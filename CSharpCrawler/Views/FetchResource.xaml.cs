@@ -38,10 +38,19 @@ namespace CSharpCrawler.Views
                 return;
             }
 
+            bool isStartWithHttp = false;
+            if(RegexUtil.IsUrl(url,out isStartWithHttp) == false)
+            {
+                MessageBox.Show("网址输入错误");
+                this.tbox_Url.Focus();
+                return;
+            }
+
             ClearControls();
 
-            GetHostIP(url);
-            GetHeaderInfo(url);
+            GetHostIP(url,isStartWithHttp);
+            GetHeaderInfo(url,isStartWithHttp);
+            GetHtmlSource(url, isStartWithHttp);
         }
 
         private void ClearControls()
@@ -49,24 +58,41 @@ namespace CSharpCrawler.Views
             this.stackpanel.Children.Clear();
         }
 
-        private void GetHostIP(string url)
+        private void GetHostIP(string url,bool isStartWithHttp)
         {
             try
             {
                 string ipTempStr = "";
+
+                if(isStartWithHttp)
+                {
+                    url = url.Replace("http://", "");
+                    url = url.Replace("https://", "");
+                }
+
+                WrapPanel wrapPanel = new WrapPanel();
                 Label hostIPLabel = new Label();
+                hostIPLabel.Width = 80;
                 hostIPLabel.Margin = new Thickness(0, 3, 0, 3);
                 IPAddress[] hostIPAddresses = WebUtil.GetHostIP(url);
                 foreach (var item in hostIPAddresses)
                 {
                     ipTempStr += item.ToString() + ";";
                 }
-                hostIPLabel.Content = "服务器IP:" + ipTempStr;
+                hostIPLabel.Content = "服务器IP:";
+                TextBox hostIPTbx = new TextBox();
+                hostIPTbx.Width = 300;
+                hostIPTbx.Margin = new Thickness(0, 3, 0, 3);
+                hostIPTbx.VerticalContentAlignment = VerticalAlignment.Center;
+                hostIPTbx.IsReadOnly = true;
+                hostIPTbx.Text = ipTempStr;
+                wrapPanel.Children.Add(hostIPLabel);
+                wrapPanel.Children.Add(hostIPTbx);
 
                 //TODO
                 //IP查询 
 
-                this.stackpanel.Children.Add(hostIPLabel);
+                this.stackpanel.Children.Add(wrapPanel);
             }
             catch(Exception ex)
             {
@@ -74,45 +100,70 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private async void GetHeaderInfo(string url)
+        private async void GetHeaderInfo(string url,bool isStartWithHttp)
         {
             try
             {
-                HttpHeader header =  WebUtil.GetHeader(url);
-                string sourceCode =await WebUtil.GetHtmlSource(url);
+                try
+                {
+                    if (isStartWithHttp == false)
+                    {
+                        url = "http://" + url;
+                    }
+                    HttpHeader header = WebUtil.GetHeader(url);
 
-                Label charsetLabel = new Label();
-                charsetLabel.Margin = new Thickness(0, 3, 0, 3);
-                charsetLabel.Content = "Charset:" + header.CharSet;
-                Label contentEncodingLabel = new Label();
-                contentEncodingLabel.Margin = new Thickness(0, 3, 0, 3);
-                contentEncodingLabel.Content = "ContentEncoding:" + header.ContentEncoding; //不准确
-                Label contentTypeLabel = new Label();
-                contentTypeLabel.Margin = new Thickness(0, 3, 0, 3);
-                contentTypeLabel.Content = "ContentType:" + header.ContentType;
-                Label serverNameLabel = new Label();
-                serverNameLabel.Margin = new Thickness(0, 3, 0, 3);
-                serverNameLabel.Content = "Server:" + header.Server;
+
+                    Label charsetLabel = new Label();
+                    charsetLabel.Margin = new Thickness(0, 3, 0, 3);
+                    charsetLabel.Content = "Charset:" + header.CharSet;
+
+                    Label contentEncodingLabel = new Label();
+                    contentEncodingLabel.Margin = new Thickness(0, 3, 0, 3);
+                    contentEncodingLabel.Content = "ContentEncoding:" + header.ContentEncoding; //不准确
+
+                    Label contentTypeLabel = new Label();
+                    contentTypeLabel.Margin = new Thickness(0, 3, 0, 3);
+                    contentTypeLabel.Content = "ContentType:" + header.ContentType;
+
+                    Label serverNameLabel = new Label();
+                    serverNameLabel.Margin = new Thickness(0, 3, 0, 3);
+                    serverNameLabel.Content = "Server:" + header.Server;
+
+                    this.stackpanel.Children.Add(charsetLabel);
+                    this.stackpanel.Children.Add(contentEncodingLabel);
+                    this.stackpanel.Children.Add(contentTypeLabel);
+                    this.stackpanel.Children.Add(serverNameLabel);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }    
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void GetHtmlSource(string url, bool isStartWithHttp)
+        {
+            if (isStartWithHttp == false)
+            {
+                url = "http://" + url;
+            }
+            try
+            {
+                string sourceCode = await WebUtil.GetHtmlSource(url);
                 RichTextBox richTextBox = new RichTextBox();
                 richTextBox.Height = this.stackpanel.ActualHeight - 180;
                 richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
                 richTextBox.Document = new FlowDocument(new Paragraph(new Run(sourceCode)));
-
-                this.stackpanel.Children.Add(charsetLabel);
-                this.stackpanel.Children.Add(contentEncodingLabel);
-                this.stackpanel.Children.Add(contentTypeLabel);
-                this.stackpanel.Children.Add(serverNameLabel);
                 this.stackpanel.Children.Add(richTextBox);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void GetSource(string url)
-        {
-
         }
     }
 }

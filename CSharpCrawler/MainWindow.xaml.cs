@@ -26,6 +26,7 @@ namespace CSharpCrawler
         FetchImage imagePage = new FetchImage();
         FetchUrl urlPage = new FetchUrl();
         FetchResource resourcePage = new FetchResource();
+        FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
 
         public MainWindow()
         {
@@ -109,6 +110,9 @@ namespace CSharpCrawler
                 GlobalDataUtil.GetInstance().Browser.Close();
         }
 
-      
+        private void btn_FetchDynamicResource_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = dynamicResourcePage;
+        }
     }
 }

@@ -100,7 +100,7 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private async void GetHeaderInfo(string url,bool isStartWithHttp)
+        private void GetHeaderInfo(string url,bool isStartWithHttp)
         {
             try
             {
@@ -117,9 +117,9 @@ namespace CSharpCrawler.Views
                     charsetLabel.Margin = new Thickness(0, 3, 0, 3);
                     charsetLabel.Content = "Charset:" + header.CharSet;
 
-                    Label contentEncodingLabel = new Label();
-                    contentEncodingLabel.Margin = new Thickness(0, 3, 0, 3);
-                    contentEncodingLabel.Content = "ContentEncoding:" + header.ContentEncoding; //不准确
+                    //Label contentEncodingLabel = new Label();
+                    //contentEncodingLabel.Margin = new Thickness(0, 3, 0, 3);
+                    //contentEncodingLabel.Content = "ContentEncoding:" + header.ContentEncoding; //不准确
 
                     Label contentTypeLabel = new Label();
                     contentTypeLabel.Margin = new Thickness(0, 3, 0, 3);
@@ -130,7 +130,7 @@ namespace CSharpCrawler.Views
                     serverNameLabel.Content = "Server:" + header.Server;
 
                     this.stackpanel.Children.Add(charsetLabel);
-                    this.stackpanel.Children.Add(contentEncodingLabel);
+                    //this.stackpanel.Children.Add(contentEncodingLabel);
                     this.stackpanel.Children.Add(contentTypeLabel);
                     this.stackpanel.Children.Add(serverNameLabel);
                 }

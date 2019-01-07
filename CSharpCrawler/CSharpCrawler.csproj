@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
+    <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
@@ -92,6 +93,9 @@
     <Compile Include="Util\WebUtil.cs" />
     <Compile Include="Views\ChromiumBrowser.xaml.cs">
       <DependentUpon>ChromiumBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FetchDynamicResource.xaml.cs">
+      <DependentUpon>FetchDynamicResource.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FetchImage.xaml.cs">
       <DependentUpon>FetchImage.xaml</DependentUpon>
@@ -123,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChromiumBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FetchDynamicResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -61,6 +61,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.11.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -103,6 +107,9 @@
     <Compile Include="Views\FetchResource.xaml.cs">
       <DependentUpon>FetchResource.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FetchResourceWithDOM.xaml.cs">
+      <DependentUpon>FetchResourceWithDOM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchUrl.xaml.cs">
       <DependentUpon>FetchUrl.xaml</DependentUpon>
     </Compile>
@@ -139,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FetchResourceWithDOM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

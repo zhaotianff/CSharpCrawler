@@ -27,6 +27,7 @@ namespace CSharpCrawler
         FetchUrl urlPage = new FetchUrl();
         FetchResource resourcePage = new FetchResource();
         FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
+        FetchResourceWithDOM fetchResourceWithDOM = new FetchResourceWithDOM();
 
         public MainWindow()
         {
@@ -113,6 +114,11 @@ namespace CSharpCrawler
         private void btn_FetchDynamicResource_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = dynamicResourcePage;
+        }
+
+        private void btn_FetchResourceWithDOM_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = fetchResourceWithDOM;
         }
     }
 }

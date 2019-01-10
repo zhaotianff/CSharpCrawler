@@ -10,44 +10,50 @@
 
     <Grid>
         <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="30"/>
-                    </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="180"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="网址" VerticalContentAlignment="Center"/>
-                        <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="网址" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center"/>
 
-                        <Grid Grid.Column="2">
-                            <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome" Checked="cbox_ShowChrome_Checked" Unchecked="cbox_ShowChrome_Unchecked"></CheckBox>
-                            <Button Content="获取" HorizontalAlignment="Right" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click"/>
-                        </Grid>
-                    </Grid>
-
-                    <Grid Grid.Row="1" Name="grid_Content">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                       
-                    </Grid>
-
-                    <StatusBar Grid.Row="2">
-                        <Label Name="lbl_StatusText" Content="当前网址抓取次数: 0"/>
-                        <Label Content="查看历史结果:"/>
-                        <ComboBox Width="500" Name="combox_Record" SelectionChanged="combox_Record_SelectionChanged"/>
-                    </StatusBar>
+                <Grid Grid.Column="2">
+                    <CheckBox Content="显示DOM树" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowDOMTree" Checked="cbox_ShowDOMTree_Checked" Unchecked="cbox_ShowDOMTree_Unchecked"></CheckBox>
+                    <Button Content="获取" HorizontalAlignment="Right" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click"/>
                 </Grid>
-          
-         
+            </Grid>
+
+            <Grid Grid.Row="2" Name="grid_Content">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TreeView Name="tree_DOM" Grid.Column="1">
+                    <!--使用数据模版-->
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Text="{Binding DisplayName}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+
+            <StatusBar Grid.Row="3">
+               
+            </StatusBar>
+        </Grid>
     </Grid>
 </Page>

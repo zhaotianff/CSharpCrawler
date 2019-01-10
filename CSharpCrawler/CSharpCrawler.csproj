@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -89,6 +91,7 @@
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
+    <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />

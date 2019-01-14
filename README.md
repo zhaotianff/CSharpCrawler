@@ -3,6 +3,9 @@
 还没想好
 
 ### 功能介绍
+* 抓取网页
+* 抓取动态网页
+* 获取网页DOM
 * Url抓取
     * 抓取指定网址的全部链接
     * 通过指定深度，抓取子网页的全部链接
@@ -26,3 +29,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/1.png" />
 </p>
+<p align="center">
+ <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/2.png" />
+</p>
+

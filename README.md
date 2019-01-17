@@ -24,6 +24,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 
 ### 使用的三方组件
 * [CefSharp](https://github.com/cefsharp/CefSharp)
+* [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)
 
 ### 软件截图
 <p align="center">

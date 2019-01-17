@@ -72,6 +72,28 @@ namespace CSharpCrawler.Views
             Surfing(url);
         }
 
+        private async void btn_SurfingDOM_Click(object sender, RoutedEventArgs e)
+        {
+            //暂使用Http相关类获取网页源码
+            try
+            {
+                string url = this.tbox_Url.Text.Trim();
+                string html = await WebUtil.GetHtmlSource(url);
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(html);
+                HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
+                ClearCollection();
+                for (int i = 0; i < nodeCollection.Count; i++)
+                {
+                    AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = nodeCollection[i].Attributes["href"].Value });
+                }
+            }
+            catch(Exception ex)
+            {
+                ShowStatusText(ex.Message);
+            }
+        }
+
         public void ShowStatusText(string content)
         {
             this.Dispatcher.Invoke(()=> {
@@ -164,6 +186,7 @@ namespace CSharpCrawler.Views
                 }
             }
 
+            //抓取网页标题
             for (int i = 0; i < urlCollection.Count; i++)
             {
                 try
@@ -182,13 +205,13 @@ namespace CSharpCrawler.Views
                     urlCollection[i].Title = mc[0].Groups["title"].Value;
                 }
 
-                Surfing(urlCollection[i].Url);
+                //Surfing(urlCollection[i].Url);  暂不进行深度爬取
             }
         }
 
         private void IncrementCount()
         {
             System.Threading.Interlocked.Increment(ref globalIndex);
-        }
+        }      
     }
 }

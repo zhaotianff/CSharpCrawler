@@ -13,7 +13,8 @@ namespace CSharpCrawler.Model
     {    
         public string DisplayName { get; set; }
         public string InnerText { get; set; }        
-        public string InnerHtml { get; set; }             
+        public string InnerHtml { get; set; } 
+        public string OuterHtml { get; set; }            
         public List<NodeStruct> Children { get; set; }
         public NodeStruct()
         {

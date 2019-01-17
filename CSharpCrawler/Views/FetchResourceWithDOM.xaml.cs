@@ -100,7 +100,9 @@ namespace CSharpCrawler.Views
                     nodeStruct.DisplayName = "html";
                     NodeRecursion(ref nodeStruct, htmlNode);
                     this.tree_DOM.Items.Add(nodeStruct);
-                    this.tree_DOM.Width = 0;
+
+                    if(this.tree_DOM.ActualWidth < this.grid_Content.ActualWidth  / 2)
+                        this.tree_DOM.Width = 0;
                 });
             });
         }
@@ -118,7 +120,8 @@ namespace CSharpCrawler.Views
 
                 NodeStruct htmlStruct = new NodeStruct();
                 htmlStruct.DisplayName = childCollection[i].Name;
-                htmlStruct.InnerHtml = childCollection[i].OuterHtml;
+                htmlStruct.OuterHtml = childCollection[i].OuterHtml;
+                htmlStruct.InnerHtml = childCollection[i].InnerHtml;
                 htmlStruct.InnerText = childCollection[i].InnerText;
                 list.Add(htmlStruct);
                 nodeStruct.Children = list;

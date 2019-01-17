@@ -120,5 +120,10 @@ namespace CSharpCrawler
         {
             this.frame.Content = fetchResourceWithDOM;
         }
+
+        private void btn_Setting_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -6,31 +6,43 @@ using System.Threading.Tasks;
 
 namespace CSharpCrawler.Model
 {
-    class ConfigStruct
+    public class ConfigStruct
     {
         public FetchUrlConfig UrlConfig { get; set; }
 
         public FetchImageConfig ImageConfig { get; set; }
+
+        public CommonConfig CommonConfig { get; set; }
     }
 
-
-
-    struct FetchUrlConfig
+    public class CommonConfig
     {
-        public string Depth;
-        public bool IgnoreUrlCheck;
-        public bool DynamicGrab;
+        /// <summary>
+        /// 是否检测Url合法性
+        /// </summary>
+        public bool UrlCheck { get; set; } = false;
     }
 
-    struct FetchImageConfig
+    public class FetchUrlConfig
     {
-        public string Depth;
-        public bool IgnoreUrlCheck;
-        public bool DynamicGrab;
-        public int MinSize;  //KB
-        public int MaxSize;  
-        public string MinResolution;//e.g. 800,600
-        public string MaxResolution;
+        public string Depth { get; set; }
+        public bool IgnoreUrlCheck { get; set; }
+        public bool DynamicGrab { get; set; }
+    }
+
+    public class FetchImageConfig
+    {
+        public string Depth { get; set; }
+        public bool IgnoreUrlCheck { get; set; }
+
+        /// <summary>
+        /// 是否使用动态抓取
+        /// </summary>
+        public bool DynamicGrab { get; set; }  
+        public int MinSize { get; set; }
+        public int MaxSize { get; set; }
+        public string MinResolution { get; set; }
+        public string MaxResolution { get; set; }
     }
 
 

@@ -72,28 +72,16 @@ namespace CSharpCrawler.Util
         {
             ConfigStruct configStruct = new ConfigStruct();
 
-            FetchUrlConfig urlConfig = new FetchUrlConfig()
-            {
-                Depth = "1",
-                IgnoreUrlCheck = false,
-                DynamicGrab = false
-            };
-            FetchImageConfig imageConfig = new FetchImageConfig()
-            {
-                Depth = "1",
-                IgnoreUrlCheck = false,
-                DynamicGrab = false,
-                MaxResolution = "0",
-                MinResolution = "0",
-                MaxSize = 0,
-                MinSize = 0
-            };
+            FetchUrlConfig urlConfig = new FetchUrlConfig();
+            FetchImageConfig imageConfig = new FetchImageConfig();
+            CommonConfig commonConfig = new CommonConfig();
 
             try
             {
                 XDocument doc = XDocument.Load(ConfigPath);
                 XElement eleUrl = doc.Root.Element("FetchUrl");
                 XElement eleImage = doc.Root.Element("FetchImage");
+                XElement eleCommon = doc.Root.Element("Common");
 
                 urlConfig.Depth = eleUrl.Element("Depth").Value;
                 urlConfig.IgnoreUrlCheck = eleUrl.Element("IgnoreUrlCheck").Value == "1" ? true : false;
@@ -106,15 +94,17 @@ namespace CSharpCrawler.Util
                 imageConfig.MinResolution = eleImage.Element("MinResolution").Value;
                 imageConfig.MinSize = Convert.ToInt32(eleImage.Element("MinSize").Value);
                 imageConfig.MaxSize = Convert.ToInt32(eleImage.Element("MaxSize").Value);
+
+                commonConfig.UrlCheck = eleCommon.Element("UrlCheck").Value == "1" ? true : false;
+
+                configStruct.ImageConfig = imageConfig;
+                configStruct.UrlConfig = urlConfig;
+                configStruct.CommonConfig = commonConfig;
             }
             catch(Exception ex)
             {
                 
-            }
-
-            configStruct.ImageConfig = imageConfig;
-            configStruct.UrlConfig = urlConfig;
-
+            }           
             return configStruct;
         }
     }

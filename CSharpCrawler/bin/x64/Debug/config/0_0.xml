@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Crawler>
+    <!--公共配置参数-->
+    <Common>
+	    <!--Url是否合法标志-->
+	    <UrlCheck></UrlCheck>
+	</Common>
 	<FetchUrl>
 		<Depth>1</Depth>
 		<DynamicGrab>0</DynamicGrab>

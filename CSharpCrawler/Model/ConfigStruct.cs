@@ -43,6 +43,11 @@ namespace CSharpCrawler.Model
         public int MaxSize { get; set; }
         public string MinResolution { get; set; }
         public string MaxResolution { get; set; }
+
+        /// <summary>
+        /// FetchMode 0-Mix 1-Regex 2-HtmlAgilityPack
+        /// </summary>
+        public int FetchMode { get; set; }
     }
 
 

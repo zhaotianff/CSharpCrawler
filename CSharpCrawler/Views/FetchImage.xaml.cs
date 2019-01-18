@@ -109,15 +109,68 @@ namespace CSharpCrawler.Views
 
         private void ExtractImage(object html)
         {
-            string value = "";          
-
-            MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagImgPattern);
-            foreach (Match item in mc)
+               
+            
+           switch(globalData.CrawlerConfig.ImageConfig.FetchMode)
             {
-                value = item.Groups["image"].Value;
-                AddToCollection(new UrlStruct() {Id = globalIndex,Status = "",Title = "",Url = value });
-                IncrementCount();
+                case 0:
+                    ExtractImageMixed(html);
+                    break;
+                case 1:
+                    ExtractImageWithRegex(html);
+                    break;
+                case 2:
+                    ExtractImageWithHtmlAgilityPack(html);
+                    break;
+                default:
+                    break;
+            }          
+        }
+
+        private void ExtractImageWithRegex(object html)
+        {
+            try
+            {
+                string value = "";
+                MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagImgPattern);
+                foreach (Match item in mc)
+                {
+                    value = item.Groups["image"].Value;
+                    AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
+                    IncrementCount();
+                }
             }
+            catch(Exception ex)
+            {
+                ShowStatusText(ex.Message);
+            }
+        }
+
+        private void ExtractImageWithHtmlAgilityPack(object html)
+        {
+            try
+            {
+                string value = "";
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(html.ToString());
+
+                HtmlAgilityPack.HtmlNodeCollection imgNodeCollection = doc.DocumentNode.SelectNodes("//img");
+                for (int i = 0; i < imgNodeCollection.Count; i++)
+                {
+                    value = imgNodeCollection[i].Attributes["src"].Value;
+                    AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
+                    IncrementCount();
+                }
+            }
+            catch(Exception ex)
+            {
+                ShowStatusText(ex.Message);
+            }
+        }
+
+        private void ExtractImageMixed(object html)
+        {
+
         }
 
         private void StartExtractThread(object html)
@@ -176,7 +229,7 @@ namespace CSharpCrawler.Views
                 }
                 catch(Exception ex)
                 {
-                    //TODO
+                    ShowStatusText(ex.Message);
                 }
             }
         }

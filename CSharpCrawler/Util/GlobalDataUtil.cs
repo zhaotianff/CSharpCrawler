@@ -94,6 +94,7 @@ namespace CSharpCrawler.Util
                 imageConfig.MinResolution = eleImage.Element("MinResolution").Value;
                 imageConfig.MinSize = Convert.ToInt32(eleImage.Element("MinSize").Value);
                 imageConfig.MaxSize = Convert.ToInt32(eleImage.Element("MaxSize").Value);
+                imageConfig.FetchMode = Convert.ToInt32(eleImage.Element("FetchMode").Value);
 
                 commonConfig.UrlCheck = eleCommon.Element("UrlCheck").Value == "1" ? true : false;
 

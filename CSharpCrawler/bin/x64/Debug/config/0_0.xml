@@ -18,5 +18,7 @@
 		<MaxSize>0</MaxSize>
 		<MinResolution>0</MinResolution>
 		<MaxResolution>0</MaxResolution>
+		<!--0 Mix 1-Regex 2-HtmlAgilityPack-->
+		<FetchMode>2</FetchMode>
 	</FetchImage>
 </Crawler>

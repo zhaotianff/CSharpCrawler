@@ -225,13 +225,15 @@ namespace CSharpCrawler.Views
             {
                 try
                 {
-                    this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imageCollection[index].Url));
+                    string imgUrl = imageCollection[index].Url;
+                    if (RegexUtil.IsInvalidImgUrl(imgUrl))
+                        this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imgUrl));
                 }
                 catch(Exception ex)
                 {
                     ShowStatusText(ex.Message);
                 }
             }
-        }
+        }                        
     }
 }

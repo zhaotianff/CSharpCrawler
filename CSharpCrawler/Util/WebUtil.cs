@@ -174,5 +174,10 @@ namespace CSharpCrawler.Util
                 return Dns.GetHostEntry(url).AddressList.ToList().Where(x=>x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToArray();
             }
         }
+
+        public static string RemoveUrlParam(string url)
+        {
+            return url;
+        }
     }
 }

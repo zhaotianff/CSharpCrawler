@@ -40,5 +40,10 @@ namespace CSharpCrawler.Util
         {
             return Regex.Matches(text, pattern);
         }
+
+        public static bool IsInvalidImgUrl(string url)
+        {
+            return Match(url, RegexPattern.MatchImgPattern)[0].Success;
+        }
     }
 }

@@ -18,6 +18,7 @@
                 <Button Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}"/>
                 <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
                 <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
+                <Button Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}"/>
                 <Button Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}"/>
             </WrapPanel>
         </Border>

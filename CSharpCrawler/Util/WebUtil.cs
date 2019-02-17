@@ -179,5 +179,10 @@ namespace CSharpCrawler.Util
         {
             return url;
         }
+
+        public static string[] ExtractPageKeyword(string html)
+        {
+            return new string[] { };
+        }
     }
 }

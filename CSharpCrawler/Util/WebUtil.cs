@@ -9,6 +9,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Net.Security;
 using System.IO.Compression;
+using System.Net.Sockets;
 
 namespace CSharpCrawler.Util
 {
@@ -183,6 +184,31 @@ namespace CSharpCrawler.Util
         public static string[] ExtractPageKeyword(string html)
         {
             return new string[] { };
+        }
+
+        public static string FetchResourceWithSocket(string hostName)
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            IPHostEntry host = Dns.GetHostEntry(hostName);
+            IPEndPoint iPEndPoint = new IPEndPoint(host.AddressList[0], 443);
+            socket.Connect(iPEndPoint);
+            string requestHeader = "Get / HTTP/1.1\r\n"
+                                    + "User-Agent:Windows NT 10.0\r\n"
+                                    + "Host:" + hostName + "\r\n"
+                                    + "Connection:Close\r\n";
+            socket.Send( Encoding.UTF8.GetBytes(requestHeader));
+            byte[] buffer = new byte[1024];
+            //SocketAsyncEventArgs  //TODO
+            int length = socket.Receive(buffer);
+
+            //reference
+            //string h1 = "GET " + _path + " HTTP/1.1\r\n";
+            //string h2 = "Accept: */*\r\n";
+            //string h3 = "Accept-Language: zh-cn\r\n";
+            //string h4 = "Host: " + _host + "\r\n";
+            //string h5 = "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36\r\n";
+            //string h7 = "Connection: close\r\n\r\n";
+            return "";
         }
     }
 }

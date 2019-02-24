@@ -28,10 +28,12 @@ namespace CSharpCrawler
         FetchResource resourcePage = new FetchResource();
         FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
         FetchResourceWithDOM fetchResourceWithDOM = new FetchResourceWithDOM();
+        Setting setting;
 
         public MainWindow()
         {
             InitializeComponent();
+            setting = new Setting(this);
             InitializeCommands();
         }
 
@@ -123,7 +125,7 @@ namespace CSharpCrawler
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
         {
-
+            this.frame.Content = setting;
         }
     }
 }

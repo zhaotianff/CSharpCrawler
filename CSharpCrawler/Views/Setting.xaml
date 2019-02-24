@@ -8,7 +8,25 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Setting">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <Label Content="抓取设置" FontSize="25"></Label>
+        <Separator></Separator>
+        <WrapPanel Height="200"/>
+        <Label Content="全局设置" FontSize="25"></Label>
+        <Separator></Separator>
+        <Label Content="主题"></Label>
+        <WrapPanel Name="GlobalSettingPanel">
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFFF9F9" Offset="0"/>
+                        <GradientStop Color="#FFA49B96" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand">
+               
+            </Border>
+        </WrapPanel>
+    </StackPanel>
 </Page>

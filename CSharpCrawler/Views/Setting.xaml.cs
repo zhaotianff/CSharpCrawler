@@ -20,9 +20,26 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class Setting : Page
     {
-        public Setting()
+        string defaultImgPath = Environment.CurrentDirectory + "\\User Data\\Theme\\Default.jpg";
+        private readonly MainWindow mainWindow;
+        public Setting(MainWindow mainWindow)
         {
             InitializeComponent();
+
+            this.mainWindow = mainWindow;
+            InitTheme();
+        }
+
+        private void InitTheme()
+        {
+            Border border = GlobalSettingPanel.Children[1] as Border;
+            if (border == null)
+                return;
+        
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute));
+            border.Background = imageBrush;
+            border.MouseDown += (a, b) => { mainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute)) }; };
         }
     }
 }

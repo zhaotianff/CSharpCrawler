@@ -15,3 +15,5 @@ PUT   向指定资源位置上传其最新内容
 
 3、在.NET中发送 Xml Post请求和接受Xml的Post请求时，修改请求端Content-Type 为“text/xml”(httpclient.Headers.Add("Content-Type", "text/xml");)
 
+4、下载网页的基本原理是和Web服务器建立Socket连接。在.Net中，可以使用封WebRequest类进行操作
+

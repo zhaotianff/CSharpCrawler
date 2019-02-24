@@ -78,13 +78,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"  BorderThickness="{TemplateBinding BorderThickness}" x:Name="WindowBorder" >
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFFFF9F9" Offset="0"/>
-                                <GradientStop Color="#FFA49B96" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"  BorderThickness="{TemplateBinding BorderThickness}" x:Name="WindowBorder" Background="{TemplateBinding Background}">
                         <Grid x:Name="LayoutRoot">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="26.4" />

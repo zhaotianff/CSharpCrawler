@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
+            <RowDefinition Height="28"/>
         </Grid.RowDefinitions>
 
         <Grid>
@@ -22,7 +23,9 @@
         </Grid>
 
         <Grid Name="stackpanel" Grid.Row="1">
-            <RichTextBox Name="rtbox_Content" Background="Transparent"></RichTextBox>
+            <RichTextBox Name="rtbox_Content" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
         </Grid>
+
+        <Label Name="lbl_Status"  HorizontalAlignment="Left" Grid.Row="2" VerticalContentAlignment="Center"/>
     </Grid>
 </Page>

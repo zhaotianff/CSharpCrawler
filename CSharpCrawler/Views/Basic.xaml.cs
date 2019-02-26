@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,28 @@ namespace CSharpCrawler.Views
 
         private void btn_Fetch_Click(object sender, RoutedEventArgs e)
         {
+            string hostName = this.tbox_Url.Text.Trim();
+            if(string.IsNullOrEmpty(hostName))
+            {
+                MessageBox.Show("请输入主机名，如www.baidu.com");
+            }
 
+            string content = WebUtil.GetHtmlSourceWithSocket(hostName);
+            this.rtbox_Content.Document = new FlowDocument(new Paragraph(new Run(content)));
+
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                ShowStatusMessage(ex.Message);
+            }
+        }
+
+        private void ShowStatusMessage(string msg)
+        {
+            this.Dispatcher.Invoke(()=> { this.lbl_Status.Content = msg; });
         }
     }
 }

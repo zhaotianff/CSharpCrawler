@@ -34,6 +34,39 @@
         </Setter>
     </Style>
 
+    <Style x:Key="CaptionButtonStyleForClose" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness"  Value="1" />
+        <Setter Property="HorizontalContentAlignment"   Value="Center" />
+        <Setter Property="VerticalContentAlignment"  Value="Center" />
+        <Setter Property="Padding"   Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="LayoutRoot">
+                        <Rectangle x:Name="ButtonBackground"  Width="40" Height="40" Fill="Silver" Opacity="0" />
+                        <Border x:Name="ButtonBorder" BorderBrush="{TemplateBinding BorderBrush}"  BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="TitleButtonContent"  Focusable="False"  RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="Pink" TargetName="ButtonBorder" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"  Value="True">
+                            <Setter Property="Opacity" Value="0.4"  TargetName="ButtonBackground" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"   Value="false">
+                            <Setter TargetName="TitleButtonContent"  Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <DataTemplate x:Key="Minimize">
         <Grid>
             <Path Data="M 7.2 14.2 L19.2 14.2" Width="26.4"  Height="26.4" VerticalAlignment="Center"  HorizontalAlignment="Center"  Stroke="Black" StrokeThickness="1" />
@@ -120,7 +153,7 @@
                                     <Button x:Name="Minimize" Width="26.4" Height="26.4" ToolTip="最小化"  WindowChrome.IsHitTestVisibleInChrome="True"  Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"  ContentTemplate="{StaticResource Minimize}"  Style="{StaticResource CaptionButtonStyle}"  IsTabStop="False" Margin="0,0,2,0"></Button>
                                     <Button x:Name="Restore" Width="26.4" Height="26.4" ToolTip="还原" WindowChrome.IsHitTestVisibleInChrome="True"  Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"   Visibility="Collapsed" ContentTemplate="{StaticResource Restore}" Style="{StaticResource CaptionButtonStyle}" IsTabStop="False"></Button>
                                     <Button x:Name="Maximize"  Width="26.4" Height="26.4" ToolTip="最大化" WindowChrome.IsHitTestVisibleInChrome="True" Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"   ContentTemplate="{StaticResource Maximize}" Style="{StaticResource CaptionButtonStyle}" Margin="0,0,1,0" IsTabStop="False"></Button>
-                                    <Button x:Name="Close" Width="26.4" Height="26.4" ToolTip="关闭"  WindowChrome.IsHitTestVisibleInChrome="True"  Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"   IsTabStop="False"  Style="{StaticResource CaptionButtonStyle}"  ContentTemplate="{StaticResource Close}" ></Button>
+                                    <Button x:Name="Close" Width="26.4" Height="26.4" ToolTip="关闭"  WindowChrome.IsHitTestVisibleInChrome="True"  Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"   IsTabStop="False"  Style="{StaticResource CaptionButtonStyleForClose}"  ContentTemplate="{StaticResource Close}" ></Button>
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">

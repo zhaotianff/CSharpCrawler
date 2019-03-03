@@ -31,6 +31,8 @@ namespace CSharpCrawler.Views
         private void btn_Fetch_Click(object sender, RoutedEventArgs e)
         {            
             string url = this.tbox_Url.Text;
+            Encoding encoding = GetChoosedEncoding();
+
             if(Urls.IsEmpty(url))
             {
                 MessageBox.Show("请输入网址");
@@ -50,12 +52,27 @@ namespace CSharpCrawler.Views
 
             GetHostIP(url,isStartWithHttp);
             GetHeaderInfo(url,isStartWithHttp);
-            GetHtmlSource(url, isStartWithHttp);
+            GetHtmlSource(url, isStartWithHttp,encoding);
         }
 
         private void ClearControls()
         {
             this.stackpanel.Children.Clear();
+        }
+
+        private Encoding GetChoosedEncoding()
+        {
+            switch(this.combox_Encoding.SelectedIndex)
+            {
+                case 0:
+                    return null;
+                case 1:
+                    return Encoding.UTF8;
+                case 2:
+                    return Encoding.GetEncoding("gb2312");                                
+                default:
+                    return Encoding.Default;
+            }
         }
 
         private void GetHostIP(string url,bool isStartWithHttp)
@@ -145,7 +162,7 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private async void GetHtmlSource(string url, bool isStartWithHttp)
+        private async void GetHtmlSource(string url, bool isStartWithHttp,Encoding encoding = null)
         {
             if (isStartWithHttp == false)
             {
@@ -153,7 +170,7 @@ namespace CSharpCrawler.Views
             }
             try
             {
-                string sourceCode = await WebUtil.GetHtmlSource(url);
+                string sourceCode = await WebUtil.GetHtmlSource(url,encoding);
                 RichTextBox richTextBox = new RichTextBox();
                 richTextBox.Height = this.stackpanel.ActualHeight - 180;
                 richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;

@@ -96,6 +96,7 @@
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\UrlStruct.cs" />
+    <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />

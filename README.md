@@ -30,7 +30,13 @@ Visual Studio 2013 + .Net 4.5<br/>
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/1.png" />
 </p>
+
+
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/2.png" />
+</p>
+
+<p align="center">
+ <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/3.png" />
 </p>
 

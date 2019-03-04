@@ -63,7 +63,26 @@ namespace CSharpCrawler.Util
         /// <returns></returns>
         public static Encoding GetEncoding(byte[] buffer)
         {
-            return Encoding.Default;
+            //java code 
+            //char[] chars = str.toCharArray();
+            //boolean isGBK = false;
+            //for (int i = 0; i < chars.length; i++)
+            //{
+            //    byte[] bytes = ("" + chars[i]).getBytes();
+            //    if (bytes.length == 2)
+            //    {
+            //        int[] ints = new int[2];
+            //        ints[0] = bytes[0] & 0xff;
+            //        ints[1] = bytes[1] & 0xff;
+            //        if (ints[0] >= 0x81 && ints[0] <= 0xFE && ints[1] >= 0x40
+            //          && ints[1] <= 0xFE)
+            //        {
+            //            isGBK = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            return Encoding.UTF8;
         }
     }
 }

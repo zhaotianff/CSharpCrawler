@@ -133,5 +133,15 @@ namespace CSharpCrawler
         {
             this.frame.Content = basic;
         }
+
+        private void btn_WebAPI_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_SimulateLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

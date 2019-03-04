@@ -26,11 +26,11 @@
                             <ColumnDefinition Width="180"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="网址" VerticalContentAlignment="Center"/>
-                        <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
 
                         <Grid Grid.Column="2">
                             <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome" Checked="cbox_ShowChrome_Checked" Unchecked="cbox_ShowChrome_Unchecked"></CheckBox>
-                            <Button Content="获取" HorizontalAlignment="Right" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click"/>
+                            <Button Content="获取" HorizontalAlignment="Right" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
                         </Grid>
                     </Grid>
 

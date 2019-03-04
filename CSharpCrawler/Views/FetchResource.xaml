@@ -16,9 +16,9 @@
 
         <Grid>
             <Label Content="输入网址" VerticalAlignment="Center"></Label>
-            <TextBox Margin="60,0,260,0" VerticalContentAlignment="Center" Name="tbox_Url"></TextBox>
+            <TextBox Margin="60,0,260,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
             <Label Content="指定编码集" HorizontalAlignment="Right" Margin="0,0,180,0" VerticalAlignment="Center" VerticalContentAlignment="Center"></Label>
-            <ComboBox Width="80" Margin="0,0,100,0" HorizontalAlignment="Right" VerticalContentAlignment="Center" SelectedIndex="0" Name="combox_Encoding">
+            <ComboBox Width="80" Margin="0,0,100,0" HorizontalAlignment="Right" VerticalContentAlignment="Center" SelectedIndex="0" Name="combox_Encoding" Style="{StaticResource ComboBoxStyle}">
                 <ComboBoxItem Content="自动"></ComboBoxItem>
                 <ComboBoxItem Content="UTF-8"></ComboBoxItem>
                 <ComboBoxItem Content="GB2312"></ComboBoxItem>

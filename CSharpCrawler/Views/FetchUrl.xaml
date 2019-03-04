@@ -16,10 +16,10 @@
         </Grid.RowDefinitions>
         <DockPanel>
             <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-            <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0"/>
-            <Button Width="88" Height="28" Content="正则匹配" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click"/>
-            <Button Width="88" Height="28" Content="DOM节点匹配" DockPanel.Dock="Right" Name="btn_SurfingDOM" Margin="5,0,0,0" Click="btn_SurfingDOM_Click"/>
-            <TextBox VerticalContentAlignment="Center" Name="tbox_Url"/>
+            <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}"/>
+            <Button Width="88" Height="28" Content="正则匹配" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click" Style="{StaticResource GlobalButtonStyle}"/>
+            <Button Width="88" Height="28" Content="DOM节点匹配" DockPanel.Dock="Right" Name="btn_SurfingDOM" Margin="5,0,0,0" Click="btn_SurfingDOM_Click" Style="{StaticResource GlobalButtonStyle}"/>
+            <TextBox VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
         </DockPanel>
 
         <ListView Grid.Row="1" Name="listview_Url" Margin="10">

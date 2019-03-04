@@ -17,9 +17,9 @@
 
         <Grid>
             <Label Content="输入主机" VerticalAlignment="Center"></Label>
-            <TextBox Margin="60,0,100,0" VerticalContentAlignment="Center" Name="tbox_Url"></TextBox>
+            <TextBox Margin="60,0,100,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
            
-            <Button Content="获取" HorizontalAlignment="Right" Margin="0,0,10,0" Width="80" Name="btn_Fetch" Click="btn_Fetch_Click"></Button>
+            <Button Content="获取" HorizontalAlignment="Right" Margin="0,0,10,0" Width="80" Name="btn_Fetch" Click="btn_Fetch_Click" Style="{StaticResource GlobalButtonStyle}"></Button>
         </Grid>
 
         <Grid Name="stackpanel" Grid.Row="1">

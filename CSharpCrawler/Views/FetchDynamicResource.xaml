@@ -10,16 +10,16 @@
       Title="FetchDynamicResource">
 
     <Grid>
-        <TabControl>
-            <TabItem Header="Chromium">
+        <TabControl Background="Transparent">
+            <TabItem Header="Chromium" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="45"/>
                         <RowDefinition/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition />
@@ -30,7 +30,7 @@
 
                         <Grid Grid.Column="2">
                             <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome" Checked="cbox_ShowChrome_Checked" Unchecked="cbox_ShowChrome_Unchecked"></CheckBox>
-                            <Button Content="获取" HorizontalAlignment="Right" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
+                            <Button Content="获取" HorizontalAlignment="Right" Name="btn_Fetch" Click="btn_Fetch_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
                         </Grid>
                     </Grid>
 

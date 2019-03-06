@@ -9,6 +9,8 @@ namespace CSharpCrawler.Util
     {
         public const string BaiduUrl = "http://www.baidu.com/s?wd=%s";
 
+        public const string WeatherQueryUrl = "http://www.weather.com.cn/data/sk/%s.html";
+
         public static bool IsEmpty(string url)
         {
             return string.IsNullOrEmpty(url);

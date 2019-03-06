@@ -20,7 +20,7 @@
             </Border.Background>
             <WrapPanel Grid.Row="0">
                 <Button Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource GlobalButtonStyle}"/>
+                <Button Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}"/>
                 <Button Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}"/>
                 <Button Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}"/>
                 <Button Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}"/>

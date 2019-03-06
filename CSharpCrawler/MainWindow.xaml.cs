@@ -30,6 +30,7 @@ namespace CSharpCrawler
         FetchResourceWithDOM fetchResourceWithDOM = new FetchResourceWithDOM();
         Setting setting;
         Basic basic = new Basic();
+        InvokeWebAPI invokeWeb = new InvokeWebAPI();
 
         public MainWindow()
         {
@@ -136,7 +137,7 @@ namespace CSharpCrawler
 
         private void btn_WebAPI_Click(object sender, RoutedEventArgs e)
         {
-
+            this.frame.Content = invokeWeb;
         }
 
         private void btn_SimulateLogin_Click(object sender, RoutedEventArgs e)

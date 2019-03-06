@@ -94,6 +94,7 @@
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
+    <Compile Include="Model\LocationCode.cs" />
     <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Util\DatabaseUtil.cs" />
@@ -123,6 +124,9 @@
     </Compile>
     <Compile Include="Views\FetchUrl.xaml.cs">
       <DependentUpon>FetchUrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvokeWebAPI.xaml.cs">
+      <DependentUpon>InvokeWebAPI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
@@ -180,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchUrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvokeWebAPI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

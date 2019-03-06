@@ -45,10 +45,9 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="1"/>
-        <Setter Property="Width" Value="180"/>
+        <Setter Property="Width" Value="88"/>
         <Setter Property="Height" Value="28"/>
-        <Setter Property="Margin" Value="8"/>
+       
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

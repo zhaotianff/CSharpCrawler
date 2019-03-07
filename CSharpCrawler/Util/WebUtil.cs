@@ -57,13 +57,11 @@ namespace CSharpCrawler.Util
                 request.Method = "GET"; //默认就是GET
                 using (WebResponse response = await request.GetResponseAsync())
                 {
-                    string encodingStr = EncodingUtil.GetEncoding(url);
-
-                    Encoding tempEncoding;
+                    Encoding tempEncoding = Encoding.Default;
 
                     if (encoding == null)
                     {
-                        tempEncoding = Encoding.GetEncoding(encodingStr);
+                        tempEncoding = EncodingUtil.GetEncoding(url);
                     }
                     else
                     {
@@ -150,7 +148,7 @@ namespace CSharpCrawler.Util
                                 "Host:" + hostName + "\r\n" + 
                                 "Connection:Close\r\n\r\n";
                 byte[] sentBuffer = Encoding.ASCII.GetBytes(request);
-                byte[] receiveBuffer = new byte[256];
+                byte[] receiveBuffer = new byte[1024];
 
                 socket.Send(sentBuffer);
 

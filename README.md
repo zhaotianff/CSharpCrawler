@@ -44,3 +44,6 @@ Visual Studio 2013 + .Net 4.5<br/>
  <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/3.png" />
 </p>
 
+### License
+
+[MIT License](LICENSE).

@@ -8,7 +8,36 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InvokeWebAPI">
 
-    <Grid>
-        
-    </Grid>
+    <TabControl Background="Transparent">
+        <TabItem Header="天气查询">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Label Content="选择城市" VerticalAlignment="Center"></Label>
+                    <ComboBox Margin="60,0,100,0" VerticalContentAlignment="Center" Name="combox_City" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Left"></ComboBox>
+
+                    <Button Content="获取天气" HorizontalAlignment="Left" Margin="270,0,10,0" Width="80" Style="{StaticResource GlobalButtonStyle}" Name="btn_QueryWeather" Click="btn_QueryWeather_Click"></Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="结果" Grid.Column="0" Name="groupbox_Result">
+                        
+                    </GroupBox>
+
+                    <GroupBox Header="天气" Grid.Column="1" Name="groupbox_Weather">
+                        
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Page>

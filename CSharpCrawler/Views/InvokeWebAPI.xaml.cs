@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpCrawler.Model;
+using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,43 @@ namespace CSharpCrawler.Views
         public InvokeWebAPI()
         {
             InitializeComponent();
+
+            InitCityList();
+        }
+
+        private void InitCityList()
+        {
+            this.combox_City.ItemsSource = Enum.GetNames(typeof(CityCode));
+            this.combox_City.SelectedIndex = 0;
+        }
+
+        private async void btn_QueryWeather_Click(object sender, RoutedEventArgs e)
+        {
+            string city = this.combox_City.SelectedItem.ToString();
+            string url = Urls.WeatherQueryUrl.Replace("%s", ((int)Enum.Parse(typeof(CityCode), city)).ToString());
+            string source =await WebUtil.GetHtmlSource(url,Encoding.UTF8);
+            WeatherInfo weatherInfo = ResolveHtmlSource(source);
+
+            ShowResult(weatherInfo);
+            ShowWeather(weatherInfo);       
+        }
+
+        private WeatherInfo ResolveHtmlSource(string html)
+        {
+            return JsonUtil.ResolveWeather(html);
+        }
+
+        private void ShowResult(WeatherInfo weatherInfo)
+        {
+            Label label = new Label();
+            label.FontSize = 15;
+            label.Content = weatherInfo.ToString();
+            this.groupbox_Result.Content = label;
+        }
+
+        private void ShowWeather(WeatherInfo weatherInfo)
+        {
+
         }
     }
 }

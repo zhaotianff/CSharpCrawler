@@ -32,14 +32,12 @@ namespace CSharpCrawler.Views
             if(string.IsNullOrEmpty(hostName))
             {
                 MessageBox.Show("请输入主机名，如www.baidu.com");
-            }
-
-            string content = WebUtil.GetHtmlSourceWithSocket(hostName);
-            this.rtbox_Content.Document = new FlowDocument(new Paragraph(new Run(content)));
+            }          
 
             try
             {
-
+                string content = WebUtil.GetHtmlSourceWithSocket(hostName);
+                this.rtbox_Content.Document = new FlowDocument(new Paragraph(new Run(content)));
             }
             catch(Exception ex)
             {

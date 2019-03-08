@@ -68,6 +68,10 @@
       <HintPath>..\packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -94,12 +98,14 @@
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
-    <Compile Include="Model\LocationCode.cs" />
+    <Compile Include="Model\CityCode.cs" />
     <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\UrlStruct.cs" />
+    <Compile Include="Model\WeatherInfo.cs" />
     <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
+    <Compile Include="Util\JsonUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
     <Compile Include="Util\Urls.cs" />

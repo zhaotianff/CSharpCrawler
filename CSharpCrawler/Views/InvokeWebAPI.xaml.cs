@@ -64,9 +64,12 @@ namespace CSharpCrawler.Views
 
         }
 
-        private void btn_BingImage_Click(object sender, RoutedEventArgs e)
+        private async void btn_BingImage_Click(object sender, RoutedEventArgs e)
         {
-
+            //Default 
+            System.IO.Stream stream =await WebUtil.GetHtmlStreamAsync(Urls.CNBingDailyImageUrl);         
+            XmlUtil<BingImages> xmlUtil = new XmlUtil<BingImages>();
+            BingImages bingImages = xmlUtil.DeserializeXML(stream);           
         }
     }
 }

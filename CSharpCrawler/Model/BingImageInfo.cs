@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace CSharpCrawler.Model
 {
@@ -52,20 +53,90 @@ namespace CSharpCrawler.Model
     /// <summary>
     /// Bing图片信息
     /// </summary>
-    public class BingImageInfo
+    public class BingImages
     {
+        [XmlArray("image")]
+        public List<BingImage> Images { get; set; }
+
+        [XmlElement("tooltips")]
+        public BingTooltips Tooltips { get; set; }
+    }
+
+    [XmlRootAttribute("image")]
+    public class BingImage
+    {
+        [XmlAttribute("startdate")]
         public DateTime StartDate { get; set; }
 
+        [XmlAttribute("enddate")]
         public DateTime EndDate { get; set; }
 
+        [XmlAttribute("fullstartdate")]
         public DateTime FullStartDate { get; set; }
 
+        [XmlAttribute("url")]
         public string Url { get; set; }
 
+        [XmlAttribute("urlBase")]
         public string UrlBase { get; set; }
 
+        [XmlAttribute("copyright")]
         public string Copyright { get; set; }
 
+        [XmlAttribute("headline")]
         public string Headline { get; set; }
+
+        [XmlAttribute("drk")]
+        public string Drk { get; set; }
+
+        [XmlAttribute("top")]
+        public string Top { get; set; }
+
+        [XmlAttribute("hot")]
+        public string Hot { get; set; }
+
+        [XmlAttribute("hotspots")]
+        public string Hotspots { get; set; }
+    }
+
+    [XmlRoot("tooltips")]
+    public class BingTooltips
+    {
+        //暂时还有点问题
+        [XmlElement("loadMessage")]
+        public string loadMessage;
+
+        [XmlElement("loadMessage")]
+        [XmlElement("message")]
+        public string message;
+
+        [XmlElement("previousImage")]
+        public string previousImage;
+
+        [XmlElement("previousImage")]
+        [XmlElement("text")]
+        public string text;
+
+        [XmlElement("nextImage")]
+        public string nextImage;
+
+        [XmlElement("nextImage")]
+        [XmlElement("text")]
+        public string text2;
+
+        [XmlChoiceIdentifier]
+        [XmlElement("play")]
+        public string play;
+
+        [XmlElement("play")]
+        [XmlElement("text")]
+        public string text3;
+
+        [XmlElement("pause")]
+        public string pause;
+
+        [XmlElement("pause")]
+        [XmlElement("text")]
+        public string text4;
     }
 }

@@ -89,6 +89,27 @@ namespace CSharpCrawler.Util
             }                   
         }
 
+        public static async Task<Stream> GetHtmlStreamAsync(string url)
+        {
+            try
+            {
+                //不受信任的HTTPS
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((a, b, c, d) => { return true; });
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET"; //默认就是GET
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    return response.GetResponseStream();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public static async Task<string> GetDynamicHtmlSourceWithIE(string url,Encoding encoding = null)
         {
             return "";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -15,6 +16,12 @@ namespace CSharpCrawler
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            //初始化全局数据 
+            GlobalDataUtil.GetInstance();
         }
     }
 }

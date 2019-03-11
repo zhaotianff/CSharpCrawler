@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,16 @@ namespace CSharpCrawler.Views
     {
         string defaultImgPath = Environment.CurrentDirectory + "\\User Data\\Theme\\Default.jpg";
         private readonly MainWindow mainWindow;
+        private GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
+        private int ignoreCount = 0;
+
         public Setting(MainWindow mainWindow)
         {
             InitializeComponent();
 
             this.mainWindow = mainWindow;
             InitTheme();
+            InitCfg();
         }
 
         private void InitTheme()
@@ -41,5 +46,45 @@ namespace CSharpCrawler.Views
             border.Background = imageBrush;
             border.MouseDown += (a, b) => { mainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute)) }; };
         }
+
+        private void InitCfg()
+        {
+            ignoreCount = 0;
+
+            if (globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck == true)
+                this.cbox_UrlCheck.IsChecked = true;
+            else
+                this.cbox_UrlCheck.IsChecked = false;
+        }
+
+
+        #region 事件
+        private void cbox_UrlCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ignoreCount == 0)
+            {
+                ignoreCount++;
+                return;
+            }
+
+            bool result = globalData.configUtil.SaveIgnoreUrlCheck(true);
+            if (result)
+                globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck = true;
+        }
+
+        private void cbox_UrlCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (ignoreCount == 0)
+            {
+                ignoreCount++;
+                return;
+            }
+
+            bool result = globalData.configUtil.SaveIgnoreUrlCheck(false);
+            if (result)
+                globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck = false;
+        }
+
+        #endregion
     }
 }

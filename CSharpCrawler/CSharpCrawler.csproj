@@ -95,6 +95,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HttpHeader.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Model\WeatherInfo.cs" />
+    <Compile Include="Util\ConfigUtil.cs" />
     <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
@@ -150,6 +152,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Style\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\CheckBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

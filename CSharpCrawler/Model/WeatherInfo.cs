@@ -6,6 +6,29 @@ using System.Threading.Tasks;
 
 namespace CSharpCrawler.Model
 {
+    /// <summary>
+    /// 天气信息
+    /// </summary>
+    /// <example>
+    /// 获取到的json字符串如下
+    /// {
+    ///"weatherinfo":{
+    ///    "city":"西安",
+    ///    "cityid":"101110101",
+    ///    "temp":"23.3",
+    ///    "WD":"西南风",
+    ///    "WS":"小于3级",
+    ///    "SD":"52%",
+    ///    "AP":"962.7hPa",
+    ///    "njd":"暂无实况",
+    ///    "WSE":"<3",
+    ///    "time":"18:00",
+    ///    "sm":"1.2",
+    ///   "isRadar":"1",
+    ///    "Radar":"JC_RADAR_AZ9290_JB"
+    ///  }
+    ///}
+    /// </example>
     public class WeatherInfo
     {
         public string City { get; set; } = "";

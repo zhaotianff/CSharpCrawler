@@ -11,7 +11,9 @@
     <StackPanel>
         <Label Content="抓取设置" FontSize="25"></Label>
         <Separator></Separator>
-        <WrapPanel Height="200"/>
+        <WrapPanel Height="200">
+            <CheckBox Content="忽略Url检验" ToolTip="正则匹配Url规则目前不完善，默认开启" Style="{StaticResource CheckBoxStyle}" Margin="5" Name="cbox_UrlCheck" Checked="cbox_UrlCheck_Checked" Unchecked="cbox_UrlCheck_Unchecked"></CheckBox>
+        </WrapPanel>
         <Label Content="全局设置" FontSize="25"></Label>
         <Separator></Separator>
         <Label Content="主题"></Label>

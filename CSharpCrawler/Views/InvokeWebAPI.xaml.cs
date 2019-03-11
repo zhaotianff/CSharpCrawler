@@ -63,5 +63,10 @@ namespace CSharpCrawler.Views
         {
 
         }
+
+        private void btn_BingImage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

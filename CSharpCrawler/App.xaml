@@ -1,7 +1,7 @@
 ﻿<Application x:Class="CSharpCrawler.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException">
+             StartupUri="MainWindow.xaml" DispatcherUnhandledException="Application_DispatcherUnhandledException" Startup="Application_Startup" >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Style/WindowStyle.xaml"/>
                 <ResourceDictionary Source="Style/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Style/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

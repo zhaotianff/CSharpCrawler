@@ -9,7 +9,7 @@
       Title="InvokeWebAPI">
 
     <TabControl Background="Transparent">
-        <TabItem Header="天气查询">
+        <TabItem Header="实时天气查询">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -37,6 +37,11 @@
                         
                     </GroupBox>
                 </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Bing每日图片">
+            <Grid>
+                <Button Width="88" Height="28" Content="获取" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource GlobalButtonStyle}" Name="btn_BingImage" Click="btn_BingImage_Click"/>
             </Grid>
         </TabItem>
     </TabControl>

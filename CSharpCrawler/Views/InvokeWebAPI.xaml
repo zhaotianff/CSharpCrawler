@@ -40,9 +40,10 @@
             </Grid>
         </TabItem>
         <TabItem Header="Bing每日图片">
-            <Grid>
+            <StackPanel>
                 <Button Width="88" Height="28" Content="获取" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource GlobalButtonStyle}" Name="btn_BingImage" Click="btn_BingImage_Click"/>
-            </Grid>
+                <Label Name="lbl_Copyright"></Label>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Page>

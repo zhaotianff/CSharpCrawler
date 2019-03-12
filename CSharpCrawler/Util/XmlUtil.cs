@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Linq;
+using System.IO;
 
 namespace CSharpCrawler.Util
 {
@@ -18,8 +21,10 @@ namespace CSharpCrawler.Util
 
         public T DeserializeXML(System.IO.Stream stream)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            return (T)xmlSerializer.Deserialize(stream);
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));     
+            object obj = xmlSerializer.Deserialize(stream);
+            stream.Dispose();
+            return (T)obj;
         }
 
     }

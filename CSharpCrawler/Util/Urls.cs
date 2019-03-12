@@ -28,7 +28,7 @@ namespace CSharpCrawler.Util
         ///        要显示的结果数量 从指定的idx往回推 最多8䅇
         /// 
         /// </remarks>
-        public const string CNBingDailyImageUrl = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
+        public const string CNBingDailyImageUrl = "https://cn.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1";
 
         public const string CNBingDailyImageBasicUrl = "https://cn.bing.com";
 

@@ -98,10 +98,8 @@ namespace CSharpCrawler.Util
 
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Method = "GET"; //默认就是GET
-                using (WebResponse response = await request.GetResponseAsync())
-                {
-                    return response.GetResponseStream();
-                }
+                WebResponse response = await request.GetResponseAsync();              
+                return response.GetResponseStream();               
             }
             catch(Exception ex)
             {

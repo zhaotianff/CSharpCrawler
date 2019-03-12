@@ -53,90 +53,57 @@ namespace CSharpCrawler.Model
     /// <summary>
     /// Bing图片信息
     /// </summary>
+    [XmlRoot("images")]
     public class BingImages
     {
-        [XmlArray("image")]
-        public List<BingImage> Images { get; set; }
+        [XmlElement("image")]
+        public BingImage Images { get; set; }
 
         [XmlElement("tooltips")]
         public BingTooltips Tooltips { get; set; }
     }
 
-    [XmlRootAttribute("image")]
     public class BingImage
     {
-        [XmlAttribute("startdate")]
-        public DateTime StartDate { get; set; }
+        [XmlElement("startdate")]
+        public string StartDate { get; set; }
 
-        [XmlAttribute("enddate")]
-        public DateTime EndDate { get; set; }
+        [XmlElement("enddate")]
+        public string EndDate { get; set; }
 
-        [XmlAttribute("fullstartdate")]
-        public DateTime FullStartDate { get; set; }
+        [XmlElement("fullstartdate")]
+        public string FullStartDate { get; set; }
 
-        [XmlAttribute("url")]
+        [XmlElement("url")]
         public string Url { get; set; }
 
-        [XmlAttribute("urlBase")]
+        [XmlElement("urlBase")]
         public string UrlBase { get; set; }
 
-        [XmlAttribute("copyright")]
+        [XmlElement("copyright")]
         public string Copyright { get; set; }
 
-        [XmlAttribute("headline")]
+        [XmlElement("copyrightlink")]
+        public string CopyrightLink { get; set; }
+
+        [XmlElement("headline")]
         public string Headline { get; set; }
 
-        [XmlAttribute("drk")]
+        [XmlElement("drk")]
         public string Drk { get; set; }
 
-        [XmlAttribute("top")]
+        [XmlElement("top")]
         public string Top { get; set; }
 
-        [XmlAttribute("hot")]
-        public string Hot { get; set; }
+        [XmlElement("bot")]
+        public string Bot { get; set; }
 
-        [XmlAttribute("hotspots")]
+        [XmlElement("hotspots")]
         public string Hotspots { get; set; }
     }
 
-    [XmlRoot("tooltips")]
     public class BingTooltips
     {
-        //暂时还有点问题
-        [XmlElement("loadMessage")]
-        public string loadMessage;
-
-        [XmlElement("loadMessage")]
-        [XmlElement("message")]
-        public string message;
-
-        [XmlElement("previousImage")]
-        public string previousImage;
-
-        [XmlElement("previousImage")]
-        [XmlElement("text")]
-        public string text;
-
-        [XmlElement("nextImage")]
-        public string nextImage;
-
-        [XmlElement("nextImage")]
-        [XmlElement("text")]
-        public string text2;
-
-        [XmlChoiceIdentifier]
-        [XmlElement("play")]
-        public string play;
-
-        [XmlElement("play")]
-        [XmlElement("text")]
-        public string text3;
-
-        [XmlElement("pause")]
-        public string pause;
-
-        [XmlElement("pause")]
-        [XmlElement("text")]
-        public string text4;
+        
     }
 }

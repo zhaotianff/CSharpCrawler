@@ -37,6 +37,8 @@ namespace CSharpCrawler
             InitializeComponent();
             setting = new Setting(this);
             InitializeCommands();
+
+            Application.Current.MainWindow = this;
         }
 
         #region Commands

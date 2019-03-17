@@ -31,6 +31,7 @@ namespace CSharpCrawler
         Setting setting;
         Basic basic = new Basic();
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
+        FetchFile fetchFile = new FetchFile();
 
         public MainWindow()
         {
@@ -96,6 +97,23 @@ namespace CSharpCrawler
         }
         #endregion
 
+        public void SetBackgroundVideo(string path,UriKind uriKind = UriKind.Relative)
+        {
+            mediaelement.Source = new Uri(path, uriKind);
+            mediaelement.Play();
+        }
+
+        public void SetTransparentBackground()
+        {
+            this.Background = Brushes.Transparent;
+        }
+
+        private void mediaelement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            mediaelement.Stop();
+            mediaelement.Play();
+        }
+
         private void btn_FetchUrl_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = urlPage;
@@ -146,5 +164,12 @@ namespace CSharpCrawler
         {
 
         }
+
+        private void btn_FileDownLoad_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = fetchFile;
+        }
+
+ 
     }
 }

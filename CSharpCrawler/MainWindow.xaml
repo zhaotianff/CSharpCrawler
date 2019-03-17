@@ -8,30 +8,45 @@
             <GradientStop Color="#FFA49B96" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26.4"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--背景元素-->
+        <Grid  Grid.RowSpan="2" Panel.ZIndex="-1" Grid.Row="0">
+            <MediaElement x:Name="mediaelement" Stretch="UniformToFill" Volume="1" MediaEnded="mediaelement_MediaEnded"  LoadedBehavior="Manual" UnloadedBehavior="Manual"/>
+        </Grid>
 
-        <Border Grid.Column="0" BorderBrush="Silver" BorderThickness="0,0,1,0" >
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity=".2"/>
-            </Border.Background>
-            <WrapPanel Grid.Row="0">
-                <Button Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}"/>
-                <Button Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}"/>
-            </WrapPanel>
-        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Frame NavigationUIVisibility="Hidden" Name="frame" Grid.Column="1"/>
+            <Border Grid.Column="0" BorderBrush="Silver" BorderThickness="0,0,1,0" >
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity=".2"/>
+                </Border.Background>
+                <WrapPanel Grid.Row="0">
+                    <Button Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}"/>
+                </WrapPanel>
+            </Border>
+
+            <Frame NavigationUIVisibility="Hidden" Name="frame" Grid.Column="1"/>
+        </Grid>
     </Grid>
+    
+    
 </Window>

@@ -209,5 +209,31 @@ namespace CSharpCrawler.Util
             }
             return socket;
         }
+
+        /// <summary>
+        /// https://dldir1.qq.com/qqfile/qq/QQ9.1.0/24712/QQ9.1.0.24712.exe
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private static string ExtractFileName(string url)
+        {
+            return url.Substring(url.LastIndexOf("/"));
+        }
+
+        public static async Task<string> DownloadFileAsync(string url,string fileName = "")
+        {
+            WebClient client = new WebClient();
+            if (string.IsNullOrEmpty(fileName))
+                fileName = "./download/" + ExtractFileName(url);
+            //TODO
+            //File exist
+            await client.DownloadFileTaskAsync(new Uri(url), fileName);
+            return fileName;
+        }
+
+        public static void DownloadFileWithProgress(string url,Action<object> act,string fileName = "")
+        {
+
+        }
     }
 }

@@ -18,6 +18,7 @@
     * 链接标题抓取
     
 * 图片抓取
+* 文件下载
 * 模拟登陆(更新中)
 * 网页相似度计算(更新中)
 
@@ -45,6 +46,11 @@ Visual Studio 2013 + .Net 4.5<br/>
 <p align="center">
  <img align="center" alt="start up" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/3.png" />
 </p>
+
+<p align="center">
+ <img align="center" alt="file download" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/4.png" />
+</p>
+
 
 ### License
 

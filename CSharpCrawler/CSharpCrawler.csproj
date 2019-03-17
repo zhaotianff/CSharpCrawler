@@ -122,6 +122,9 @@
     <Compile Include="Views\FetchDynamicResource.xaml.cs">
       <DependentUpon>FetchDynamicResource.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FetchFile.xaml.cs">
+      <DependentUpon>FetchFile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchImage.xaml.cs">
       <DependentUpon>FetchImage.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchDynamicResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FetchFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -116,6 +116,9 @@
     <Compile Include="Views\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BingImageSearch.xaml.cs">
+      <DependentUpon>BingImageSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChromiumBrowser.xaml.cs">
       <DependentUpon>ChromiumBrowser.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Basic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BingImageSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

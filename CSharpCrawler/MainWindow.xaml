@@ -38,6 +38,7 @@
                     <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
                     <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
                     <Button Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <Button Content="必应图片搜索" Name="btn_BingImageSearch" Click="btn_BingImageSearch_Click" Style="{StaticResource ListButtonStyle}"/>
                     <Button Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}"/>
                     <Button Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}"/>
                     <Button Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}"/>

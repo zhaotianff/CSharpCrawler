@@ -1,0 +1,18 @@
+﻿<Page x:Class="CSharpCrawler.Views.BingImageSearch"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CSharpCrawler.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="BingImageSearch">
+    <Page.Resources>
+       
+    </Page.Resources>
+    <Canvas Name="canvas">
+        <Grid Width="{Binding ElementName=canvas,Path=ActualWidth}" Height="{Binding ElementName=canvas,Path=ActualHeight}" Background="LightBlue">
+            
+        </Grid>
+    </Canvas>
+</Page>

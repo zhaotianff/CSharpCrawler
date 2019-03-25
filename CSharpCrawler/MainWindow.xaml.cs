@@ -32,6 +32,7 @@ namespace CSharpCrawler
         Basic basic = new Basic();
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
         FetchFile fetchFile = new FetchFile();
+        BingImageSearch bingImageSearch = new BingImageSearch();
 
         public MainWindow()
         {
@@ -169,6 +170,9 @@ namespace CSharpCrawler
             this.frame.Content = fetchFile;
         }
 
- 
+        private void btn_BingImageSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = bingImageSearch;
+        }
     }
 }

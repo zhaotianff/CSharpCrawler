@@ -22,15 +22,13 @@ namespace CSharpCrawler.Views
     public partial class Setting : Page
     {
         string defaultImgPath = Environment.CurrentDirectory + "\\User Data\\Theme\\Default.jpg";
-        private readonly MainWindow mainWindow;
         private GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         private int ignoreCount = 0;
 
-        public Setting(MainWindow mainWindow)
+        public Setting()
         {
             InitializeComponent();
 
-            this.mainWindow = mainWindow;
             InitTheme();
             InitCfg();
         }
@@ -44,7 +42,7 @@ namespace CSharpCrawler.Views
             ImageBrush imageBrush = new ImageBrush();
             imageBrush.ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute));
             border.Background = imageBrush;
-            border.MouseDown += (a, b) => { mainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute)) }; };
+            border.MouseDown += (a, b) => { Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute)) }; };
         }
 
         private void InitCfg()
@@ -85,6 +83,23 @@ namespace CSharpCrawler.Views
                 globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck = false;
         }
 
+        private void DefaultTheme_MouseDown(object sender, MouseButtonEventArgs e)
+        {        
+            LinearGradientBrush gradientBrush = new LinearGradientBrush();
+            gradientBrush.EndPoint = new Point(0.5, 1);
+            gradientBrush.StartPoint = new Point(0.5, 0);
+            GradientStop color1 = new GradientStop();
+            color1.Color = (Color)(ColorConverter.ConvertFromString("#FFFFF9F9"));
+            color1.Offset = 0;
+            GradientStop color2 = new GradientStop();
+            color2.Color = (Color)(ColorConverter.ConvertFromString("#FFA49B96"));
+            color2.Offset = 1;
+            gradientBrush.GradientStops.Add(color1);
+            gradientBrush.GradientStops.Add(color2);
+            Application.Current.MainWindow.Background = gradientBrush;
+        }
         #endregion
+
+
     }
 }

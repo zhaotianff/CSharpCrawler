@@ -49,7 +49,7 @@ namespace CSharpCrawler.Views
             HttpHeader httpHeader =  WebUtil.GetHeader(url);
             if (httpHeader.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                ShowStatusText($"{url} is not available");
+                ShowStatusText($"{url} is not available\r\n");
                 return;
             }
            

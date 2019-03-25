@@ -18,7 +18,7 @@
         <Separator></Separator>
         <Label Content="主题"></Label>
         <WrapPanel Name="GlobalSettingPanel">
-            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand">
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="DefaultTheme_MouseDown">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFFFF9F9" Offset="0"/>

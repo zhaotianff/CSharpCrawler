@@ -28,7 +28,7 @@ namespace CSharpCrawler
         FetchResource resourcePage = new FetchResource();
         FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
         FetchResourceWithDOM fetchResourceWithDOM = new FetchResourceWithDOM();
-        Setting setting;
+        Setting setting = new Setting();
         Basic basic = new Basic();
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
         FetchFile fetchFile = new FetchFile();
@@ -36,9 +36,8 @@ namespace CSharpCrawler
         public MainWindow()
         {
             InitializeComponent();
-            setting = new Setting(this);
+            
             InitializeCommands();
-
             Application.Current.MainWindow = this;
         }
 

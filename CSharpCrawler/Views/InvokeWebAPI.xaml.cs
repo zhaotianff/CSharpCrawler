@@ -68,8 +68,8 @@ namespace CSharpCrawler.Views
         {
             //Default 
             System.IO.Stream stream =await WebUtil.GetHtmlStreamAsync(Urls.CNBingDailyImageUrl);         
-            XmlUtil<BingImages> xmlUtil = new XmlUtil<BingImages>();
-            BingImages bingImages = xmlUtil.DeserializeXML(stream);
+            XmlUtil<BingDailyImages> xmlUtil = new XmlUtil<BingDailyImages>();
+            BingDailyImages bingImages = xmlUtil.DeserializeXML(stream);
             this.lbl_Copyright.Content ="版权:" +  bingImages.Images.Copyright + "\r\n" + bingImages.Images.CopyrightLink;
             SetBackground(bingImages.Images.Url);       
         }

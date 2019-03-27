@@ -7,12 +7,21 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="BingImageSearch">
-    <Page.Resources>
-       
-    </Page.Resources>
     <Canvas Name="canvas">
-        <Grid Width="{Binding ElementName=canvas,Path=ActualWidth}" Height="{Binding ElementName=canvas,Path=ActualHeight}" Background="LightBlue">
-            
+        <Grid Width="{Binding ElementName=canvas,Path=ActualWidth}" Height="{Binding ElementName=canvas,Path=ActualHeight}" Name="grid" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBox Width="500" Height="45" Style="{StaticResource TextBoxStyle}" Margin="-230,0,0,0" FontSize="20" FontFamily="Arial" VerticalContentAlignment="Center"/>
+                <Button Height="45" Content="搜索" Style="{StaticResource GlobalButtonStyle}" Margin="420,0,0,0"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Name="grid_Content">
+                
+            </Grid>
         </Grid>
     </Canvas>
 </Page>

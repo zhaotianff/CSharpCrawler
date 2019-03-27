@@ -54,16 +54,16 @@ namespace CSharpCrawler.Model
     /// Bing图片信息
     /// </summary>
     [XmlRoot("images")]
-    public class BingImages
+    public class BingDailyImages
     {
         [XmlElement("image")]
-        public BingImage Images { get; set; }
+        public BingDailyImage Images { get; set; }
 
         [XmlElement("tooltips")]
         public BingTooltips Tooltips { get; set; }
     }
 
-    public class BingImage
+    public class BingDailyImage
     {
         [XmlElement("startdate")]
         public string StartDate { get; set; }

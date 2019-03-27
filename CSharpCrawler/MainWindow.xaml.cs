@@ -173,6 +173,7 @@ namespace CSharpCrawler
         private void btn_BingImageSearch_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = bingImageSearch;
+            bingImageSearch.StartAnimation();
         }
     }
 }

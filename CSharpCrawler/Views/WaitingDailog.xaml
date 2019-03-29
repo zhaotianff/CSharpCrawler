@@ -1,0 +1,407 @@
+﻿<Window x:Class="GetImageZUI.Views.WaitingDailog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="WaitingDailog" Height="150" Width="150" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Resources>
+            <SolidColorBrush x:Key="ParticleColor" Color = "Pink"/>
+            <SolidColorBrush x:Key="ParticleBackgroundColor" Color = "Transparent"/>
+            <sys:Double x:Key="ParticleOpacity">1</sys:Double>
+            <sys:Double x:Key="ParticleRadius">5</sys:Double>
+
+            <sys:Double x:Key="StartingPointX">0</sys:Double>
+            <sys:Double x:Key="StartingPointY">-18</sys:Double>
+
+            <sys:Double x:Key="RotationPointX">0.5</sys:Double>
+            <sys:Double x:Key="RotationPointY">0.5</sys:Double>
+
+            <sys:TimeSpan x:Key="StoryBoardBeginTimecircle0">00:00:00.000</sys:TimeSpan>
+            <sys:TimeSpan x:Key="StoryBoardBeginTimecircle1">00:00:00.100</sys:TimeSpan>
+            <sys:TimeSpan x:Key="StoryBoardBeginTimecircle2">00:00:00.200</sys:TimeSpan>
+            <sys:TimeSpan x:Key="StoryBoardBeginTimecircle3">00:00:00.300</sys:TimeSpan>
+            <sys:TimeSpan x:Key="StoryBoardBeginTimecircle4">00:00:00.400</sys:TimeSpan>
+            <Duration x:Key="StoryBoardDuration">00:00:03.500</Duration>
+
+            <sys:Double x:Key="ParticleOriginAnglecircle0">0</sys:Double>
+            <sys:Double x:Key="ParticleOriginAnglecircle1">-15</sys:Double>
+            <sys:Double x:Key="ParticleOriginAnglecircle2">-30</sys:Double>
+            <sys:Double x:Key="ParticleOriginAnglecircle3">-45</sys:Double>
+            <sys:Double x:Key="ParticleOriginAnglecircle4">-60</sys:Double>
+
+            <sys:Double x:Key="ParticleBeginAngle1">0</sys:Double>
+            <sys:Double x:Key="ParticleEndAngle1">90</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime1">00:00:00.000</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration1">00:00:00.750</Duration>
+
+            <sys:Double x:Key="ParticleBeginAngle2">90</sys:Double>
+            <sys:Double x:Key="ParticleEndAngle2">270</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime2">00:00:00.751</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration2">00:00:00.500</Duration>
+
+            <sys:Double x:Key="ParticleBeginAngle3">270</sys:Double>
+            <sys:Double x:Key="ParticleEndAngle3">360</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime3">00:00:01.252</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration3">00:00:00.750</Duration>
+
+            <sys:Double x:Key="ParticleBeginAngle4">0</sys:Double>
+            <sys:Double x:Key="ParticleEndAngle4">180</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime4">00:00:02.03</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration4">00:00:00.450</Duration>
+
+            <sys:Double x:Key="ParticleBeginOpacity6">1</sys:Double>
+            <sys:Double x:Key="ParticleEndOpacity6">0</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime6">00:00:02.353</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration6">00:00:00.040</Duration>
+
+            <sys:Double x:Key="ParticleBeginOpacity7">0</sys:Double>
+            <sys:Double x:Key="ParticleEndOpacity7">1</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime7">00:00:02.900</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration7">00:00:00.020</Duration>
+
+            <sys:Double x:Key="ParticleBeginAngle5">180</sys:Double>
+            <sys:Double x:Key="ParticleEndAngle5">360</sys:Double>
+            <sys:TimeSpan x:Key="ParticleBeginTime5">00:00:02.900</sys:TimeSpan>
+            <Duration x:Key="ParticleDuration5">00:00:00.600</Duration>
+
+            <Style x:Key="EllipseStyle" TargetType="Ellipse">
+                <Setter Property="Width" Value="5"/>
+                <Setter Property="Height" Value="5"/>
+                <Setter Property="Fill" Value="Pink"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter Property="Opacity" Value="{StaticResource ParticleOpacity}"/>
+            </Style>
+        </Grid.Resources>
+
+        <Grid Width="80" Height="80">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Canvas.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="{StaticResource StoryBoardBeginTimecircle0}" 
+                                        Duration="{StaticResource StoryBoardDuration}"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="circle0" 
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle1}"
+                                                 To="{StaticResource ParticleEndAngle1}"
+                                                 BeginTime="{StaticResource ParticleBeginTime1}"
+                                                 Duration="{StaticResource ParticleDuration1}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle2}"
+                                                 To ="{StaticResource ParticleEndAngle2}"
+                                                 BeginTime="{StaticResource ParticleBeginTime2}"
+                                                 Duration="{StaticResource ParticleDuration2}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle3}"
+                                                 To="{StaticResource ParticleEndAngle3}"
+                                                 BeginTime="{StaticResource ParticleBeginTime3}"
+                                                 Duration="{StaticResource ParticleDuration3}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle4}"
+                                                 To="{StaticResource ParticleEndAngle4}"
+                                                 BeginTime="{StaticResource ParticleBeginTime4}"
+                                                 Duration="{StaticResource ParticleDuration4}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle5}"
+                                                 To="{StaticResource ParticleEndAngle5}"
+                                                 BeginTime="{StaticResource ParticleBeginTime5}"
+                                                 Duration="{StaticResource ParticleDuration5}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity6}"
+                                                 To="{StaticResource ParticleEndOpacity6}"
+                                                 BeginTime="{StaticResource ParticleBeginTime6}"
+                                                 Duration="{StaticResource ParticleDuration6}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle0"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity7}"
+                                                 To="{StaticResource ParticleEndOpacity7}"
+                                                 BeginTime="{StaticResource ParticleBeginTime7}"
+                                                 Duration="{StaticResource ParticleDuration7}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="{StaticResource StoryBoardBeginTimecircle1}" 
+                                        Duration="{StaticResource StoryBoardDuration}"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle1}"
+                                                 To="{StaticResource ParticleEndAngle1}"
+                                                 BeginTime="{StaticResource ParticleBeginTime1}"
+                                                 Duration="{StaticResource ParticleDuration1}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle2}"
+                                                 To="{StaticResource ParticleEndAngle2}"
+                                                 BeginTime="{StaticResource ParticleBeginTime2}"
+                                                 Duration="{StaticResource ParticleDuration2}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle3}"
+                                                 To="{StaticResource ParticleEndAngle3}"
+                                                 BeginTime="{StaticResource ParticleBeginTime3}"
+                                                 Duration="{StaticResource ParticleDuration3}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle4}"
+                                                 To="{StaticResource ParticleEndAngle4}"
+                                                 BeginTime="{StaticResource ParticleBeginTime4}"
+                                                 Duration="{StaticResource ParticleDuration4}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle5}"
+                                                 To="{StaticResource ParticleEndAngle5}"
+                                                 BeginTime="{StaticResource ParticleBeginTime5}"
+                                                 Duration="{StaticResource ParticleDuration5}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity6}"
+                                                 To="{StaticResource ParticleEndOpacity6}"
+                                                 BeginTime="{StaticResource ParticleBeginTime6}"
+                                                 Duration="{StaticResource ParticleDuration6}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle1"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity7}"
+                                                 To="{StaticResource ParticleEndOpacity7}"
+                                                 BeginTime="{StaticResource ParticleBeginTime7}"
+                                                 Duration="{StaticResource ParticleDuration7}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="{StaticResource StoryBoardBeginTimecircle2}"
+                                        Duration="{StaticResource StoryBoardDuration}"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle1}"
+                                                 To="{StaticResource ParticleEndAngle1}"
+                                                 BeginTime="{StaticResource ParticleBeginTime1}"
+                                                 Duration="{StaticResource ParticleDuration1}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle2}"
+                                                 To="{StaticResource ParticleEndAngle2}"
+                                                 BeginTime="{StaticResource ParticleBeginTime2}"
+                                                 Duration="{StaticResource ParticleDuration2}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle3}"
+                                                 To="{StaticResource ParticleEndAngle3}"
+                                                 BeginTime="{StaticResource ParticleBeginTime3}"
+                                                 Duration="{StaticResource ParticleDuration3}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle4}"
+                                                 To="{StaticResource ParticleEndAngle4}"
+                                                 BeginTime="{StaticResource ParticleBeginTime4}"
+                                                 Duration="{StaticResource ParticleDuration4}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle5}"
+                                                 To="{StaticResource ParticleEndAngle5}"
+                                                 BeginTime="{StaticResource ParticleBeginTime5}"
+                                                 Duration="{StaticResource ParticleDuration5}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity6}"
+                                                 To="{StaticResource ParticleEndOpacity6}"
+                                                 BeginTime="{StaticResource ParticleBeginTime6}"
+                                                 Duration="{StaticResource ParticleDuration6}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle2"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity7}"
+                                                 To="{StaticResource ParticleEndOpacity7}"
+                                                 BeginTime="{StaticResource ParticleBeginTime7}"
+                                                 Duration="{StaticResource ParticleDuration7}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="{StaticResource StoryBoardBeginTimecircle3}"
+                                        Duration="{StaticResource StoryBoardDuration}"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle1}"
+                                                 To="{StaticResource ParticleEndAngle1}"
+                                                 BeginTime="{StaticResource ParticleBeginTime1}"
+                                                 Duration="{StaticResource ParticleDuration1}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle2}"
+                                                 To="{StaticResource ParticleEndAngle2}"
+                                                 BeginTime="{StaticResource ParticleBeginTime2}"
+                                                 Duration="{StaticResource ParticleDuration2}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle3}"
+                                                 To="{StaticResource ParticleEndAngle3}"
+                                                 BeginTime="{StaticResource ParticleBeginTime3}"
+                                                 Duration="{StaticResource ParticleDuration3}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle4}"
+                                                 To="{StaticResource ParticleEndAngle4}"
+                                                 BeginTime="{StaticResource ParticleBeginTime4}"
+                                                 Duration="{StaticResource ParticleDuration4}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle5}"
+                                                 To="{StaticResource ParticleEndAngle5}"
+                                                 BeginTime="{StaticResource ParticleBeginTime5}"
+                                                 Duration="{StaticResource ParticleDuration5}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity6}"
+                                                 To="{StaticResource ParticleEndOpacity6}"
+                                                 BeginTime="{StaticResource ParticleBeginTime6}"
+                                                 Duration="{StaticResource ParticleDuration6}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle3"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity7}"
+                                                 To="{StaticResource ParticleEndOpacity7}"
+                                                 BeginTime="{StaticResource ParticleBeginTime7}"
+                                                 Duration="{StaticResource ParticleDuration7}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="{StaticResource StoryBoardBeginTimecircle4}"
+                                        Duration="{StaticResource StoryBoardDuration}"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle1}"
+                                                 To="{StaticResource ParticleEndAngle1}"
+                                                 BeginTime="{StaticResource ParticleBeginTime1}"
+                                                 Duration="{StaticResource ParticleDuration1}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle2}"
+                                                 To="{StaticResource ParticleEndAngle2}"
+                                                 BeginTime="{StaticResource ParticleBeginTime2}"
+                                                 Duration="{StaticResource ParticleDuration2}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle3}"
+                                                 To="{StaticResource ParticleEndAngle3}"
+                                                 BeginTime="{StaticResource ParticleBeginTime3}"
+                                                 Duration="{StaticResource ParticleDuration3}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle4}"
+                                                 To="{StaticResource ParticleEndAngle4}"
+                                                 BeginTime="{StaticResource ParticleBeginTime4}"
+                                                 Duration="{StaticResource ParticleDuration4}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                 From="{StaticResource ParticleBeginAngle5}"
+                                                 To="{StaticResource ParticleEndAngle5}"
+                                                 BeginTime="{StaticResource ParticleBeginTime5}"
+                                                 Duration="{StaticResource ParticleDuration5}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity6}"
+                                                 To="{StaticResource ParticleEndOpacity6}"
+                                                 BeginTime="{StaticResource ParticleBeginTime6}"
+                                                 Duration="{StaticResource ParticleDuration6}"/>
+                                <DoubleAnimation Storyboard.TargetName="circle4"
+                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 From="{StaticResource ParticleBeginOpacity7}"
+                                                 To="{StaticResource ParticleEndOpacity7}"
+                                                 BeginTime="{StaticResource ParticleBeginTime7}"
+                                                 Duration="{StaticResource ParticleDuration7}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Border x:Name="circle0" Background="{StaticResource ParticleBackgroundColor}" Opacity="{StaticResource ParticleOpacity}">
+                <Border.RenderTransform>
+                    <RotateTransform/>
+                </Border.RenderTransform>
+                <Border.RenderTransformOrigin>
+                    <Point X="{StaticResource RotationPointX}" Y="{StaticResource RotationPointY}"/>
+                </Border.RenderTransformOrigin>
+                <Ellipse Style="{StaticResource EllipseStyle}">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="{StaticResource StartingPointX}" Y="{StaticResource StartingPointY}"/>
+                            <RotateTransform Angle="{StaticResource ParticleOriginAnglecircle0}"/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Border>
+            <Border x:Name="circle1" Background="{StaticResource ParticleBackgroundColor}" Opacity="{StaticResource ParticleOpacity}">
+                <Border.RenderTransform>
+                    <RotateTransform/>
+                </Border.RenderTransform>
+                <Border.RenderTransformOrigin>
+                    <Point X="{StaticResource RotationPointX}" Y ="{StaticResource RotationPointY}"/>
+                </Border.RenderTransformOrigin>
+                <Ellipse Style = "{StaticResource EllipseStyle}">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="{StaticResource StartingPointX}" Y="{StaticResource StartingPointY}"/>
+                            <RotateTransform Angle="{StaticResource ParticleOriginAnglecircle1}"/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Border>
+            <Border x:Name="circle2" Background="{StaticResource ParticleBackgroundColor}" Opacity="{StaticResource ParticleOpacity}">
+                <Border.RenderTransform>
+                    <RotateTransform/>
+                </Border.RenderTransform>
+                <Border.RenderTransformOrigin>
+                    <Point X="{StaticResource RotationPointX}" Y="{StaticResource RotationPointY}"/>
+                </Border.RenderTransformOrigin>
+                <Ellipse Style="{StaticResource EllipseStyle}">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="{StaticResource StartingPointX}" Y="{StaticResource StartingPointY}"/>
+                            <RotateTransform Angle="{StaticResource ParticleOriginAnglecircle2}"/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Border>
+            <Border x:Name="circle3" Background="{StaticResource ParticleBackgroundColor}" Opacity="{StaticResource ParticleOpacity}">
+                <Border.RenderTransform>
+                    <RotateTransform/>
+                </Border.RenderTransform>
+                <Border.RenderTransformOrigin>
+                    <Point X="{StaticResource RotationPointX}" Y="{StaticResource RotationPointY}"/>
+                </Border.RenderTransformOrigin>
+                <Ellipse Style="{StaticResource EllipseStyle}">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="{StaticResource StartingPointX}" Y="{StaticResource StartingPointY}"/>
+                            <RotateTransform Angle="{StaticResource ParticleOriginAnglecircle3}"/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Border>
+            <Border x:Name="circle4" Background="{StaticResource ParticleBackgroundColor}" Opacity="{StaticResource ParticleOpacity}">
+                <Border.RenderTransform>
+                    <RotateTransform/>
+                </Border.RenderTransform>
+                <Border.RenderTransformOrigin>
+                    <Point X="{StaticResource RotationPointX}" Y="{StaticResource RotationPointY}"/>
+                </Border.RenderTransformOrigin>
+                <Ellipse Style="{StaticResource EllipseStyle}" Width="10" Height="10">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="{StaticResource StartingPointX}" Y="{StaticResource StartingPointY}"/>
+                            <RotateTransform Angle="{StaticResource ParticleOriginAnglecircle4}"/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Border>
+        </Grid>
+        <Label Name="content"  FontWeight="Bold" HorizontalAlignment="Center" Foreground="{Binding ParticleColor}" VerticalAlignment="Center" Margin="0,120,0,0"></Label>
+    </Grid>
+</Window>

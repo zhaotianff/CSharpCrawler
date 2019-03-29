@@ -95,9 +95,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="Controls\TextImage.cs" />
     <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
+    <Compile Include="Model\HtmlTag.cs" />
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\CityCode.cs" />
     <Compile Include="Model\NodeStruct.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
+    <Compile Include="Util\HtmlAgilityPackUtil.cs" />
     <Compile Include="Util\JsonUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
@@ -146,6 +149,9 @@
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WaitingDailog.xaml.cs">
+      <DependentUpon>WaitingDailog.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +176,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\TabControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +191,10 @@
     <Page Include="Style\WindowStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Basic.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +239,10 @@
     <Page Include="Views\Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WaitingDailog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

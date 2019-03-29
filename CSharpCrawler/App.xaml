@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Style/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="Style/CheckBoxStyle.xaml"/>
                 <ResourceDictionary Source="Style/TabControlStyle.xaml"/>
+                <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

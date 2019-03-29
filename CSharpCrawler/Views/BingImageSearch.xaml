@@ -8,9 +8,9 @@
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="BingImageSearch">
     <Canvas Name="canvas">
-        <Grid Width="{Binding ElementName=canvas,Path=ActualWidth}" Height="{Binding ElementName=canvas,Path=ActualHeight}" Name="grid" Background="White">
+        <Grid Width="{Binding ElementName=canvas,Path=ActualWidth}" Height="{Binding ElementName=canvas,Path=ActualHeight}" Name="grid" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="150"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -19,9 +19,13 @@
                 <Button Height="45" Content="搜索" Style="{StaticResource GlobalButtonStyle}" Margin="420,0,0,0"/>
             </Grid>
 
-            <Grid Grid.Row="1" Name="grid_Content">
-                
-            </Grid>
+            <Canvas Grid.Row="1" Name="canvas_Content">
+                <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="scroll" ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="{Binding ElementName=canvas_Content,Path=ActualHeight}" Width="{Binding ElementName=canvas_Content,Path=ActualWidth}">
+                    <Grid Background="Transparent" Name="grid_Content" Height="{Binding ElementName=canvas_Content,Path=ActualHeight}" ScrollViewer.CanContentScroll="True" ScrollViewer.PanningMode="HorizontalFirst" MouseWheel="scroll_MouseWheel">
+
+                    </Grid>
+                </ScrollViewer>
+            </Canvas>
         </Grid>
     </Canvas>
 </Page>

@@ -89,6 +89,60 @@ namespace CSharpCrawler.Util
             }                   
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="accept"></param>
+        /// <param name="userAgent"></param>
+        /// <param name="encoding"></param>
+        /// <remarks>以后再改</remarks>
+        /// <returns></returns>
+        public static async Task<string> GetHtmlSource(string url,string accept,string userAgent,Encoding encoding=null)
+        {
+            try
+            {
+                //不受信任的HTTPS
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((a, b, c, d) => { return true; });
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET"; //默认就是GET
+                request.Accept = accept;
+                request.UserAgent = userAgent;
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    Encoding tempEncoding = Encoding.Default;
+
+                    if (encoding == null)
+                    {
+                        tempEncoding = EncodingUtil.GetEncoding(url);
+                    }
+                    else
+                    {
+                        tempEncoding = encoding;
+                    }
+
+                    Stream stream = response.GetResponseStream();
+
+                    //GZIP流
+                    if (((HttpWebResponse)response).ContentEncoding.ToLower().Contains("gzip"))
+                    {
+                        stream = new GZipStream(stream, CompressionMode.Decompress);
+                    }
+
+                    using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                    {
+                        return sr.ReadToEnd();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static async Task<Stream> GetHtmlStreamAsync(string url)
         {
             try

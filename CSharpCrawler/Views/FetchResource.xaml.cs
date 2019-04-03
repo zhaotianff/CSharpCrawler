@@ -41,7 +41,7 @@ namespace CSharpCrawler.Views
             }
 
             bool isStartWithHttp = false;
-            if(RegexUtil.IsUrl(url,out isStartWithHttp) == false)
+            if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
             {
                 MessageBox.Show("网址输入错误");
                 this.tbox_Url.Focus();

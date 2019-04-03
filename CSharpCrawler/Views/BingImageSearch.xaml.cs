@@ -30,6 +30,7 @@ namespace CSharpCrawler.Views
         WaitingDailog dialog;
 
         const int RowCount = 3;
+        const int PageImageNum = 35;
 
         public BingImageSearch()
         {
@@ -72,6 +73,17 @@ namespace CSharpCrawler.Views
             //显示
             ShowImage(hotSpotsImgList);
             dialog.Close();
+        }
+
+        private async Task<List<TagImg>> SearchBingImage(string keyword,int page = 1)
+        {
+            List<TagImg> searchImgList = new List<TagImg>();
+            var start = 1;
+            if (page > 1)
+                start = page * PageImageNum + 1;
+            var url = Urls.CNBingImageDetailUrl.Replace("[keyword]", keyword).Replace("[start]", start.ToString());
+            searchImgList = await HtmlAgilityPackUtil.GetImgFromUrl(url);
+            return searchImgList;
         }
 
         private void ShowImage(List<TagImg> imgList)
@@ -139,6 +151,20 @@ namespace CSharpCrawler.Views
             {
                 scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + 50);
             }
+        }
+
+        private async void btn_Search_Click(object sender, RoutedEventArgs e)
+        {
+            List<TagImg> searchResult = new List<TagImg>();
+            string keyword = this.tbox_Keyword.Text.Trim();
+            if(string.IsNullOrEmpty(keyword))
+            {
+                MessageBox.Show("请输入搜索关键字");
+                return;
+            }
+
+            searchResult =await SearchBingImage(keyword);
+            ShowImage(searchResult);
         }
     }
 }

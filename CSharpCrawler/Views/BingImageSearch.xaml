@@ -15,8 +15,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBox Width="500" Height="45" Style="{StaticResource TextBoxStyle}" Margin="-230,0,0,0" FontSize="20" FontFamily="Arial" VerticalContentAlignment="Center"/>
-                <Button Height="45" Content="搜索" Style="{StaticResource GlobalButtonStyle}" Margin="420,0,0,0"/>
+                <TextBox Width="500" Height="45" Style="{StaticResource TextBoxStyle}" Margin="-230,0,0,0" FontSize="20" FontFamily="Arial" VerticalContentAlignment="Center" Name="tbox_Keyword"/>
+                <Button Height="45" Content="搜索" Style="{StaticResource GlobalButtonStyle}" Margin="420,0,0,0" Name="btn_Search" Click="btn_Search_Click"/>
             </Grid>
 
             <Canvas Grid.Row="1" Name="canvas_Content">

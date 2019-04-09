@@ -71,7 +71,7 @@ namespace CSharpCrawler.Views
             hotSpotsImgList = hotSpotsImgList.Where(x => x.Src.Contains("tse1-mm")).ToList();
 
             //显示
-            ShowImage(hotSpotsImgList);
+            ShowImage(hotSpotsImgList,true);
             dialog.Close();
         }
 
@@ -86,7 +86,7 @@ namespace CSharpCrawler.Views
             return searchImgList;
         }
 
-        private void ShowImage(List<TagImg> imgList)
+        private void ShowImage(List<TagImg> imgList,bool isHotSpot = false)
         {
             Reset();
 
@@ -112,11 +112,27 @@ namespace CSharpCrawler.Views
             //暂不做异步加载
             for(int i = 0;i<imgList.Count;i++)
             {
+                string detailUrl = imgList[i].DetailUrl;
+
                 TextImage image = new TextImage();
                 image.Width = 300;
                 image.Margin = new Thickness(5);
                 image.Image = imgList[i].Src;
                 image.Text = imgList[i].Alt;
+                image.Cursor = Cursors.Hand;
+                if(isHotSpot)
+                {
+                    image.MouseDown += (a, b) => { this.tbox_Keyword.Text = image.Text;btn_Search_Click(null, null); };
+                }
+                else
+                {
+                    image.MouseDown += (a, b) =>
+                    {
+                        Point p = b.GetPosition(Application.Current.MainWindow);
+                        AnimationImageWindow animationDialog = new AnimationImageWindow();
+                        animationDialog.ShowImage(detailUrl, p.X, p.Y);
+                    };
+                }
                 Grid.SetColumn(image, i / RowCount);
                 Grid.SetRow(image, row);
                 this.grid_Content.Children.Add(image);

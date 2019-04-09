@@ -116,6 +116,9 @@
     <Compile Include="Util\Urls.cs" />
     <Compile Include="Util\WebUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
+    <Compile Include="Views\AnimationImageWindow.xaml.cs">
+      <DependentUpon>AnimationImageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AnimationImageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Basic.xaml">
       <SubType>Designer</SubType>

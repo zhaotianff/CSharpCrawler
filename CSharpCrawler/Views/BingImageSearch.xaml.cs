@@ -125,12 +125,13 @@ namespace CSharpCrawler.Views
                     image.MouseDown += (a, b) => { this.tbox_Keyword.Text = image.Text;btn_Search_Click(null, null); };
                 }
                 else
-                {
-                    image.MouseDown += (a, b) =>
+                {                   
+                    image.MouseDown +=async (a, b) =>
                     {
+                        string imgUrl = await HtmlAgilityPackUtil.ExtractSingleImage(detailUrl);
                         Point p = b.GetPosition(Application.Current.MainWindow);
-                        AnimationImageWindow animationDialog = new AnimationImageWindow();
-                        animationDialog.ShowImage(detailUrl, p.X, p.Y);
+                        AnimationImageWindow animationDialog = new AnimationImageWindow();                      
+                        animationDialog.ShowImage(imgUrl, p.X, p.Y);
                     };
                 }
                 Grid.SetColumn(image, i / RowCount);

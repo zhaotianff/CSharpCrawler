@@ -14,7 +14,8 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        x:Name="main">
+        x:Name="main"
+        Topmost="True">
 
     <Window.Resources>
         <Storyboard x:Key="start">

@@ -36,6 +36,8 @@ namespace CSharpCrawler.Views
         {
             this.scaleTransform.CenterX = centerX;
             this.scaleTransform.CenterY = centerY;
+            this.image.Source = new BitmapImage(new Uri(url));
+            this.Show();           
         }
 
         private void StartAnimation()

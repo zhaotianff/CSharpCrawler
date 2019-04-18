@@ -112,9 +112,7 @@ namespace CSharpCrawler.Views
             //暂不做异步加载
             for(int i = 0;i<imgList.Count;i++)
             {
-                //string detailUrl = imgList[i].DetailUrl;
-                //临时
-                string detailUrl = imgList[i].Src;
+                string detailUrl = imgList[i].DetailUrl;
 
                 TextImage image = new TextImage();
                 image.Width = 300;
@@ -130,10 +128,10 @@ namespace CSharpCrawler.Views
                 {                   
                     image.MouseDown +=(a, b) =>
                     {
-                        //string imgUrl = await HtmlAgilityPackUtil.ExtractSingleImage(detailUrl);
+                        string imgUrl = RegexUtil.ExtractBingImage(detailUrl);
                         Point p = b.GetPosition(Application.Current.MainWindow);
                         AnimationImageWindow animationDialog = new AnimationImageWindow();                      
-                        animationDialog.ShowImage(detailUrl, p.X, p.Y);
+                        animationDialog.ShowImage(imgUrl, p.X, p.Y);
                     };
                 }
                 Grid.SetColumn(image, i / RowCount);

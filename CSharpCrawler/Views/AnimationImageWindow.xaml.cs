@@ -34,6 +34,7 @@ namespace CSharpCrawler.Views
 
         public void ShowImage(string url,double centerX,double centerY)
         {
+            SetImageSize();
             this.scaleTransform.CenterX = centerX;
             this.scaleTransform.CenterY = centerY;
             this.image.Source = new BitmapImage(new Uri(url));
@@ -58,6 +59,25 @@ namespace CSharpCrawler.Views
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             EndAnimation();
+        }
+
+        private void SetImageSize()
+        {
+            int screenHeight = (int)SystemParameters.PrimaryScreenHeight;
+            Thickness thickness;
+            if (screenHeight < 1080)
+            {
+                thickness = new Thickness(0, 50, 0, 50);
+            }
+            else if (screenHeight >= 1080 && screenHeight < 2048)
+            {
+                thickness = new Thickness(0, 100, 0, 100);
+            }
+            else
+            {
+                thickness = new Thickness(0, 300, 0, 300);
+            }
+            this.image.Margin = thickness;
         }
     }
 }

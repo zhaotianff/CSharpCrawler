@@ -52,8 +52,9 @@ namespace CSharpCrawler.Util
             //http%3a%2f%2fi2.chinanews.com%2fsimg%2fhd%2f2018%2f04%2f19%2f27fdf774f284408f8a3e1299cefd18c3.jpg
             string pattern = "url=(?<url>\\S*(.jpg|.png|.bmp))";
             Match match = Regex.Match(url, pattern);
+            //http%3a%2f%2fi2.chinanews.com%2fsimg%2fhd%2f2018%2f04%2f19%2f27fdf774f284408f8a3e1299cefd18c3.jpg
             if (match.Success)
-                return match.Groups["url"].Value;
+                return match.Groups["url"].Value.Replace("%2f","/").Replace("%3a", ":");
             return url;
         }
     }

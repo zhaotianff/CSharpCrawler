@@ -9,7 +9,7 @@ namespace CSharpCrawler.Util
 {
     public class HtmlAgilityPackUtil
     {
-        public async static Task<List<TagImg>> GetImgFromHtml(string html)
+        public async static Task<List<TagImg>> GetImgFromHtml(string html,bool isHotspot = false)
         {
             Task<List<TagImg>> task = Task.Run(() => {
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -48,24 +48,29 @@ namespace CSharpCrawler.Util
                        </a>
                     */
 
-                    tempAttribute = item.ParentNode.ParentNode.Attributes["href"];
-                    tagImg.DetailUrl = tempAttribute == null ? "" :Urls.CNBingDailyImageBasicUrl +  tempAttribute.Value;
+                    /*< a class="iusc" style="height:207px;width:276px" m="{&quot;cid&quot;:&quot;Ox2V7JRH&quot;,&quot;purl&quot;:&quot;http://www.wall001.com/nature/under_sky/html/image8.html&quot;,&quot;murl&quot;:&quot;http://wall001.com/nature/under_sky/mxxx01/[wall001.com]_sky_AP23070.jpg&quot;,&quot;turl&quot;:&quot;https://tse2-mm.cn.bing.net/th?id=OIP.Ox2V7JRHXMInhT3_WlPpVgHaFj&amp;pid=15.1&quot;,&quot;md5&quot;:&quot;3b1d95ec94475cc227853dff5a53e956&quot;,&quot;shkey&quot;:&quot;&quot;,&quot;t&quot;:&quot;桌布天堂 --- 晴朗天空 - 藍天白云8&quot;,&quot;mid&quot;:&quot;8A372FC995FECC38853858A07F4171C439B8FA58&quot;,&quot;desc&quot;:&quot;&quot;}" onclick="sj_evt.fire('IFrame.Navigate', this.href); return false;" href="/images/search?view=detailV2&amp;ccid=Ox2V7JRH&amp;id=8A372FC995FECC38853858A07F4171C439B8FA58&amp;thid=OIP.Ox2V7JRHXMInhT3_WlPpVgHaFj&amp;mediaurl=http%3a%2f%2fwall001.com%2fnature%2funder_sky%2fmxxx01%2f%5bwall001.com%5d_sky_AP23070.jpg&amp;exph=768&amp;expw=1024&amp;q=%e5%a4%a9%e7%a9%ba&amp;simid=608010515721882861&amp;selectedIndex=5&amp;qft=+filterui%3aphoto-photo" h="ID=images.5601_7,5055.1"><div class="img_cont hoff"><img class="mimg" style="background-color:#1543b6;color:#1543b6" height="207" width="276" src="https://tse4-mm.cn.bing.net/th?id=OIP.Ox2V7JRHXMInhT3_WlPpVgHaFj&amp;w=276&amp;h=207&amp;c=7&amp;o=5&amp;pid=1.7" alt="天空 的图像结果"></div></a>*/
 
-                    tagImg.Width = w;
-                    tagImg.Height = h;
-                    list.Add(tagImg);
+                    Tuple<bool,string> extractResult = RegexUtil.ExtractBingImage(item.ParentNode.ParentNode.OuterHtml);
+
+                    if (extractResult.Item1 == true || isHotspot == true)
+                    {
+                        tagImg.DetailUrl = extractResult.Item2;
+                        tagImg.Width = w;
+                        tagImg.Height = h;
+                        list.Add(tagImg);
+                    }
                 }
                 return list;
             });
             return await task;
         }
 
-        public async static Task<List<TagImg>> GetImgFromUrl(string url)
+        public async static Task<List<TagImg>> GetImgFromUrl(string url,bool isHotspot = false)
         {
             var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
             var userAgent= "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 TheWorld 7";
             var html =await WebUtil.GetHtmlSource(url,accept,userAgent,Encoding.UTF8);
-            return await GetImgFromHtml(html);
+            return await GetImgFromHtml(html,isHotspot);
         }
 
 

@@ -17,3 +17,5 @@ PUT   向指定资源位置上传其最新内容
 
 4、下载网页的基本原理是和Web服务器建立Socket连接。发送请求后，再接收数据。在.Net中，可以使用封装好的WebRequest类进行操作
 
+5、使用HttpWebRequest实现多线程下载的核心是：HttpWebRequest提供了一个AddRange方法，可以指定下载的文件数据范围
+

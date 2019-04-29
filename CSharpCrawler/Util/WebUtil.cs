@@ -271,7 +271,7 @@ namespace CSharpCrawler.Util
         /// <returns></returns>
         private static string ExtractFileName(string url)
         {
-            return url.Substring(url.LastIndexOf("/"));
+            return url.Substring(url.LastIndexOf("/") + 1);
         }
 
         public static async Task<string> DownloadFileAsync(string url,string fileName = "")
@@ -285,9 +285,78 @@ namespace CSharpCrawler.Util
             return fileName;
         }
 
-        public static void DownloadFileWithProgress(string url,Action<object> act,string fileName = "")
+        public async static void DownloadFileWithProgress(string url,Action<string> act,string fileName = "")
         {
+            //TODO thread count
+            int threadCount = 3;
+            long blockSize = 0;
+            long[] rangeArray = new long[threadCount+1];
+            byte[] fileBuffer;
+            long fileSize = 0;
+            List<Task<byte[]>> tasks = new List<Task<byte[]>>();
 
+            if (string.IsNullOrEmpty(fileName))
+                fileName ="./download/" +  ExtractFileName(url);
+
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            fileSize = response.ContentLength;
+            fileBuffer = new byte[fileSize];
+            act($"FileSize:{fileSize} bytes");
+
+            blockSize = fileSize / threadCount;
+
+            rangeArray[0] = 0;
+            for (int i = 1; i < threadCount; i++)
+            {
+                rangeArray[i] = blockSize*i;
+            }
+            rangeArray[threadCount] = fileSize;
+
+            for (int i = 0; i < threadCount; i++)
+            {
+                long start = rangeArray[i];
+                long end = rangeArray[i + 1];
+                Task<byte[]> t = Task.Run(()=> {return DownloadPartFile(start,end, url); });
+                tasks.Add(t);
+                act($"Create thread {i+1},download range from {start} to {end} bytes");
+            }
+
+            await Task.WhenAll(tasks);
+
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                byte[] buffer = await tasks[i];
+                Array.Copy(buffer, 0, fileBuffer, rangeArray[i], rangeArray[i + 1] - rangeArray[i]);
+            }
+
+            using (System.IO.FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                await fs.WriteAsync(fileBuffer, 0, (int)fileSize);
+            }
+        }
+
+        private static byte[] DownloadPartFile(long start,long end,string url)
+        {
+            long bufferSize = end - start;
+            byte[] buffer = new byte[bufferSize+1];
+            int targetIndex = 0;
+
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.AddRange(start, end);
+            using (Stream stream = request.GetResponse().GetResponseStream())
+            {
+                byte[] receiveBytes = new byte[512];
+                int readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
+                while(readBytes > 0)
+                {
+                    Array.Copy(receiveBytes, 0, buffer, targetIndex, readBytes);
+                    targetIndex += readBytes;
+                    readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
+                }
+            }
+            return buffer;
+            
         }
     }
 }

@@ -46,14 +46,16 @@ namespace CSharpCrawler.Views
                 //文件URL检验
             }
 
+            ShowStatusText($"check {url} status");
             HttpHeader httpHeader =  WebUtil.GetHeader(url);
             if (httpHeader.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                ShowStatusText($"{url} is not available\r\n");
+                ShowStatusText($"{url} is not available");
                 return;
             }
-           
-            ShowStatusText($"Download file {url}.....\r\n");
+
+            ShowStatusText($"{url} is available");
+            ShowStatusText($"Download file {url}.....");
             string fileName = await WebUtil.DownloadFileAsync(url);
             ShowStatusText($"Download : {url} Finished\r\n");
 
@@ -65,6 +67,35 @@ namespace CSharpCrawler.Views
             }
         }
 
+        private void btn_MultiThreadDonwload_Click(object sender, RoutedEventArgs e)
+        {
+            string url = this.tbox_Url.Text.Trim();
+            if (string.IsNullOrEmpty(url))
+            {
+                MessageBox.Show("请输入下载地址");
+                return;
+            }
+
+            if (globalData.CrawlerConfig.ImageConfig.IgnoreUrlCheck == false)
+            {
+                //TODO 
+                //文件URL检验
+            }
+
+            ShowStatusText($"check {url} status");
+            HttpHeader httpHeader = WebUtil.GetHeader(url);
+            if (httpHeader.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                ShowStatusText($"{url} is not available");
+                return;
+            }
+
+            ShowStatusText($"{url} is available");
+            ShowStatusText($"Download file {url}.....");
+
+            WebUtil.DownloadFileWithProgress(url, ShowStatusText);
+        }
+
         private void btn_DownLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
 
@@ -73,7 +104,7 @@ namespace CSharpCrawler.Views
         private void ShowStatusText(string text)
         {
             this.Dispatcher.Invoke(()=> {
-                paragraph.Inlines.Add(new Run(text));
+                paragraph.Inlines.Add(new Run(DateTime.Now.ToString() + "\t" +  text + "\r\n"));
                 this.rtbox_Status.Document = new FlowDocument(paragraph);
             });
         }

@@ -65,7 +65,7 @@ namespace CSharpCrawler.Views
                 dialog.ShowDialog();
             }));
          
-            hotSpotsImgList = await HtmlAgilityPackUtil.GetImgFromUrl(Urls.CNBingImageUrl);
+            hotSpotsImgList = await HtmlAgilityPackUtil.GetImgFromUrl(Urls.CNBingImageUrl,true);
 
             //去除
             hotSpotsImgList = hotSpotsImgList.Where(x => x.Src.Contains("tse1-mm")).ToList();
@@ -128,7 +128,7 @@ namespace CSharpCrawler.Views
                 {                   
                     image.MouseDown +=(a, b) =>
                     {
-                        string imgUrl = RegexUtil.ExtractBingImage(detailUrl);
+                        string imgUrl = detailUrl;
                         Point p = b.GetPosition(Application.Current.MainWindow);
                         AnimationImageWindow animationDialog = new AnimationImageWindow();                      
                         animationDialog.ShowImage(imgUrl, p.X, p.Y);

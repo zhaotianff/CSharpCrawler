@@ -290,7 +290,8 @@ namespace CSharpCrawler.Util
             //TODO thread count
             int threadCount = 3;
             long blockSize = 0;
-            long[] rangeArray = new long[threadCount+1];
+            int index = 0;
+            long[] rangeArray = new long[threadCount*2];
             byte[] fileBuffer;
             long fileSize = 0;
             List<Task<byte[]>> tasks = new List<Task<byte[]>>();
@@ -306,56 +307,83 @@ namespace CSharpCrawler.Util
 
             blockSize = fileSize / threadCount;
 
-            rangeArray[0] = 0;
-            for (int i = 1; i < threadCount; i++)
+            for (int i = 0; i < threadCount*2; i+=2)
             {
-                rangeArray[i] = blockSize*i;
-            }
-            rangeArray[threadCount] = fileSize;
+                if (i == 0)
+                {
+                    rangeArray[i] = 0;
+                    rangeArray[i + 1] = blockSize;
+                }
+                else if(i == threadCount*2 -2)
+                {
+                    rangeArray[i] = rangeArray[i - 1] + 1;
+                    rangeArray[i + 1] = fileSize;
+                }
+                else
+                {
+                    rangeArray[i] = rangeArray[i - 1] + 1;
+                    rangeArray[i + 1] = rangeArray[i] + blockSize;
+                }
+            }           
 
-            for (int i = 0; i < threadCount; i++)
+            for (int i = 0; i < threadCount*2; i+=2)
             {
                 long start = rangeArray[i];
                 long end = rangeArray[i + 1];
-                Task<byte[]> t = Task.Run(()=> {return DownloadPartFile(start,end, url); });
-                tasks.Add(t);
-                act($"Create thread {i+1},download range from {start} to {end} bytes");
-            }
 
-            await Task.WhenAll(tasks);
+                byte[] buffer = await Task.Run(() => { return DownloadPartFile(start, end, url); });
 
-            for (int i = 0; i < tasks.Count; i++)
-            {
-                byte[] buffer = await tasks[i];
-                Array.Copy(buffer, 0, fileBuffer, rangeArray[i], rangeArray[i + 1] - rangeArray[i]);
-            }
 
-            using (System.IO.FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
-            {
-                await fs.WriteAsync(fileBuffer, 0, (int)fileSize);
-            }
+                using (System.IO.FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    fs.Seek(start, SeekOrigin.Begin);
+                    fs.Write(buffer, 0, buffer.Length);
+                    //await fs.WriteAsync(buffer, 0, buffer.Length);
+                }
+
+                act($"Create thread {index+1},download range from {start} to {end} bytes");
+                index++;
+            }          
+
+            act($"Download {url} success");
         }
 
         private static byte[] DownloadPartFile(long start,long end,string url)
         {
-            long bufferSize = end - start;
-            byte[] buffer = new byte[bufferSize+1];
-            int targetIndex = 0;
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.AddRange(start, end);
-            using (Stream stream = request.GetResponse().GetResponseStream())
+            try
             {
-                byte[] receiveBytes = new byte[512];
-                int readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
-                while(readBytes > 0)
+                long bufferSize = end - start;
+                byte[] buffer = new byte[bufferSize + 1];
+                int targetIndex = 0;
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Referer = url;
+                request.Method = "GET";
+                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 2.0.1124)";
+                request.AllowAutoRedirect = false;
+                request.ContentType = "application/octet-stream";
+                request.Accept = "image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, application/xaml+xml, application/vnd.ms-xpsdocument, application/x-ms-xbap, application/x-ms-application, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*";
+                request.Timeout = 10 * 1000;
+                request.AllowAutoRedirect = true;
+                request.AddRange(start, end);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                using (Stream stream = response.GetResponseStream())
                 {
-                    Array.Copy(receiveBytes, 0, buffer, targetIndex, readBytes);
-                    targetIndex += readBytes;
-                    readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
+                    byte[] receiveBytes = new byte[512];
+                    int readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
+                    while (readBytes > 0)
+                    {
+                        Array.Copy(receiveBytes, 0, buffer, targetIndex, readBytes);
+                        readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
+                        targetIndex += readBytes;
+                    }
                 }
+                return buffer;
             }
-            return buffer;
+            catch
+            {
+                return DownloadPartFile(start, end, url);
+            }
             
         }
     }

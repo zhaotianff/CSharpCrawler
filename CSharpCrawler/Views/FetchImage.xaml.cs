@@ -78,6 +78,7 @@ namespace CSharpCrawler.Views
 
         public void Surfing(string url)
         {
+            ShowStatusText($"正在从{url}抓取图像");
             if(globalData.CrawlerConfig.ImageConfig.DynamicGrab == true)
             {
                 SurfingByCEF(url);
@@ -108,9 +109,7 @@ namespace CSharpCrawler.Views
         }
 
         private void ExtractImage(object html)
-        {
-               
-            
+        {                       
            switch(globalData.CrawlerConfig.ImageConfig.FetchMode)
             {
                 case 0:
@@ -139,6 +138,7 @@ namespace CSharpCrawler.Views
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
                     IncrementCount();
                 }
+                ShowStatusText($"已抓取到{mc.Count}个图像");
             }
             catch(Exception ex)
             {
@@ -161,6 +161,7 @@ namespace CSharpCrawler.Views
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
                     IncrementCount();
                 }
+                ShowStatusText($"已抓取到{imgNodeCollection.Count}个图像");
             }
             catch(Exception ex)
             {
@@ -234,6 +235,6 @@ namespace CSharpCrawler.Views
                     ShowStatusText(ex.Message);
                 }
             }
-        }                        
+        }   
     }
 }

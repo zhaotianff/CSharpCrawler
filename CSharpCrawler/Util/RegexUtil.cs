@@ -57,5 +57,26 @@ namespace CSharpCrawler.Util
                 return new Tuple<bool, string>(true, match.Groups["url"].Value.Replace("%2f", "/").Replace("%3a", ":"));
             return new Tuple<bool, string>(false,url);
         }
+
+        private static List<string> ExtractBackgroundImages(string html)
+        {
+            /*
+             * <div id="sections" style="background-size: 100% 100%; background-image: url(&quot;http://image.fristlvy.com/hnxxxdsly/image/GetSingleImage?id=1150&amp;type=Original&amp;_sort=0&amp;_imgType=21&quot;); height: 400px; display: block;">
+                <div class="div-b">
+                    <div style="color: black;font-size: 16px;margin-top:10px;padding-left: 40px;"><span>更新时间:</span> <span id="newdate">7天前</span></div>
+                    <div style="margin-top:5px;width: 100%;">
+                        <span class="askQuestion" id="title" style="color: black;font-size: 25px;float:left;padding-left: 40px;line-height:35px;">厦门旅游攻略！玩几天合适，一般玩哪些地方？吃住行是怎么安排的，大概 需要多少费用？去过的朋友求解答！</span>
+                    </div>
+                </div>
+            </div>
+            *
+            */
+            List<string> list = new List<string>();
+
+            //并不常见 TODO
+            string pattern = "background-image:(\\s*url|url)(";
+            return list;
+
+        }
     }
 }

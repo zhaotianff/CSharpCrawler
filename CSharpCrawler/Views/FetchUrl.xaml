@@ -22,7 +22,7 @@
             <TextBox VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
         </DockPanel>
 
-        <ListView Grid.Row="1" Name="listview_Url" Margin="10">
+        <ListView Grid.Row="1" Name="listview_Url" Margin="10" Style="{StaticResource ListViewStyle}">
             <ListView.Background>
                 <SolidColorBrush Color="White" Opacity=".6"/>
             </ListView.Background>

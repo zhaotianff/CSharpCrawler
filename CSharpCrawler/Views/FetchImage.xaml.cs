@@ -32,6 +32,7 @@ namespace CSharpCrawler.Views
         List<UrlStruct> VisitedList = new List<UrlStruct>();
 
         int globalIndex = 1;
+        string baseUrl = "";
 
         public FetchImage()
         {
@@ -63,6 +64,18 @@ namespace CSharpCrawler.Views
                 {
                     url = "http://" + url;
                 }
+            }
+            
+            if(url.Contains("/"))
+            {
+                baseUrl = url;
+                baseUrl = baseUrl.Replace("//","@");
+                baseUrl = baseUrl.Substring(0,baseUrl.IndexOf("/"));
+                baseUrl = baseUrl.Replace("@", "//");
+            }
+            else
+            {
+                baseUrl = url;
             }
 
             Reset();
@@ -158,6 +171,8 @@ namespace CSharpCrawler.Views
                 for (int i = 0; i < imgNodeCollection.Count; i++)
                 {
                     value = imgNodeCollection[i].Attributes["src"].Value;
+                    if (value.ToLower().StartsWith("http") == false || value.ToLower().StartsWith("https") == false)
+                        value = baseUrl + value;
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
                     IncrementCount();
                 }

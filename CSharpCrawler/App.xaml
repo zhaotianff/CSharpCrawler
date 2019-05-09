@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Style/CheckBoxStyle.xaml"/>
                 <ResourceDictionary Source="Style/TabControlStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

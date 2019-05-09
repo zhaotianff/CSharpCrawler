@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <DockPanel>
             <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
@@ -27,13 +27,13 @@
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged">
+            <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged" Style="{StaticResource ListViewStyle}">
                 <ListView.Background>
                     <SolidColorBrush Color="White" Opacity=".6"/>
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="30"/>
                         <GridViewColumn Header="链接" Width="700" DisplayMemberBinding="{Binding Url}"/>
                         <GridViewColumn Header="标题" Width="200" DisplayMemberBinding="{Binding Title}"/>
                         <GridViewColumn Header="状态" Width="100" DisplayMemberBinding="{Binding Status}"/>

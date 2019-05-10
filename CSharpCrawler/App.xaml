@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Style/TabControlStyle.xaml"/>
                 <ResourceDictionary Source="Style/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="Style/ToolTipStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,15 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
-        <Setter Property="BorderBrush" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBaseColor}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentBlueColor}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontFamily" Value="Myriad Hebrew"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBoxBase" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib">
-                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="border" SnapsToDevicePixels="True" CornerRadius="5">
+                    <Border BorderThickness="0,0,0,1" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="border" SnapsToDevicePixels="True" CornerRadius="3">
                         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="PART_ContentHost" Focusable="False" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -24,21 +27,15 @@
                             </Trigger.Value>
                         </Trigger>
                         <Trigger Property="UIElement.IsMouseOver">
-                            <Setter Property="Border.BorderBrush" TargetName="border">
-                                <Setter.Value>
-                                    <SolidColorBrush>#99119EDA</SolidColorBrush>
-                                </Setter.Value>
+                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{StaticResource AccentBaseColor}">
                             </Setter>
+                            <Setter Property="Opacity" TargetName="border" Value=".9"/>
                             <Trigger.Value>
                                 <s:Boolean>True</s:Boolean>
                             </Trigger.Value>
                         </Trigger>
                         <Trigger Property="UIElement.IsKeyboardFocused">
-                            <Setter Property="Border.BorderBrush" TargetName="border">
-                                <Setter.Value>
-                                    <SolidColorBrush>#99119EDA</SolidColorBrush>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{StaticResource AccentBaseColor}"></Setter>
                             <Trigger.Value>
                                 <s:Boolean>True</s:Boolean>
                             </Trigger.Value>

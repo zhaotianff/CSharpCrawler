@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="C#网络爬虫程序" Height="720" Width="1280" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}" Closed="Window_Closed" Icon="./crawler.png">
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFFFF9F9" Offset="0"/>
-            <GradientStop Color="#FFA49B96" Offset="1"/>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="White"/>
+            <GradientStop Color="#FFF9FDFB" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 
@@ -27,27 +27,28 @@
 
             <Border Grid.Column="0" BorderBrush="Silver" BorderThickness="0,0,1,0" >
                 <Border.Background>
-                    <SolidColorBrush Color="White" Opacity=".2"/>
+                    <SolidColorBrush Color="Transparent"/>
                 </Border.Background>
+                
                 <WrapPanel Grid.Row="0">
-                    <Button Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="必应图片搜索" Name="btn_BingImageSearch" Click="btn_BingImageSearch_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}"/>
-                    <Button Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}"/>
+                    <ToggleButton Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="必应图片搜索" Name="btn_BingImageSearch" Click="btn_BingImageSearch_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                 </WrapPanel>
             </Border>
 
             <Frame NavigationUIVisibility="Hidden" Name="frame" Grid.Column="1"/>
         </Grid>
     </Grid>
-    
-    
+
+
 </Window>

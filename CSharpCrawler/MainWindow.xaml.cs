@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using CSharpCrawler.Views;
+using System.Windows.Controls.Primitives;
 
 namespace CSharpCrawler
 {
@@ -33,6 +34,8 @@ namespace CSharpCrawler
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
         FetchFile fetchFile = new FetchFile();
         BingImageSearch bingImageSearch = new BingImageSearch();
+
+        ToggleButton toggleButton = null;
 
         public MainWindow()
         {
@@ -174,6 +177,14 @@ namespace CSharpCrawler
         {
             this.frame.Content = bingImageSearch;
             bingImageSearch.StartAnimation();
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (toggleButton != null)
+                toggleButton.IsChecked = false;
+
+            toggleButton = sender as ToggleButton;
         }
     }
 }

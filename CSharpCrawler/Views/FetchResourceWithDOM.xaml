@@ -12,7 +12,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
-                <RowDefinition Height="60"/>
                 <RowDefinition/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
@@ -32,7 +31,7 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="2" Name="grid_Content">
+            <Grid Grid.Row="1" Name="grid_Content">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="auto"/>
@@ -51,7 +50,7 @@
                 </TreeView>
             </Grid>
 
-            <StatusBar Grid.Row="3">
+            <StatusBar Grid.Row="2"  Background="White">
                
             </StatusBar>
         </Grid>

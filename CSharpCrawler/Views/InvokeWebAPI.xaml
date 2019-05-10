@@ -9,7 +9,7 @@
       Title="InvokeWebAPI">
 
     <TabControl Background="Transparent" ItemContainerStyle="{StaticResource StyleTabItem}">
-        <TabItem Header="实时天气查询">
+        <TabItem Header="实时天气查询" Width="100" Height="30">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -29,17 +29,17 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <GroupBox Header="结果" Grid.Column="0" Name="groupbox_Result">
+                    <GroupBox Header="结果" Grid.Column="0" Name="groupbox_Result" Foreground="Black">
                         
                     </GroupBox>
 
-                    <GroupBox Header="天气" Grid.Column="1" Name="groupbox_Weather">
+                    <GroupBox Header="天气" Grid.Column="1" Name="groupbox_Weather" Foreground="Black">
                         
                     </GroupBox>
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Header="Bing每日图片">
+        <TabItem Header="Bing每日图片" Width="100" Height="30">
             <StackPanel>
                 <Button Width="88" Height="28" Content="获取" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource GlobalButtonStyle}" Name="btn_BingImage" Click="btn_BingImage_Click"/>
                 <Label Name="lbl_Copyright"></Label>

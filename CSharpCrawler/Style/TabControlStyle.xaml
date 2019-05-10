@@ -4,7 +4,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Border  x:Name="bbb" SnapsToDevicePixels="True" ClipToBounds="True" CornerRadius="5" BorderBrush="Silver" BorderThickness="1" >
+                    <Border  x:Name="bbb" SnapsToDevicePixels="True" ClipToBounds="True" CornerRadius="3" BorderThickness="1" >
                         <Grid>
                             <ContentPresenter x:Name="contentPresenter" 
                                               ContentSource="Header"
@@ -22,8 +22,20 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="bbb" Property="Background" Value="Silver"></Setter>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" TargetName="bbb" Value="{StaticResource AccentBaseColor}"></Setter>
+                            <Setter Property="Opacity" TargetName="bbb" Value=".7"/>
                         </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=TabStripPlacement, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" Value="Top" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" TargetName="bbb" Value="{StaticResource AccentBaseColor}"></Setter>
+                            <Setter Property="Opacity" TargetName="bbb" Value=".7"/>
+                        </MultiDataTrigger>
 
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="LayoutTransform">
@@ -32,14 +44,6 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-
-                        <!--<MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
-                                <Condition Binding="{Binding Path=TabStripPlacement, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="bbb" Value="#FFCFCFCF"/>
-                        </MultiDataTrigger>-->
 
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="LayoutTransform">

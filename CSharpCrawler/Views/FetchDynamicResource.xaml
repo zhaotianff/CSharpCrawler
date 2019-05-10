@@ -11,7 +11,7 @@
 
     <Grid>
         <TabControl Background="Transparent">
-            <TabItem Header="Chromium" >
+            <TabItem Header="Chromium" Style="{StaticResource StyleTabItem}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45"/>
@@ -51,7 +51,7 @@
                     </StatusBar>
                 </Grid>
             </TabItem>
-            <TabItem Header="WebBrowser(IE)"></TabItem>
+            <TabItem Header="WebBrowser(IE)" Style="{StaticResource StyleTabItem}"></TabItem>
         </TabControl>
     </Grid>
 </Page>

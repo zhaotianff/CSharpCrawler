@@ -170,9 +170,7 @@ namespace CSharpCrawler.Views
                 HtmlAgilityPack.HtmlNodeCollection imgNodeCollection = doc.DocumentNode.SelectNodes("//img");
                 for (int i = 0; i < imgNodeCollection.Count; i++)
                 {
-                    value = imgNodeCollection[i].Attributes["src"].Value;
-                    if (value.ToLower().StartsWith("http") == false || value.ToLower().StartsWith("https") == false)
-                        value = baseUrl + value;
+                    value = imgNodeCollection[i].Attributes["src"].Value;                  
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
                     IncrementCount();
                 }

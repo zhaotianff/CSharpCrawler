@@ -18,8 +18,8 @@
                             <Rectangle x:Name="CheckBoxRectangle" Fill="White" Opacity="0.3" RadiusY="5" RadiusX="5"/>
                             <Rectangle x:Name="CheckBoxRectangleOut" Stroke="#FFABADB3" StrokeThickness="1" RadiusY="5" RadiusX="5"/>
                             <Grid x:Name="CheckedMark" Width="20" Height="20" Visibility="Collapsed">
-                                <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M1,9 L10,17" Stroke="#FFECA892"/>
-                                <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M8,17 L20,4" Stroke="#FFECA892"/>
+                                <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M1,9 L10,17" Stroke="{StaticResource AccentBaseColor}"/>
+                                <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M8,17 L20,4" Stroke="{StaticResource AccentBaseColor}"/>
                             </Grid>
                         </Grid>
                         <ContentPresenter Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,0"/>

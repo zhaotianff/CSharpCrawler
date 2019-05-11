@@ -29,7 +29,7 @@
                         <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
 
                         <Grid Grid.Column="2">
-                            <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome" Checked="cbox_ShowChrome_Checked" Unchecked="cbox_ShowChrome_Unchecked"></CheckBox>
+                            <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome" Checked="cbox_ShowChrome_Checked" Unchecked="cbox_ShowChrome_Unchecked" Style="{StaticResource CheckBoxStyle}"></CheckBox>
                             <Button Content="获取" HorizontalAlignment="Right" Name="btn_Fetch" Click="btn_Fetch_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
                         </Grid>
                     </Grid>
@@ -44,10 +44,10 @@
                         <chrome:ChromiumWebBrowser x:Name="chromiumBrowser" Grid.Column="1" FrameLoadEnd="chromiumBrowser_FrameLoadEnd" />
                     </Grid>
 
-                    <StatusBar Grid.Row="2">
+                    <StatusBar Grid.Row="2" Background="White">
                         <Label Name="lbl_StatusText" Content="当前网址抓取次数: 0"/>
                         <Label Content="查看历史结果:"/>
-                        <ComboBox Width="500" Name="combox_Record" SelectionChanged="combox_Record_SelectionChanged"/>
+                        <ComboBox Width="500" Name="combox_Record" SelectionChanged="combox_Record_SelectionChanged" Style="{StaticResource ComboBoxStyle}" Height="22"/>
                     </StatusBar>
                 </Grid>
             </TabItem>

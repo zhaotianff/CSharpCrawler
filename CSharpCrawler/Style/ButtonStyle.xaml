@@ -20,9 +20,7 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" Value="#1fcc7b"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#1fcc7b"/>
-                            <Setter Property="BorderThickness" TargetName="border" Value="5,0,0,0"/>
+                            <Setter Property="Background" TargetName="border" Value="Gainsboro"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Foreground" Value="#1fcc7b"/>

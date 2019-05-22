@@ -129,6 +129,9 @@
     <Compile Include="Views\ChromiumBrowser.xaml.cs">
       <DependentUpon>ChromiumBrowser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DataStorage.xaml.cs">
+      <DependentUpon>DataStorage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchDynamicResource.xaml.cs">
       <DependentUpon>FetchDynamicResource.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChromiumBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataStorage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

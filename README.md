@@ -4,6 +4,7 @@
 
 ### 功能介绍
 * 网页抓取原理
+* 正则表达式的使用
 * WebAPI调用
     * 获取实时天气
     * 获取Bing每日图片
@@ -20,8 +21,7 @@
 * 图片抓取
 * 文件下载
 * 必应图片搜索
-* 模拟登陆(更新中)
-* 网页相似度计算(更新中)
+* 爬虫数据存储
 
 ### 开发环境
 Visual Studio 2013 + .Net 4.5<br/>
@@ -33,6 +33,8 @@ Visual Studio 2013 + .Net 4.5<br/>
 ### 使用的三方组件
 * [CefSharp](https://github.com/cefsharp/CefSharp)
 * [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)
+* [Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)
+* [SQLite](https://www.sqlite.org/index.html)
 
 ### 软件截图
 <p align="center">

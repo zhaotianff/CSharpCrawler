@@ -186,5 +186,10 @@ namespace CSharpCrawler
 
             toggleButton = sender as ToggleButton;
         }
+
+        private void btn_DataStorage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

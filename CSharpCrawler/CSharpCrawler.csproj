@@ -98,6 +98,7 @@
     <Compile Include="Controls\TextImage.cs" />
     <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
+    <Compile Include="Model\EMessageBoxType.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HtmlTag.cs" />
     <Compile Include="Model\HttpHeader.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Views\DataStorage.xaml.cs">
       <DependentUpon>DataStorage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\EMessageBox.cs" />
     <Compile Include="Views\FetchDynamicResource.xaml.cs">
       <DependentUpon>FetchDynamicResource.xaml</DependentUpon>
     </Compile>
@@ -152,6 +154,9 @@
     </Compile>
     <Compile Include="Views\InvokeWebAPI.xaml.cs">
       <DependentUpon>InvokeWebAPI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageUI.xaml.cs">
+      <DependentUpon>MessageUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
@@ -262,6 +267,10 @@
     <Page Include="Views\InvokeWebAPI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessageUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Setting.xaml">
       <SubType>Designer</SubType>

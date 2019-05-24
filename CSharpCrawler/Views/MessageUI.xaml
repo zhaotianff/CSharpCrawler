@@ -1,0 +1,59 @@
+﻿<Window x:Class="ISeer.GUI.MessageUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MessageUI" Height="210" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Storyboard x:Key="start">
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="(Canvas.Top)" From="30" To="0" Duration="0:0:0.5"></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="end">
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="(Canvas.Top)" From="0" To="30" Duration="0:0:0.5"></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.5"></DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Canvas Height="210" Width="300" Name="canvas">
+        <Grid Height="180" Width="300" Name="main">            
+            <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+            <!--标题栏-->
+            <Grid Grid.Row="0" MouseDown="Grid_MouseDown">
+                <Border CornerRadius="5,5,0,0" Background="#3db39e">
+                    <Grid>
+                        <Label Content="提示信息" FontFamily="华文行楷" VerticalAlignment="Center" FontSize="14" Name="title" Foreground="White"></Label>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+            <!--内容-->
+            <Grid Grid.Row="1"  >
+                <Border BorderBrush="#3db39e" Background="White" BorderThickness="1,1,1,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="50" Height="50" Source="../Resource/Image/status_dialog.png" HorizontalAlignment="Right" Stretch="UniformToFill"></Image>
+                        <Label Grid.Column="1" Width="150" Height="100"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0">
+                            <TextBlock Name="content" TextWrapping="Wrap" Text="成功"></TextBlock>
+                        </Label>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+            <!--提示按钮-->
+            <Grid Grid.Row="2">
+                <Border CornerRadius="0,0,5,5" Background="Beige"  BorderBrush="#3db39e" BorderThickness="1,0,1,1">
+                    <Grid>
+                        <Button Visibility="Hidden" Name="cancel" Width="80" Height="25" Style="{StaticResource GlobalButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Content="取消" Margin="60,0,0,0" Click="Button_Click_1"></Button>
+                        <Button Name="ok" Width="80" Height="25" Style="{StaticResource GlobalButtonStyle}" VerticalAlignment="Center" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,105,0">确定</Button>
+                    </Grid>
+                </Border>
+            </Grid>              
+        </Grid>
+            
+    </Canvas>
+</Window>

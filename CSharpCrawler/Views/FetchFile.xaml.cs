@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CSharpCrawler.Model;
 using CSharpCrawler.Util;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -36,7 +37,7 @@ namespace CSharpCrawler.Views
             string url = this.tbox_Url.Text.Trim();
             if(string.IsNullOrEmpty(url))
             {
-                MessageBox.Show("请输入下载地址");
+                EMessageBox.Show("请输入下载地址");
                 return;
             }
 
@@ -72,7 +73,7 @@ namespace CSharpCrawler.Views
             string url = this.tbox_Url.Text.Trim();
             if (string.IsNullOrEmpty(url))
             {
-                MessageBox.Show("请输入下载地址");
+                EMessageBox.Show("请输入下载地址");
                 return;
             }
 

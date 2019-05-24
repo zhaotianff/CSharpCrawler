@@ -18,6 +18,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -176,7 +177,7 @@ namespace CSharpCrawler.Views
             string keyword = this.tbox_Keyword.Text.Trim();
             if(string.IsNullOrEmpty(keyword))
             {
-                MessageBox.Show("请输入搜索关键字");
+                EMessageBox.Show("请输入搜索关键字");
                 return;
             }
 

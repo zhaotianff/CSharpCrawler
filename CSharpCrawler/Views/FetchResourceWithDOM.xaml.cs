@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -42,7 +43,7 @@ namespace CSharpCrawler.Views
             string url = this.tbox_Url.Text;
             if (Urls.IsEmpty(url))
             {
-                MessageBox.Show("请输入网址");
+                EMessageBox.Show("请输入网址");
                 this.tbox_Url.Focus();
                 return;
             }
@@ -50,7 +51,7 @@ namespace CSharpCrawler.Views
             bool isStartWithHttp = false;
             if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
             {
-                MessageBox.Show("网址输入错误");
+                EMessageBox.Show("网址输入错误");
                 this.tbox_Url.Focus();
                 return;
             }
@@ -73,7 +74,7 @@ namespace CSharpCrawler.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                EMessageBox.Show(ex.Message);
             }
         }
 

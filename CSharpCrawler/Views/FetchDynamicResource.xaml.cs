@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CefSharp;
 using CSharpCrawler.Model;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -50,7 +51,7 @@ namespace CSharpCrawler.Views
             string url = this.tbox_Url.Text.Trim();
             if(string.IsNullOrEmpty(url))
             {
-                MessageBox.Show("请输入网址");
+                EMessageBox.Show("请输入网址");
                 return;
             }
 

@@ -41,7 +41,7 @@ namespace CSharpCrawler.Views
         private void btn_Fetch_Click(object sender, RoutedEventArgs e)
         {
             string url = this.tbox_Url.Text;
-            if (Urls.IsEmpty(url))
+            if (UrlUtil.IsEmpty(url))
             {
                 EMessageBox.Show("请输入网址");
                 this.tbox_Url.Focus();

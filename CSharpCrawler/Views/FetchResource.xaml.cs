@@ -34,7 +34,7 @@ namespace CSharpCrawler.Views
             string url = this.tbox_Url.Text;
             Encoding encoding = GetChoosedEncoding();
 
-            if(Urls.IsEmpty(url))
+            if(UrlUtil.IsEmpty(url))
             {
                 EMessageBox.Show("请输入网址");
                 this.tbox_Url.Focus();

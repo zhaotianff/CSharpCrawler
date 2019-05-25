@@ -66,7 +66,7 @@ namespace CSharpCrawler.Views
                 dialog.ShowDialog();
             }));
          
-            hotSpotsImgList = await HtmlAgilityPackUtil.GetImgFromUrl(Urls.CNBingImageUrl,true);
+            hotSpotsImgList = await HtmlAgilityPackUtil.GetImgFromUrl(UrlUtil.CNBingImageUrl,true);
 
             //去除
             hotSpotsImgList = hotSpotsImgList.Where(x => x.Src.Contains("tse1-mm")).ToList();
@@ -82,7 +82,7 @@ namespace CSharpCrawler.Views
             var start = 1;
             if (page > 1)
                 start = page * PageImageNum + 1;
-            var url = Urls.CNBingImageDetailUrl.Replace("[keyword]", keyword).Replace("[start]", start.ToString());
+            var url = UrlUtil.CNBingImageDetailUrl.Replace("[keyword]", keyword).Replace("[start]", start.ToString());
             searchImgList = await HtmlAgilityPackUtil.GetImgFromUrl(url);
             return searchImgList;
         }

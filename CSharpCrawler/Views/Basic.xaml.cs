@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -31,7 +32,8 @@ namespace CSharpCrawler.Views
             string hostName = this.tbox_Url.Text.Trim();
             if(string.IsNullOrEmpty(hostName))
             {
-                MessageBox.Show("请输入主机名，如www.baidu.com");
+                EMessageBox.Show("请输入主机名，如www.baidu.com");
+                return;
             }          
 
             try

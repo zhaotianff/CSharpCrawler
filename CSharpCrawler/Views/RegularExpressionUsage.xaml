@@ -1,0 +1,60 @@
+﻿<Page x:Class="CSharpCrawler.Views.RegularExpressionUsage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CSharpCrawler.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1024"
+      Title="RegularExpressionUsage">
+
+    <Grid>
+        <TabControl Background="Transparent" ItemContainerStyle="{StaticResource StyleTabItem}">
+            <TabItem Header="正则表达式使用" Width="100" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="输入要匹配的内容" Foreground="Black">
+                        <RichTextBox Name="rtbx_Content" Margin="3"/>
+                    </GroupBox>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="输入pattern" Margin="0,20,0,0"/>
+                        <TextBox  Margin="5" Style="{StaticResource TextBoxStyle}"/>
+                        <Button Content="匹配" HorizontalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
+                        <Label Content="匹配状态"/>
+                        <TextBox></TextBox>
+                        <Label Content="匹配结果"/>
+                        <TextBox/>
+                        <Label Content="分组"/>
+                        <ListView Style="{StaticResource ListViewStyle}">
+                            <ListView.Background>
+                                <SolidColorBrush Color="White" Opacity=".6"/>
+                            </ListView.Background>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="分组" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                    <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Url}"/>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <GroupBox Header=".Net正则表达式快速参考" Foreground="Black" Height="500">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="常用匹配模式" Width="100" Height="30"/>
+        </TabControl>
+    </Grid>
+</Page>

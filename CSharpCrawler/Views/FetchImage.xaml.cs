@@ -43,7 +43,6 @@ namespace CSharpCrawler.Views
         private void btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
             string url = this.tbox_Url.Text;
-            bool isStartWithHttp = false;
 
             if (string.IsNullOrEmpty(url))
             {
@@ -51,32 +50,16 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-            //判断Url
-            if (globalData.CrawlerConfig.ImageConfig.IgnoreUrlCheck == false)
+            if (globalData.CrawlerConfig.CommonConfig.UrlCheck == true)
             {
-                if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
+                if (RegexUtil.IsUrl(url) == false)
                 {
                     ShowStatusText("网址输入有误");
                     return;
                 }
+            }
 
-                if (isStartWithHttp == false)
-                {
-                    url = "http://" + url;
-                }
-            }
-            
-            if(url.Contains("/"))
-            {
-                baseUrl = url;
-                baseUrl = baseUrl.Replace("//","@");
-                baseUrl = baseUrl.Substring(0,baseUrl.IndexOf("/"));
-                baseUrl = baseUrl.Replace("@", "//");
-            }
-            else
-            {
-                baseUrl = url;
-            }
+            baseUrl = UrlUtil.FixUrl(url);                 
 
             Reset();
             Surfing(url);
@@ -148,8 +131,11 @@ namespace CSharpCrawler.Views
                 foreach (Match item in mc)
                 {
                     value = item.Groups["image"].Value;
+                    if(value.Contains("//") == false)
+                    {
+                        value = baseUrl + value;
+                    }
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
-                    IncrementCount();
                 }
                 ShowStatusText($"已抓取到{mc.Count}个图像");
             }
@@ -170,9 +156,17 @@ namespace CSharpCrawler.Views
                 HtmlAgilityPack.HtmlNodeCollection imgNodeCollection = doc.DocumentNode.SelectNodes("//img");
                 for (int i = 0; i < imgNodeCollection.Count; i++)
                 {
-                    value = imgNodeCollection[i].Attributes["src"].Value;                  
+                    value = imgNodeCollection[i].Attributes["src"].Value;
+                    if(value.StartsWith("//"))
+                    {
+                        value = "http:" + value;
+                    }
+
+                    if (value.Contains(":") == false)
+                    {
+                        value = baseUrl + value;
+                    }
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
-                    IncrementCount();
                 }
                 ShowStatusText($"已抓取到{imgNodeCollection.Count}个图像");
             }
@@ -210,6 +204,7 @@ namespace CSharpCrawler.Views
                     imageCollection.Add(urlStruct);
                     ToVisitList.Add(urlStruct);
                 });
+                globalIndex++;
             }
         }
 
@@ -225,11 +220,6 @@ namespace CSharpCrawler.Views
             ClearCollection();
             globalIndex = 1;
             ShowStatusText("");
-        }
-
-        private void IncrementCount()
-        {
-            System.Threading.Interlocked.Increment(ref globalIndex);
         }
 
         private void listview_Image_SelectionChanged(object sender, SelectionChangedEventArgs e)

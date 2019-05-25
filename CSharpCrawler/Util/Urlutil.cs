@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSharpCrawler.Util
 {
-    class Urls
+    class UrlUtil
     {
         public const string BaiduUrl = "http://www.baidu.com/s?wd=%s";
 
@@ -38,6 +38,23 @@ namespace CSharpCrawler.Util
         public static bool IsEmpty(string url)
         {
             return string.IsNullOrEmpty(url);
+        }
+
+        public static string FixUrl(string url)
+        {
+            if (url.Contains("/"))
+            {
+                url = url.Replace("//", "@");
+                url = url.Substring(0, url.IndexOf("/"));
+                url = url.Replace("@", "//");
+            }
+
+            if (url.Contains(":") == false)
+            {
+                url = "http://" + url;
+            }
+
+            return url;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace CSharpCrawler.Views
         private async void btn_QueryWeather_Click(object sender, RoutedEventArgs e)
         {
             string city = this.combox_City.SelectedItem.ToString();
-            string url = Urls.WeatherQueryUrl.Replace("%s", ((int)Enum.Parse(typeof(CityCode), city)).ToString());
+            string url = UrlUtil.WeatherQueryUrl.Replace("%s", ((int)Enum.Parse(typeof(CityCode), city)).ToString());
             string source =await WebUtil.GetHtmlSource(url,Encoding.UTF8);
             WeatherInfo weatherInfo = ResolveHtmlSource(source);
 
@@ -67,7 +67,7 @@ namespace CSharpCrawler.Views
         private async void btn_BingImage_Click(object sender, RoutedEventArgs e)
         {
             //Default 
-            System.IO.Stream stream =await WebUtil.GetHtmlStreamAsync(Urls.CNBingDailyImageUrl);         
+            System.IO.Stream stream =await WebUtil.GetHtmlStreamAsync(UrlUtil.CNBingDailyImageUrl);         
             XmlUtil<BingDailyImages> xmlUtil = new XmlUtil<BingDailyImages>();
             BingDailyImages bingImages = xmlUtil.DeserializeXML(stream);
             this.lbl_Copyright.Content ="版权:" +  bingImages.Images.Copyright + "\r\n" + bingImages.Images.CopyrightLink;
@@ -76,7 +76,7 @@ namespace CSharpCrawler.Views
 
         private void SetBackground(string path)
         {
-            path = Urls.CNBingDailyImageBasicUrl  + path;
+            path = UrlUtil.CNBingDailyImageBasicUrl  + path;
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
             bi.UriSource = new Uri(path);

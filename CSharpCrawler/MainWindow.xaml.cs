@@ -34,6 +34,7 @@ namespace CSharpCrawler
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
         FetchFile fetchFile = new FetchFile();
         BingImageSearch bingImageSearch = new BingImageSearch();
+        RegularExpressionUsage regularExpressionUsage = new RegularExpressionUsage();
 
         ToggleButton toggleButton = null;
 
@@ -194,7 +195,7 @@ namespace CSharpCrawler
 
         private void btn_RegularExpression_Click(object sender, RoutedEventArgs e)
         {
-
+            this.frame.Content = regularExpressionUsage;
         }
     }
 }

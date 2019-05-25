@@ -115,7 +115,7 @@
     <Compile Include="Util\JsonUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
-    <Compile Include="Util\Urls.cs" />
+    <Compile Include="Util\Urlutil.cs" />
     <Compile Include="Util\WebUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
     <Compile Include="Views\AnimationImageWindow.xaml.cs">
@@ -157,6 +157,9 @@
     </Compile>
     <Compile Include="Views\MessageUI.xaml.cs">
       <DependentUpon>MessageUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegularExpressionUsage.xaml.cs">
+      <DependentUpon>RegularExpressionUsage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
@@ -272,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\RegularExpressionUsage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,6 +330,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="doc\.Net regular expression quick reference.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

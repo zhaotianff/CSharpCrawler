@@ -5,13 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="1024"
       Title="DataStorage">
 
     <Grid>
         <TabControl Background="Transparent">
             <TabItem Header="Berkeley DB" Style="{StaticResource StyleTabItem}">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="要写入的记录" HorizontalAlignment="Left"/>
+                    <TextBox Margin="85,0,105,0" Style="{StaticResource TextBoxStyle}" Name="tbox_Url" Text="https://huaban.com/pins/48457331/"/>
+                    <Button Content="写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,5,0" Name="btn_WriteToBDB" Click="btn_WriteToBDB_Click"/>
                 </Grid>
             </TabItem>
 

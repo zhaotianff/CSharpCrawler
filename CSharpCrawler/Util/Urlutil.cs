@@ -42,7 +42,7 @@ namespace CSharpCrawler.Util
 
         public static string FixUrl(string url)
         {
-            if (url.Contains("/"))
+            if (url.LastIndexOf("/") == url.Length -1)
             {
                 url = url.Replace("//", "@");
                 url = url.Substring(0, url.IndexOf("/"));

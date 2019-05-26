@@ -35,6 +35,7 @@ namespace CSharpCrawler
         FetchFile fetchFile = new FetchFile();
         BingImageSearch bingImageSearch = new BingImageSearch();
         RegularExpressionUsage regularExpressionUsage = new RegularExpressionUsage();
+        DataStorage dataStorage = new DataStorage();
 
         ToggleButton toggleButton = null;
 
@@ -190,7 +191,7 @@ namespace CSharpCrawler
 
         private void btn_DataStorage_Click(object sender, RoutedEventArgs e)
         {
-
+            this.frame.Content = dataStorage;
         }
 
         private void btn_RegularExpression_Click(object sender, RoutedEventArgs e)

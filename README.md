@@ -30,6 +30,8 @@ Visual Studio 2013 + .Net 4.5<br/>
 
 **编译时可能会显示各种库找不到，Nuget还原下包就可以正常编译了**
 
+**Berkeley DB需要引用bin/x64/Debug目录下的libdb_dotnet181.dll，运行时还需要libdb_csharp181.dll和libdb181.dll，已置于bin/x64/Debug目录下**
+
 ### 使用的三方组件
 * [CefSharp](https://github.com/cefsharp/CefSharp)
 * [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)

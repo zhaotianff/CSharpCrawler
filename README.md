@@ -22,6 +22,8 @@
 * 文件下载
 * 必应图片搜索
 * 爬虫数据存储
+    * Berkeley DB
+    * SQLite
 
 ### 开发环境
 Visual Studio 2013 + .Net 4.5<br/>

@@ -17,44 +17,102 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
 
-                    <GroupBox Header="输入要匹配的内容" Foreground="Black">
-                        <RichTextBox Name="rtbx_Content" Margin="3"/>
+                    <GroupBox Header=".Net正则表达式快速参考" Foreground="Black">
+                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <Image Grid.Column="0" Source="../doc/.Net regular expression quick reference.png" Stretch="UniformToFill"  Name="image"/>
+                        </ScrollViewer>
                     </GroupBox>
 
                     <StackPanel Grid.Column="1">
+                        <GroupBox Header="输入要匹配的内容" Foreground="Black" Height="300">
+                            <RichTextBox Name="rtbx_Content" Margin="3" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </GroupBox>
+                        
                         <Label Content="输入pattern" Margin="0,20,0,0"/>
-                        <TextBox  Margin="5" Style="{StaticResource TextBoxStyle}"/>
-                        <Button Content="匹配" HorizontalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
+                        <TextBox  Margin="5" Style="{StaticResource TextBoxStyle}" Name="tbox_Pattern"/>
                         <Label Content="匹配状态"/>
-                        <TextBox></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Name="tbox_MatchStatus"></TextBox>
                         <Label Content="匹配结果"/>
-                        <TextBox/>
-                        <Label Content="分组"/>
-                        <ListView Style="{StaticResource ListViewStyle}">
+                        <ListView Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" Name="listview_MatchResult" Height="100">
                             <ListView.Background>
                                 <SolidColorBrush Color="White" Opacity=".6"/>
                             </ListView.Background>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="分组" DisplayMemberBinding="{Binding Id}" Width="30"/>
-                                    <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Url}"/>
+                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                    <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Result}"/>
 
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <GroupBox Header=".Net正则表达式快速参考" Foreground="Black" Height="500">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                            </Grid>
-                        </GroupBox>
+                        <Label Content="分组"/>
+                        <ListView Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" Name="listview_GroupResult" Height="100">
+                            <ListView.Background>
+                                <SolidColorBrush Color="White" Opacity=".6"/>
+                            </ListView.Background>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                    <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Result}"/>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="匹配" HorizontalAlignment="Center" Style="{StaticResource GlobalButtonStyle}" Name="btn_Match" Click="btn_Match_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="常用匹配模式" Width="100" Height="30"/>
+            <TabItem Header="常用匹配模式" Width="100" Height="30">
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配网址"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

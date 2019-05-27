@@ -59,5 +59,18 @@ namespace CSharpCrawler.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;head&gt;
+        ///&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+        ///&lt;script type=&quot;text/javascript&quot;&gt;uaredirect(&quot;html&quot;)&lt;/script&gt;
+        ///&lt;/head&gt;
+        ///&lt;body style=&quot;&quot;&gt;&lt;div id=&quot;BAIDU_DUP_fp_wrapper&quot; style=&quot;position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;&quot;&gt;&lt;iframe id=&quot; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string RegexHtml {
+            get {
+                return ResourceManager.GetString("RegexHtml", resourceCulture);
+            }
+        }
     }
 }

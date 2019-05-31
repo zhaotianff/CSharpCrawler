@@ -338,6 +338,9 @@
   <ItemGroup>
     <Resource Include="doc\.Net regular expression quick reference.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="正则表达式.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using CSharpCrawler.Util;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -71,6 +73,28 @@ namespace CSharpCrawler.Views
             catch(Exception ex)
             {
                 this.tbox_MatchStatus.Text = "程序异常，异常信息:" + ex.Message;
+            }
+        }
+
+        private void Match_Event(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button button = sender as Button;
+                var grid = VisualTreeHelper.GetParent(button) as Grid;
+                var pattern = (grid.Children[1] as TextBox).Text;
+                var input = (grid.Children[3] as TextBox).Text;
+                MatchCollection mc = Regex.Matches(input, pattern);
+                var result = "";
+                for (int i = 0; i < mc.Count; i++)
+                {
+                    result += mc[i].Value + ";";
+                }
+                (grid.Children[5] as TextBox).Text = result;
+            }
+            catch (Exception ex)
+            {
+                EMessageBox.Show(ex.Message);
             }
         }
     }

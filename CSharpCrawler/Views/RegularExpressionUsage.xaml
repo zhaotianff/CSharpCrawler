@@ -62,6 +62,52 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            <TabItem Header="分组构造" Width="100" Height="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="匹配的子表达式" Foreground="Black" BorderBrush="{StaticResource AccentBaseColor}" Margin="3">
+                        <Grid>
+                            <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <TextBox Style="{StaticResource TextBoxStyle}" Text="(\w+)\s(\1)\W" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
+                                <TextBox.ToolTip>
+                                    <ToolTip Content=" (\w+)	匹配一个或多个单词字符。 这是第一个捕获组。&#x0a;\s	与空白字符匹配。&#x0a;(\1)与第一个捕获组捕获中的字符串匹配。 这是第二个捕获组。 该示例将其指定到捕获组上，以便可从 Match.Index 属性返回。&#x0a;\W	匹配包括空格和标点符号的一个非单词字符。 这样可以防止正则表达式模式匹配从第一个捕获组的单词开头的单词。"></ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="输入"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="350,0,0,0"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Width="400" Margin="390,0,0,0" Text="not not bad"/>
+                            <Button Content="匹配" HorizontalAlignment="Left" Margin="800,0,0,0" Style="{StaticResource GlobalButtonStyle}" Click="Match_Event"/>
+                            <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="命名匹配的子表达式" Grid.Row="1" Foreground="Black" BorderBrush="{StaticResource AccentBaseColor}" Margin="3">
+                        <Grid>
+                            <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <TextBox Style="{StaticResource TextBoxStyle}" Text="(?&lt;match&gt;(\w+)\s(\1))\W" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
+                                <TextBox.ToolTip>
+                                    <ToolTip Content=" (\w+)	匹配一个或多个单词字符。 这是第一个捕获组。&#x0a;\s	与空白字符匹配。&#x0a;(\1)与第一个捕获组捕获中的字符串匹配。 这是第二个捕获组。 该示例将其指定到捕获组上，以便可从 Match.Index 属性返回。&#x0a;\W	匹配包括空格和标点符号的一个非单词字符。 这样可以防止正则表达式模式匹配从第一个捕获组的单词开头的单词。"></ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="输入"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="350,0,0,0"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Width="400" Margin="390,0,0,0" Text="not not bad"/>
+                            <Button Content="匹配" HorizontalAlignment="Left" Margin="800,0,0,0" Style="{StaticResource GlobalButtonStyle}" Click="Match_Event"/>
+                            <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem Header="常用匹配模式" Width="100" Height="30">
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <StackPanel>

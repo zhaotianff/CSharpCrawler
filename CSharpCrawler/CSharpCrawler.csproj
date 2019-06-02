@@ -111,6 +111,7 @@
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Model\WeatherInfo.cs" />
+    <Compile Include="Util\BDBHelper.cs" />
     <Compile Include="Util\ConfigUtil.cs" />
     <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
@@ -196,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\GroupBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,6 +345,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="正则表达式.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="BerkeleyDB介绍.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -13,13 +13,44 @@
             <TabItem Header="Berkeley DB" Style="{StaticResource StyleTabItem}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="要写入的记录" HorizontalAlignment="Left"/>
-                    <TextBox Margin="85,0,105,0" Style="{StaticResource TextBoxStyle}" Name="tbox_Url" Text="https://huaban.com/pins/48457331/"/>
-                    <Button Content="写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,5,0" Name="btn_WriteToBDB" Click="btn_WriteToBDB_Click"/>
+                    <GroupBox Header="写入字符串">
+                        <Grid>
+                            <Label Content="键(Key)" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Margin="55,0,0,0" Width="210" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Name="tbox_Key" Text="F624BF4E-E553-44CE-B167-89AD"/>
+                            <Label Content="值(Value)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="270,0,0,0"/>
+                            <TextBox Margin="340,0,0,0" Width="480" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Name="tbox_Value" Text="https://huaban.com/pins/48457331/"/>
+                            <Button Content="写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="830,0,5,0" Name="btn_WriteStringToBDB" Click="btn_WriteStringToBDB_Click"/>
+                            <Button Content="读取" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="930,0,5,0" Name="btn_ReadStringFromBDB" Click="btn_ReadStringFromBDB_Click"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="写入对象" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="820"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="public class CrawlerRecord&#x0a;{&#x0a;    public int ID;&#x0a;    public string url;&#x0a;    public string title;&#x0a;    public string content;&#x0a;}"></TextBlock>
+
+                            <Grid Grid.Column="1">
+                                <Button Content="写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,0"  Name="btn_WriteObjectToBDB" Click="btn_WriteObjectToBDB_Click"/>
+                                <Button Content="读取" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="110,0,0,0"  Name="btn_ReadObjectFromBDB" Click="btn_ReadObjectFromBDB_Click"/>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="写入图像或其它文件" Grid.Row="2">
+                        <Grid>
+
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
 

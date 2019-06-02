@@ -77,7 +77,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <GroupBox Header="匹配的子表达式" Foreground="Black" BorderBrush="{StaticResource AccentBaseColor}" Margin="3">
+                    <GroupBox Header="匹配的子表达式">
                         <Grid>
                             <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
                             <TextBox Style="{StaticResource TextBoxStyle}" Text="(\w+)\s(\1)\W" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
@@ -92,7 +92,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="命名匹配的子表达式" Grid.Row="1" Foreground="Black" BorderBrush="{StaticResource AccentBaseColor}" Margin="3">
+                    <GroupBox Header="命名匹配的子表达式" Grid.Row="1">
                         <Grid>
                             <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
                             <TextBox Style="{StaticResource TextBoxStyle}" Text="(?&lt;match&gt;(\w+)\s(\1))\W" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">

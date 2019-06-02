@@ -1,0 +1,7 @@
+﻿Berkeley DB是一个开源的文件数据库，介于关系数据库与内存数据库之间。简称BDB
+
+Berkeley DB是嵌入式键值数据库库，为应用程序提供可扩展的高性能数据管理服务。 Berkeley DB产品使用简单的函数调用API进行数据访问和管理。
+
+它使用C开发，C#调用是以P/Invoke的形式，不过Oracle发行了C#的版本，里面封装了API的调用，所以我们只需要引用程序集直接调用就行。
+
+更加详细的介绍，请访问Oracle Berkeley DB官网https://www.oracle.com/database/technologies/related/berkeleydb.html

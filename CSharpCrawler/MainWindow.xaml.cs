@@ -36,6 +36,7 @@ namespace CSharpCrawler
         BingImageSearch bingImageSearch = new BingImageSearch();
         RegularExpressionUsage regularExpressionUsage = new RegularExpressionUsage();
         DataStorage dataStorage = new DataStorage();
+        RobotsProtocol robotsProtocol = new RobotsProtocol();
 
         ToggleButton toggleButton = null;
 
@@ -197,6 +198,12 @@ namespace CSharpCrawler
         private void btn_RegularExpression_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = regularExpressionUsage;
+        }
+
+        private void btn_RobotsProtocol_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = robotsProtocol;
+            robotsProtocol.LoadContent();
         }
     }
 }

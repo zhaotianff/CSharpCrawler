@@ -32,6 +32,7 @@
                 
                 <WrapPanel Grid.Row="0">
                     <ToggleButton Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="爬虫协议" Name="btn_RobotsProtocol" Click="btn_RobotsProtocol_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="正则表达式的使用" Name="btn_RegularExpression" Click="btn_RegularExpression_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>

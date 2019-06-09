@@ -166,6 +166,9 @@
     <Compile Include="Views\RegularExpressionUsage.xaml.cs">
       <DependentUpon>RegularExpressionUsage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RobotsProtocol.xaml.cs">
+      <DependentUpon>RobotsProtocol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\RegularExpressionUsage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RobotsProtocol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

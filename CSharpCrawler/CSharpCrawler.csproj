@@ -349,6 +349,9 @@
   <ItemGroup>
     <Resource Include="BerkeleyDB介绍.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RobotsExclusionProtocol.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

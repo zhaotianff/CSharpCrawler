@@ -386,5 +386,24 @@ namespace CSharpCrawler.Util
             }
             
         }
+
+        /// <summary>
+        /// 可以使用RobotsTxt库，Nuget可以搜索得到
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public List<RobotsExclusionProtocol> ResolveRobotsProtocol(Stream stream)
+        {
+            List<RobotsExclusionProtocol> list = new List<RobotsExclusionProtocol>();
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                string line;
+                while (string.IsNullOrEmpty( (line = sr.ReadLine() ).Trim())== false)
+                {
+                    
+                }
+            }
+            return list;
+        }
     }
 }

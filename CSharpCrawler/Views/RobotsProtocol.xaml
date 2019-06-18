@@ -9,6 +9,29 @@
       Title="RobotsProtocol">
 
     <Grid>
-        <RichTextBox Name="lbl_Content"></RichTextBox>
+        <TabControl>
+            <TabItem Header="简介" Style="{StaticResource StyleTabItem}">
+                <RichTextBox Name="lbl_Content"></RichTextBox>
+            </TabItem>
+
+            <TabItem Header="读取" Style="{StaticResource StyleTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Label Content="输入网址" VerticalAlignment="Center"></Label>
+                        <TextBox Margin="60,0,100,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
+                        <Button Content="读取" HorizontalAlignment="Right" Margin="0,0,10,0" Width="80" Name="btn_Fetch" Click="btn_Fetch_Click" Style="{StaticResource GlobalButtonStyle}"></Button>
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <TextBlock Grid.Row="1" LineHeight="20" TextWrapping="Wrap" Name="lbl_Result" Foreground="Black" Margin="10"></TextBlock>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

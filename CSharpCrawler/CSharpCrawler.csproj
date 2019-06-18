@@ -108,6 +108,7 @@
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\CityCode.cs" />
     <Compile Include="Model\NodeStruct.cs" />
+    <Compile Include="Model\RobotsExclusionProtocol.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Model\WeatherInfo.cs" />

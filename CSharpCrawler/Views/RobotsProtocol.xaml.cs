@@ -73,10 +73,15 @@ namespace CSharpCrawler.Views
             }
 
             var stream = await WebUtil.GetHtmlStreamAsync(robotsUrl);
-            StreamReader sr = new StreamReader(stream);
-            this.lbl_Result.Text = sr.ReadToEnd();
-            sr.Close();
+            var result =  WebUtil.ResolveRobotsProtocol(stream);
             stream.Close();
+
+            //显示结果
+            this.lbl_Result.Text = $"从【{url}】获取到的爬虫协议如下(目录以;分隔)\r\n\n";
+            foreach (var item in result)
+            {
+                this.lbl_Result.Text += item.ToString();
+            }
         }
     }
 }

@@ -392,16 +392,55 @@ namespace CSharpCrawler.Util
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        public List<RobotsExclusionProtocol> ResolveRobotsProtocol(Stream stream)
+        public static List<RobotsExclusionProtocol> ResolveRobotsProtocol(Stream stream)
         {
             List<RobotsExclusionProtocol> list = new List<RobotsExclusionProtocol>();
+            List<string> strList = new List<string>();
+            RobotsExclusionProtocol robotsProtocol = new RobotsExclusionProtocol();
+
+            string userAgent = "USER-AGENT";
+            string allow = "DISALLOW";
+            string disallow = "ALLOW";
+            string sitemap = "SITEMAP";
+
             using (StreamReader sr = new StreamReader(stream))
             {
                 string line;
-                while (string.IsNullOrEmpty( (line = sr.ReadLine() ).Trim())== false)
+                while ((line = sr.ReadLine()) != null)
                 {
-                    
+                    strList.Add(line);
                 }
+
+                foreach (var item in strList)
+                {
+                    if(string.IsNullOrEmpty(item.Trim()))
+                    {
+                        list.Add(robotsProtocol);
+                        robotsProtocol = new RobotsExclusionProtocol();
+                    }
+                    else
+                    {
+                        if(item.ToUpper().StartsWith(userAgent))
+                        {
+                            robotsProtocol.UserAgent = item.Substring(userAgent.Length).Replace(":", "").Trim();
+                        }
+                        else if(item.ToUpper().StartsWith(allow))
+                        {
+                            robotsProtocol.AllowList.Add(item.Substring(allow.Length).Replace(":", "").Trim());
+                        }
+                        else if(item.ToUpper().StartsWith(disallow))
+                        {
+                            robotsProtocol.DisallowList.Add(item.Substring(disallow.Length).Replace(":", "").Trim());
+                        }
+                        else if(item.ToUpper().StartsWith(sitemap))
+                        {
+                            robotsProtocol.Sitemap = item.Substring(sitemap.Length).Replace(":", "").Trim();
+                        }
+                    }
+                }
+
+                list.Add(robotsProtocol);
+
             }
             return list;
         }

@@ -8,6 +8,11 @@ namespace CSharpCrawler.Model
 {
     public class RobotsExclusionProtocol
     {
+        public RobotsExclusionProtocol()
+        {
+            DisallowList = new List<string>();
+            AllowList = new List<string>();
+        }
         /// <summary>
         /// 搜索引擎种类，*是一个通配符，代表所有搜索引擎
         /// </summary>
@@ -42,10 +47,10 @@ namespace CSharpCrawler.Model
             DisallowList.ForEach(x => disAllowStr += x + ";");
             AllowList.ForEach(x => allowStr += x + ";");
 
-            return $"UserAgent:{UserAgent}\r\n" +
-                   $"DisallowList:{disAllowStr}\r\n" +
-                   $"AllowList:{allowStr}\r\n" +
-                   $"Sitemap:{Sitemap}";
+            return $"搜索引擎:{UserAgent}\r\n" +
+                   $"禁止抓取的目录:{disAllowStr}\r\n" +
+                   $"允许抓取的目录:{allowStr}\r\n" +
+                   $"网站地图:{Sitemap}\r\n\n";
         }
     }
 }

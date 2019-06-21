@@ -399,8 +399,8 @@ namespace CSharpCrawler.Util
             RobotsExclusionProtocol robotsProtocol = new RobotsExclusionProtocol();
 
             string userAgent = "USER-AGENT";
-            string allow = "DISALLOW";
-            string disallow = "ALLOW";
+            string allow = "ALLOW";
+            string disallow = "DISALLOW";
             string sitemap = "SITEMAP";
 
             using (StreamReader sr = new StreamReader(stream))

@@ -149,6 +149,9 @@
     <Compile Include="Views\FetchImage.xaml.cs">
       <DependentUpon>FetchImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FetchImageEx.xaml.cs">
+      <DependentUpon>FetchImageEx.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchResource.xaml.cs">
       <DependentUpon>FetchResource.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,9 @@
     </Compile>
     <Compile Include="Views\FetchUrl.xaml.cs">
       <DependentUpon>FetchUrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FetImageConfig.xaml.cs">
+      <DependentUpon>FetImageConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InvokeWebAPI.xaml.cs">
       <DependentUpon>InvokeWebAPI.xaml</DependentUpon>
@@ -268,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FetchImageEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FetchResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -277,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchUrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FetImageConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

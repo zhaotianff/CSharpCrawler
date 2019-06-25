@@ -25,6 +25,7 @@ namespace CSharpCrawler
     public partial class MainWindow : Window
     {
         FetchImage imagePage = new FetchImage();
+        FetchImageEx imagePageEx = new FetchImageEx();
         FetchUrl urlPage = new FetchUrl();
         FetchResource resourcePage = new FetchResource();
         FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
@@ -204,6 +205,11 @@ namespace CSharpCrawler
         {
             this.frame.Content = robotsProtocol;
             robotsProtocol.LoadContent();
+        }
+
+        private void btn_FetchImageEx_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = imagePageEx;
         }
     }
 }

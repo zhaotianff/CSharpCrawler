@@ -27,6 +27,12 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <Grid Name="grid_Content">
+                    
+                </Grid>
+            </ScrollViewer>
+
             <Grid Grid.Row="1">
                 <Button  Width="42" Height="42" Margin="-100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇦" FontSize="30"></Button>
                 <Button  Width="42" Height="42"  Style="{StaticResource GlobalButtonStyle}" Content="⇩" FontSize="30"></Button>

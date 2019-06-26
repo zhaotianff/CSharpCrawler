@@ -106,19 +106,41 @@
                             <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </GroupBox>
+
+                    <GroupBox Header="平衡组定义" Grid.Row="2">
+                        <Grid>
+                            
+                           
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="非捕获组" Grid.Row="3">
+                        <Grid>
+                            <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <TextBox Style="{StaticResource TextBoxStyle}" Text="(?:\b(?:\w+)\W*)+\." HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
+                                <TextBox.ToolTip>
+                                    <ToolTip Content=" \b    在单词边界处开始匹配。&#x0a;(?:\w+)    匹配一个或多个单词字符。 不将匹配的文本分配给捕获的组。&#x0a;\W*    匹配零个或多个非单词字符。&#x0a;(?:\b(?:\w+)\W*)+    一次或多次匹配跟在零个或多个非单词字符后面以单词边界开头的一个或多个单词字符的模式。 不将匹配的文本分配给捕获的组。&#x0a;\.    匹配句点"></ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="输入"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="350,0,0,0"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Width="400" Margin="390,0,0,0" Text="This is a simple sentence."/>
+                            <Button Content="匹配" HorizontalAlignment="Left" Margin="800,0,0,0" Style="{StaticResource GlobalButtonStyle}" Click="Match_Event"/>
+                            <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="常用匹配模式" Width="100" Height="30">
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
+                        <Label Content="匹配数字"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="\d+或[0-9]+"/>
+                        <Label Content="匹配单词"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="\w+ (说明：\w+是匹配全部单词，中文和英文都可以)"/>
+                        <Label Content="匹配中文"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="[\u4E00-\u9FA5]+"/>
+                        <Label Content="匹配IP"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="\d+.\d+.\d+.\d+"/>
                         <Label Content="匹配网址"></Label>
                         <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
                         <Label Content="匹配网址"></Label>

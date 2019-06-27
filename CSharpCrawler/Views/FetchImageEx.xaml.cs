@@ -1,4 +1,5 @@
-﻿using CSharpCrawler.Model;
+﻿using CSharpCrawler.Controls;
+using CSharpCrawler.Model;
 using CSharpCrawler.Util;
 using System;
 using System.Collections.Generic;
@@ -236,13 +237,25 @@ namespace CSharpCrawler.Views
                 this.Dispatcher.Invoke(()=> {
                     grid_Content.ColumnDefinitions.Add(new ColumnDefinition());
 
-                    Image image = new Image();
+                    ListImage image = new ListImage();
                     image.Margin = new Thickness(10);
-                    image.Source = new BitmapImage(new Uri(list[i].Url));
-                    image.Stretch = Stretch.UniformToFill;
+                    image.Text = "我独自坐在这静静的静静的静静的窗台上";
+                    image.Image = new BitmapImage(new Uri(list[i].Url));                 
                     Grid.SetColumn(image, i);
                     grid_Content.Children.Add(image);
                 });             
+            }
+        }
+
+        private void scroll_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset - 50);
+            }
+            else
+            {
+                scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + 50);
             }
         }
     }

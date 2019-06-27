@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\WindowCommand.cs" />
+    <Compile Include="Controls\ListImage.cs" />
     <Compile Include="Controls\TextImage.cs" />
     <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
@@ -211,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\GroupBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ImageStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,10 +6,6 @@
     <!--ToggleButton 未点击时的状态-->
     <!--Popup 下拉出来的面板-->
     <!--ItemsPresenter 显示的每一项-->
-    
-    <SolidColorBrush Color="#1fcc7b" x:Key="AccentBaseColor"/>
-    <SolidColorBrush Color="White" x:Key="LightColor"/>
-    <SolidColorBrush Color="#7cc6ee" x:Key="AccentBlueColor"/>
 
     <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>

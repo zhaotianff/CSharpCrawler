@@ -27,8 +27,8 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <Grid Name="grid_Content">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Name="scroll">
+                <Grid Name="grid_Content" MouseWheel="scroll_MouseWheel">
                     
                 </Grid>
             </ScrollViewer>

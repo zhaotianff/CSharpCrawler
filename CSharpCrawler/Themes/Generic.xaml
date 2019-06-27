@@ -56,14 +56,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ListImage}">
-                    <Border Name="border"  CornerRadius="5" Focusable="True" Background="Transparent"  FocusManager.IsFocusScope="True">
+                    <Border Name="border"  CornerRadius="20" Focusable="True" Background="Transparent"  FocusManager.IsFocusScope="True">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
 
-                            <Image Source="{Binding Image,RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="UniformToFill" FocusManager.IsFocusScope="True"></Image>
+                            <Image Margin="10" Source="{Binding Image,RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="UniformToFill" FocusManager.IsFocusScope="True"></Image>
 
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding Text,RelativeSource={RelativeSource TemplatedParent}}" TextWrapping="Wrap"></TextBlock>
                         </Grid>
@@ -71,15 +71,15 @@
                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="#1fcc7b" TargetName="border"/>
+                            <Setter Property="Background" Value="Silver" TargetName="border"/>
                         </Trigger>
 
                         <Trigger Property="UIElement.IsKeyboardFocused" Value="true">
-                            <Setter Property="Background" Value="#1fcc7b" TargetName="border"/>
+                            <Setter Property="Background" Value="Silver" TargetName="border"/>
                         </Trigger>
 
                         <Trigger Property="UIElement.IsFocused" Value="true">
-                            <Setter Property="Background" Value="#1fcc7b" TargetName="border"/>
+                            <Setter Property="Background" Value="Silver" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -227,35 +227,34 @@ namespace CSharpCrawler.Views
         {
             int count = list.Count;
 
-            this.Dispatcher.Invoke(()=> {
-                this.grid_Content.ColumnDefinitions.Clear();
+            this.Dispatcher.Invoke(()=> {             
                 this.grid_Content.Children.Clear();
             }); 
 
             for (int i = 0; i < count; i++)
             {
-                this.Dispatcher.Invoke(()=> {
-                    grid_Content.ColumnDefinitions.Add(new ColumnDefinition());
-
+                this.Dispatcher.Invoke(()=> {               
                     ListImage image = new ListImage();
+                    image.Width = 500;
+                    image.Height = 500;
                     image.Margin = new Thickness(10);
-                    image.Text = "我独自坐在这静静的静静的静静的窗台上";
-                    image.Image = new BitmapImage(new Uri(list[i].Url));                 
-                    Grid.SetColumn(image, i);
+                    image.Text = "";
+                    image.Image = new BitmapImage(new Uri(list[i].Url));                                  
                     grid_Content.Children.Add(image);
                 });             
             }
         }
 
-        private void scroll_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (e.Delta > 0)
+            foreach (var item in this.grid_Content.Children)
             {
-                scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset - 50);
-            }
-            else
-            {
-                scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + 50);
+                var image = item as ListImage;
+                if(image != null)
+                {
+                    image.Width = e.NewValue;
+                    image.Height = e.NewValue;
+                }
             }
         }
     }

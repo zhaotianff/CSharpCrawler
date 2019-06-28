@@ -22,7 +22,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -150,6 +150,9 @@
     <Compile Include="Views\FetchImage.xaml.cs">
       <DependentUpon>FetchImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FetchImageConfigDialog.xaml.cs">
+      <DependentUpon>FetchImageConfigDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchImageEx.xaml.cs">
       <DependentUpon>FetchImageEx.xaml</DependentUpon>
     </Compile>
@@ -161,9 +164,6 @@
     </Compile>
     <Compile Include="Views\FetchUrl.xaml.cs">
       <DependentUpon>FetchUrl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FetImageConfig.xaml.cs">
-      <DependentUpon>FetImageConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InvokeWebAPI.xaml.cs">
       <DependentUpon>InvokeWebAPI.xaml</DependentUpon>
@@ -216,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ImageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\SliderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +283,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FetchImageConfigDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FetchImageEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,10 +300,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchUrl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FetImageConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Style/ListViewStyle.xaml"/>
                 <ResourceDictionary Source="Style/ToolTipStyle.xaml"/>
                 <ResourceDictionary Source="Style/GroupBoxStyle.xaml"/>
+                <ResourceDictionary Source="Style/SliderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

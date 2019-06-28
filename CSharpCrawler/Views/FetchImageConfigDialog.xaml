@@ -1,0 +1,55 @@
+﻿<Window x:Class="CSharpCrawler.Views.FetchImageConfigDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharpCrawler.Views"
+        mc:Ignorable="d"
+        Title="FetImageConfig" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False"
+        x:Name="main" Loaded="Main_Loaded">
+
+    <Window.Resources>
+        <Storyboard x:Key="start">
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" From="0" To="1"></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" From="0" To="1" Duration="0:0:0.4"></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" From="0" To="1" Duration="0:0:0.68"></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="end">
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.4" From="1" To="0.5"/>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                             Duration="0:0:0.68" From="1" To="0"/>
+            <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                             Duration="0:0:0.4" From="1" To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform CenterX="0" CenterY="0" x:Name="scaleTransform"></ScaleTransform>
+        </TransformGroup>
+    </Window.RenderTransform>
+
+    <Border CornerRadius="10" BorderBrush="{StaticResource AccentSkyBlueColor}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource AccentSkyBlueColor}" MouseLeftButtonDown="Grid_MouseDown" CornerRadius="10,10,0,0">
+                <Label Content="图片抓取配置" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource LightColor}"></Label>
+            </Border>
+
+            <Grid Grid.Row="2">
+                <Grid.Background>
+                    <SolidColorBrush Color="Silver" Opacity=".1"/>
+                </Grid.Background>
+                <Button Content="确定" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,100,0" Name="btn_OK"/>
+                <Button Content="取消" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,5,0" Name="btn_Cancel" Click="Btn_Cancel_Click"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

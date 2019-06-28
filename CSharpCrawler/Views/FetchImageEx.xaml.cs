@@ -257,5 +257,14 @@ namespace CSharpCrawler.Views
                 }
             }
         }
+
+        private void Btn_Config_Click(object sender, RoutedEventArgs e)
+        {
+            FetchImageConfigDialog fetchImageConfigDialog = new FetchImageConfigDialog();
+            Point point = this.btn_Config.PointToScreen(new Point(0,0));
+            fetchImageConfigDialog.X = point.X;
+            fetchImageConfigDialog.Y = point.Y;
+            fetchImageConfigDialog.ShowDialog();
+        }
     }
 }

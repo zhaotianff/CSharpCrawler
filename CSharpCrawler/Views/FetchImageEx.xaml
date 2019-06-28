@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <DockPanel>
             <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-            <Button Width="38" Height="28" Content="◕‿◕" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}" ToolTip="配置"/>
+            <Button Width="38" Height="28" Content="◕‿◕" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}" ToolTip="配置" Name="btn_Config" Click="Btn_Config_Click"/>
             <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click" Style="{StaticResource GlobalButtonStyle}"/>
             <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
         </DockPanel>
@@ -39,7 +39,7 @@
                 <Button  Width="42" Height="42" Margin="100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇨" FontSize="30"></Button>
 
                 <Label Content="缩略图大小" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0"></Label>
-                <Slider HorizontalAlignment="Right" Margin="0,3,5,0" VerticalAlignment="Center" Width="90" Minimum="300" Maximum="600" Value="500" TickFrequency="10" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
+                <Slider HorizontalAlignment="Right" Margin="0,3,5,0" VerticalAlignment="Center" Width="90" Height="15" Minimum="300" Maximum="600" Value="500" TickFrequency="10" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged" Style="{StaticResource SliderStyle}"/>
             </Grid>
         </Grid>
 

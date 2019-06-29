@@ -78,6 +78,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="Views\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BigImageDialog.xaml.cs">
+      <DependentUpon>BigImageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BingImageSearch.xaml.cs">
       <DependentUpon>BingImageSearch.xaml</DependentUpon>
@@ -256,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Basic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BigImageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

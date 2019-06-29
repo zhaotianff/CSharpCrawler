@@ -233,12 +233,12 @@ namespace CSharpCrawler.Views
 
             for (int i = 0; i < count; i++)
             {
-                this.Dispatcher.Invoke(()=> {               
-                    ListImage image = new ListImage();
-                    image.Width = 500;
-                    image.Height = 500;
-                    image.Margin = new Thickness(10);
-                    image.Text = "";
+                this.Dispatcher.Invoke(() => {
+                ListImage image = new ListImage();
+                image.Width = 370;
+                image.Height = 370;
+                image.Margin = new Thickness(10);
+                image.Text = "";
                     image.Image = new BitmapImage(new Uri(list[i].Url));                                  
                     grid_Content.Children.Add(image);
                 });             

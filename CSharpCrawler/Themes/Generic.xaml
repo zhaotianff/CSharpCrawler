@@ -63,7 +63,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
 
-                            <Image Margin="10" Source="{Binding Image,RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="UniformToFill" FocusManager.IsFocusScope="True"></Image>
+                            <Image Margin="10" Source="{Binding Image,RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="Uniform" FocusManager.IsFocusScope="True"></Image>
 
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding Text,RelativeSource={RelativeSource TemplatedParent}}" TextWrapping="Wrap"></TextBlock>
                         </Grid>

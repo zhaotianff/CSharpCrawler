@@ -48,7 +48,23 @@ namespace CSharpCrawler.Model
         /// FetchMode 0-Mix 1-Regex 2-HtmlAgilityPack
         /// </summary>
         public int FetchMode { get; set; }
+
+        /// <summary>
+        /// 0-Manual 1-Auto
+        /// </summary>
+        public int PageDownRule { get; set; } = -1;
+
+        /// <summary>
+        /// 0-url 1-post
+        /// </summary>
+        public int ManualPageDownMethod { get; set; } = -1;
+
+        public string PageDownUrl { get; set; }
+
+        /// <summary>
+        /// reserve
+        /// </summary>
+        public string PageDownPostData { get; set; }    
+        
     }
-
-
 }

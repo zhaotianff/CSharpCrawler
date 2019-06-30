@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -54,7 +55,7 @@ namespace CSharpCrawler.Views
             end = this.TryFindResource("end") as Storyboard;
             if(end != null)
             {
-                end.Completed += (a, b) => { this.Close(); };
+                end.Completed += (a, b) => { this.DialogResult = false; };
             }
             start = this.TryFindResource("start") as Storyboard;
         }
@@ -82,8 +83,34 @@ namespace CSharpCrawler.Views
         }
 
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
-        {
+        {         
             ShowEndAnimation();
+        }
+
+        private void cbx_AutoRule_Checked(object sender, RoutedEventArgs e)
+        {
+            cbx_ManualRule.IsChecked = false;
+        }
+
+        private void cbx_ManualRule_Checked(object sender, RoutedEventArgs e)
+        {
+            cbx_AutoRule.IsChecked = false;
+        }
+
+        private void cbx_url_Checked(object sender, RoutedEventArgs e)
+        {
+            cbx_post.IsChecked = false;
+        }
+
+        private void cbx_post_Checked(object sender, RoutedEventArgs e)
+        {
+            cbx_url.IsChecked = false;
+        }
+
+        private void btn_OK_Click(object sender, RoutedEventArgs e)
+        {
+            EMessageBox.Show("当前配置已生效，但还不会写入配置文件");
+            this.DialogResult = true;
         }
     }
 }

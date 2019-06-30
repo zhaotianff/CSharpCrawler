@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -264,7 +265,39 @@ namespace CSharpCrawler.Views
             Point point = this.btn_Config.PointToScreen(new Point(0,0));
             fetchImageConfigDialog.X = point.X;
             fetchImageConfigDialog.Y = point.Y;
-            fetchImageConfigDialog.ShowDialog();
+            if(fetchImageConfigDialog.ShowDialog() == true)
+            {
+                if(fetchImageConfigDialog.cbx_ManualRule.IsChecked == true)
+                {
+                    globalData.CrawlerConfig.ImageConfig.PageDownRule = 0;
+
+                    if(fetchImageConfigDialog.cbx_url.IsChecked == true)
+                    {
+                        globalData.CrawlerConfig.ImageConfig.ManualPageDownMethod = 0;
+                        globalData.CrawlerConfig.ImageConfig.PageDownUrl = fetchImageConfigDialog.tbox_url.Text;
+                    }
+                    else
+                    {
+                        globalData.CrawlerConfig.ImageConfig.ManualPageDownMethod = 1;
+                        globalData.CrawlerConfig.ImageConfig.PageDownPostData = fetchImageConfigDialog.tbox_postdata.Text;
+                    }
+                }
+                else
+                {
+                    globalData.CrawlerConfig.ImageConfig.PageDownRule = 1;
+                }
+            }
+        }
+
+        private void btn_PageDown_Click(object sender, RoutedEventArgs e)
+        {
+            if(globalData.CrawlerConfig.ImageConfig.PageDownRule == -1)
+            {
+                EMessageBox.Show("未配置翻页规则，无法跳转到下一页");
+                return;
+            }
+
+
         }
     }
 }

@@ -37,9 +37,9 @@
             </ScrollViewer>
 
             <Grid Grid.Row="1">
-                <Button  Width="42" Height="42" Margin="-100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇦" FontSize="30"></Button>
-                <Button  Width="42" Height="42"  Style="{StaticResource GlobalButtonStyle}" Content="⇩" FontSize="30"></Button>
-                <Button  Width="42" Height="42" Margin="100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇨" FontSize="30"></Button>
+                <Button  Width="42" Height="42" Margin="-100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇦" FontSize="30" Name="btn_PageUp"></Button>
+                <Button  Width="42" Height="42"  Style="{StaticResource GlobalButtonStyle}" Content="⇩" FontSize="30" Name="btn_Download"></Button>
+                <Button  Width="42" Height="42" Margin="100,0,0,0" Style="{StaticResource GlobalButtonStyle}" Content="⇨" FontSize="30" Name="btn_PageDown" Click="btn_PageDown_Click"></Button>
 
                 <Label Content="缩略图大小" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0"></Label>
                 <Slider HorizontalAlignment="Right" Margin="0,3,5,0" VerticalAlignment="Center" Width="90" Height="15" Minimum="300" Maximum="600" Value="370" TickFrequency="10" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged" Style="{StaticResource SliderStyle}"/>

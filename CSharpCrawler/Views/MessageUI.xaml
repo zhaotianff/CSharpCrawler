@@ -32,12 +32,9 @@
             <Grid Grid.Row="1"  >
                 <Border BorderBrush="#3db39e" Background="White" BorderThickness="1,1,1,0">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="50" Height="50" Source="../Resource/Image/status_dialog.png" HorizontalAlignment="Right" Stretch="UniformToFill"></Image>
-                        <Label Grid.Column="1" Width="150" Height="100"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0">
+                       
+                       
+                        <Label  VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Name="content" TextWrapping="Wrap" Text="成功"></TextBlock>
                         </Label>
                     </Grid>

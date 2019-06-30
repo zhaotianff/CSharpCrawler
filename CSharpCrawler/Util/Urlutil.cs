@@ -56,5 +56,12 @@ namespace CSharpCrawler.Util
 
             return url;
         }
+
+        public static string GetPageDownUrl(int page,string baseUrl,string pageDownUrl)
+        {
+            var suffix1 = "";
+            var suffix2 = "";
+            return "";
+        }
     }
 }

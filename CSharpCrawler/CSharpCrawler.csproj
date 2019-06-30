@@ -102,6 +102,7 @@
     <Compile Include="Commands\WindowCommand.cs" />
     <Compile Include="Controls\ListImage.cs" />
     <Compile Include="Controls\TextImage.cs" />
+    <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\EMessageBoxType.cs" />

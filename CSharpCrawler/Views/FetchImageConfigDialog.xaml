@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpCrawler.Views"
+        xmlns:converters="clr-namespace:CSharpCrawler.Converters"
         mc:Ignorable="d"
         Title="FetImageConfig" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False"
         x:Name="main" Loaded="Main_Loaded">
-
     <Window.Resources>
         <Storyboard x:Key="start">
             <DoubleAnimation Storyboard.TargetName="main" Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" From="0" To="1"></DoubleAnimation>
@@ -43,11 +43,60 @@
                 <Label Content="图片抓取配置" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource LightColor}"></Label>
             </Border>
 
+            <Grid Grid.Row="1" Background="{StaticResource LightColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header="翻页规则">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="150"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <CheckBox Content="指定翻页规则" Style="{StaticResource CheckBoxStyle}" Name="cbx_ManualRule" Checked="cbx_ManualRule_Checked"></CheckBox>
+                        <Grid Grid.Row="1" IsEnabled="{Binding ElementName=cbx_ManualRule,Path=IsChecked}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Content="通过Url翻页(指定当前网站的第二页和第三页Url。每一条Url用;隔开)" Style="{StaticResource CheckBoxStyle}" Height="15" Margin="10,0,0,0" Name="cbx_url" Checked="cbx_url_Checked"></CheckBox>
+
+                            <Grid Grid.Row="1">
+                                <Label Content="指定两页Url" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Center"></Label>
+                                <TextBox HorizontalAlignment="Center" Style="{StaticResource TextBoxStyle}" Width="580" Name="tbox_url"></TextBox>
+                                <Button Content="保存" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
+                            </Grid>
+
+                            <CheckBox Content="通过Post翻页" Style="{StaticResource CheckBoxStyle}" Grid.Row="2" Height="15" Margin="10,0,0,0" Name="cbx_post" Checked="cbx_post_Checked"></CheckBox>
+
+                            <Grid Grid.Row="3">
+                                <Label Content="要Post的数据" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Center"></Label>
+                                <TextBox HorizontalAlignment="Center" Style="{StaticResource TextBoxStyle}" Width="580" Name="tbox_postdata"></TextBox>
+                                <Button Content="保存" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
+                            </Grid>
+                        </Grid>
+                        <CheckBox Content="自动获取翻页规则" Style="{StaticResource CheckBoxStyle}" Grid.Row="2" Name="cbx_AutoRule" Checked="cbx_AutoRule_Checked">
+                            <CheckBox.ToolTip>
+                                <ToolTip Content="自动计算下一页的Url，这种方式不适合多种情况，不推荐使用"></ToolTip>
+                            </CheckBox.ToolTip>
+                        </CheckBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
             <Grid Grid.Row="2">
                 <Grid.Background>
                     <SolidColorBrush Color="Silver" Opacity=".1"/>
                 </Grid.Background>
-                <Button Content="确定" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,100,0" Name="btn_OK"/>
+                <Button Content="确定" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,100,0" Name="btn_OK" Click="btn_OK_Click"/>
                 <Button Content="取消" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,5,0" Name="btn_Cancel" Click="Btn_Cancel_Click"/>
             </Grid>
         </Grid>

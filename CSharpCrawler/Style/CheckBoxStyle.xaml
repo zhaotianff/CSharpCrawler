@@ -29,6 +29,10 @@
                             <Setter TargetName="CheckedMark" Property="Visibility" Value="Visible"></Setter>
                             <Setter TargetName="CheckBoxRectangle" Property="Opacity" Value="1"></Setter>
                         </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="Silver"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

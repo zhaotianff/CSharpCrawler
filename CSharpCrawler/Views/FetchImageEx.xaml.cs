@@ -36,6 +36,8 @@ namespace CSharpCrawler.Views
         int globalIndex = 1;
         string baseUrl = "";
 
+        public int Page { get; set; } = 0;
+
         public FetchImageEx()
         {
             InitializeComponent();
@@ -297,7 +299,10 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-
+            var urlArray = globalData.CrawlerConfig.ImageConfig.PageDownUrl.Split(';');
+            var url = UrlUtil.GetPageDownUrl(Page++, urlArray[0], urlArray[1]);
+            this.tbox_Url.Text = url;
+            btn_Surfing_Click(null, null);
         }
     }
 }

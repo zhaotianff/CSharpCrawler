@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CSharpCrawler.Util
 {
@@ -59,9 +60,39 @@ namespace CSharpCrawler.Util
 
         public static string GetPageDownUrl(int page,string baseUrl,string pageDownUrl)
         {
-            var suffix1 = "";
-            var suffix2 = "";
-            return "";
+            var suffix1 = baseUrl.Substring(baseUrl.LastIndexOf("/")); ;
+            var suffix2 = pageDownUrl.Substring(pageDownUrl.LastIndexOf("/")) ;
+            var pattern = "[0-9]+";
+            var match1 = Regex.Matches(suffix1, pattern);
+            var match2 = Regex.Matches(suffix2, pattern);
+            var pageCurrent = 0;
+            var pageNext = 0;
+            var url = "";
+
+            if(match1.Count > 0 && match2.Count > 0 && match1.Count == match2.Count)
+            {
+                for (int i = 0; i < match1.Count; i++)
+                {
+                    if(match1[i].Value == match2[i].Value)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        pageCurrent = Convert.ToInt32(match1[i].Value);
+                        pageNext = Convert.ToInt32(match2[i].Value);
+
+                        if(pageNext > pageCurrent)
+                        {
+                            page++;
+                            url = suffix1.Replace(match1[i].Value, page.ToString());
+                            url = baseUrl.Replace(suffix1, url);
+                            break;
+                        }
+                    }
+                }
+            }
+            return url;
         }
     }
 }

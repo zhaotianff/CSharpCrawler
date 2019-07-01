@@ -209,6 +209,7 @@ namespace CSharpCrawler
 
         private void btn_FetchImageEx_Click(object sender, RoutedEventArgs e)
         {
+            imagePageEx.Page = 1;
             this.frame.Content = imagePageEx;
         }
     }

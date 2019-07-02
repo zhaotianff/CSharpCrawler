@@ -29,5 +29,7 @@ namespace CSharpCrawler.Util
 
         //charset
         public static string CharsetPattern = @"<meta[\s\S]+?charset=(?<charset>(.*?))""[\s\S]+?>";
+
+        public const string EndWithHtmlPattern = @"\S*(.html|.shtml)$";
     }
 }

@@ -9,12 +9,12 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 爬虫协议
   <p>爬虫协议介绍，以及它的语法规则;</p>
   <p>C#如何获取网站的爬虫协议;</p>
-  <p>C#中如何解析爬虫协议</p>
+  <p>C#中如何解析爬虫协议;</p>
 
 * 正则表达式的使用
-  <p>正则表达式的基础知识和基本使用；</p>
-  <p>正则表达式中的分组构造；</p>
-  <p>常用匹配模式</p>
+  <p>正则表达式的基础知识和基本使用;</p>
+  <p>正则表达式中的分组构造;</p>
+  <p>常用匹配模式;</p>
 
 * WebAPI调用
     * 获取实时天气
@@ -30,10 +30,10 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
   <p>如何从网页源码中提取页面的编码</p>
 
 * 抓取动态网页
-  <p>使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页</p>
+  <p>使用![CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页</p>
 
 * 获取网页DOM
-  <p>使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构</p>
+  <p>使用![HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构</p>
 
 * Url抓取(待更新)
     * 抓取指定网址的全部链接

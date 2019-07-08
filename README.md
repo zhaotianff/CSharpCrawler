@@ -5,28 +5,36 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 ### 功能介绍
 * 网页抓取原理
 <p>使用套接字来获取网页源码</p>
+
 * 爬虫协议
-爬虫协议介绍，以及它的语法规则;
-C#如何获取网站的爬虫协议;
-C#中如何解析爬虫协议
+<p>爬虫协议介绍，以及它的语法规则;</p>
+<p>C#如何获取网站的爬虫协议;</p>
+<p>C#中如何解析爬虫协议</p>
+
 * 正则表达式的使用
-正则表达式的基础知识和基本使用；
-正则表达式中的分组构造；
-常用匹配模式
+<p>正则表达式的基础知识和基本使用；</p>
+<p>正则表达式中的分组构造；</p>
+<p>常用匹配模式</p>
+
 * WebAPI调用
     * 获取实时天气
-      调用中国天气网公开API接口来获取天气
+      <p>调用中国天气网公开API接口来获取天气</p>
+      
     * 获取Bing每日图片
-      调用cn bing API接口来获取Bing每日图片
+      <p>调用cn bing API接口来获取Bing每日图片</p>
+      
 * 抓取网页
-C# HttpWebRequest类的使用
-获取指定url的IP地址
-获取指定url的网页头信息
-如何从网页源码中提取页面的编码
+<p>HttpWebRequest类的使用</p>
+<p>获取指定url的IP地址</p>
+<p>获取指定url的网页头信息</p>
+<p>如何从网页源码中提取页面的编码</p>
+
 * 抓取动态网页
-使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页
+<p>使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页</p>
+
 * 获取网页DOM
-使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构
+<p>使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构</p>
+
 * Url抓取(待更新)
     * 抓取指定网址的全部链接
     * 通过指定深度，抓取子网页的全部链接
@@ -35,21 +43,25 @@ C# HttpWebRequest类的使用
     * 链接标题抓取
     
 * 图片抓取(更新中)
-抓取指定url页面中的图片，通过配置url的页码规则，来进行翻页。
-自动获取下一页
+<p>抓取指定url页面中的图片，通过配置url的页码规则，来进行翻页。
+<p>自动获取下一页</p>
+
 * 文件下载
-使用WebClient类下载文件
-多线程下载文件
-从文件加载批量下载(待更新)
+<p>使用WebClient类下载文件</p>
+<p>多线程下载文件</p>
+<p>从文件加载批量下载(待更新)</p>
 
 * 必应图片搜索(仅供学习，请勿用途其它用途)
-实现必应图片搜索的功能
-翻页及优化(待更新)
+<p>实现必应图片搜索的功能</p>
+<p>翻页及优化(待更新)</p>
+
 * 爬虫数据存储
     * Berkeley DB
-    介绍BerkeleyDB以及使用方式
+    <p>介绍BerkeleyDB以及使用方式</p>
+    
     * SQLite
-    介绍SQLite以及使用方式
+    <p>介绍SQLite以及使用方式</p>
+    
 ### 开发环境
 Visual Studio 2013 + .Net 4.5<br/>
 

@@ -30,10 +30,10 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
   <p>如何从网页源码中提取页面的编码</p>
 
 * 抓取动态网页
-  <p>使用 [CEFSharp](https://github.com/cefsharp/CefSharp) 来抓取动态网页</p>
+  <p>使用<a href="https://github.com/cefsharp/CefSharp">CEFSharp</a>来抓取动态网页</p>
 
 * 获取网页DOM
-  <p>使用 [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack) 来获取网页的DOM结构</p>
+  <p>使用<a href="https://github.com/zzzprojects/html-agility-pack">HtmlAgilityPack</a>来获取网页的DOM结构</p>
 
 * Url抓取(待更新)
     * 抓取指定网址的全部链接

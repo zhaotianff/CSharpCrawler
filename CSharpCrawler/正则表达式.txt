@@ -140,7 +140,7 @@ Hello World aaa
 模式： (?<=\sWorld\s)\w+
 结果：aaa
 
-9、零宽度负回顾后发断言（明天再看）
+9、零宽度负回顾后发断言
 
 下组构造定义零宽度负回顾后发断言：
 (?<! 子表达式 )
@@ -156,14 +156,40 @@ Hello World aaa
 零宽度负回顾后发断言要的结果是不匹配后的结果
 
 如有以下句子
-Hello World aaa
+Monday February 1, 2010
+Wednesday February 3, 2010
+Saturday February 6, 2010
+Sunday February 7, 2010
+Monday, February 8, 2010
 
 使用零宽度正回顾后发断言
-模式：(?<=\sWorld\s)\w+
-结果：aaa
+模式：(?<=(Saturday|Sunday) )\b\w+ \d{1,2}, \d{4}\b
+结果：
+February 6, 2010
+February 7, 2010
+说明：
+\b	在单词边界处开始匹配。
+\w+	匹配一个或多个后跟空白字符的单词字符。
+\d{1,2},	匹配空白字符和逗号后面的一个或两个十进制数字。
+\d{4}\b	匹配四个十进制数字并在单词边界处结束匹配。
+(?<=(Saturday|Sunday) )	如果匹配以字符串“星期六”或者“星期日”开头，后跟一个空格，则继续匹配。
  
 使用零宽度负回顾后发断言
-模式：(?<!\sWorld\s)\w+
+模式：(?<!(Saturday|Sunday) )\b\w+ \d{1,2}, \d{4}\b
+结果
+February 1, 2010
+February 3, 2010
+February 8, 2010
+
+\b	在单词边界处开始匹配。
+\w+	匹配一个或多个后跟空白字符的单词字符。
+\d{1,2},	匹配空白字符和逗号后面的一个或两个十进制数字。
+\d{4}\b	匹配四个十进制数字并在单词边界处结束匹配。
+(?<!(Saturday|Sunday) )	如果匹配以字符串“星期六”或者“星期日”开头，后跟一个空格，则匹配成功。
+
+上面两个结果的区别就是
+零宽度正回顾后发断言:结果是匹配给定的模式之后的字符串。February 6, 2010是跟在Saturday之后的，February 7, 2010是跟在Sunday之后的
+零宽度负回顾后发断言:结果是匹配给定的模式之外的字符串。February 1, 2010，February 3, 2010，February 8, 2010不是跟在Saturday或Sunday之后的
 
 
 

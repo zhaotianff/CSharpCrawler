@@ -177,6 +177,21 @@
                             <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </GroupBox>
+
+                    <GroupBox Header="零宽度负回顾后发断言" Grid.Row="8">
+                        <Grid>
+                            <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <TextBox Style="{StaticResource TextBoxStyle}" Text="(?&lt;!Hello )\s\w+\b" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
+                                <TextBox.ToolTip>
+                                    <ToolTip Content="(?&lt;!Hello )	如果匹配以字符串'Hello'开头，后跟一个空格，则匹配成功。。&#x0a;\s    空格。&#x0a;\w+     匹配单词。&#x0a;\b    匹配单词边界"></ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="输入"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="350,0,0,0"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Width="400" Margin="390,0,0,0" Text="Hello World aaa"/>
+                            <Button Content="匹配" HorizontalAlignment="Left" Margin="800,0,0,0" Style="{StaticResource GlobalButtonStyle}" Click="Match_Event"/>
+                            <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="常用匹配模式" Width="100" Height="30">

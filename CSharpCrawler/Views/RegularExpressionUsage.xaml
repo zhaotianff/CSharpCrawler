@@ -109,8 +109,14 @@
 
                     <GroupBox Header="平衡组定义" Grid.Row="2">
                         <Grid>
-                            
-                           
+                            <Label Content="模式" VerticalContentAlignment="Center" HorizontalAlignment="Left"></Label>
+                            <TextBox Style="{StaticResource TextBoxStyle}" Text="^[^&lt;&gt;]*(((?'Open'&lt;)[^&lt;&gt;]*)+((?'Close-Open'>)[^&lt;&gt;]*)+)*(?(Open)(?!))$" HorizontalAlignment="Left" Width="300" Margin="40,0,0,0">
+                                
+                            </TextBox>
+                            <Label Content="输入"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="350,0,0,0"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Width="400" Margin="390,0,0,0" Text="&lt;abc&gt;&lt;mno&lt;xyz&gt;&gt;"/>
+                            <Button Content="匹配" HorizontalAlignment="Left" Margin="800,0,0,0" Style="{StaticResource GlobalButtonStyle}" Click="Match_Event"/>
+                            <TextBox Width="200" HorizontalAlignment="Left" Margin="900,0,0,0" Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </GroupBox>
 

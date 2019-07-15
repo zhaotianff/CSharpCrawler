@@ -38,14 +38,15 @@ namespace CSharpCrawler.Views
         {
             try
             {
-                TextRange tr = new TextRange(this.rtbx_Content.Document.ContentStart, rtbx_Content.Document.ContentEnd);
+                TextRange tr = new TextRange(this.rtbx_Content.Document.ContentStart, rtbx_Content.Document.ContentEnd);              
+                RegexOptions regexOption = (RegexOptions)Enum.Parse(typeof(RegexOptions), combox_RegexOption.Text);
 
                 string input = tr.Text;
                 string pattern = this.tbox_Pattern.Text;
                 List<dynamic> matchList = new List<dynamic>();
                 List<dynamic> groupList = new List<dynamic>();
 
-                MatchCollection matches = Regex.Matches(input, pattern, RegexOptions.IgnoreCase);
+                MatchCollection matches = Regex.Matches(input, pattern, regexOption);
                 if (matches.Count > 0)
                 {
                     this.tbox_MatchStatus.Text = "匹配成功";

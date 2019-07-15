@@ -58,7 +58,22 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Content="匹配" HorizontalAlignment="Center" Style="{StaticResource GlobalButtonStyle}" Name="btn_Match" Click="btn_Match_Click"/>
+                        <Grid>
+                            <Label Content="正则表达式选项" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+                            <ComboBox HorizontalAlignment="Left" Width="200" Margin="100,0,0,0" VerticalAlignment="Center" Style="{StaticResource ComboBoxStyle}" SelectedIndex="0" Name="combox_RegexOption">
+                                <ComboBoxItem>None</ComboBoxItem>
+                                <ComboBoxItem>IgnoreCase</ComboBoxItem>
+                                <ComboBoxItem>Multiline</ComboBoxItem>
+                                <ComboBoxItem>ExplicitCapture</ComboBoxItem>
+                                <ComboBoxItem>Compiled</ComboBoxItem>
+                                <ComboBoxItem>Singleline</ComboBoxItem>
+                                <ComboBoxItem>IgnorePatternWhitespace</ComboBoxItem>
+                                <ComboBoxItem>RightToLeft</ComboBoxItem>
+                                <ComboBoxItem>ECMAScript</ComboBoxItem>
+                                <ComboBoxItem>CultureInvariant</ComboBoxItem>
+                            </ComboBox>
+                            <Button Content="匹配" HorizontalAlignment="Left" Style="{StaticResource GlobalButtonStyle}" Margin="310,0,0,0" Name="btn_Match" Click="btn_Match_Click"/>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>

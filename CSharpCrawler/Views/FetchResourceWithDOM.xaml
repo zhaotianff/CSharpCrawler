@@ -20,13 +20,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="网址" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Name="tbox_Url" VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
 
                 <Grid Grid.Column="2">
-                    <CheckBox Content="显示DOM树" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowDOMTree" Checked="cbox_ShowDOMTree_Checked" Unchecked="cbox_ShowDOMTree_Unchecked"></CheckBox>
+                    <CheckBox Content="显示DOM树" Style="{StaticResource CheckBoxStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowDOMTree" Checked="cbox_ShowDOMTree_Checked" Unchecked="cbox_ShowDOMTree_Unchecked"></CheckBox>
                     <Button Content="获取" HorizontalAlignment="Right" VerticalAlignment="Center" Width="90" Name="btn_Fetch" Click="btn_Fetch_Click" Style="{StaticResource GlobalButtonStyle}"/>
                 </Grid>
             </Grid>
@@ -37,8 +37,8 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                <TreeView Name="tree_DOM" Grid.Column="1">
+                <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Transparent"/>
+                <TreeView Name="tree_DOM" Grid.Column="1" Background="Transparent">
                     <!--使用数据模版-->
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
@@ -50,7 +50,7 @@
                 </TreeView>
             </Grid>
 
-            <StatusBar Grid.Row="2"  Background="White">
+            <StatusBar Grid.Row="2"  Background="Transparent">
                
             </StatusBar>
         </Grid>

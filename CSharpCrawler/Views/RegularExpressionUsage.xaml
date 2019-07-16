@@ -287,43 +287,20 @@
                         <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="[\u4E00-\u9FA5]+"/>
                         <Label Content="匹配IP"></Label>
                         <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        <Label Content="匹配网址"></Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8"/>
-                        
+                        <Label Content="匹配网址(https) RegexOptions.Multiline"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="^http://\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$"/>
+                        <Label Content="匹配网址(http) RegexOptions.Multiline"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="^https://\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$"/>
+                        <Label Content="匹配网址(不以http或https开头)"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="^\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$"/>
+                        <Label Content="匹配Html title标签"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="&lt;title&gt;(?&lt;title&gt;\\S+)&lt;/title&gt;"/>
+                        <Label Content="匹配Html a标签"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="(?&lt;=&lt;a)[\\s\\S]*?(?=&lt;/a&gt;)"/>
+                        <Label Content="匹配Html a标签（href捕获组）"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="(?&lt;=&lt;a)[\\s\\S]*?href=\&quot;(?&lt;href&gt;\\S*)\&quot;[\\s\\S]*?(?=&lt;/a&gt;)"/>
+                        <Label Content="匹配Html charset（charset捕获组）"></Label>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="0,0,300,8" Text="&lt;meta[\s\S]+?charset=(?&lt;charset>(.*?))&quot;[\s\S]+?>"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

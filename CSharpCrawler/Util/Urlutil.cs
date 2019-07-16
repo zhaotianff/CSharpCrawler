@@ -101,7 +101,7 @@ namespace CSharpCrawler.Util
             return url;
         }
 
-        public static async Task<string> GetPageDownUrlAuto(string url)
+        public static async Task<string> GetPageDownUrlAuto(string url, int page = 0)
         {
             //example1
             // home
@@ -117,6 +117,9 @@ namespace CSharpCrawler.Util
                 if(IsEndWithHtml(url))
                 {
                     //使用正则，查找页码
+                    var suffix = url.Substring(url.LastIndexOf("/")+1);
+                    //使用简单的方式
+                    
                 }
                 else
                 {

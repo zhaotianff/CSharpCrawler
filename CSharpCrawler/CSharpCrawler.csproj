@@ -384,7 +384,7 @@
     <Resource Include="doc\.Net regular expression quick reference.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="正则表达式.txt" />
+    <None Include="正则表达式.md" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="BerkeleyDB介绍.txt" />

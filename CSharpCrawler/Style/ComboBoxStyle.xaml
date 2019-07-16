@@ -106,7 +106,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
-                    <Grid Name="MainGrid" SnapsToDevicePixels="true">
+                    <Grid Name="MainGrid" SnapsToDevicePixels="true" Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
@@ -118,7 +118,7 @@
                                Margin="1"
                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                            <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                            <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}" Background="{TemplateBinding Background}">
                                 <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
                                 <Border Background="#0A000000" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
 
@@ -128,7 +128,7 @@
                                         BorderThickness="1"
                                         Margin="0,-1,0,0">
                                     <!-- popup border thickness not dependent on BorderThickness property-->
-                                    <ScrollViewer Name="DropDownScrollViewer">
+                                    <ScrollViewer Name="DropDownScrollViewer" Background="Transparent">
                                         <Grid RenderOptions.ClearTypeHint="Enabled">
                                             <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                 <Rectangle 

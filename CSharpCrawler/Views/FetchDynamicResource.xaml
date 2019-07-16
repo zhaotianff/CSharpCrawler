@@ -40,11 +40,11 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        <RichTextBox Name="rtbox_Resource" ScrollViewer.VerticalScrollBarVisibility="Auto"  Background="Transparent"/>
                         <chrome:ChromiumWebBrowser x:Name="chromiumBrowser" Grid.Column="1" FrameLoadEnd="chromiumBrowser_FrameLoadEnd" />
                     </Grid>
 
-                    <StatusBar Grid.Row="2" Background="White">
+                    <StatusBar Grid.Row="2" Background="Transparent">
                         <Label Name="lbl_StatusText" Content="当前网址抓取次数: 0"/>
                         <Label Content="查看历史结果:"/>
                         <ComboBox Width="500" Name="combox_Record" SelectionChanged="combox_Record_SelectionChanged" Style="{StaticResource ComboBoxStyle}" Height="22"/>

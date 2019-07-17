@@ -97,18 +97,67 @@ namespace CSharpCrawler.Views
             WebUtil.DownloadFileWithProgress(url, ShowStatusText);
         }
 
-        private void btn_DownLoadFromFile_Click(object sender, RoutedEventArgs e)
+        private async void btn_DownLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             var downListFile = Environment.CurrentDirectory + "\\download\\list.txt";
+            string str = "";
+            string name = "";
+            int count = 0;
+            Dictionary<string, string> nameUrlPairs = new Dictionary<string, string>();
+            List<Task<string>> taskList = new List<Task<string>>();
 
             if (!System.IO.File.Exists(downListFile))
+            {
                 ShowStatusText($"{downListFile} is not exist!!!");
+                return;
+            }
 
             //还是比较乱，有空再整理吧
             using (System.IO.FileStream fs = System.IO.File.Open(downListFile, System.IO.FileMode.Open))
             {
+                using (System.IO.StreamReader sr = new System.IO.StreamReader(fs))
+                {
+                    while((str = sr.ReadLine()) != null)
+                    {
+                        count++;
 
+                        if (count % 2 == 0)
+                        {
+                            nameUrlPairs.Add(name, str);
+                        }
+                        else
+                        {
+                            name = str;
+                        }
+                    }
+                }
             }
+
+            ShowStatusText("load download list from list.txt");
+
+            foreach (var item in nameUrlPairs)
+            {
+                ShowStatusText(item.Value);
+                taskList.Add(WebUtil.DownloadFileAsync(item.Value));
+            }
+
+            while (taskList.Count > 0)
+            {
+                
+                Task<string> finishedTask = await Task.WhenAny(taskList);
+                taskList.Remove(finishedTask);
+
+                try
+                {
+                    string fileName = await finishedTask;
+                    ShowStatusText($"{fileName} download finished");
+                }
+                catch(Exception ex)
+                {
+                    ShowStatusText(ex.Message);
+                }
+            }
+
         }
 
         private void ShowStatusText(string text)

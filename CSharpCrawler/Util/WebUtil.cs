@@ -331,19 +331,29 @@ namespace CSharpCrawler.Util
                 long start = rangeArray[i];
                 long end = rangeArray[i + 1];
 
-                byte[] buffer = await Task.Run(() => { return DownloadPartFile(start, end, url); });
+                tasks.Add(Task.Run(() => { return DownloadPartFile(start, end, url); }));
 
+                act($"Create thread {index + 1},download range from {start} to {end} bytes");
+                index++;
+            }
 
-                using (System.IO.FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            await Task.WhenAll(tasks);
+
+            index = 0;
+
+            for (int i = 0; i < threadCount * 2; i += 2)
+            {
+                long start = rangeArray[i];
+                long end = rangeArray[i + 1];
+                byte[] buffer =await tasks[index];
+
+                using (System.IO.FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
                 {
                     fs.Seek(start, SeekOrigin.Begin);
                     fs.Write(buffer, 0, buffer.Length);
                     //await fs.WriteAsync(buffer, 0, buffer.Length);
-                }
-
-                act($"Create thread {index+1},download range from {start} to {end} bytes");
-                index++;
-            }          
+                }              
+            }
 
             act($"Download {url} success");
         }
@@ -355,11 +365,13 @@ namespace CSharpCrawler.Util
                 long bufferSize = end - start;
                 byte[] buffer = new byte[bufferSize + 1];
                 int targetIndex = 0;
+                int readBytes = 0;
+                byte[] receiveBytes = new byte[512];
 
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Referer = url;
                 request.Method = "GET";
-                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 2.0.1124)";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
                 request.AllowAutoRedirect = false;
                 request.ContentType = "application/octet-stream";
                 request.Accept = "image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, application/xaml+xml, application/vnd.ms-xpsdocument, application/x-ms-xbap, application/x-ms-application, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*";
@@ -368,13 +380,10 @@ namespace CSharpCrawler.Util
                 request.AddRange(start, end);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 using (Stream stream = response.GetResponseStream())
-                {
-                    byte[] receiveBytes = new byte[512];
-                    int readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
-                    while (readBytes > 0)
-                    {
+                {                                 
+                    while ((readBytes  = stream.Read(receiveBytes, 0, receiveBytes.Length)) > 0)
+                    {                       
                         Array.Copy(receiveBytes, 0, buffer, targetIndex, readBytes);
-                        readBytes = stream.Read(receiveBytes, 0, receiveBytes.Length);
                         targetIndex += readBytes;
                     }
                 }

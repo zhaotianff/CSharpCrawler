@@ -99,7 +99,16 @@ namespace CSharpCrawler.Views
 
         private void btn_DownLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
+            var downListFile = Environment.CurrentDirectory + "\\download\\list.txt";
 
+            if (!System.IO.File.Exists(downListFile))
+                ShowStatusText($"{downListFile} is not exist!!!");
+
+            //还是比较乱，有空再整理吧
+            using (System.IO.FileStream fs = System.IO.File.Open(downListFile, System.IO.FileMode.Open))
+            {
+
+            }
         }
 
         private void ShowStatusText(string text)

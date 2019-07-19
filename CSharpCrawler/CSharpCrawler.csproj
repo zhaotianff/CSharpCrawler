@@ -146,6 +146,9 @@
       <DependentUpon>DataStorage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\EMessageBox.cs" />
+    <Compile Include="Views\DishesPrice.xaml.cs">
+      <DependentUpon>DishesPrice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FetchDynamicResource.xaml.cs">
       <DependentUpon>FetchDynamicResource.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataStorage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DishesPrice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

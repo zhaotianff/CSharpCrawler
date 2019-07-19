@@ -38,6 +38,7 @@ namespace CSharpCrawler
         RegularExpressionUsage regularExpressionUsage = new RegularExpressionUsage();
         DataStorage dataStorage = new DataStorage();
         RobotsProtocol robotsProtocol = new RobotsProtocol();
+        DishesPrice dishesPrice = new DishesPrice();
 
         ToggleButton toggleButton = null;
 
@@ -211,6 +212,11 @@ namespace CSharpCrawler
         {
             imagePageEx.Page = 1;
             this.frame.Content = imagePageEx;
+        }
+
+        private void btn_DishesPrice_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = dishesPrice;
         }
     }
 }

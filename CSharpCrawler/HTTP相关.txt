@@ -19,3 +19,20 @@ PUT   向指定资源位置上传其最新内容
 
 5、使用HttpWebRequest实现多线程下载的核心是：HttpWebRequest提供了一个AddRange方法，可以指定下载的文件数据范围
 
+6、Http常用请求头
+
+Header	解释	示例
+Accept	指定客户端能够接收的内容类型	Accept:text/plain,text/html
+Accept-Charset	浏览器可以接受的字符编码集。	Accept-Charset:utf-8
+Accept-Encoding	指定浏览器可以支持的web服务器返回内容压缩编码类型。	Accept-Encoding:compress,gzip
+Accept-Language	浏览器可接受的语言	Accept-Language:en,zh
+Accept-Ranges	可以请求网页实体的一个或者多个子范围字段	Accept-Ranges:bytes
+Authorization	HTTP授权的授权证书	Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Cache-Control	指定请求和响应遵循的缓存机制	Cache-Control:no-cache
+Connection	表示是否需要持久连接。（HTTP 1.1默认进行持久连接）	Connection:close
+Cookie	HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。	Cookie:$Version=1;Skin=new;
+Content-Length	请求的内容长度	Content-Length:348
+Content-Type	请求的与实体对应的MIME信息	Content-Type:application/x-www-form-urlencoded
+Referer	先前网页的地址，当前请求网页紧随其后,即来路	Referer:http:
+User-Agent	User-Agent的内容包含发出请求的用户信息	User-Agent:Mozilla/5.0(Linux;X11)
+

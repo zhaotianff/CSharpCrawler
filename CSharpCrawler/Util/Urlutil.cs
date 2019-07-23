@@ -37,6 +37,12 @@ namespace CSharpCrawler.Util
 
         public const string CNBingDailyImageBasicUrl = "https://cn.bing.com";
 
+        #region Dianping Urls
+        public const string DianpingCityListUrl = "https://www.dianping.com/citylist";
+        public const string DianpingGetAllProvince = "https://www.dianping.com/ajax/citylist/getAllDomesticProvince";
+        public const string DianpingGetCityByProvince = "https://www.dianping.com/ajax/citylist/getDomesticCityByProvince";
+        #endregion
+
         public static bool IsEmpty(string url)
         {
             return string.IsNullOrEmpty(url);

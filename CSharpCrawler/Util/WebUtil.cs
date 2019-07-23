@@ -161,6 +161,77 @@ namespace CSharpCrawler.Util
             }
         }
 
+        public static async Task<CookieContainer> GetCookies(string url,string postData,CookieContainer cookieContainer = null)
+        {          
+            HttpWebRequest request = null;
+            WebResponse response = null;
+
+            if (cookieContainer == null)
+                cookieContainer = new CookieContainer();
+
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                byte[] postdatabyte = Encoding.UTF8.GetBytes(postData);
+                request.ContentLength = postdatabyte.Length;
+                request.AllowAutoRedirect = true;               
+                request.CookieContainer = cookieContainer;
+                request.KeepAlive = true;
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                Stream stream = await request.GetRequestStreamAsync();
+                stream.Write(postdatabyte, 0, postdatabyte.Length);
+                stream.Close();
+
+                response =await request.GetResponseAsync();
+                var cookies = ((HttpWebResponse)response).Cookies;
+                cookieContainer.Add(cookies);
+                return cookieContainer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<string> PostData(string url, string postData, string contentType = "")
+        {
+            HttpWebRequest request = null;
+            WebResponse response = null;        
+
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                byte[] postdatabyte = Encoding.UTF8.GetBytes(postData);
+                request.ContentLength = postdatabyte.Length;
+                request.AllowAutoRedirect = true;
+                request.KeepAlive = true;
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+                if (!string.IsNullOrEmpty(contentType))
+                    request.ContentType = "application/json";
+
+                Stream stream = await request.GetRequestStreamAsync();
+                stream.Write(postdatabyte, 0, postdatabyte.Length);
+                stream.Close();
+
+                response = await request.GetResponseAsync();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader sr = new StreamReader(responseStream);
+                var responseStr = sr.ReadToEnd();
+                response.Close();
+                responseStream.Close();
+
+                return responseStr;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public static async Task<string> GetDynamicHtmlSourceWithIE(string url,Encoding encoding = null)
         {

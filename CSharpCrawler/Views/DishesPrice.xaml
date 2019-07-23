@@ -16,13 +16,15 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <RichTextBox Background="Transparent">
-                    <FlowDocument>
-                        <Paragraph x:Name="paragraph">
-                            
-                        </Paragraph>
-                    </FlowDocument>
-                </RichTextBox>
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <RichTextBox Background="Transparent">
+                        <FlowDocument>
+                            <Paragraph x:Name="paragraph">
+
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
 
                 <Grid Grid.Row="1">
                     <Button Content="开始获取" HorizontalAlignment="Right" Margin="5" Style="{StaticResource GlobalButtonStyle}" Name="btn_StartGetCity" Click="btn_StartGetCity_Click"/>

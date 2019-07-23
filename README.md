@@ -76,6 +76,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 * [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)
 * [Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)
 * [SQLite](https://www.sqlite.org/index.html)
+* [Json.NET](https://github.com/JamesNK/Newtonsoft.Json)
 
 ### 软件截图
 <p align="center">

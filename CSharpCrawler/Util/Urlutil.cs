@@ -41,6 +41,11 @@ namespace CSharpCrawler.Util
         public const string DianpingCityListUrl = "https://www.dianping.com/citylist";
         public const string DianpingGetAllProvince = "https://www.dianping.com/ajax/citylist/getAllDomesticProvince";
         public const string DianpingGetCityByProvince = "https://www.dianping.com/ajax/citylist/getDomesticCityByProvince";
+
+        /// <summary>
+        /// replace citypyname
+        /// </summary>
+        public const string DianpingHomeDishes = "https://www.dianping.com/citypyname/ch10/g1783";
         #endregion
 
         public static bool IsEmpty(string url)

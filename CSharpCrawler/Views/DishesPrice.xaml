@@ -31,7 +31,28 @@
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Style="{StaticResource StyleTabItem}" Header="第二步、抓取家常菜价格" Width="200"></TabItem>
+        <TabItem Style="{StaticResource StyleTabItem}" Header="第二步、抓取家常菜价格" Width="200">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <RichTextBox Background="Transparent">
+                        <FlowDocument>
+                            <Paragraph x:Name="paragraph_Step2">
+
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
+
+                <Grid Grid.Row="1">
+                    <Button Content="开始获取" HorizontalAlignment="Right" Margin="5" Style="{StaticResource GlobalButtonStyle}" Name="btn_StartDishPrice" Click="btn_StartDishPrice_Click"/>
+                </Grid>
+            </Grid>
+        </TabItem>
         <TabItem Style="{StaticResource StyleTabItem}" Header="第三步、生成统计图表" Width="200"></TabItem>
     </TabControl>
 </Page>

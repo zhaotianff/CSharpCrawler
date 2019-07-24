@@ -1,8 +1,32 @@
-﻿1、HTTP 1.1提供的请求方法
+﻿1、HTTP 请求过程
+我们平常上网，在浏览器中输出网址，浏览器显示网页内容。
+实际上，这个过程是浏览器向网站所在的服务器发送了一个请求，网站服务器接收到这个请求后进行处理和解析，然后返
+回对应的响应，响应里包含了要显示的网页内容，浏览器在接收到这个响应后，对内容进行解析并显示
 
-GET   请求获取特定的资源 
-POST  请求向指定资源提交数据进行处理（提交表单或上传文件等），请求的数据被包含在请求体里
-PUT   向指定资源位置上传其最新内容
+
+请求分为四部分内容
+
+请求方法（ Request Method ）
+GET    请求获取特定的资源 
+POST   请求向指定资源提交数据进行处理（提交表单或上传文件等），请求的数据被包含在请求体里
+HEAD   类似于 GET 请求， 只不过返回的响应中没有具体的内容，用于获取报头
+PUT    向指定资源位置上传其最新内容
+DELETE 请求服务器删除指定的页面
+
+请求的网址( Request URL ）
+要访问的网址
+
+请求头（ Request Headers ） 
+
+请求体（ Request Body ）
+
+
+
+
+GET请求和POST请求的区别
+一、GET 请求中的参数包含在 URL 里面，数据可以在 URL 中看到，而 POST 请求的 URL 不会包
+含这些数据，数据都是通过表单形式传输的，会包含在请求体中 。
+二、GET 请求提交的数据最多只有 1024 字节，而 POST 方式没有限制 。
 
 2、HTTP常用状态码
 200 OK
@@ -35,4 +59,5 @@ Content-Length	请求的内容长度	Content-Length:348
 Content-Type	请求的与实体对应的MIME信息	Content-Type:application/x-www-form-urlencoded
 Referer	先前网页的地址，当前请求网页紧随其后,即来路	Referer:http:
 User-Agent	User-Agent的内容包含发出请求的用户信息	User-Agent:Mozilla/5.0(Linux;X11)
+
 

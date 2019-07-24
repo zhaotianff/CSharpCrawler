@@ -54,9 +54,9 @@ namespace CSharpCrawler.Views
             return list;
         }
 
-        public void SaveProvince()
+        public void SaveProvinceToDB(List<Province> privinceList)
         {
-
+            //TODO
         }
 
         public void ShowProvincesInfo(List<Province> list)
@@ -102,9 +102,9 @@ namespace CSharpCrawler.Views
             return cityList;
         }
 
-        public void GetCitiesByProvinceID(int provinceID)
+        public void SaveCityToDB(List<City> cityList)
         {
-
+            //TODO
         }
 
         private void ShowStatusText(string str)
@@ -112,6 +112,19 @@ namespace CSharpCrawler.Views
             this.Dispatcher.Invoke(()=> {
                 this.paragraph.Inlines.Add(str + Environment.NewLine);
             });
+        }
+
+        private async void btn_StartDishPrice_Click(object sender, RoutedEventArgs e)
+        {
+            //这里只是简单的示例，所以仅抓取第一页数据
+            //shenzhen
+
+            var url = UrlUtil.DianpingHomeDishes.Replace("citypyname", "shenzhen");
+            var htmlSourceCode = await WebUtil.GetHtmlSource(url,"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
+            var pattern = "(?<=<li class=\"\")[\\s\\S]*?(?=</li>)";
+            var matchCollection = RegexUtil.Match(htmlSourceCode, pattern);
+
+            
         }
     }
 }

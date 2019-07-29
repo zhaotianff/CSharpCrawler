@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace CSharpCrawler.Views
 {
@@ -97,6 +98,8 @@ namespace CSharpCrawler.Views
 
                 ShowStatusText($"***********************************\r\n{item.ProvinceName}\r\n***********************************");
                 tempCitiesList.ForEach(x => ShowStatusText(x.ToString()));
+
+                System.Threading.Thread.Sleep(2000);
             }
 
             return cityList;
@@ -117,14 +120,54 @@ namespace CSharpCrawler.Views
         private async void btn_StartDishPrice_Click(object sender, RoutedEventArgs e)
         {
             //这里只是简单的示例，所以仅抓取第一页数据
-            //shenzhen
+            //需要添加以下Cookie信息，否则会出现验证码页面
 
-            var url = UrlUtil.DianpingHomeDishes.Replace("citypyname", "shenzhen");
-            var htmlSourceCode = await WebUtil.GetHtmlSource(url,"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
+            var url = "https://www.dianping.com/shenzhen/ch10/g1783";
+            var userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+            var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+
+            CookieContainer cookieContainer = new CookieContainer();
+
+            System.Net.Cookie cookie = new Cookie("_hc.v", "721d1647-b5e0-18b6-d41a-43453671c5f8.1563348000");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("_lx_utm", "utm_source%3DBaidu%26utm_medium%3Dorganic");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("_lxsdk", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("_lxsdk_cuid", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("cy", "7");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("cye", "shenzhen");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("s_ViewType", "10");
+            cookie.Domain = "www.dianping.com";
+            cookieContainer.Add(cookie);
+
+            var html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
+          
+            this.paragraph_Step2.Inlines.Add(html);
+
             var pattern = "(?<=<li class=\"\")[\\s\\S]*?(?=</li>)";
-            var matchCollection = RegexUtil.Match(htmlSourceCode, pattern);
+            var matchCollection = RegexUtil.Match(html, pattern);
 
-            
+            //PC页面价格加密了，可能需要访问移动端页面
         }
     }
 }

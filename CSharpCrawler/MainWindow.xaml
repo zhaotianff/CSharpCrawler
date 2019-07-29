@@ -37,7 +37,7 @@
                     <ToggleButton Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                    <ToggleButton Content="以DOM访问网页" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="获取网页DOM" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton  Content="抓取图像╮(￣▽￣)╭" Name="btn_FetchImageEx" Click="btn_FetchImageEx_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>

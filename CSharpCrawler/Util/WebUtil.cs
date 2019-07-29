@@ -98,7 +98,7 @@ namespace CSharpCrawler.Util
         /// <param name="encoding"></param>
         /// <remarks>以后再改</remarks>
         /// <returns></returns>
-        public static async Task<string> GetHtmlSource(string url,string accept,string userAgent,Encoding encoding=null)
+        public static async Task<string> GetHtmlSource(string url,string accept,string userAgent,Encoding encoding=null,CookieContainer cookieContainer = null)
         {
             try
             {
@@ -109,6 +109,9 @@ namespace CSharpCrawler.Util
                 request.Method = "GET"; //默认就是GET
                 request.Accept = accept;
                 request.UserAgent = userAgent;
+                if (cookieContainer != null)
+                    request.CookieContainer = cookieContainer;
+
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     Encoding tempEncoding = Encoding.Default;

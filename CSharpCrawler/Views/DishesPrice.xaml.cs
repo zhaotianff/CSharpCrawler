@@ -144,10 +144,6 @@ namespace CSharpCrawler.Views
             cookie.Domain = "www.dianping.com";
             cookieContainer.Add(cookie);
 
-            cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
-            cookie.Domain = "www.dianping.com";
-            cookieContainer.Add(cookie);
-
             cookie = new Cookie("cy", "7");
             cookie.Domain = "www.dianping.com";
             cookieContainer.Add(cookie);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
 
-namespace SmartImage.Utils
+namespace CSharpCrawler.Util
 {
     /// <summary>
     /// SQLite帮助类
@@ -16,9 +16,9 @@ namespace SmartImage.Utils
         private SQLiteConnection con;
         private bool openFlag = false;
 
-        public SQLiteUtil()
+        public SQLiteUtil(string dbPath)
         {
-            
+            OpenConnection(dbPath);
         }
 
         private void OpenConnection(string dbPath)
@@ -42,7 +42,7 @@ namespace SmartImage.Utils
             }
         }
 
-        private DataTable Query(string sql)
+        public DataTable Query(string sql)
         {
             if (openFlag == false)
                 throw new Exception("Database has not open yet.");
@@ -53,7 +53,7 @@ namespace SmartImage.Utils
             return dt;
         }
 
-        private object ExecuteScalar(string sql)
+        public object ExecuteScalar(string sql)
         {
             if (openFlag == false)
                 throw new Exception("Database has not open yet.");
@@ -63,17 +63,17 @@ namespace SmartImage.Utils
             return cmd.ExecuteScalar();
         }
 
-        private int ExecuteNonQuery(string sql)
+        public int ExecuteNonQuery(string sql)
         {
             if (openFlag == false)
                 throw new Exception("Database has not open yet.");
 
-            SQLiteCommand cmd = new SQLiteCommand(sql);
+            SQLiteCommand cmd = new SQLiteCommand(con);
             cmd.CommandText = sql;
             return cmd.ExecuteNonQuery();
         }
 
-        private int ExecuteNonQuery(string sql, SQLiteParameter[] parameters)
+        public int ExecuteNonQuery(string sql, SQLiteParameter[] parameters)
         {
             if (openFlag == false)
                 throw new Exception("Database has not open yet.");
@@ -90,7 +90,7 @@ namespace SmartImage.Utils
             return result;
         }
 
-        private void UpdateDataTableToDB(DataTable dt,string sql)
+        public void UpdateDataTableToDB(DataTable dt,string sql)
         {
             if (openFlag == false)
                 throw new Exception("Database has not open yet.");
@@ -101,7 +101,7 @@ namespace SmartImage.Utils
             da.Update(dt);
         }
 
-        public void CloseConnection()
+        private void CloseConnection()
         {
             try
             {

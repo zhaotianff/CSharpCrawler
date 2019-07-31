@@ -25,15 +25,13 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class DishesPrice : Page
     {
+        private string dbPath = Environment.CurrentDirectory + "\\User Data\\Dianping\\db\\" + "dianping";
+
+        List<City> cityList = new List<City>();
 
         public DishesPrice()
         {
             InitializeComponent();
-        }
-
-        private void InitDB()
-        {
-
         }
 
         private async void btn_StartGetCity_Click(object sender, RoutedEventArgs e)
@@ -41,8 +39,11 @@ namespace CSharpCrawler.Views
             ShowStatusText($"正在从{UrlUtil.DianpingGetAllProvince}获取省份信息");
             List<Province> provinceList = await  GetProvinces();
             ShowProvincesInfo(provinceList);
+            SaveProvinceToDB(provinceList);
+
             ShowStatusText($"正在从{UrlUtil.DianpingGetCityByProvince}获取城市信息");
-            List<City> cityList = await GetAllCities(provinceList);
+            cityList = await GetAllCities(provinceList);
+            SaveCityToDB(cityList);
         }
 
         public async Task<List<Province>> GetProvinces()
@@ -55,9 +56,30 @@ namespace CSharpCrawler.Views
             return list;
         }
 
-        public void SaveProvinceToDB(List<Province> privinceList)
+        public async void SaveProvinceToDB(List<Province> provinceList)
         {
-            //TODO
+            await Task.Run(()=> {
+
+                ShowStatusText($"开始保存省份信息");
+
+                using (SQLiteUtil sqlite = new SQLiteUtil(dbPath))
+                {
+                    var sql = "Delete From Province";
+                    sqlite.ExecuteNonQuery(sql);
+
+                    foreach (var item in provinceList)
+                    {
+                        sql = "Insert Into Province (ProvinceID,ProvinceName) Values (@ProvinceID,@ProvinceName)";
+                        System.Data.SQLite.SQLiteParameter[] parameters = new System.Data.SQLite.SQLiteParameter[]
+                        {
+                        new System.Data.SQLite.SQLiteParameter("@ProvinceID",item.ProvinceID),
+                        new System.Data.SQLite.SQLiteParameter("@ProvinceName",item.ProvinceName)
+                        };
+                        sqlite.ExecuteNonQuery(sql, parameters);
+                    }
+                }
+                ShowStatusText($"保存省份信息完成");
+            }); 
         }
 
         public void ShowProvincesInfo(List<Province> list)
@@ -99,15 +121,40 @@ namespace CSharpCrawler.Views
                 ShowStatusText($"***********************************\r\n{item.ProvinceName}\r\n***********************************");
                 tempCitiesList.ForEach(x => ShowStatusText(x.ToString()));
 
-                System.Threading.Thread.Sleep(2000);
+                await Task.Delay(2000);
             }
 
             return cityList;
         }
 
-        public void SaveCityToDB(List<City> cityList)
+        public async void SaveCityToDB(List<City> cityList)
         {
-            //TODO
+            await Task.Run(()=> {
+
+                ShowStatusText($"开始保存城市数据");
+
+                using (SQLiteUtil sqlite = new SQLiteUtil(dbPath))
+                {
+                    var sql = "Delete From City";
+                    sqlite.ExecuteNonQuery(sql);
+
+                    foreach (var item in cityList)
+                    {
+                        sql = "Insert Into City (ProvinceID,CityID,CityName,CityPinYin) Values (@ProvinceID,@CityID,@CityName,@CityPinYin)";
+                        System.Data.SQLite.SQLiteParameter[] parameters = new System.Data.SQLite.SQLiteParameter[]
+                        {
+                        new System.Data.SQLite.SQLiteParameter("@ProvinceID",item.ProvinceID),
+                        new System.Data.SQLite.SQLiteParameter("@CityID",item.CityID),
+                        new System.Data.SQLite.SQLiteParameter("@CityName",item.CityName),
+                        new System.Data.SQLite.SQLiteParameter("@CityPinYin",item.CityPinYinName)
+                        };
+                        sqlite.ExecuteNonQuery(sql, parameters);
+                        ShowStatusText($"保存{item.CityName}数据完成");
+                        Task.Delay(5);
+                    }
+                }
+                ShowStatusText($"保存城市数据完成");
+            }); 
         }
 
         private void ShowStatusText(string str)
@@ -119,10 +166,16 @@ namespace CSharpCrawler.Views
 
         private async void btn_StartDishPrice_Click(object sender, RoutedEventArgs e)
         {
+            if(cityList.Count == 0)
+            {
+                this.paragraph_Step2.Inlines.Add("请先获取城市列表");
+                return;
+            }
+
             //这里只是简单的示例，所以仅抓取第一页数据
             //需要添加以下Cookie信息，否则会出现验证码页面
-
-            var url = "https://www.dianping.com/shenzhen/ch10/g1783";
+            var url = "";
+            var html = "";
             var userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
             var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
 
@@ -144,6 +197,10 @@ namespace CSharpCrawler.Views
             cookie.Domain = "www.dianping.com";
             cookieContainer.Add(cookie);
 
+            //cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
+            //cookie.Domain = "www.dianping.com";
+            //cookieContainer.Add(cookie);
+
             cookie = new Cookie("cy", "7");
             cookie.Domain = "www.dianping.com";
             cookieContainer.Add(cookie);
@@ -155,15 +212,27 @@ namespace CSharpCrawler.Views
             cookie = new Cookie("s_ViewType", "10");
             cookie.Domain = "www.dianping.com";
             cookieContainer.Add(cookie);
+              
+            //PC页面价格加密了，访问移动端页面来获取价格
+            foreach (var item in cityList)
+            {
+                url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
+                //移动端
+                url = url.Replace("www", "m");
 
-            var html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
-          
-            this.paragraph_Step2.Inlines.Add(html);
+                html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
 
-            var pattern = "(?<=<li class=\"\")[\\s\\S]*?(?=</li>)";
-            var matchCollection = RegexUtil.Match(html, pattern);
 
-            //PC页面价格加密了，可能需要访问移动端页面
+            }
+        }
+
+
+
+        private void SaveResult(Result result)
+        {
+            Task.Run(()=> {
+
+            });
         }
     }
 }

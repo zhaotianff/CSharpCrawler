@@ -128,6 +128,7 @@
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\Dianpin\City.cs" />
     <Compile Include="Model\Dianpin\Province.cs" />
+    <Compile Include="Model\Dianpin\Result.cs" />
     <Compile Include="Model\EMessageBoxType.cs" />
     <Compile Include="Model\HtmlStruct.cs" />
     <Compile Include="Model\HtmlTag.cs" />

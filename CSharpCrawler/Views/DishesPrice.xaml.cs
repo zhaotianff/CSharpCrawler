@@ -169,7 +169,7 @@ namespace CSharpCrawler.Views
             if(cityList.Count == 0)
             {
                 this.paragraph_Step2.Inlines.Add("请先获取城市列表");
-                return;
+                //return;
             }
 
             //这里只是简单的示例，所以仅抓取第一页数据
@@ -182,48 +182,66 @@ namespace CSharpCrawler.Views
             CookieContainer cookieContainer = new CookieContainer();
 
             System.Net.Cookie cookie = new Cookie("_hc.v", "721d1647-b5e0-18b6-d41a-43453671c5f8.1563348000");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             cookie = new Cookie("_lx_utm", "utm_source%3DBaidu%26utm_medium%3Dorganic");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             cookie = new Cookie("_lxsdk", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             cookie = new Cookie("_lxsdk_cuid", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             //cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
             //cookie.Domain = "www.dianping.com";
             //cookieContainer.Add(cookie);
 
+            cookie = new Cookie("cityid", "2");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("default_ab", "shopList%3AC%3A4");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
             cookie = new Cookie("cy", "7");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             cookie = new Cookie("cye", "shenzhen");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
 
             cookie = new Cookie("s_ViewType", "10");
-            cookie.Domain = "www.dianping.com";
+            cookie.Domain = "m.dianping.com";
             cookieContainer.Add(cookie);
               
             //PC页面价格加密了，访问移动端页面来获取价格
             foreach (var item in cityList)
             {
-                url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
+                //url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
                 //移动端
-                url = url.Replace("www", "m");
+                //url = url.Replace("www", "m");
+
+                url = "https://www.dianping.com/changsha/ch10/g1783";
 
                 html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
 
 
             }
+
+            url = "https://m.dianping.com/hefei/ch10/g1783";
+
+            html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
+
+            var pattern = "(?<=<ul class=\"list-search\">)[\\s\\S]*(?=</ul>)";
+
+            var result = RegexUtil.Match(html, pattern);
         }
 
 

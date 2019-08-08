@@ -169,7 +169,7 @@ namespace CSharpCrawler.Views
             string value = "";
             string source = "";
 
-            MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagAPattern);
+            MatchCollection mc = RegexUtil.Matches(html.ToString(), RegexPattern.TagAPattern);
             foreach (Match item in mc)
             {
                 value = item.Groups["url"].Value;
@@ -199,7 +199,7 @@ namespace CSharpCrawler.Views
                     continue;
                 }
 
-                mc = RegexUtil.Match(source, RegexPattern.TagTitlePattern);
+                mc = RegexUtil.Matches(source, RegexPattern.TagTitlePattern);
                 if (mc.Count > 0)
                 {
                     urlCollection[i].Title = mc[0].Groups["title"].Value;

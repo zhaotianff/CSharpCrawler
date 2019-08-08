@@ -91,5 +91,19 @@ namespace CSharpCrawler.Util
             else
                 return tempAttribute.Value;
         }
+
+        public static HtmlAgilityPack.HtmlNodeCollection GetTagList(string html,string tagName)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            try
+            {
+                doc.LoadHtml(html);
+                return doc.DocumentNode.SelectNodes("//" + tagName);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

@@ -35,5 +35,8 @@ namespace CSharpCrawler.Util
         public static string CharsetPattern = @"<meta[\s\S]+?charset=(?<charset>(.*?))""[\s\S]+?>";
 
         public const string EndWithHtmlPattern = @"\S*(.html|.shtml)$";
+
+        //Dianping
+        public const string DianPingAveragePricePattern = @"(?<price>\d+)/";
     }
 }

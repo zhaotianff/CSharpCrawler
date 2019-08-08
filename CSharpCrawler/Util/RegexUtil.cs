@@ -36,14 +36,19 @@ namespace CSharpCrawler.Util
             return false;
         }
 
-        public static MatchCollection Match(string text, string pattern)
+        public static MatchCollection Matches(string text, string pattern)
         {
             return Regex.Matches(text, pattern);
         }
 
         public static bool IsInvalidImgUrl(string url)
         {
-            return Match(url, RegexPattern.MatchImgPattern)[0].Success;
+            return Match(url, RegexPattern.MatchImgPattern).Success;
+        }
+
+        public static Match Match(string text,string pattern)
+        {
+            return Regex.Match(text, pattern);
         }
 
         public static Tuple<bool,string> ExtractBingImage(string url)
@@ -77,6 +82,17 @@ namespace CSharpCrawler.Util
             string pattern = "background-image:(\\s*url|url)(";
             return list;
 
+        }
+
+        public static string ExtractDianPingAveragePrice(string input)
+        {
+            var price = "0";
+            Match match = Match(input, RegexPattern.DianPingAveragePricePattern);
+            if(match.Success && !string.IsNullOrEmpty(match.Groups["price"].Value))
+            {
+                price = match.Groups["price"].Value;
+            }
+            return price;
         }
     }
 }

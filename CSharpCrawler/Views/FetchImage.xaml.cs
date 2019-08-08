@@ -127,7 +127,7 @@ namespace CSharpCrawler.Views
             try
             {
                 string value = "";
-                MatchCollection mc = RegexUtil.Match(html.ToString(), RegexPattern.TagImgPattern);
+                MatchCollection mc = RegexUtil.Matches(html.ToString(), RegexPattern.TagImgPattern);
                 foreach (Match item in mc)
                 {
                     value = item.Groups["image"].Value;

@@ -241,7 +241,21 @@ namespace CSharpCrawler.Views
 
             var pattern = "(?<=<ul class=\"list-search\">)[\\s\\S]*(?=</ul>)";
 
-            var result = RegexUtil.Match(html, pattern);
+            var result = RegexUtil.Matches(html, pattern);
+
+            //正则暂时不好匹配，使用HtmlAgilityPack
+            html = "<html><head></head><body >" + result[0].Value + "</body></html>";
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+
+            var itemList = doc.DocumentNode.SelectNodes("//li");
+
+            foreach (var item in itemList)
+            {               
+                var shopName = item.SelectSingleNode("h3").InnerText;
+                var keyword = item.InnerText;
+                var averageConsume = RegexUtil.ExtractDianPingAveragePrice(keyword);
+            }
         }
 
 

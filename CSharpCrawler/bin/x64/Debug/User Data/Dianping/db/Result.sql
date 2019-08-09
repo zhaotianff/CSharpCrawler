@@ -27,8 +27,8 @@ CREATE TABLE "Result" (
 "Html"  TEXT NOT NULL,
 "RestaurentName"  TEXT NOT NULL,
 "AverageSpend"  REAL NOT NULL,
-"RestaurentImage"  BLOB NOT NULL,
-"KeyWord"  TEXT NOT NULL,
+"RestaurentImage"  BLOB,
+"Keyword"  TEXT NOT NULL,
 CONSTRAINT "CITY_FOREIGN_KEY" FOREIGN KEY ("CityID") REFERENCES "City" ("CityID")
 );
 

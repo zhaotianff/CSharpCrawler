@@ -17,5 +17,13 @@ namespace CSharpCrawler.Model.Dianpin
         public string AverageSpend { get; set; }
 
         public byte[] RestaurentImage { get; set; }
+
+        public string Keyword { get; set; }
+
+        public override string ToString()
+        {
+            return $"{RestaurentName}-{AverageSpend}元/人\r\n"
+                + $"关键词:{Keyword}";
+        }
     }
 }

@@ -16,7 +16,7 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Name="scroll">
                     <RichTextBox Background="Transparent">
                         <FlowDocument>
                             <Paragraph x:Name="paragraph">
@@ -38,7 +38,7 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="scroll_Step2">
                     <RichTextBox Background="Transparent">
                         <FlowDocument>
                             <Paragraph x:Name="paragraph_Step2">

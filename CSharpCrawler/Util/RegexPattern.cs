@@ -38,5 +38,6 @@ namespace CSharpCrawler.Util
 
         //Dianping
         public const string DianPingAveragePricePattern = @"(?<price>\d+)/";
+        public const string DianPingContentArea = "(?<=<ul class=\"list-search\">)[\\s\\S]*(?=</ul>)";
     }
 }

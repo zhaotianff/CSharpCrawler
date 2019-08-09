@@ -110,7 +110,7 @@ namespace CSharpCrawler.Views
                 var citiesJToken = citiesObj["cityList"];
 
                 var tempCitiesList = citiesJToken.Select(x=>new City {
-                    CityID = (string)x["cityId"],
+                    CityID = (int)x["cityId"],
                     CityName = (string)x["cityName"],
                     CityPinYinName = (string)x["cityPyName"],
                     ProvinceID = item.ProvinceID
@@ -161,6 +161,15 @@ namespace CSharpCrawler.Views
         {
             this.Dispatcher.Invoke(()=> {
                 this.paragraph.Inlines.Add(str + Environment.NewLine);
+                this.scroll.ScrollToBottom();
+            });
+        }
+
+        private void ShowStep2StatusText(string str)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.paragraph_Step2.Inlines.Add(str + Environment.NewLine);
+                this.scroll_Step2.ScrollToBottom();
             });
         }
 
@@ -168,16 +177,22 @@ namespace CSharpCrawler.Views
         {
             if(cityList.Count == 0)
             {
-                this.paragraph_Step2.Inlines.Add("请先获取城市列表");
-                //return;
+                ShowStep2StatusText("请先获取城市列表");
+                return;
             }
+
+            ShowStep2StatusText($"正在从{cityList.Count}个城市获取私房菜价格");           
 
             //这里只是简单的示例，所以仅抓取第一页数据
             //需要添加以下Cookie信息，否则会出现验证码页面
             var url = "";
+            var originalHtml = "";
             var html = "";
             var userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
             var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+            var r = new Random();
+
+            ClearRecord();
 
             CookieContainer cookieContainer = new CookieContainer();
 
@@ -224,47 +239,79 @@ namespace CSharpCrawler.Views
             //PC页面价格加密了，访问移动端页面来获取价格
             foreach (var item in cityList)
             {
-                //url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
+                ShowStep2StatusText($"开始获取{item.CityName}私房菜价格");
+                //等待10-20秒
+                await Task.Delay(r.Next(10,20)*1000);
+
+                url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
                 //移动端
-                //url = url.Replace("www", "m");
+                url = url.Replace("www", "m");
+                originalHtml = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
+                var match = RegexUtil.Match(originalHtml, RegexPattern.DianPingContentArea);
 
-                url = "https://www.dianping.com/changsha/ch10/g1783";
+                if (match.Success == false)
+                    continue;
 
-                html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
+                //正则暂时不好匹配，使用HtmlAgilityPack
+                //图片是动态的，不打算使用CEF，这里就不抓取了
+                html = "<html><head></head><body >" + match.Value + "</body></html>";
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(html);
+                var itemList = doc.DocumentNode.SelectNodes("//li");
+                var titleList = doc.DocumentNode.SelectNodes("//h3");
 
+                if (itemList.Count != titleList.Count)
+                    continue;
 
-            }
+                for (int i = 0; i < itemList.Count; i++)
+                {
+                    var shopName = titleList[i].InnerText;
+                    var keyword = itemList[i].InnerText;
+                    var averageConsume = RegexUtil.ExtractDianPingAveragePrice(keyword);
 
-            url = "https://m.dianping.com/hefei/ch10/g1783";
+                    Result result = new Result()
+                    {
+                        AverageSpend = averageConsume,
+                        CityID = item.CityID,
+                        Html = originalHtml,
+                        RestaurentName = shopName,
+                        Keyword = keyword
+                    };
 
-            html = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
-
-            var pattern = "(?<=<ul class=\"list-search\">)[\\s\\S]*(?=</ul>)";
-
-            var result = RegexUtil.Matches(html, pattern);
-
-            //正则暂时不好匹配，使用HtmlAgilityPack
-            html = "<html><head></head><body >" + result[0].Value + "</body></html>";
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(html);
-
-            var itemList = doc.DocumentNode.SelectNodes("//li");
-
-            foreach (var item in itemList)
-            {               
-                var shopName = item.SelectSingleNode("h3").InnerText;
-                var keyword = item.InnerText;
-                var averageConsume = RegexUtil.ExtractDianPingAveragePrice(keyword);
-            }
+                    await SaveResult(result);
+                    ShowStep2StatusText(result.ToString());
+                }
+            }       
+            
         }
 
-
-
-        private void SaveResult(Result result)
+        private void ClearRecord()
         {
-            Task.Run(()=> {
+            using (SQLiteUtil sqlite = new SQLiteUtil(dbPath))
+            {
+                var sql = "Delete From Result";
+                sqlite.ExecuteNonQuery(sql);
+            }
+        }     
 
+        private async Task SaveResult(Result result)
+        {
+            await Task.Run(()=> {
+                using (SQLiteUtil sqlite = new SQLiteUtil(dbPath))
+                {
+                    var sql = "Insert Into Result (CityID,Html,RestaurentName,AverageSpend,Keyword) values (@CityID,@Html,@RestaurentName,@AverageSpend,@Keyword)";
+                    System.Data.SQLite.SQLiteParameter[] parameters = new System.Data.SQLite.SQLiteParameter[]
+                    {
+                    new System.Data.SQLite.SQLiteParameter("@CityID",result.CityID),
+                    new System.Data.SQLite.SQLiteParameter("@Html",result.Html),
+                    new System.Data.SQLite.SQLiteParameter("@RestaurentName",result.RestaurentName),
+                    new System.Data.SQLite.SQLiteParameter("@AverageSpend",result.AverageSpend),
+                    new System.Data.SQLite.SQLiteParameter("@Keyword",result.Keyword)
+                    };
+                    sqlite.ExecuteNonQuery(sql, parameters);
+                }
             });
+            
         }
     }
 }

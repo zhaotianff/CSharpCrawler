@@ -9,7 +9,7 @@ namespace CSharpCrawler.Model.Dianpin
     public class City
     {
        public int ProvinceID { get; set; }
-       public string CityID { get; set; }
+       public int CityID { get; set; }
        public string CityName { get; set; }
        public string CityPinYinName { get; set; }
 

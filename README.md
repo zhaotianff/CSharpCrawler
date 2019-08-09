@@ -31,6 +31,8 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 
 * 抓取动态网页
   * 使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页
+  * 使用WebBrowser(IE)来抓取动态网页
+  * 使用[Selenium](https://github.com/SeleniumHQ/selenium)来抓取动态网页
 
 * 获取网页DOM
   * 使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构
@@ -61,6 +63,11 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
     
     * SQLite
       * 介绍SQLite以及使用方式
+	 
+* 小例子-全国家常菜价格统计
+    * 获取全国城市，以及城市代码
+	* 抓取家常菜价格
+	* 生成统计图表
     
 ### 开发环境
 Visual Studio 2013 + .Net 4.5<br/>
@@ -77,6 +84,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 * [Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)
 * [SQLite](https://www.sqlite.org/index.html)
 * [Json.NET](https://github.com/JamesNK/Newtonsoft.Json)
+* [Selenium](https://github.com/SeleniumHQ/selenium)
 
 ### 软件截图
 <p align="center">

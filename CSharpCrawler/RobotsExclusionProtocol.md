@@ -1,10 +1,12 @@
 ﻿# Robots Exclusion Protocol(网络爬虫排除标准),也称为爬虫协议
 
 网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。  
+
 robots协议在网站的具体体现是**robots.txt**
 
 如  
 https://www.taobao.com/robots.txt  
+
 https://www.baidu.com/robots.txt  
 
 在写爬虫时，这一点是必须注意的。不能违反爬虫协议，否则后果很严重→_→  
@@ -27,7 +29,7 @@ https://www.baidu.com/robots.txt
 * #:   注释  
 
 
-这里以https://www.taobao.com/robots.txt的一部分为例进行讲解    
+这里以https://www.taobao.com/robots.txt 的一部分为例进行讲解    
 *User-agent:  Baiduspider  
 Allow:  /article  
 Allow:  /oshtml  

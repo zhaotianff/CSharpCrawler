@@ -1,15 +1,15 @@
 ﻿# Robots Exclusion Protocol(网络爬虫排除标准),也称为爬虫协议
 
-网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。
+网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。  
 robots协议在网站的具体体现是**robots.txt**
 
-如
-https://www.taobao.com/robots.txt
-https://www.baidu.com/robots.txt
+如  
+https://www.taobao.com/robots.txt  
+https://www.baidu.com/robots.txt  
 
-在写爬虫时，这一点是必须注意的。不能违反爬虫协议，否则后果很严重→_→
+在写爬虫时，这一点是必须注意的。不能违反爬虫协议，否则后果很严重→_→  
 
-**robots.txt**用法如下
+**robots.txt**用法如下  
 
 * **User-agent**: * 这里的*代表的所有的搜索引擎种类，*是一个通配符
 * **Disallow**: /admin/ 这里定义是禁止爬寻admin目录下面的目录
@@ -27,35 +27,35 @@ https://www.baidu.com/robots.txt
 * #:   注释  
 
 
-这里以https://www.taobao.com/robots.txt的一部分为例进行讲解  
-*User-agent:  Baiduspider
-Allow:  /article
-Allow:  /oshtml
-Allow:  /ershou
-Allow: /$
-Disallow:  /product/
-Disallow:  /*
+这里以https://www.taobao.com/robots.txt的一部分为例进行讲解    
+*User-agent:  Baiduspider  
+Allow:  /article  
+Allow:  /oshtml  
+Allow:  /ershou  
+Allow: /$  
+Disallow:  /product/  
+Disallow:  /*  
 
-*User-agent:  Baiduspider*  
-搜索引擎：百度蜘蛛
+*User-agent:  Baiduspider*    
+搜索引擎：百度蜘蛛  
 
-*Allow:  /article*  
-允许抓取article目录下面的内容
+*Allow:  /article*    
+允许抓取article目录下面的内容  
 
-*Allow:  /oshtml*  
-允许抓取oshtml目录下面的内容
+*Allow:  /oshtml*    
+允许抓取oshtml目录下面的内容  
 
-*Allow:  /ershou*
-允许抓取ershou目录下面的内容
+*Allow:  /ershou*  
+允许抓取ershou目录下面的内容  
 
-*Allow: /$*
-使用 $ 匹配网址的结束字符，这里这句感觉没用啊，根目录下，不带任何字符，那就是没有允许访问任何页面啊
+*Allow: /$*  
+使用 $ 匹配网址的结束字符，这里这句感觉没用啊，根目录下，不带任何字符，那就是没有允许访问任何页面啊  
 
-*Disallow:  /product/*
-不允许抓取product目录下的内容
+*Disallow:  /product/*  
+不允许抓取product目录下的内容  
 
-*Disallow:  /**
-*是通配符，不允许抓取根目录下的所有内容。跟Disallow: /作用其实是一样的
+*Disallow:  /**  
+*是通配符，不允许抓取根目录下的所有内容。跟Disallow: /作用其实是一样的  
 
 
 

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
+      xmlns:chrome="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="DishesPrice">
@@ -53,6 +54,22 @@
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Style="{StaticResource StyleTabItem}" Header="第三步、生成统计图表" Width="200"></TabItem>
+        <TabItem Style="{StaticResource StyleTabItem}" Header="第三步、生成统计图表" Width="200">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Name="grid_Chrome">
+                    <chrome:ChromiumWebBrowser Address="file:///./User Data/Dianping/echarts/Index.html" x:Name="chrome"></chrome:ChromiumWebBrowser>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button Content="开始获取" HorizontalAlignment="Right" Margin="5" Style="{StaticResource GlobalButtonStyle}" Name="btn_StartGenerateChart"/>
+                </Grid>
+            </Grid>
+        </TabItem>
     </TabControl>
 </Page>

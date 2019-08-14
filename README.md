@@ -134,6 +134,10 @@ Visual Studio 2013 + .Net 4.5<br/>
 </p>
 
 
+<p align="center">
+ <img align="center" alt="file download" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/6.png" />
+</p>
+
 ### License
 
 [MIT License](LICENSE).

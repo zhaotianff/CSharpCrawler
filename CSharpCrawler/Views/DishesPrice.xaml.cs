@@ -192,49 +192,7 @@ namespace CSharpCrawler.Views
             var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
             var r = new Random();
 
-            ClearRecord();
-
-            CookieContainer cookieContainer = new CookieContainer();
-
-            System.Net.Cookie cookie = new Cookie("_hc.v", "721d1647-b5e0-18b6-d41a-43453671c5f8.1563348000");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("_lx_utm", "utm_source%3DBaidu%26utm_medium%3Dorganic");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("_lxsdk", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("_lxsdk_cuid", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            //cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
-            //cookie.Domain = "www.dianping.com";
-            //cookieContainer.Add(cookie);
-
-            cookie = new Cookie("cityid", "2");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("default_ab", "shopList%3AC%3A4");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("cy", "7");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("cye", "shenzhen");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
-
-            cookie = new Cookie("s_ViewType", "10");
-            cookie.Domain = "m.dianping.com";
-            cookieContainer.Add(cookie);
+            ClearRecord();          
               
             //PC页面价格加密了，访问移动端页面来获取价格
             foreach (var item in cityList)
@@ -246,6 +204,7 @@ namespace CSharpCrawler.Views
                 url = UrlUtil.DianpingHomeDishes.Replace("citypyname", item.CityPinYinName);
                 //移动端
                 url = url.Replace("www", "m");
+                var cookieContainer = GetCityCookies(item.CityID);
                 originalHtml = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
                 var match = RegexUtil.Match(originalHtml, RegexPattern.DianPingContentArea);
 
@@ -312,6 +271,58 @@ namespace CSharpCrawler.Views
                 }
             });
             
+        }
+
+        private CookieContainer GetCityCookies(int cityID)
+        {
+            CookieContainer cookieContainer = new CookieContainer();
+
+            System.Net.Cookie cookie = new Cookie("_hc.v", "721d1647-b5e0-18b6-d41a-43453671c5f8.1563348000");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);        
+
+            cookie = new Cookie("_lxsdk", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("_lxsdk_cuid", "16bfecd5b69c8-070d60ba7b365d-3c604504-1fa400-16bfecd5b69c8");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            if(cityID < 342)
+            {
+                cookie = new Cookie("_lx_utm", "utm_source%3DBaidu%26utm_medium%3Dorganic");
+                cookie.Domain = "m.dianping.com";
+                cookieContainer.Add(cookie);
+            }
+            else
+            {
+                cookie = new Cookie("_lxsdk_s", "16c3b315b86-7bd-ed8-6a4%7C%7C21");
+                cookie.Domain = "www.dianping.com";
+                cookieContainer.Add(cookie);
+            }
+
+            cookie = new Cookie("cityid", "2");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("default_ab", "shopList%3AC%3A4");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("cy", "7");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("cye", "shenzhen");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            cookie = new Cookie("s_ViewType", "10");
+            cookie.Domain = "m.dianping.com";
+            cookieContainer.Add(cookie);
+
+            return cookieContainer;
         }
     }
 }

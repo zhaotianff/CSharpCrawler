@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:CSharpCrawler.Views"
       mc:Ignorable="d" 
       xmlns:chrome="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+      xmlns:winform="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="FetchDynamicResource">
 
@@ -51,7 +52,49 @@
                     </StatusBar>
                 </Grid>
             </TabItem>
-            <TabItem Header="WebBrowser(IE)" Style="{StaticResource StyleTabItem}"></TabItem>
+            <TabItem Header="WebBrowser(IE)" Style="{StaticResource StyleTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="网址" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Column="1" Name="tbox_Url_IE" VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+
+                        <Grid Grid.Column="2">
+                            <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome_IE" Checked="cbox_ShowChrome_IE_Checked" Unchecked="cbox_ShowChrome_IE_Unchecked" Style="{StaticResource CheckBoxStyle}"></CheckBox>
+                            <Button Content="获取" HorizontalAlignment="Right" Name="btn_Fetch_IE" Click="btn_Fetch_IE_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Name="grid_Content_IE">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <RichTextBox Name="rtbox_Resource_IE" ScrollViewer.VerticalScrollBarVisibility="Auto"  Background="Transparent"/>
+
+                        <WindowsFormsHost Grid.Column="1" x:Name="formHost" Width="0">
+                            <winform:WebBrowser x:Name="ieBrowser"  Navigated="ieBrowser_Navigated" ScriptErrorsSuppressed="True"/>
+                        </WindowsFormsHost>
+                    </Grid>
+
+                    <StatusBar Grid.Row="2" Background="Transparent">
+                        <Label Name="lbl_StatusText_IE" Content="当前网址抓取次数: 0"/>
+                        <Label Content="查看历史结果:"/>
+                        <ComboBox Width="500" Name="combox_Record_IE" SelectionChanged="combox_Record_IE_SelectionChanged" Style="{StaticResource ComboBoxStyle}" Height="22"/>
+                    </StatusBar>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

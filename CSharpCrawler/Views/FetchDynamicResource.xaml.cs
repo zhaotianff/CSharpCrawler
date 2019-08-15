@@ -28,12 +28,15 @@ namespace CSharpCrawler.Views
         //记录当前网址动态加载获取到的网页内容
         List<HtmlStruct> recordList = new List<HtmlStruct>();
 
+        int countIE = 0;
+        List<HtmlStruct> recordListIE = new List<HtmlStruct>();
+
         public FetchDynamicResource()
         {
             InitializeComponent();
         }
 
-        #region 事件
+        #region Chromium 事件
         private void cbox_ShowChrome_Checked(object sender, RoutedEventArgs e)
         {
             ShowOrHideChromiumBrowser(true);
@@ -87,7 +90,7 @@ namespace CSharpCrawler.Views
 
         #endregion
 
-        #region 方法
+        #region Chromium 方法
 
         /// <summary>
         /// 显示或隐藏浏览器
@@ -185,5 +188,123 @@ namespace CSharpCrawler.Views
             }
         }
         #endregion
+
+        #region IE 事件
+        private void cbox_ShowChrome_IE_Checked(object sender, RoutedEventArgs e)
+        {
+            ShowOrHideIEBrowser(true);
+        }
+
+        private void cbox_ShowChrome_IE_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ShowOrHideIEBrowser(false);
+        }
+
+        private void btn_Fetch_IE_Click(object sender, RoutedEventArgs e)
+        {
+            string url = this.tbox_Url_IE.Text.Trim();
+            if (string.IsNullOrEmpty(url))
+            {
+                EMessageBox.Show("请输入网址");
+                return;
+            }
+
+            OpenUrlWithIE(this.tbox_Url_IE.Text);
+        }
+
+        private void combox_Record_IE_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = this.combox_Record_IE.SelectedIndex;
+            if (index > -1)
+                ShowRecordIE(index);
+        }
+
+
+        private void ieBrowser_Navigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
+        {
+            countIE++;
+            string url = "";
+            string title = "";
+            ShowCountMessageIE(countIE);
+            string html = ieBrowser.Document.GetElementsByTagName("html")[0].OuterHtml;
+            this.Dispatcher.Invoke(() => {
+                url = ieBrowser.Url.ToString();
+                title = ieBrowser.Document.Title;
+            });
+            ShowHtmlIE(html, url, title);
+        }
+        #endregion
+
+        #region IE 方法
+        /// <summary>
+        /// 显示或隐藏浏览器
+        /// </summary>
+        /// <param name="showFlag"></param>
+        private void ShowOrHideIEBrowser(bool showFlag)
+        {
+            if (showFlag == true)
+            {
+                this.formHost.Width = (int)this.grid_Content_IE.ActualWidth / 2;
+            }
+            else
+            {
+                this.formHost.Width = 0;
+            }
+        }
+
+        public void ShowCountMessageIE(int count)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.lbl_StatusText_IE.Content = "当前网址抓取次数: " + count.ToString();
+            });
+        }
+
+        private void ShowHtmlIE(string html,string url,string title)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.rtbox_Resource_IE.Document = new FlowDocument(new Paragraph(new Run(html)));
+                HtmlStruct htmlStruct = new HtmlStruct() { Content = html, Url = url, Title = title };
+                RecordHtmlIE(htmlStruct);
+            });
+        }
+
+        private void RecordHtmlIE(HtmlStruct htmlStruct)
+        {
+            recordListIE.Add(htmlStruct);
+            this.combox_Record_IE.ItemsSource = null;
+            this.combox_Record_IE.ItemsSource = recordListIE.Select(x => x.Url); ;
+        }
+
+        public void ResetCounterIE()
+        {
+            countIE = 0;
+            ShowCountMessageIE(countIE);
+        }
+
+        private void ClearRecordListIE()
+        {
+            recordListIE.Clear();
+            this.combox_Record_IE.ItemsSource = null;
+        }
+
+        private void OpenUrlWithIE(string url)
+        {
+            ResetCounterIE();
+            ClearRecordListIE();
+            this.ieBrowser.Navigate(url);
+        }
+
+        private void ShowRecordIE(int index)
+        {
+            if (index >= 0 && index < recordListIE.Count)
+            {
+                this.Dispatcher.Invoke(() => {
+                    string html = recordListIE[index].Content;
+                    this.rtbox_Resource_IE.Document = new FlowDocument(new Paragraph(new Run(html)));
+                });
+            }
+        }
+        #endregion
+
     }
 }

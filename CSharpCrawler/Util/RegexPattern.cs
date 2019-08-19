@@ -9,9 +9,9 @@ namespace CSharpCrawler.Util
     class RegexPattern
     {
         //匹配网址 RegexOptions.Multiline
-        public static string MatchUrlWithHttpPattern = "^http://\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
-        public static string MatchUrlWithHttpsPattern = "^https://\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
-        public static string MatchUrlNoHttpPattern = "^\\S+.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
+        public static string MatchUrlWithHttpPattern = "^http://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
+        public static string MatchUrlWithHttpsPattern = "^https://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
+        public static string MatchUrlNoHttpPattern = "^\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
 
         //匹配有效图像路径
         public static string MatchImgPattern = "(ftp|http|https)://\\S*.(png|jpg|gif|jiff|jpeg|bmp)";
@@ -20,7 +20,7 @@ namespace CSharpCrawler.Util
         public static string TagCommon = "(?<=<TagName)[\\s\\S]*?href=\"(?<PropertyName>\\S*)\"[\\s\\S]*?(?=</TagName>)";
 
         //a标签
-        public static string TagAPattern = "(?<=<a)[\\s\\S]*?(?=</a>)";
+        public static string TagAPattern = "<a(\\s+(href=\"(?<url>([^\"])*)\"|'([^'])*'|\\w+=\"(([^\"])*)\"|'([^'])*'))+>(?<text>(.*?))</a>";
         public static string TagAPatternExtractUrl = "(?<=<a)[\\s\\S]*?href=\"(?<href>\\S*)\"[\\s\\S]*?(?=</a>)";
 
         //title标签

@@ -16,25 +16,44 @@
         </Grid.RowDefinitions>
         <DockPanel>
             <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-            <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}"/>
+            <Button Width="38" Height="28" Content="◕‿◕" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_ShowSetting" Click="btn_ShowSetting_Click"/>
             <Button Width="88" Height="28" Content="正则匹配" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click" Style="{StaticResource GlobalButtonStyle}"/>
             <Button Width="128" Height="28" Content="HtmlAglityPack匹配" DockPanel.Dock="Right" Name="btn_SurfingDOM" Margin="5,0,0,0" Click="btn_SurfingDOM_Click" Style="{StaticResource GlobalButtonStyle}"/>
             <TextBox VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
         </DockPanel>
 
-        <ListView Grid.Row="1" Name="listview_Url" Margin="10" Style="{StaticResource ListViewStyle}">
-            <ListView.Background>
-                <SolidColorBrush Color="White" Opacity=".6"/>
-            </ListView.Background>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn  Header="ID" DisplayMemberBinding="{Binding Id}" Width="60"/>
-                    <GridViewColumn Header="链接" DisplayMemberBinding="{Binding Url}" Width="1000"/>
-                    <GridViewColumn Header="标题" DisplayMemberBinding="{Binding Title}" Width="300"/>
-                    <GridViewColumn Header="状态" DisplayMemberBinding="{Binding Status}" Width="100"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView Grid.Row="1" Name="listview_Url" Margin="10" Style="{StaticResource ListViewStyle}">
+                <ListView.Background>
+                    <SolidColorBrush Color="White" Opacity=".6"/>
+                </ListView.Background>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn  Header="ID" DisplayMemberBinding="{Binding Id}" Width="60"/>
+                        <GridViewColumn Header="链接" DisplayMemberBinding="{Binding Url}" Width="1000"/>
+                        <GridViewColumn Header="标题" DisplayMemberBinding="{Binding Title}" Width="300"/>
+                        <GridViewColumn Header="状态" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Grid Grid.Column="1" Name="grid_Setting" Width="200">
+                <GroupBox Header="设置">
+                    <StackPanel>
+                        <Label Content="抓取深度(默认为1)" Margin="10"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5"/>
+
+                        <CheckBox Content="单线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10"/>
+                        <CheckBox Content="多线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </Grid>
 
         <Grid Grid.Row="2">
             <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>

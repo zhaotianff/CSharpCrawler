@@ -37,13 +37,9 @@ namespace CSharpCrawler.Views
         }
 
         public void GetHtmlSourceDynamic(string url,Action<string> act)
-        {
-            ThreadPool.QueueUserWorkItem((object obj) => {            
-                this.Dispatcher.Invoke(()=> {
-                    browser.Address = url;
-                    extractImageCallBack = act;          
-                });                
-            });                   
+        {           
+            browser.Address = url;
+            extractImageCallBack = act;                                     
         }
 
         private async void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)

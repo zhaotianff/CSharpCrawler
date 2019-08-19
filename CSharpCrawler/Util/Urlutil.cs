@@ -76,6 +76,19 @@ namespace CSharpCrawler.Util
             return Regex.IsMatch(url, RegexPattern.EndWithHtmlPattern);
         }
 
+        public static string ExtractBaseUrl(string url)
+        {
+            if (url.Contains("/") == false)
+            {
+                return url;
+            }
+            else
+            {
+                var index = url.IndexOf("/");
+                return url.Substring(0, index -1);
+            }
+        }
+
         public static string GetPageDownUrl(int page,string baseUrl,string pageDownUrl)
         {
             var suffix1 = baseUrl.Substring(baseUrl.LastIndexOf("/")); ;

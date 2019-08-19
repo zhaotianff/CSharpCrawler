@@ -26,6 +26,8 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class FetchUrl : Page
     {
+        private const int MaxSettingPanelWidth = 200;
+
         ObservableCollection<UrlStruct> urlCollection = new ObservableCollection<UrlStruct>();
         List<UrlStruct> ToVisitList = new List<UrlStruct>();
         List<UrlStruct> VisitedList = new List<UrlStruct>();
@@ -34,7 +36,7 @@ namespace CSharpCrawler.Views
 
         object obj = new object();
         int globalIndex = 1;
-        string globalUrl = "";
+        string baseUrl = "";
 
         public FetchUrl()
         {
@@ -45,7 +47,6 @@ namespace CSharpCrawler.Views
         private void btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
             string url = this.tbox_Url.Text;
-            bool isStartWithHttp = false;
 
             if(string.IsNullOrEmpty(url))
             {
@@ -53,45 +54,30 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-            //判断Url
-            if (globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck == false)
-            {
-                if (RegexUtil.IsUrl(url, out isStartWithHttp) == false)
-                {
-                    ShowStatusText("网址输入有误");
-                    return;
-                }
+            Reset();
+            Surfing(url, StartUrlExtractThreadWithRegex);
+        }
 
-                if (isStartWithHttp == false)
-                {
-                    url = "http://" + url;
-                }
+        private void btn_SurfingDOM_Click(object sender, RoutedEventArgs e)
+        {
+            string url = this.tbox_Url.Text;
+
+            if (string.IsNullOrEmpty(url))
+            {
+                ShowStatusText("请输入Url");
+                return;
             }
 
             Reset();
-            Surfing(url);
+            Surfing(url, StartUrlExtractThreadWithDom);
         }
 
-        private async void btn_SurfingDOM_Click(object sender, RoutedEventArgs e)
+        private void btn_ShowSetting_Click(object sender, RoutedEventArgs e)
         {
-            //暂使用Http相关类获取网页源码
-            try
-            {
-                string url = this.tbox_Url.Text.Trim();
-                string html = await WebUtil.GetHtmlSource(url);
-                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(html);
-                HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
-                ClearCollection();
-                for (int i = 0; i < nodeCollection.Count; i++)
-                {
-                    AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = nodeCollection[i].Attributes["href"].Value });
-                }
-            }
-            catch(Exception ex)
-            {
-                ShowStatusText(ex.Message);
-            }
+            if (grid_Setting.Width == MaxSettingPanelWidth)
+                grid_Setting.Width = 0;
+            else
+                grid_Setting.Width = MaxSettingPanelWidth;
         }
 
         public void ShowStatusText(string content)
@@ -101,31 +87,28 @@ namespace CSharpCrawler.Views
             });
         }
 
-        public void Surfing(string url)
-        {  
-            if(globalData.CrawlerConfig.UrlConfig.DynamicGrab == true)
-            {
-                SurfingByCEF(url);
-            }
-            else
-            {
-                SurfingByFCL(url);
-            }
+        public void Surfing(string url,Action<string> act)
+        {
+            baseUrl = UrlUtil.ExtractBaseUrl(url);
+            //使用CEF
+            SurfingByCEF(url,act);
+            //使用HttpWebRequest
+            //SurfingByFCL(url);          
         }
 
-        public void SurfingByCEF(string url)
+        public void SurfingByCEF(string url,Action<string> act)
         {
-
+            globalData.Browser.GetHtmlSourceDynamic(url,act);
         }
 
         public async void SurfingByFCL(string url)
         {
             try
             {
-                globalUrl = url;
+                baseUrl =UrlUtil.ExtractBaseUrl(url);
                 string html = await WebUtil.GetHtmlSource(url);
 
-                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrl));
+                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrlWithRegex));
                 extractThread.IsBackground = true;
                 extractThread.Start(html);
             }
@@ -136,6 +119,15 @@ namespace CSharpCrawler.Views
             }
         }
 
+        public void StartUrlExtractThreadWithRegex(string html)
+        {
+            new Thread(ExtractUrlWithRegex) { IsBackground = true }.Start(html);
+        }
+
+        public void StartUrlExtractThreadWithDom(string html)
+        {
+            new Thread(ExtractUrlWithDOM) { IsBackground = true }.Start(html);
+        }
 
         public void AddToCollection(UrlStruct urlStruct)
         {
@@ -147,14 +139,15 @@ namespace CSharpCrawler.Views
                 Dispatcher.Invoke(()=> {
                     urlCollection.Add(urlStruct);
                     ToVisitList.Add(urlStruct);
-                }); 
+                });
+                ShowStatusText("获取到" + urlCollection.Count + "条链接");
             }
         }
 
 
         public void ClearCollection()
         {
-            urlCollection.Clear();
+            this.Dispatcher.Invoke(()=> { urlCollection.Clear(); });
         }
 
         public void Reset()
@@ -164,10 +157,9 @@ namespace CSharpCrawler.Views
             ShowStatusText("");
         }
 
-        private async void ExtractUrl(object html)
+        private void ExtractUrlWithRegex(object html)
         {
             string value = "";
-            string source = "";
 
             MatchCollection mc = RegexUtil.Matches(html.ToString(), RegexPattern.TagAPattern);
             foreach (Match item in mc)
@@ -181,37 +173,35 @@ namespace CSharpCrawler.Views
                 }
                 else if (value.StartsWith("/"))
                 {
-                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = globalUrl + item.Groups["url"].Value });
+                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = baseUrl + item.Groups["url"].Value });
                     IncrementCount();
                 }
             }
+        }
 
-            //抓取网页标题
-            for (int i = 0; i < urlCollection.Count; i++)
+        private void ExtractUrlWithDOM(object html)
+        {
+            var url = "";
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html.ToString());
+            HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
+            ClearCollection();
+            for (int i = 0; i < nodeCollection.Count; i++)
             {
-                try
-                {
-                    source = await WebUtil.GetHtmlSource(urlCollection[i].Url);
-                }
-                catch (Exception ex)
-                {
-                    ShowStatusText(ex.Message);
+                url = nodeCollection[i].Attributes["href"].Value;
+
+                if (string.IsNullOrEmpty(url))
                     continue;
-                }
 
-                mc = RegexUtil.Matches(source, RegexPattern.TagTitlePattern);
-                if (mc.Count > 0)
-                {
-                    urlCollection[i].Title = mc[0].Groups["title"].Value;
-                }
-
-                //Surfing(urlCollection[i].Url);  暂不进行深度爬取
+                if (url.StartsWith("/"))
+                    url = baseUrl + url;
+                AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url});
             }
         }
 
         private void IncrementCount()
         {
             System.Threading.Interlocked.Increment(ref globalIndex);
-        }      
+        }     
     }
 }

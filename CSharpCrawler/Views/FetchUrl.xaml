@@ -42,14 +42,14 @@
                 </ListView.View>
             </ListView>
 
-            <Grid Grid.Column="1" Name="grid_Setting" Width="200">
+            <Grid Grid.Column="1" Name="grid_Setting" Width="0">
                 <GroupBox Header="设置">
                     <StackPanel>
                         <Label Content="抓取深度(默认为1)" Margin="10"/>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5" Text="1"/>
 
-                        <CheckBox Content="单线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10"/>
-                        <CheckBox Content="多线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10"/>
+                        <CheckBox Content="单线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" IsChecked="True"/>
+                        <CheckBox Content="多线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

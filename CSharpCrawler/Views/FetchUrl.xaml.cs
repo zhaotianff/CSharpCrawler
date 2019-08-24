@@ -27,6 +27,7 @@ namespace CSharpCrawler.Views
     public partial class FetchUrl : Page
     {
         private const int MaxSettingPanelWidth = 200;
+        private const int MaxThreadCount = 3;
 
         ObservableCollection<UrlStruct> urlCollection = new ObservableCollection<UrlStruct>();
         List<UrlStruct> ToVisitList = new List<UrlStruct>();
@@ -36,6 +37,7 @@ namespace CSharpCrawler.Views
 
         object obj = new object();
         int globalIndex = 1;
+        int globalRecursionDepth = 1;
         string baseUrl = "";
 
         public FetchUrl()
@@ -89,6 +91,14 @@ namespace CSharpCrawler.Views
 
         public void Surfing(string url,Action<string> act)
         {
+            //从界面获取设置
+            var threadCount = 1;
+            if (this.cbx_MultiThread.IsChecked.Value == true)
+                threadCount = MaxThreadCount;
+            var recursionDepth = 1;
+            int.TryParse(this.tbx_RecursionDepth.Text, out recursionDepth);
+
+
             baseUrl = UrlUtil.ExtractBaseUrl(url);
             //使用CEF
             SurfingByCEF(url,act);
@@ -188,7 +198,11 @@ namespace CSharpCrawler.Views
             ClearCollection();
             for (int i = 0; i < nodeCollection.Count; i++)
             {
-                url = nodeCollection[i].Attributes["href"].Value;
+                var hrefAttribute = nodeCollection[i].Attributes["href"];
+                if (hrefAttribute == null)
+                    continue;
+
+                url = hrefAttribute.Value;
 
                 if (string.IsNullOrEmpty(url))
                     continue;
@@ -202,6 +216,11 @@ namespace CSharpCrawler.Views
         private void IncrementCount()
         {
             System.Threading.Interlocked.Increment(ref globalIndex);
-        }     
+        }    
+        
+        private void IncrementRecursionDepthCount()
+        {
+            System.Threading.Interlocked.Increment(ref globalRecursionDepth);
+        }
     }
 }

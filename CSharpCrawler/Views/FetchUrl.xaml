@@ -46,10 +46,10 @@
                 <GroupBox Header="设置">
                     <StackPanel>
                         <Label Content="抓取深度(默认为1)" Margin="10"/>
-                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5" Text="1"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5" Text="1" Name="tbx_RecursionDepth"/>
 
-                        <CheckBox Content="单线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" IsChecked="True"/>
-                        <CheckBox Content="多线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20"/>
+                        <CheckBox Content="单线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" IsChecked="True" Name="cbx_SingleThread"/>
+                        <CheckBox Content="多线程抓取" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" Name="cbx_MultiThread"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

@@ -92,18 +92,21 @@ namespace CSharpCrawler.Views
         public void Surfing(string url,Action<string> act)
         {
             //从界面获取设置
-            var threadCount = 1;
-            if (this.cbx_MultiThread.IsChecked.Value == true)
-                threadCount = MaxThreadCount;
             var recursionDepth = 1;
             int.TryParse(this.tbx_RecursionDepth.Text, out recursionDepth);
 
-
             baseUrl = UrlUtil.ExtractBaseUrl(url);
-            //使用CEF
-            SurfingByCEF(url,act);
-            //使用HttpWebRequest
-            //SurfingByFCL(url);          
+
+            if (recursionDepth == 1)
+            {
+                //使用CEF
+                SurfingByCEF(url, act);
+            }
+            else
+            {
+                //使用HttpWebRequest
+                SurfingByFCL(url,recursionDepth);          
+            }
         }
 
         public void SurfingByCEF(string url,Action<string> act)
@@ -111,14 +114,14 @@ namespace CSharpCrawler.Views
             globalData.Browser.GetHtmlSourceDynamic(url,act);
         }
 
-        public async void SurfingByFCL(string url)
+        public async void SurfingByFCL(string url,int recursionDepth)
         {
             try
             {
                 baseUrl =UrlUtil.ExtractBaseUrl(url);
                 string html = await WebUtil.GetHtmlSource(url);
 
-                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrlWithRegex));
+                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrlWithDOMRecursion));
                 extractThread.IsBackground = true;
                 extractThread.Start(html);
             }
@@ -210,6 +213,32 @@ namespace CSharpCrawler.Views
                 if (url.StartsWith("/"))
                     url = baseUrl + url;
                 AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url});
+            }
+        }
+
+        private void ExtractUrlWithDOMRecursion(object tupleObj)
+        {
+            Tuple<int, string> tuple = (Tuple<int, string>)tupleObj;
+            var url = "";
+            var html = tuple.Item2;
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html.ToString());
+            HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
+            ClearCollection();
+            for (int i = 0; i < nodeCollection.Count; i++)
+            {
+                var hrefAttribute = nodeCollection[i].Attributes["href"];
+                if (hrefAttribute == null)
+                    continue;
+
+                url = hrefAttribute.Value;
+
+                if (string.IsNullOrEmpty(url))
+                    continue;
+
+                if (url.StartsWith("/"))
+                    url = baseUrl + url;
+                AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url });
             }
         }
 

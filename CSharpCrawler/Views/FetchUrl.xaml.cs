@@ -240,6 +240,7 @@ namespace CSharpCrawler.Views
             {
                 //TODO
                 //Url Check
+                //当前页Url
                 string html = await WebUtil.GetHtmlSource(url);
 
                 await Task.Run(()=> {

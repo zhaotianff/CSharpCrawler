@@ -23,11 +23,13 @@ namespace CSharpCrawler.Views
 {
     /// <summary>
     /// FetchUrl.xaml 的交互逻辑
+    /// 重在演示功能
     /// </summary>
     public partial class FetchUrl : Page
     {
         private const int MaxSettingPanelWidth = 200;
         private const int MaxThreadCount = 3;
+        private const int StartDepth = 1;
 
         ObservableCollection<UrlStruct> urlCollection = new ObservableCollection<UrlStruct>();
         List<UrlStruct> ToVisitList = new List<UrlStruct>();
@@ -37,13 +39,13 @@ namespace CSharpCrawler.Views
 
         object obj = new object();
         int globalIndex = 1;
-        int globalRecursionDepth = 1;
+        int recursionDepth = 1;
         string baseUrl = "";
 
         public FetchUrl()
         {
             InitializeComponent();
-            this.listview_Url.ItemsSource = urlCollection;
+            this.listview_Url.ItemsSource = urlCollection;           
         }
 
         private void btn_Surfing_Click(object sender, RoutedEventArgs e)
@@ -91,21 +93,19 @@ namespace CSharpCrawler.Views
 
         public void Surfing(string url,Action<string> act)
         {
-            //从界面获取设置
-            var recursionDepth = 1;
+            //从界面获取值
             int.TryParse(this.tbx_RecursionDepth.Text, out recursionDepth);
 
             baseUrl = UrlUtil.ExtractBaseUrl(url);
 
-            if (recursionDepth == 1)
+            if (recursionDepth == StartDepth)
             {
                 //使用CEF
-                SurfingByCEF(url, act);
+                SurfingByCEF(url,act);
             }
             else
             {
-                //使用HttpWebRequest
-                SurfingByFCL(url,recursionDepth);          
+                SurfingByFCL(url,act);          
             }
         }
 
@@ -114,16 +114,16 @@ namespace CSharpCrawler.Views
             globalData.Browser.GetHtmlSourceDynamic(url,act);
         }
 
-        public async void SurfingByFCL(string url,int recursionDepth)
+        public async void SurfingByFCL(string url, Action<string> act)
         {
             try
             {
                 baseUrl =UrlUtil.ExtractBaseUrl(url);
+                //TODO
+                //Url Check
                 string html = await WebUtil.GetHtmlSource(url);
 
-                Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractUrlWithDOMRecursion));
-                extractThread.IsBackground = true;
-                extractThread.Start(html);
+                act?.Invoke(html);
             }
             catch (Exception ex)
             {
@@ -190,6 +190,12 @@ namespace CSharpCrawler.Views
                     IncrementCount();
                 }
             }
+
+            //对顶级页面抓取的Url进行递归
+            if (recursionDepth > StartDepth)
+            {
+                
+            }
         }
 
         private void ExtractUrlWithDOM(object html)
@@ -214,42 +220,61 @@ namespace CSharpCrawler.Views
                     url = baseUrl + url;
                 AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url});
             }
+
+            //对顶级页面抓取的Url进行递归
+            if(recursionDepth > StartDepth)
+            {
+                foreach (var item in urlCollection)
+                {
+                    GetUrlRecursion(item.Url, StartDepth);
+                }
+            }
         }
 
-        private void ExtractUrlWithDOMRecursion(object tupleObj)
+        private async void GetUrlRecursion(string url,int depth)
         {
-            Tuple<int, string> tuple = (Tuple<int, string>)tupleObj;
-            var url = "";
-            var html = tuple.Item2;
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(html.ToString());
-            HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
-            ClearCollection();
-            for (int i = 0; i < nodeCollection.Count; i++)
+            if (depth > recursionDepth)
+                return;
+
+            try
             {
-                var hrefAttribute = nodeCollection[i].Attributes["href"];
-                if (hrefAttribute == null)
-                    continue;
+                //TODO
+                //Url Check
+                string html = await WebUtil.GetHtmlSource(url);
 
-                url = hrefAttribute.Value;
+                await Task.Run(()=> {
+                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    doc.LoadHtml(html.ToString());
+                    HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
+                    for (int i = 0; i < nodeCollection.Count; i++)
+                    {
+                        var hrefAttribute = nodeCollection[i].Attributes["href"];
+                        if (hrefAttribute == null)
+                            continue;
+                        url = hrefAttribute.Value;
+                        if (string.IsNullOrEmpty(url))
+                            continue;
+                        if (url.StartsWith("/"))
+                            url = baseUrl + url;
+                        AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url });
 
-                if (string.IsNullOrEmpty(url))
-                    continue;
+                        System.Threading.Thread.Sleep(3000);
 
-                if (url.StartsWith("/"))
-                    url = baseUrl + url;
-                AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url });
+                        GetUrlRecursion(url, depth);
+                    }
+                });
             }
+            catch(Exception ex)
+            {
+                ShowStatusText(ex.Message);
+            }
+
+            depth++;
         }
 
         private void IncrementCount()
         {
             System.Threading.Interlocked.Increment(ref globalIndex);
-        }    
-        
-        private void IncrementRecursionDepthCount()
-        {
-            System.Threading.Interlocked.Increment(ref globalRecursionDepth);
-        }
+        }          
     }
 }

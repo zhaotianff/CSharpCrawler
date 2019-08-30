@@ -40,7 +40,8 @@ namespace CSharpCrawler.Views
         object obj = new object();
         int globalIndex = 1;
         int recursionDepth = 1;
-        string baseUrl = "";
+        string globalBaseUrl = "";
+        bool isGrabCurrentPageUrl = false;
 
         public FetchUrl()
         {
@@ -95,8 +96,10 @@ namespace CSharpCrawler.Views
         {
             //从界面获取值
             int.TryParse(this.tbx_RecursionDepth.Text, out recursionDepth);
+            if (this.cbx_CurrentPage.IsChecked.Value == true)
+                isGrabCurrentPageUrl = true;
 
-            baseUrl = UrlUtil.ExtractBaseUrl(url);
+            globalBaseUrl = UrlUtil.ExtractBaseUrl(url);
 
             if (recursionDepth == StartDepth)
             {
@@ -118,9 +121,9 @@ namespace CSharpCrawler.Views
         {
             try
             {
-                baseUrl =UrlUtil.ExtractBaseUrl(url);
-                //TODO
                 //Url Check
+                url = UrlUtil.FixUrl(url);
+
                 string html = await WebUtil.GetHtmlSource(url);
 
                 act?.Invoke(html);
@@ -142,13 +145,20 @@ namespace CSharpCrawler.Views
             new Thread(ExtractUrlWithDOM) { IsBackground = true }.Start(html);
         }
 
-        public void AddToCollection(UrlStruct urlStruct)
+        public void AddToCollection(UrlStruct urlStruct,string baseUrl)
         {
             lock(obj)
             {
                 var query = urlCollection.Where(x=>x.Url == urlStruct.Url).FirstOrDefault();
+
                 if (query != null)
                     return;
+
+                if(isGrabCurrentPageUrl == true)
+                {
+                    if (urlStruct.Url.Contains(baseUrl) == false)
+                        return;
+                }
                 Dispatcher.Invoke(()=> {
                     urlCollection.Add(urlStruct);
                     ToVisitList.Add(urlStruct);
@@ -173,6 +183,7 @@ namespace CSharpCrawler.Views
         private void ExtractUrlWithRegex(object html)
         {
             string value = "";
+            string url = "";
 
             MatchCollection mc = RegexUtil.Matches(html.ToString(), RegexPattern.TagAPattern);
             foreach (Match item in mc)
@@ -181,14 +192,15 @@ namespace CSharpCrawler.Views
 
                 if (value.StartsWith("http://") || value.StartsWith("https://") || value.StartsWith("ftp://"))
                 {
-                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = item.Groups["url"].Value });
-                    IncrementCount();
+                    url = item.Groups["url"].Value;                  
                 }
                 else if (value.StartsWith("/"))
                 {
-                    AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = baseUrl + item.Groups["url"].Value });
-                    IncrementCount();
+                    url = globalBaseUrl + item.Groups["url"].Value;
                 }
+
+                AddToCollection(new UrlStruct() { Title = "", Id = globalIndex, Status = "", Url = url }, globalBaseUrl);
+                IncrementCount();
             }
 
             //对顶级页面抓取的Url进行递归
@@ -217,18 +229,21 @@ namespace CSharpCrawler.Views
                     continue;
 
                 if (url.StartsWith("/"))
-                    url = baseUrl + url;
-                AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url});
+                    url = globalBaseUrl + url;
+                AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url},globalBaseUrl);
             }
 
             //对顶级页面抓取的Url进行递归
             if(recursionDepth > StartDepth)
             {
-                foreach (var item in urlCollection)
+                List<UrlStruct> tempList = new List<UrlStruct>(urlCollection);
+                foreach (var item in tempList)
                 {
                     GetUrlRecursion(item.Url, StartDepth);
                 }
             }
+
+            //Url清洗工作
         }
 
         private async void GetUrlRecursion(string url,int depth)
@@ -238,30 +253,38 @@ namespace CSharpCrawler.Views
 
             try
             {
-                //TODO
                 //Url Check
-                //当前页Url
+                var extractUrl = "";
+
+                url = UrlUtil.FixUrl(url);
+                
                 string html = await WebUtil.GetHtmlSource(url);
+
+                var recursionBaseUrl = UrlUtil.ExtractBaseUrl(url);
 
                 await Task.Run(()=> {
                     HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
                     doc.LoadHtml(html.ToString());
                     HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a");
+
+                    if (nodeCollection == null)
+                        return;
+
                     for (int i = 0; i < nodeCollection.Count; i++)
                     {
                         var hrefAttribute = nodeCollection[i].Attributes["href"];
                         if (hrefAttribute == null)
                             continue;
-                        url = hrefAttribute.Value;
-                        if (string.IsNullOrEmpty(url))
+                        extractUrl = hrefAttribute.Value;
+                        if (string.IsNullOrEmpty(extractUrl))
                             continue;
-                        if (url.StartsWith("/"))
-                            url = baseUrl + url;
-                        AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = url });
+                        if (extractUrl.StartsWith("/"))
+                            extractUrl = recursionBaseUrl + extractUrl;
+                        AddToCollection(new UrlStruct() { Id = (i + 1), Status = "", Title = "", Url = extractUrl },globalBaseUrl);
 
                         System.Threading.Thread.Sleep(3000);
 
-                        GetUrlRecursion(url, depth);
+                        GetUrlRecursion(extractUrl, depth);
                     }
                 });
             }

@@ -48,7 +48,7 @@
                         <Label Content="抓取深度(默认为1)" Margin="10"/>
                         <TextBox Style="{StaticResource TextBoxStyle}" Margin="10,5,10,5" Text="1" Name="tbx_RecursionDepth"/>
 
-                        <CheckBox Content="只抓取当前页网址Url" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" IsChecked="False" Name="cbx_SingleThread"/>
+                        <CheckBox Content="只抓取当前页网址Url" Style="{StaticResource CheckBoxStyle}" Margin="10,20,10,20" IsChecked="False" Name="cbx_CurrentPage"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

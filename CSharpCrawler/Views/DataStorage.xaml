@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="1024"
+      d:DesignHeight="1080" d:DesignWidth="1024"
       Title="DataStorage">
 
     <Grid>
@@ -15,7 +15,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="200"/>
-                        <RowDefinition Height="60"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -48,7 +47,19 @@
 
                     <GroupBox Header="写入图像或其它文件" Grid.Row="2">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="820"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
+                            <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource AccentBaseColor}">
+                                <Image Stretch="Uniform" Name="img"/>
+                            </Border>
+
+                            <Grid Grid.Column="1">
+                                <Button Content="浏览并写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,0"  Name="btn_WriteImageToBDB" Click="btn_WriteImageToBDB_Click"/>
+                                <Button Content="读取" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="110,0,0,0"  Name="btn_ReadImageFromBDB" Click="btn_ReadImageFromBDB_Click"/>
+                            </Grid>
                         </Grid>
                     </GroupBox>
                 </Grid>

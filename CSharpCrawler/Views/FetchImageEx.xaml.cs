@@ -242,7 +242,8 @@ namespace CSharpCrawler.Views
                 image.Height = 370;
                 image.Margin = new Thickness(10);
                 image.Text = "";
-                    image.Image = new BitmapImage(new Uri(list[i].Url));                                  
+                    image.Image = new BitmapImage(new Uri(list[i].Url));
+                    image.ImageType = System.IO.Path.GetExtension(list[i].Url);                               
                     grid_Content.Children.Add(image);
                 });             
             }
@@ -303,6 +304,53 @@ namespace CSharpCrawler.Views
             var url = UrlUtil.GetPageDownUrl(Page++, urlArray[0], urlArray[1]);
             this.tbox_Url.Text = url;
             btn_Surfing_Click(null, null);
+        }
+
+        private void btn_Download_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog folderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            folderDialog.SelectedPath = Environment.CurrentDirectory;
+            if(folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                for (int i = 0; i < grid_Content.Children.Count; i++)
+                {
+                    ListImage liImage = grid_Content.Children[i] as ListImage;
+
+                    if(liImage != null)
+                    {
+                        DownloadImage(liImage, folderDialog.SelectedPath,i);
+                    }
+                }
+
+                ShowStatusText("保存图像完成");
+            }
+        }
+
+        private void DownloadImage(ListImage imageControl,string folderName,int index)
+        {
+            BitmapEncoder encoder = null;
+            switch(imageControl.ImageType.ToUpper())
+            {
+                case ".JPG":                   
+                    encoder = new JpegBitmapEncoder();
+                    break;
+                case ".PNG":
+                    encoder = new PngBitmapEncoder();
+                    break;
+                case ".BMP":
+                    encoder = new BmpBitmapEncoder();
+                    break;
+            }
+
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageControl.Image));
+            using (System.IO.FileStream stream = new System.IO.FileStream(index.ToString() + imageControl.ImageType, System.IO.FileMode.Create))
+            {
+                encoder.Save(stream);
+            }
+
+            //这里因为已经显示在界面上了，所以直接拿控件内容保存
+            //对于直接下载的情况，可以使用这个函数
+            //WebUtil.DownloadFileAsync();
         }
     }
 }

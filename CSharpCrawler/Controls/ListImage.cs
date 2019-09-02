@@ -24,6 +24,7 @@ namespace CSharpCrawler.Controls
       
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(BitmapImage), typeof(FrameworkElement));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(FrameworkElement));
+        public static readonly DependencyProperty ImageTypeProperty = DependencyProperty.Register("ImageType", typeof(string), typeof(FrameworkElement));
 
         public BitmapImage Image
         {
@@ -46,6 +47,19 @@ namespace CSharpCrawler.Controls
             get
             {
                 return (string)GetValue(TextProperty);
+            }
+        }
+
+        public string ImageType
+        {
+            set
+            {
+                SetValue(ImageTypeProperty, value);
+            }
+
+            get
+            {
+                return (string)GetValue(ImageTypeProperty);
             }
         }
     }

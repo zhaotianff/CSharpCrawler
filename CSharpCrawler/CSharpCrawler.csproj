@@ -407,7 +407,7 @@
     <Folder Include="ScreenShots\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="HTTP相关.txt" />
+    <None Include="PrerequisiteKnowledge.md" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />

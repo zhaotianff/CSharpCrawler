@@ -1,8 +1,9 @@
-﻿# HTTP相关知识点
+﻿# 爬虫相关知识点
 
 ## HTTP和HTTPS  
 **HTTP:Hyper Text Transfer Protocol 超文件传输协议**  
 HTTP协议是用于网络传输超文本数据到本地的传输协议  
+
 **HTTPS:Hyper Text Transfer Protocol over Secure Socket Layer 超文本传输安全协议**  
 HTTPS协议是HTTP的安全版，加入SSL层，数据传输经过SSL加密。使用HTTPS可以保证数据通过安全的通道来进行传输。还能确定网站的真实性，采用https的服务器必须从CA （Certificate Authority）申请一个用于证明服务器用途类型的证书。
 
@@ -33,10 +34,10 @@ CONNECT|把服务器当作跳板，让服务器代替客户端访问其它页面
 OPTIONS|允许客户端查看服务器的性能
 TRACE|回显服务器收到的请求，主要用于测试或诊断  
 
-GET请求和POST请求的区别
-一、GET 请求中的参数包含在 URL 里面，数据可以在 URL 中看到，而 POST 请求的 URL 不会包
-含这些数据，数据都是通过表单形式传输的，会包含在请求体中 。
-二、GET 请求提交的数据最多只有 1024 字节，而 POST 方式没有限制 。
+>**GET请求和POST请求的区别**  
+>一、GET 请求中的参数包含在 URL 里面，数据可以在 URL 中看到，而 POST 请求的 URL 不会包
+>含这些数据，数据都是通过表单形式传输的，会包含在请求体中 。  
+>二、GET 请求提交的数据最多只有 1024 字节，而 POST 方式没有限制 。
 
 * 请求的网址( Request URL ）  
 
@@ -67,6 +68,7 @@ Content-Type|也叫互联网媒体类型（Internet Media Type）或都MIME类�
 <p align="center">
  <img align="center" alt="Request Header" src="ScreenShots/RequestHeaders.png" />
 </p>
+<p align="center">请求头</p>
 
 * 请求体（ Request Body ）  
 
@@ -83,7 +85,7 @@ text/xml|XML数据
 
 ## HTTP响应
 
-* HTTP常用状态码  
+* HTTP常用响应状态码  
 
 状态码|说明
 :--:|:--:
@@ -95,8 +97,9 @@ text/xml|XML数据
 405|METHOD NOT ALLOWED
 501|NOT IMPLEMENTED
 
-* 响应头
-常用头信息如下
+* 响应头  
+
+  常用头信息如下
 
 响应头|说明
 :--:|:--:
@@ -111,13 +114,16 @@ Expires|指定响应的过期时间，可以使代理服务器或浏览器将加
 <p align="center">
  <img align="center" alt="Response Header" src="ScreenShots/ResponseHeaders.png" />
 </p>
+<p align="center">响应头</p>
 
-* 响应体
-最重要的当属响应体的内容了。响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的 HTML 代码；请求一张图片时 ， 它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的 内容就是响应体。
+* 响应体  
+
+  最重要的当属响应体的内容了。响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的 HTML 代码；请求一张图片时，它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的 内容就是响应体。
 
 <p align="center">
  <img align="center" alt="Response Body" src="ScreenShots/ResponseBody.png" />
 </p>
+<p align="center">响应体</p>
 
 
 ## 编程相关

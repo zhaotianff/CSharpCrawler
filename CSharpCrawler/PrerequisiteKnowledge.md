@@ -126,6 +126,29 @@ Expires|指定响应的过期时间，可以使代理服务器或浏览器将加
 <p align="center">响应体</p>
 
 
+## 爬虫原理
+爬虫其实就是获取网页，并提取网页信息的程序。
+
+**爬虫的步骤**
+* 获取网页  
+使用代码抓取网页的源码内容，在C#里，一般是使用HttpWebRequest类，也可以使用自动化工具Selenium来获取，获取直接嵌入浏览器来获取，如CEF和WebBrowser控件。
+
+* 提取网页信息
+网页源码获取到之后，我们需要对自己想要的内容进行提取，最常用的，肯定就是链接里的图片和视频等。
+在C#中，可以使用以下方式来提取网页信息
+1. [正则表达式](正则表达式.md)  
+   这种方式虽然学习正则表达式的相关知识，但功能强大，几乎无所不能。这里我做了一些总结，可以参考一下
+2. 使用[AngleSharp](https://github.com/AngleSharp/AngleSharp)/[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)等支持DOM的HTML解析库。  
+由于我最先使用的是HtmlAgilityPack，所以示例程序里不再介绍AngleSharp的使用方式,有兴趣的可以参照文档自行学习。
+
+* 保存数据  
+这里得看自己需求，如果想方便的话，推荐SQLite/Berkeley DB等嵌入式数据库.
+
+**如何抓取动态网页的内容**  
+动态网页指的是采用 了Ajax 、前端模块化工具来构建，整个网页由 JavaScript 动态渲染出来的页面。    
+TODO
+
+
 ## 编程相关
 
 * 在.NET中发送 Xml Post请求和接受Xml的Post请求时，修改请求端Content-Type 为“text/xml”(httpclient.Headers.Add("Content-Type", "text/xml");)

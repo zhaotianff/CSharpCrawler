@@ -147,6 +147,12 @@ Session和 Cookies是为了保持 HTTP 连接状态。HTTP本身是一个无状�
 有很多网站有记住登录的功能。原理是把Cookie的Expires得比较长,而且Cookie里会记录会话ID信息。当再次访问记住登录的页面时，仍然能够通过本地的Cookie找以原来的会话ID，这就实现了保持登录状态的功能
 
 ## Cookie的结构  
+
+<p align="center">
+ <img align="center" alt="Cookies" src="ScreenShots/Cookies.png" />
+</p>
+<p align="center">Cookie结构</p>
+
 * Name  
 Cookie的名称，一旦创建，不可修改。
 * Value  

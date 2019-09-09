@@ -144,8 +144,25 @@ Session和 Cookies是为了保持 HTTP 连接状态。HTTP本身是一个无状�
 
 所有Cookies和会话需要配合，一个处于客户端，一个处于服务器，二者共同协作，就实现了登录会话控制。
 
+有很多网站有记住登录的功能。原理是把Cookie的Expires得比较长,而且Cookie里会记录会话ID信息。当再次访问记住登录的页面时，仍然能够通过本地的Cookie找以原来的会话ID，这就实现了保持登录状态的功能
+
 ## Cookie的结构  
-TODO
+* Name  
+Cookie的名称，一旦创建，不可修改。
+* Value  
+该Cookie的值。如果值为Unicode字符，需要为字符编码。如果值为二进制数据，则需要使用BASE64编码  
+* Domain  
+可以访问该Cookie的域名.如.baidu.com。如果为N/A，则表示该值不适用
+* Expires /Max Age  
+表示Cookie失效的时间，单位为秒。如果为正数，则该Cookie在Max Age秒之后失效。如果为负数或N/A，则关闭浏览器Cookie就失效。
+* Path  
+该Cookie的使用路径。如果设置为/path/，则只有路径为/path/的页面可以访问该Cookie。如果为/，则本域名下的所有页面都可访问该Cookie
+* Size  
+该Cookie的大小  
+* HTTP  
+Cookie的httponly属性。或此属性为true，则只有在HTTP头中会带有此Cookie的信息。
+* Secure  
+该Cookie是否仅被使用安全协议传输
 
 ## 爬虫原理
 爬虫其实就是获取网页，并提取网页信息的程序。

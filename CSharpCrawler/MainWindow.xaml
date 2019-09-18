@@ -44,9 +44,9 @@
                     <ToggleButton Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="必应图片搜索" Name="btn_BingImageSearch" Click="btn_BingImageSearch_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="爬虫数据存储" Name="btn_DataStorage" Click="btn_DataStorage_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                    <!--<ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                    <ToggleButton Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>-->
+                    <!--<ToggleButton Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>-->
                     <ToggleButton Content="小例子-全国家常菜价格统计" Name="btn_DishesPrice" Click="btn_DishesPrice_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                 </WrapPanel>
             </Border>

@@ -143,6 +143,7 @@
     <Compile Include="Util\ConfigUtil.cs" />
     <Compile Include="Util\DatabaseUtil.cs" />
     <Compile Include="Util\EncodingUtil.cs" />
+    <Compile Include="Util\EncryptionUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\HtmlAgilityPackUtil.cs" />
     <Compile Include="Util\JsonUtil.cs" />
@@ -212,6 +213,9 @@
     </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SimulateLogin.xaml.cs">
+      <DependentUpon>SimulateLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WaitingDailog.xaml.cs">
       <DependentUpon>WaitingDailog.xaml</DependentUpon>
@@ -361,6 +365,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SimulateLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

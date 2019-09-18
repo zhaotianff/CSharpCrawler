@@ -39,6 +39,7 @@ namespace CSharpCrawler
         DataStorage dataStorage = new DataStorage();
         RobotsProtocol robotsProtocol = new RobotsProtocol();
         DishesPrice dishesPrice = new DishesPrice();
+        SimulateLogin simulateLogin = new SimulateLogin();
 
         ToggleButton toggleButton = null;
 
@@ -170,7 +171,7 @@ namespace CSharpCrawler
 
         private void btn_SimulateLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.frame.Content = simulateLogin;
         }
 
         private void btn_FileDownLoad_Click(object sender, RoutedEventArgs e)

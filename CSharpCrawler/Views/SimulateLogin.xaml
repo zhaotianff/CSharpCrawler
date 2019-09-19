@@ -14,8 +14,23 @@
                 <TabItem Header="使用Cookie" Width="100" Height="30">
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <Hyperlink NavigateUri="https://i.360.cn/">模拟登录360个人中心</Hyperlink>
+                            </GroupBox.Header>
+                            <Grid>
+                                <Label Content="键(Key)" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Margin="55,0,0,0" Width="210" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Name="tbox_Key" Text="F624BF4E-E553-44CE-B167-89AD"/>
+                                <Label Content="值(Value)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="270,0,0,0"/>
+                                <TextBox Margin="340,0,0,0" Width="480" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Name="tbox_Value" Text="https://huaban.com/pins/48457331/"/>
+                                <Button Content="写入" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="830,0,5,0" Name="btn_WriteStringToBDB" Click="btn_WriteStringToBDB_Click"/>
+                                <Button Content="读取" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Left" Margin="930,0,5,0" Name="btn_ReadStringFromBDB" Click="btn_ReadStringFromBDB_Click"/>
+                            </Grid>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
             </TabControl>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -26,9 +27,19 @@ namespace CSharpCrawler.Views
             InitializeComponent();
         }
 
-        private void btn_Login_Click(object sender, RoutedEventArgs e)
+        private async void btn_Login_Click(object sender, RoutedEventArgs e)
         {
+            var userName = this.tbox_UserName.Text.Trim();
+            var password = this.tbox_Password.Text.Trim();
 
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                EMessageBox.Show("请输入用户名或密码");
+                return;
+            }
+            var sourceBeforeLogin =await WebUtil.GetHtmlSource(UrlUtil.UserHome);
+
+            this.rtbox_BeforeLoginContent.Document = new FlowDocument(new Paragraph(new Run(sourceBeforeLogin)));
         }
 
         private async void tbox_UserName_LostFocus(object sender, RoutedEventArgs e)
@@ -70,8 +81,13 @@ namespace CSharpCrawler.Views
 
                 if(System.IO.File.Exists(fullCaptchaPath))
                 {
+                    grid_Captcha.IsEnabled = true;
                     this.img_Captcha.Source = new BitmapImage(new Uri(fullCaptchaPath,UriKind.Absolute));
                 }
+            }
+            else
+            {
+                grid_Captcha.IsEnabled = false;
             }
         }
     }

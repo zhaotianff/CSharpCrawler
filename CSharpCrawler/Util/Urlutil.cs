@@ -49,6 +49,10 @@ namespace CSharpCrawler.Util
         public const string DianpingCityIndex = "https://www.dianping.com/citypyname";
         #endregion
 
+        #region 360
+        public const string UserHome = "https://i.360.cn";
+        #endregion
+
         public static bool IsEmpty(string url)
         {
             return string.IsNullOrEmpty(url);

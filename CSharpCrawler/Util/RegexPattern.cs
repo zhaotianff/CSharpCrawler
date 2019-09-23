@@ -39,5 +39,8 @@ namespace CSharpCrawler.Util
         //Dianping
         public const string DianPingAveragePricePattern = @"(?<price>\d+)/";
         public const string DianPingContentArea = "(?<=<ul class=\"list-search\">)[\\s\\S]*(?=</ul>)";
+
+        //360
+        public const string Get360CaptchaCheckJsonPattern = "(?<=\\()[\\s\\S]+(?=\\))";
     }
 }

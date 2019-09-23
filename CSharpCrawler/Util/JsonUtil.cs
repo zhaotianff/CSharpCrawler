@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using CSharpCrawler.Model;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using Newtonsoft.Json.Converters;
+using System.IO;
 
 namespace CSharpCrawler.Util
 {
@@ -47,6 +49,23 @@ namespace CSharpCrawler.Util
                     item.SetValue(weatherInfo, value);
                 }
             }
+        }
+
+        public static T ConvertToObject<T>(string jsonStr)
+        {
+            T t = default(T);
+            try
+            {               
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Converters.Add(new JavaScriptDateTimeConverter());
+                serializer.NullValueHandling = NullValueHandling.Ignore;             
+                t = JsonConvert.DeserializeObject<T>(jsonStr);               
+            }
+            catch
+            {
+                return default(T);
+            }
+            return t;
         }
     }
 }

@@ -16,6 +16,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60"/>
                             <RowDefinition/>
+                            <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
 
                         <GroupBox>
@@ -60,6 +61,10 @@
                             <GroupBox Grid.Column="1" Header="登录后">
                                 <RichTextBox Name="rtbox_AfterLoginContent"/>
                             </GroupBox>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
                         </Grid>
                     </Grid>
                 </TabItem>

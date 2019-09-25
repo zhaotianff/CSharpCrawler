@@ -42,5 +42,7 @@ namespace CSharpCrawler.Util
 
         //360
         public const string Get360CaptchaCheckJsonPattern = "(?<=\\()[\\s\\S]+(?=\\))";
+        // jQuery112406519812780967824_1569420309197({"errno":0,"errmsg":"","token":"916e4fcbfa1c06e5"})
+        public const string Get360TokenPattern = "\"token\":\"(?<token>\\S*)\"";
     }
 }

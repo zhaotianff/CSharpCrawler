@@ -50,7 +50,8 @@ namespace CSharpCrawler.Util
         #endregion
 
         #region 360
-        public const string UserHome = "https://i.360.cn";
+        public const string _360UserHome = "https://i.360.cn";
+        public const string _360LoginUrl = "https://login.360.cn/";
         #endregion
 
         public static bool IsEmpty(string url)

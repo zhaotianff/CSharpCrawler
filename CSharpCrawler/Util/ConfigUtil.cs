@@ -28,6 +28,7 @@ namespace CSharpCrawler.Util
             FetchUrlConfig urlConfig = new FetchUrlConfig();
             FetchImageConfig imageConfig = new FetchImageConfig();
             CommonConfig commonConfig = new CommonConfig();
+            List<Theme> themeList = new List<Theme>();
 
             try
             {
@@ -35,6 +36,7 @@ namespace CSharpCrawler.Util
                 XElement eleUrl = doc.Root.Element("FetchUrl");
                 XElement eleImage = doc.Root.Element("FetchImage");
                 XElement eleCommon = doc.Root.Element("Common");
+                IEnumerable<XElement> eleThemeList = doc.Root.XPathSelectElements("ThemeList/Theme");
 
                 urlConfig.Depth = eleUrl.Element("Depth").Value;
                 urlConfig.IgnoreUrlCheck = eleUrl.Element("IgnoreUrlCheck").Value == "1" ? true : false;
@@ -51,9 +53,17 @@ namespace CSharpCrawler.Util
 
                 commonConfig.UrlCheck = eleCommon.Element("UrlCheck").Value == "1" ? true : false;
 
+                foreach (var item in eleThemeList)
+                {
+                    Theme theme = new Theme() {Background = item.Element("Background").Value };
+                    themeList.Add(theme);
+                }
+
                 configStruct.ImageConfig = imageConfig;
                 configStruct.UrlConfig = urlConfig;
                 configStruct.CommonConfig = commonConfig;
+                configStruct.ThemeList = themeList;
+                
             }
             catch (Exception ex)
             {

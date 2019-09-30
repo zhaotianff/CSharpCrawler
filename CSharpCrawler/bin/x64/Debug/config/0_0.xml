@@ -21,4 +21,13 @@
 		<!--0 Mix 1-Regex 2-HtmlAgilityPack-->
 		<FetchMode>2</FetchMode>
 	</FetchImage>
+	<!--暂时只做图片-->
+	<ThemeList>
+		<Theme>
+			<Background>./User Data/Theme/Default.jpg</Background>
+		</Theme>
+		<Theme>
+			<Background>./User Data/Theme/Default_2.jpg</Background>
+		</Theme>
+	</ThemeList>
 </Crawler>

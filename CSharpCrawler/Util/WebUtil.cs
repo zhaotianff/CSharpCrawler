@@ -146,6 +146,62 @@ namespace CSharpCrawler.Util
             }
         }
 
+        public static async Task<Tuple<string,CookieContainer>> GetHtmlSource(string url,CookieContainer cookieContainer, string accept = "", string userAgent = "", Encoding encoding = null)
+        {
+            //现在很多是共用的，直接复制过来了，以后再统一整理吧。
+            try
+            {
+                //不受信任的HTTPS
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((a, b, c, d) => { return true; });
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET"; //默认就是GET
+
+                if(!string.IsNullOrEmpty(accept))
+                    request.Accept = accept;
+
+                if(!string.IsNullOrEmpty(userAgent))
+                    request.UserAgent = userAgent;
+
+                 request.CookieContainer = cookieContainer;
+
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    Encoding tempEncoding = Encoding.Default;
+
+                    if (encoding == null)
+                    {
+                        tempEncoding = EncodingUtil.GetEncoding(url);
+                    }
+                    else
+                    {
+                        tempEncoding = encoding;
+                    }
+
+                    Stream stream = response.GetResponseStream();
+
+                    //GZIP流
+                    if (((HttpWebResponse)response).ContentEncoding.ToLower().Contains("gzip"))
+                    {
+                        stream = new GZipStream(stream, CompressionMode.Decompress);
+                    }
+
+                    using (StreamReader sr = new StreamReader(stream, tempEncoding))
+                    {
+                        var html =  sr.ReadToEnd();
+                        CookieCollection responseCookieContainer = ((HttpWebResponse)response).Cookies;
+                        stream.Close();
+                        return new Tuple<string, CookieContainer>(html,cookieContainer);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static async Task<Stream> GetHtmlStreamAsync(string url)
         {
             try
@@ -198,7 +254,7 @@ namespace CSharpCrawler.Util
             }
         }
 
-        public static async Task<string> PostData(string url, string postData, string contentType = "")
+        public static async Task<string> PostData(string url, string postData, string contentType = "",CookieContainer cookieContainer = null)
         {
             HttpWebRequest request = null;
             WebResponse response = null;        
@@ -215,6 +271,9 @@ namespace CSharpCrawler.Util
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
                 if (!string.IsNullOrEmpty(contentType))
                     request.ContentType = "application/json";
+
+                if (cookieContainer != null)
+                    request.CookieContainer = cookieContainer;
 
                 Stream stream = await request.GetRequestStreamAsync();
                 stream.Write(postdatabyte, 0, postdatabyte.Length);

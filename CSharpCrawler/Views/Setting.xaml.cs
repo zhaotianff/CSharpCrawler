@@ -21,7 +21,6 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class Setting : Page
     {
-        string defaultImgPath = Environment.CurrentDirectory + "\\User Data\\Theme\\Default.jpg";
         private GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         private int ignoreCount = 0;
 
@@ -35,14 +34,26 @@ namespace CSharpCrawler.Views
 
         private void InitTheme()
         {
-            Border border = GlobalSettingPanel.Children[1] as Border;
-            if (border == null)
-                return;
-        
-            ImageBrush imageBrush = new ImageBrush();
-            imageBrush.ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute));
-            border.Background = imageBrush;
-            border.MouseDown += (a, b) => { Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(defaultImgPath,UriKind.Absolute)) }; };
+            SolidColorBrush accentBaseColor = Application.Current.FindResource("AccentBaseColor") as SolidColorBrush;
+
+            foreach (var item in globalData.CrawlerConfig.ThemeList)
+            {
+                Border border = new Border();
+                border.Width = 100;
+                border.Height = 100;
+                border.CornerRadius = new CornerRadius(10);
+                border.Cursor = Cursors.Hand;
+
+                ImageBrush imageBrush = new ImageBrush();
+                imageBrush.ImageSource = new BitmapImage(new Uri(item.Background, UriKind.Relative));
+                border.Background = imageBrush;
+                border.MouseDown += DefaultTheme_MouseDown;
+                border.BorderBrush = accentBaseColor;
+                border.BorderThickness = new Thickness(1);
+                border.Margin = new Thickness(10);
+
+                GlobalSettingPanel.Children.Add(border);
+            }           
         }
 
         private void InitCfg()
@@ -84,19 +95,12 @@ namespace CSharpCrawler.Views
         }
 
         private void DefaultTheme_MouseDown(object sender, MouseButtonEventArgs e)
-        {        
-            LinearGradientBrush gradientBrush = new LinearGradientBrush();
-            gradientBrush.EndPoint = new Point(0.5, 1);
-            gradientBrush.StartPoint = new Point(0.5, 0);
-            GradientStop color1 = new GradientStop();
-            color1.Color = (Color)(ColorConverter.ConvertFromString("#FFFFF9F9"));
-            color1.Offset = 0;
-            GradientStop color2 = new GradientStop();
-            color2.Color = (Color)(ColorConverter.ConvertFromString("#FFA49B96"));
-            color2.Offset = 1;
-            gradientBrush.GradientStops.Add(color1);
-            gradientBrush.GradientStops.Add(color2);
-            Application.Current.MainWindow.Background = gradientBrush;
+        {
+            var border = sender as Border;
+            if(border != null)
+            {
+                Application.Current.MainWindow.Background = border.Background;
+            }          
         }
         #endregion
 

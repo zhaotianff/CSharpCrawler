@@ -13,6 +13,8 @@ namespace CSharpCrawler.Model
         public FetchImageConfig ImageConfig { get; set; }
 
         public CommonConfig CommonConfig { get; set; }
+
+        public List<Theme> ThemeList { get; set; }
     }
 
     public class CommonConfig
@@ -66,5 +68,10 @@ namespace CSharpCrawler.Model
         /// </summary>
         public string PageDownPostData { get; set; }    
         
+    }
+
+    public class Theme
+    {
+        public string Background { get; set; }
     }
 }

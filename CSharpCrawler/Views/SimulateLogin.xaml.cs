@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,16 +52,26 @@ namespace CSharpCrawler.Views
                  *  就不转成对象了，直接使用正则
                  */
 
-                //TODO
-                //还缺了一些参数
+                //需要设置Cookie
+                CookieContainer cookieContainer = new CookieContainer();
+                Cookie _DC_gidCookie = new Cookie("__DC_gid", "59612149.266039479.1569828952751.1569829055668.4");
+                _DC_gidCookie.Domain = "login.360.cn";
+                cookieContainer.Add(_DC_gidCookie);
+                Cookie _guidCookie = new Cookie("__guid", "59612149.2764161016782091300.1569828952751.616");
+                _guidCookie.Domain = "login.360.cn";
+                cookieContainer.Add(_guidCookie);
 
-                var sourceGetToken = await WebUtil.GetHtmlSource(getTokenUrl);
-                var token = RegexUtil.Match(sourceGetToken, RegexPattern.Get360TokenPattern).Groups["token"].Value;
+                //向服务器请求登录
+                var requesttLoginUrl = $"http://s.360.cn/i360/qhpass.htm?src=pcw_i360&version=6.8.3&guid={_guidCookie.Value}&action=submit&module=signin";
+                await WebUtil.GetHtmlSource(requesttLoginUrl,cookieContainer:cookieContainer);
+
+                var sourceGetToken = await WebUtil.GetHtmlSource(getTokenUrl,cookieContainer:cookieContainer);
+                var token = RegexUtil.Match(sourceGetToken.Item1, RegexPattern.Get360TokenPattern).Groups["token"].Value;
 
                 password = EncryptionUtil.MD5_32(password);
                 var postData = $"src=pcw_i360&from=pcw_i360&charset=UTF-8&requestScema=https&quc_sdk_version=6.8.3&quc_sdk_name=jssdk&o=sso&m=login&lm=0&captFlag=1&rtype=data&validatelm=0&isKeepAlive=1&captchaApp=i360&userName={userName}&smDeviceId=&type=normal&account={userName}&password={password}&captcha=&token={token}&proxy=http%3A%2F%2Fi.360.cn%2Fpsp_jump.html&callback=QiUserJsonp331446237&func=QiUserJsonp331446237";
                 var contentType = "application/x-www-form-urlencoded";
-                var sourceAfterLogin = await WebUtil.PostData(UrlUtil._360LoginUrl, postData, contentType);
+                var sourceAfterLogin = await WebUtil.PostData(UrlUtil._360LoginUrl, postData, contentType,cookieContainer);
                 this.rtbox_AfterLoginContent.Document = new FlowDocument(new Paragraph(new Run(sourceAfterLogin)));
                 ShowStatusMessage("登录成功");
             }

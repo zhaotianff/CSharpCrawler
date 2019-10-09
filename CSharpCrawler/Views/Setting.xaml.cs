@@ -46,6 +46,7 @@ namespace CSharpCrawler.Views
 
                 ImageBrush imageBrush = new ImageBrush();
                 imageBrush.ImageSource = new BitmapImage(new Uri(item.Background, UriKind.Relative));
+                imageBrush.Stretch = Stretch.UniformToFill;
                 border.Background = imageBrush;
                 border.MouseDown += DefaultTheme_MouseDown;
                 border.BorderBrush = accentBaseColor;

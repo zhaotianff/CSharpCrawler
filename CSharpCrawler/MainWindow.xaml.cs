@@ -117,6 +117,11 @@ namespace CSharpCrawler
             this.Background = Brushes.Transparent;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowUtil.BlurWindow(this);
+        }
+
         private void mediaelement_MediaEnded(object sender, RoutedEventArgs e)
         {
             mediaelement.Stop();

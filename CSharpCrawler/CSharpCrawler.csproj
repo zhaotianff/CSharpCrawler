@@ -152,6 +152,7 @@
     <Compile Include="Util\SQLiteUtil.cs" />
     <Compile Include="Util\Urlutil.cs" />
     <Compile Include="Util\WebUtil.cs" />
+    <Compile Include="Util\WindowUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
     <Compile Include="Views\AnimationImageWindow.xaml.cs">
       <DependentUpon>AnimationImageWindow.xaml</DependentUpon>

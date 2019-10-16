@@ -23,10 +23,16 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class SimulateLogin : Page
     {
+        /// <summary>
+        /// 使用Cookie登录360，分析了一段时间没分析出来还缺了什么，一直没有模拟登录成功，脑壳痛。
+        /// 可能需要换个网站做示例了，哈哈
+        /// </summary>
         public SimulateLogin()
         {
             InitializeComponent();
         }
+
+        #region 使用Cookies
 
         private async void btn_Login_Click(object sender, RoutedEventArgs e)
         {
@@ -137,6 +143,24 @@ namespace CSharpCrawler.Views
                 this.lbl_Status.Content = str;
             });
         }
+
+        #endregion
+
+        #region 使用Selenium登录 
+
+        private void btn_Login_Selenium_Click(object sender, RoutedEventArgs e)
+        {
+            using (OpenQA.Selenium.IWebDriver driver = new OpenQA.Selenium.Edge.EdgeDriver())
+            {
+                driver.Navigate().GoToUrl("http://www.baidu.com");  //driver.Url = "http://www.baidu.com"是一样的
+
+                var source = driver.PageSource;
+
+                this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(source)));
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>

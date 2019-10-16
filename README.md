@@ -71,10 +71,13 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 	* 抓取家常菜价格
 	* 生成统计图表
 	
-### Roadmap
 * 模拟登录并获取登录后的内容
-  * 使用Cookie
-  * 使用Selenium
+    * 使用Cookie(实现中)
+	* 使用Selenium(实现中)[CSharpCrawler/Selenium.md]
+	  * 说明：使用的是EdgeDriver，所以需要Windows10系统，如果需要其它浏览器Driver,可自行修改。
+      * 测试系统：Windows 10 1703 Edge 15.15063.0，如果Edge驱动版本不一致，需要手动更新至对应的版本。 	  
+	
+### Roadmap
 * 抓包工具Fiddler的使用
 * 抓包工具Charles的使用
 * 使用抓包工具分析网站接口

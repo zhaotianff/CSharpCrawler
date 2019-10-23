@@ -1,4 +1,5 @@
 ﻿using CSharpCrawler.Util;
+using QA =  OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -152,11 +153,21 @@ namespace CSharpCrawler.Views
         {
             using (OpenQA.Selenium.IWebDriver driver = new OpenQA.Selenium.Edge.EdgeDriver())
             {
-                driver.Navigate().GoToUrl("http://www.baidu.com");  //driver.Url = "http://www.baidu.com"是一样的
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+
+                driver.Navigate().GoToUrl("http://i.360.cn");  //driver.Url = "http://i.360.cn"是一样的
 
                 var source = driver.PageSource;
 
                 this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(source)));
+
+                QA.IWebElement userName = driver.FindElement(QA.By.Name("userName"));
+
+                userName.SendKeys(QA.Keys.Tab);
+                userName.Clear();
+                userName.SendKeys("user name");
+
+
             }
         }
 

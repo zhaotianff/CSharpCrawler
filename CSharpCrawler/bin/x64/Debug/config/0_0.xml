@@ -29,5 +29,8 @@
 		<Theme>
 			<Background>./User Data/Theme/Default_2.jpg</Background>
 		</Theme>
+		<Theme>
+			<Background>./User Data/Theme/Default_3.jpg</Background>
+		</Theme>
 	</ThemeList>
 </Crawler>

@@ -149,8 +149,17 @@ namespace CSharpCrawler.Views
 
         #region 使用Selenium登录 
 
-        private void btn_Login_Selenium_Click(object sender, RoutedEventArgs e)
+        private async void btn_Login_Selenium_Click(object sender, RoutedEventArgs e)
         {
+            var userName = this.tbox_UserName_Selenium.Text.Trim();
+            var password = this.tbox_Password_Selenium.Text.Trim();
+
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                EMessageBox.Show("请输入用户名或密码");
+                return;
+            }
+
             using (OpenQA.Selenium.IWebDriver driver = new OpenQA.Selenium.Edge.EdgeDriver())
             {
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
@@ -161,13 +170,30 @@ namespace CSharpCrawler.Views
 
                 this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(source)));
 
-                QA.IWebElement userName = driver.FindElement(QA.By.Name("userName"));
+                QA.IWebElement userNameEle = (new QA.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(30))).Until(QA.Support.UI.ExpectedConditions.textto(QA.By.Name("userName")));
 
-                userName.SendKeys(QA.Keys.Tab);
-                userName.Clear();
-                userName.SendKeys("user name");
+                //QA.IWebElement userNameEle = driver.FindElement(QA.By.Name("userName"));
+                QA.IWebElement passwordEle = driver.FindElement(QA.By.Name("password"));
+                QA.IWebElement loginEle = driver.FindElement(QA.By.ClassName("quc-button-submit quc-button quc-button-primary"));
 
+                userNameEle.SendKeys(QA.Keys.Tab);
+                userNameEle.Clear();
+                userNameEle.SendKeys(userName);
 
+                passwordEle.SendKeys(QA.Keys.Tab);
+                passwordEle.Clear();
+                passwordEle.SendKeys(password);
+
+                loginEle.Click();
+
+                //Cookies
+                var cookies = driver.Manage().Cookies.AllCookies;
+
+                var cookieContainer = SeleniumUtil.CookieConvert(cookies);
+
+                var html = await WebUtil.GetHtmlSource("http://i.360.cn", cookieContainer: cookieContainer);
+
+                this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(html.Item1)));
             }
         }
 

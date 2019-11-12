@@ -158,6 +158,7 @@
     <Compile Include="Util\JsonUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />
+    <Compile Include="Util\SeleniumUtil.cs" />
     <Compile Include="Util\SQLiteUtil.cs" />
     <Compile Include="Util\Urlutil.cs" />
     <Compile Include="Util\WebUtil.cs" />

@@ -162,29 +162,41 @@ namespace CSharpCrawler.Views
 
             using (OpenQA.Selenium.IWebDriver driver = new OpenQA.Selenium.Edge.EdgeDriver())
             {
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
+               
                 driver.Navigate().GoToUrl("http://i.360.cn");  //driver.Url = "http://i.360.cn"是一样的
 
                 var source = driver.PageSource;
 
                 this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(source)));
-
-                QA.IWebElement userNameEle = (new QA.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(30))).Until(QA.Support.UI.ExpectedConditions.textto(QA.By.Name("userName")));
+              
+                //这个等待是无效的，只是测试代码，可以直接启用下载获取username的代码
+                QA.Support.UI.WebDriverWait wait = new QA.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(2));
+                QA.IWebElement userNameEle = wait.Until<QA.IWebElement>(d => d.FindElement(QA.By.Name("userName")));
 
                 //QA.IWebElement userNameEle = driver.FindElement(QA.By.Name("userName"));
                 QA.IWebElement passwordEle = driver.FindElement(QA.By.Name("password"));
                 QA.IWebElement loginEle = driver.FindElement(QA.By.ClassName("quc-button-submit quc-button quc-button-primary"));
 
+                //填写用户名
                 userNameEle.SendKeys(QA.Keys.Tab);
                 userNameEle.Clear();
                 userNameEle.SendKeys(userName);
+                //主动等待2秒
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
+                //填写密码
                 passwordEle.SendKeys(QA.Keys.Tab);
                 passwordEle.Clear();
                 passwordEle.SendKeys(password);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
+                //点击登录按钮
                 loginEle.Click();
+
+                //主动等待5秒
+                //使用driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);这种方式等待无效
+                //登录需要时间，如果直接去获取Cookie，获取的还是未登录前的Cookie
+                System.Threading.Thread.Sleep(5000);
 
                 //Cookies
                 var cookies = driver.Manage().Cookies.AllCookies;
@@ -193,7 +205,7 @@ namespace CSharpCrawler.Views
 
                 var html = await WebUtil.GetHtmlSource("http://i.360.cn", cookieContainer: cookieContainer);
 
-                this.rtbox_BeforeLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(html.Item1)));
+                this.rtbox_AfterLoginContent_Selenium.Document = new FlowDocument(new Paragraph(new Run(html.Item1)));
             }
         }
 

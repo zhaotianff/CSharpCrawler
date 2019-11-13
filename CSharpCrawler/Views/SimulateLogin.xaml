@@ -112,12 +112,12 @@
                                 </GroupBox>
 
                                 <GroupBox Grid.Row="1" Header="登录前">
-                                    <RichTextBox Name="rtbox_BeforeLoginContent_Selenium"/>
+                                    <RichTextBox Name="rtbox_BeforeLoginContent_Selenium" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                                 </GroupBox>
                             </Grid>
 
                             <GroupBox Grid.Column="1" Header="登录后">
-                                <RichTextBox Name="rtbox_AfterLoginContent_Selenium"/>
+                                <RichTextBox Name="rtbox_AfterLoginContent_Selenium" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                             </GroupBox>
                         </Grid>
 

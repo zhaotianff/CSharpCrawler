@@ -76,6 +76,52 @@ namespace CSharpCrawler.Util
             return url;
         }
 
+        public static bool IsAvailableFileUrl(string url)
+        {
+            //常见的文件url
+            //https://qd.myapp.com/myapp/qqteam/pcqq/PCQQ2019.exe
+            //http://qzonestyle.gtimg.cn/qzone/qzactStatics/imgs/20190626150615_2860ae.png
+            //https://res.vmallres.com/pimages//common/config/logo/SXppnESYv4K11DBxDFc2.png
+            //文件类型太多，这里只写几个需要的
+            // http\S*\.(jpg|png|bmp|mp4|exe|rar|zip)
+
+
+            //另一种文件url
+            // /img/2019/flower.jpg            
+            // /\S*\.(jpg|png|bmp|mp4|exe|rar|zip)
+
+            var tempUrl = url.ToUpper();
+            if (tempUrl.StartsWith("HTTP") || tempUrl.StartsWith("HTTPS"))
+            {
+                var match = RegexUtil.Match(url, RegexPattern.MatchFileUrlWithHttpPattern);
+                return match.Success;
+
+            }
+            else if(tempUrl.StartsWith("/"))
+            {
+                var match = RegexUtil.Match(url, RegexPattern.MatchFileUrlWithForwardSlash);
+                return match.Success;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string FixFileUrl(string url,string baseUrl)
+        {
+            var tempUrl = url.ToUpper();
+
+            if (tempUrl.StartsWith("HTTP") || tempUrl.StartsWith("HTTPS"))
+                return url;
+            
+            if(tempUrl.StartsWith("/"))
+            {
+                return baseUrl + url;
+            }
+            return url;
+        }
+
         public static bool IsEndWithHtml(string url)
         {
             return Regex.IsMatch(url, RegexPattern.EndWithHtmlPattern);

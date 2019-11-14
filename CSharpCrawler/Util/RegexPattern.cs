@@ -12,6 +12,9 @@ namespace CSharpCrawler.Util
         public static string MatchUrlWithHttpPattern = "^http://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
         public static string MatchUrlWithHttpsPattern = "^https://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
         public static string MatchUrlNoHttpPattern = "^\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
+        public static string MatchFileUrlWithHttpPattern = "http\\S*\\.(jpg|png|bmp|mp4|exe|rar|zip)";
+        public static string MatchFileUrlWithForwardSlash = "/\\S*\\.(jpg|png|bmp|mp4|exe|rar|zip)";
+
 
         //匹配有效图像路径
         public static string MatchImgPattern = "(ftp|http|https)://\\S*.(png|jpg|gif|jiff|jpeg|bmp)";

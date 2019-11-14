@@ -201,6 +201,11 @@ namespace CSharpCrawler.Views
         {
             lock (obj)
             {
+                if (UrlUtil.IsAvailableFileUrl(urlStruct.Url) == false)
+                    return;
+
+                urlStruct.Url = UrlUtil.FixFileUrl(urlStruct.Url,baseUrl);
+
                 var query = imageCollection.Where(x => x.Url == urlStruct.Url).FirstOrDefault();
                 if (query != null)
                     return;

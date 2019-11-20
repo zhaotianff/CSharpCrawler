@@ -47,6 +47,7 @@
                     <!--<ToggleButton Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>-->
                     <ToggleButton Content="小例子-全国家常菜价格统计" Name="btn_DishesPrice" Click="btn_DishesPrice_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                    <ToggleButton Content="抓包工具使用" Name="btn_AnalysisPacket" Click="btn_AnalysisPacket_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     <ToggleButton Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                 </WrapPanel>
             </Border>

@@ -164,6 +164,9 @@
     <Compile Include="Util\WebUtil.cs" />
     <Compile Include="Util\WindowUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
+    <Compile Include="Views\AnalysisPacket.xaml.cs">
+      <DependentUpon>AnalysisPacket.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AnimationImageWindow.xaml.cs">
       <DependentUpon>AnimationImageWindow.xaml</DependentUpon>
     </Compile>
@@ -299,6 +302,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AnalysisPacket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AnimationImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -406,6 +413,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="AnalysisPacket_Fiddler.md" />
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

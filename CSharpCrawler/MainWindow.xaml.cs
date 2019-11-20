@@ -224,5 +224,10 @@ namespace CSharpCrawler
         {
             this.frame.Content = dishesPrice;
         }
+
+        private void btn_AnalysisPacket_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

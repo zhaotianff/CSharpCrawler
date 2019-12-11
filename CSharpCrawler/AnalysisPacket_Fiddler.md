@@ -11,45 +11,52 @@ https://www.telerik.com/download/fiddler
 Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
 
 <p align="center">
- <img align="center" alt="Decrypt HTTPS" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/DecryptHTTPSTrafficOption.png" />
+ <img align="center" alt="Decrypt HTTPS" src="doc/DecryptHTTPSTrafficOption.png" />
 </p>
 
 2. 开启Win8+系统WinRT(UWP)应用抓取  
 
 <p align="center">
- <img align="center" alt="Win8Config" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/Win8Config.png" />
+ <img align="center" alt="Win8Config" src="doc/Win8Config.png" />
 </p>
 
 <p align="center">
- <img align="center" alt="Win8Config" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/Win8Config_2.png" />
+ <img align="center" alt="Win8Config" src="doc/Win8Config_2.png" />
 </p>
 
 <p align="center">
- <img align="center" alt="Win8Config" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/Win8Config_3.png" />
+ <img align="center" alt="Win8Config" src="doc/Win8Config_3.png" />
 </p>
 
 ## 使用
 * 开始和停止抓取  
   软件启动后，会自动启动抓取。如果需要停止抓取，可以单击状态栏上的Capturing  
-<p align="center">
- <img align="center" alt="Stop Capturing" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/StopCapturing.png" />
-</p>
+![StopCapturing](doc/StopCapturing.png)
 
 * 指定进程抓取  
 在状态栏上单击**All Processes**，可以筛选要抓取的程序。可选项为全部进程(All Processes)，只抓取浏览器(Web Browsers)，只抓取非浏览器(Non-Browser)，隐藏所有(Hide-All)  
-![Filter Process](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/FilterProcess.png)  
-在工具栏单击**Any Processes**，再将光标拖动到需要抓取的程序窗体，可以对指定程序进行抓取。我这里选取了360极速浏览器，可以看到整个浏览器窗体会变色，代表选中。  
-![Select Process](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/SelectProcess.png)  
+![Filter Process](doc/FilterProcess.png)  
+ 在工具栏单击**Any Processes**，再将光标拖动到需要抓取的程序窗体，可以对指定程序进行抓取。我这里选取了360极速浏览器，可以看到整个浏览器窗体会变色，代表选中。  
+![Select Process](doc/SelectProcess.png)  
   
 * 查看会话列表  
 运行fiddler，再打开浏览器。可以在左侧列表中看到会话情况
 <p align="center">
- <img align="center" alt="Web Traffic" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/WebTraffic.png" />
+ <img align="center" alt="Web Traffic" src="doc/WebTraffic.png" />
 </p>
 
 * 查看会话详情  
 双击左边列表，可以在右侧看到会话详情。  
 点击Statistics，查看会话统计。点击Inspectors，可以查看会话的详细。点击TimeLine，可以查看时间线。
+
 <p align="center">
- <img align="center" alt="View Web Traffic Statistics" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/doc/WebTrafficStatistics.png" />
+ <img align="center" alt="View Web Traffic Statistics" src="doc/WebTrafficStatistics.png" />
 </p>
+
+<p align="center">
+ <img align="center" alt="Inspectors" src="doc/Inspectors.png" />
+</p>
+
+* 搜索和过滤会话列表  
+单击工具栏上的**Find**按钮，可以打开搜索对话框
+![Find](doc/Find.png)

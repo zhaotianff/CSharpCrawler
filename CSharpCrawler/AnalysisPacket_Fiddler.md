@@ -28,7 +28,7 @@ Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
  <img align="center" alt="Win8Config" src="doc/Win8Config_3.png" />
 </p>
 
-## 使用
+## 基本使用
 * 开始和停止抓取  
   软件启动后，会自动启动抓取。如果需要停止抓取，可以单击状态栏上的Capturing  
 ![StopCapturing](doc/StopCapturing.png)
@@ -58,5 +58,12 @@ Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
 </p>
 
 * 搜索和过滤会话列表  
-单击工具栏上的**Find**按钮，可以打开搜索对话框
-![Find](doc/Find.png)
+单击工具栏上的**Find**按钮，可以打开搜索对话框  
+![Find](doc/Find.png)  
+这里可以通过会话内容查找会话，也可以使用正则来匹配会话。
+
+* 选择子会话和父会话  
+  在左侧会话列表中选择一个会话  
+  按下**P**键可以选择该会话的父会话，如果该会话没有父会话，则会取消选中任何会话
+  按下**C**键可以选择该会话的子会话，如果该会话没有子会话，则会继续选中当前会话  
+  ![SelectSession](doc/SelectChildSession.png)

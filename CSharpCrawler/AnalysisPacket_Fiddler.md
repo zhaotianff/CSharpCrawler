@@ -67,3 +67,36 @@ Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
   按下**P**键可以选择该会话的父会话，如果该会话没有父会话，则会取消选中任何会话
   按下**C**键可以选择该会话的子会话，如果该会话没有子会话，则会继续选中当前会话  
   ![SelectSession](doc/SelectChildSession.png)
+
+  ## 进阶使用
+  * 与.Net程序进行交互  
+  https://docs.telerik.com/fiddler/Extend-Fiddler/ExtendWithDotNet
+
+  * 抓取手机上数据包(以安卓为例，IOS系统可以访问以下链接https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/ConfigureForiOS)
+
+  1. Tools->Options->HTTPS->选择“from remote clients only”  
+  这一步也可以不设置， 依旧抓取全部会话。 from remote clients only表示 只抓取远程客户端，也就是手机或其它使用代理连进来的设备。  
+  ![SetRemoteOnly](doc/SetRemoteOnly.png)  
+
+  2. 开启代理服务  
+  切换到Connections Tab，钩上“Allow remote computers to connect"    
+  ![SetProxy](doc/SetProxy.png)
+
+  3. 保存设置后，重启Fiddler
+
+  4. 设置手机(这里以安卓手机为例)   
+    打开手机wifi设置，选择修改网络。(这里是已经连接wifi的情况，如果未连接wifi，可以在连接时，打开连接的高级选项，直接设置代理 )   
+    ![WIfiSetting_1](doc/ModifyWIfiSetting_1.png)  
+    钩上显示高级选项  
+    ![WIfiSetting_2](doc/ModifyWIfiSetting_2.png)  
+    选择手动设置代理，设置相关参数即可   
+    ![WIfiSetting_3](doc/ModifyWIfiSetting_3.png)  
+    此时手机是通过代理上网，Fiddler就可以抓取手机的包。  
+    在初次使用时，会出现下面这种情况
+    ![WIfiSetting_4](doc/ModifyWIfiSetting_4.png)  
+    这个时候，我们可以访问下面这个网址，下载并安装证书即可(端口号是你设置的那个端口号)  
+    http://ipv4.fiddler:8888  
+    ![DownloadCertificate](doc/DownloadCertificate.png)
+    安装证书的位置各大厂家都不太一样，我的手机是安全和隐私->更多安全设置-> 从SD卡安装证书，选择刚刚下载的那个证书文件即可。可以参考以下链接https://jingyan.baidu.com/article/915fc4143beb3d11384b2034.html
+
+

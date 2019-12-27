@@ -40,6 +40,8 @@ namespace CSharpCrawler
         RobotsProtocol robotsProtocol = new RobotsProtocol();
         DishesPrice dishesPrice = new DishesPrice();
         SimulateLogin simulateLogin = new SimulateLogin();
+        AnalysisPacket analysicPacket = new AnalysisPacket();
+        AdvanceSelect advanceSelect = new AdvanceSelect();
 
         ToggleButton toggleButton = null;
 
@@ -161,6 +163,7 @@ namespace CSharpCrawler
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
         {
+            setting.LoadSettingFromUI();
             this.frame.Content = setting;
         }
 
@@ -227,7 +230,13 @@ namespace CSharpCrawler
 
         private void btn_AnalysisPacket_Click(object sender, RoutedEventArgs e)
         {
+            this.frame.Content = analysicPacket;
+            analysicPacket.LoadContent();
+        }
 
+        private void btn_AdvanceSelect_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = advanceSelect;
         }
     }
 }

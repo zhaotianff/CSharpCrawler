@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -20,9 +21,34 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class AnalysisPacket : Page
     {
+        private const string FiddlerMarkDownPath = "../../../AnalysisPacket_Fiddler.md";
+        private const string FiddlerTempHtmlPath = "../../../AnalysisPacket_Fiddler.html";
         public AnalysisPacket()
         {
             InitializeComponent();
+        }
+
+        public void LoadContent()
+        {
+            //使用MarkDig将目录下的markdown转成html显示在界面上
+            var fiddlerMarkDownPath = FiddlerMarkDownPath;
+            var fullPath = System.IO.Path.GetFullPath(fiddlerMarkDownPath);
+            if (!System.IO.File.Exists(fullPath))
+            {
+                EMessageBox.Show("Markdown文件不存在");
+                return;
+            }
+            var markdown = System.IO.File.ReadAllText(fullPath);
+            var html = Markdig.Markdown.ToHtml(markdown);
+
+            //CEF不支持直接设置网页内容，只能保存成文件
+            if(!System.IO.File.Exists(FiddlerTempHtmlPath))
+            {
+                System.IO.File.WriteAllText(FiddlerTempHtmlPath, html,Encoding.UTF8);
+            }
+
+            
+            this.chrome.Address = "file:///" + System.IO.Path.GetFullPath( FiddlerTempHtmlPath);
         }
     }
 }

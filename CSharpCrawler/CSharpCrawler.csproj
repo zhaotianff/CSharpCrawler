@@ -80,6 +80,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x64\Debug\libdb_dotnet181.dll</HintPath>
     </Reference>
+    <Reference Include="Markdig, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.18.0\lib\net40\Markdig.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -164,6 +168,9 @@
     <Compile Include="Util\WebUtil.cs" />
     <Compile Include="Util\WindowUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
+    <Compile Include="Views\AdvanceSelect.xaml.cs">
+      <DependentUpon>AdvanceSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AnalysisPacket.xaml.cs">
       <DependentUpon>AnalysisPacket.xaml</DependentUpon>
     </Compile>
@@ -301,6 +308,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdvanceSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AnalysisPacket.xaml">
       <SubType>Designer</SubType>

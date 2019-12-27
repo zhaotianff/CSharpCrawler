@@ -55,7 +55,7 @@ namespace CSharpCrawler.Views
                 border.Margin = new Thickness(10);
 
                 GlobalSettingPanel.Children.Add(border);
-            }           
+            }              
         }
 
         private void InitCfg()
@@ -66,6 +66,11 @@ namespace CSharpCrawler.Views
                 this.cbox_UrlCheck.IsChecked = true;
             else
                 this.cbox_UrlCheck.IsChecked = false;
+        }
+
+        public void LoadSettingFromUI()
+        {
+            this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
         }
 
 
@@ -104,6 +109,12 @@ namespace CSharpCrawler.Views
                 Application.Current.MainWindow.Background = border.Background;
             }          
         }
+
+        private void slider_Opacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Application.Current.MainWindow.Background.Opacity = e.NewValue;
+        }
+
         #endregion
 
 

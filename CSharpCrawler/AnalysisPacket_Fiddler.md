@@ -29,10 +29,18 @@ Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
 </p>
 
 ## 工作原理
-* Fiddler是以代理服务器的形式工作的。代理服务器（Proxy Server）的功能是代理网络用户去取得网络信息。当运行Fiddler软件以后，所有的网络数据包都会经过Fiddler来进行收发。代理IP:127.0.0.1，端口号默认为8888(抓取局域网其它设备的包时，代理IP填局域网地址,需要开启相关设置，下面会有介绍)
-* 运行Fiddler后，程序会自动在IE代理服务器中添加一条127.0.0.1:8888的记录。一般浏览器会默认使用IE代理设置，就可以进行正常抓包。如果运行Fiddler软件后，再用浏览器访问网站，发现没有抓取到任何数据包，这个时候可以将浏览器的代理设置设为使用IE代理设置或手动添加一条127.0.0.1:8888的代理服务器记录即可  
+* Fiddler是以代理服务器的形式工作的。代理服务器（Proxy Server）的功能是代理网络用户去取得网络信息。当运行Fiddler软件以后，所有的网络数据包都会经过Fiddler来进行收发。代理IP:127.0.0.1，端口号8888(默认)
+* 运行Fiddler后，程序会自动在IE代理服务器中添加一条127.0.0.1:8888的记录。一般浏览器会默认使用IE代理设置。如果发现使用Fiddler无法抓取任何数据包，可以将浏览器的代理设置设为使用IE代理设置或手动添加一条127.0.0.1:8888的代理服务器记录即可
+> 如果遇到Fiddler闪退，程序无法自动移除IE代理设置中的配置，就会出现上不了网的情况，此时，重新运行Fiddler再正常退出即可。
+
 ![IEProxyServer](doc/IEProxyServer.png)    
-IE设置  
+![IEProxyServer](doc/IEProxyServer_2.png)  
+![IEProxyServer](doc/IEProxyServer_3.png)  
+运行Fiddler后可以看到IE的代理设置已经被设置成图中所示  
+
+![IEProxyServer](doc/IEProxyServer_4.png)  
+退出Fiddler后可以看到IE代理设置按钮是灰的  
+
 ![FiddlerProxyServer](doc/FiddlerProxyServer.png)  
 浏览器设置
 

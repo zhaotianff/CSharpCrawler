@@ -1,5 +1,7 @@
 ﻿# 抓包工具Fiddler使用
 
+> Fiddler其实是一个Http协议的调试工具，使用C#开发。它能记录客户端和服务器的HTTP和HTTPS请求，监视、设置断点、甚至修改输入输出数据。Fiddler功能强大，这里只介绍了数据抓取部分，Web调试相关的功能这里不做介绍。
+
 ## 下载和安装
 * 下载   
 https://www.telerik.com/download/fiddler   

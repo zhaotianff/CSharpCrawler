@@ -51,6 +51,13 @@ Tools > Fiddler Options > HTTPS > Decrypt HTTPS Traffic box.
   软件启动后，会自动启动抓取。如果需要停止抓取，可以单击状态栏上的Capturing  
 ![StopCapturing](doc/StopCapturing.png)
 
+* 隐藏HTTP Tunnel  
+当访问https网页的时候，可以看到有很多http tunnel(http隧道)的请求，这些对于我们抓包分析帮助是不大的，可以直接隐藏掉。设置方法如下
+![StopCapturing](doc/HideHTTPTunnel.png)  
+HTTP Tunnel  
+![StopCapturing](doc/HideHTTPTunnel_2.png)  
+隐藏HTTP Tunnel  
+
 * 指定进程抓取  
 在状态栏上单击**All Processes**，可以筛选要抓取的程序。可选项为全部进程(All Processes)，只抓取浏览器(Web Browsers)，只抓取非浏览器(Non-Browser)，隐藏所有(Hide-All)  
 ![Filter Process](doc/FilterProcess.png)  

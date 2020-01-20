@@ -114,6 +114,10 @@ namespace CSharpCrawler.Views
                 //过完年再搞 ╮(－_－)╭
                 this.rbox_Output.Document = new FlowDocument(new Paragraph(new Run(angleSharpObj.OuterHtml)));
             }
+            else
+            {
+                this.rbox_Output.Document = new FlowDocument(new Paragraph(new Run("未匹配到结果")));
+            }
             
         }
     }

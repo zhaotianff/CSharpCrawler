@@ -44,7 +44,7 @@
                             <Grid Grid.Row="1">
                                 <Label Content="输入CSS选择器" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <TextBox Margin="100,0,100,0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Name="tbox_CSSSelector"/>
-                                <Button Width="90" HorizontalAlignment="Right" Margin="0,0,5,0" Content="查询" Style="{StaticResource GlobalButtonStyle}" Name="btn_Query" Click="btn_Query_Click"/>
+                                <Button Width="90" HorizontalAlignment="Right" Margin="0,0,5,0" Content="查询" Style="{StaticResource GlobalButtonStyle}" Name="btn_Query" Click="btn_Query_Click" IsDefault="True"/>
                             </Grid>
                         </Grid>
 

@@ -5,10 +5,56 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="720" d:DesignWidth="1280"
       Title="AdvanceSelect">
 
     <Grid>
-        
+        <TabControl Background="Transparent" ItemContainerStyle="{StaticResource StyleTabItem}">
+            <TabItem Header="CSS选择器" Width="100" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Name="listview_CSSSelector" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="选择器" DisplayMemberBinding="{Binding Selector}" Width="120"/>
+                                <GridViewColumn Header="例子" DisplayMemberBinding="{Binding Example}" Width="150"/>
+                                <GridViewColumn Header="描述" DisplayMemberBinding="{Binding Description}" Width="310"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+
+                            <RichTextBox Background="Transparent" BorderBrush="Transparent" Name="rbox_Input" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <Grid Grid.Row="1">
+                                <Label Content="输入CSS选择器" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Margin="100,0,100,0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Name="tbox_CSSSelector"/>
+                                <Button Width="90" HorizontalAlignment="Right" Margin="0,0,5,0" Content="查询" Style="{StaticResource GlobalButtonStyle}" Name="btn_Query" Click="btn_Query_Click"/>
+                            </Grid>
+                        </Grid>
+
+                        <Border Grid.Row="1">
+                            <RichTextBox Background="Transparent" BorderBrush="Transparent" Name="rbox_Output" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="XPath查询" Width="100" Height="30"></TabItem>
+        </TabControl>
     </Grid>
 </Page>

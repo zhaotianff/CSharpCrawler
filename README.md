@@ -2,6 +2,7 @@
 ### 关于项目
 C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整的爬虫程序，只是一些示例。  
 > 为什么要拿C#开发爬虫项目，因为个人还是比较喜欢C#。C#虽然库少一点，但想要的功能基本还是能实现的。
+> 总结的知识点如果什么错误之处，还恳请大家提个issue指正，一起学习进步♂（￣▽￣）/
 
 ### 功能介绍
 * 基础知识
@@ -115,6 +116,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 * [SQLite](https://www.sqlite.org/index.html)
 * [Json.NET](https://github.com/JamesNK/Newtonsoft.Json)
 * [Selenium](https://github.com/SeleniumHQ/selenium)
+* [AngleSharp](https://github.com/AngleSharp/AngleSharp)
 
 ### 软件截图
 <p align="center">

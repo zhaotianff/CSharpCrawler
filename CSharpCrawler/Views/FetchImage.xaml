@@ -58,7 +58,7 @@
                 <Label Content="Height" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
                 <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="250,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Height"></TextBox>
                 <Label HorizontalAlignment="Left" Margin="330,0,120,0" VerticalAlignment="Center"></Label>
-                <Button Content="下载" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,10,0" Name="btn_Download"></Button>
+                <Button Content="下载" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,10,0" Name="btn_Download" Click="btn_Download_Click"></Button>
             </Grid>
         </GroupBox>
 

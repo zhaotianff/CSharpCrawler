@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <DockPanel>
@@ -49,7 +50,19 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <GroupBox Header="图片下载" Grid.Row="2">
+            <Grid>
+                <CheckBox Content="过滤" Style="{StaticResource CheckBoxStyle}"  HorizontalAlignment="Left" Name="cbox_Filter"></CheckBox>
+                <Label Content="Width" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="70,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
+                <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="120,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Width"></TextBox>
+                <Label Content="Height" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
+                <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="250,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Height"></TextBox>
+                <Label HorizontalAlignment="Left" Margin="330,0,120,0" VerticalAlignment="Center"></Label>
+                <Button Content="下载" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,10,0" Name="btn_Download"></Button>
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Row="3">
             <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
         </Grid>
     </Grid>

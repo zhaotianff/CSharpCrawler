@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -238,6 +239,15 @@ namespace CSharpCrawler.Views
                     ShowStatusText(ex.Message);
                 }
             }
-        }   
+        }
+
+        private void btn_Download_Click(object sender, RoutedEventArgs e)
+        {
+            if(imageCollection.Count == 0)
+            {
+                EMessageBox.Show("请先输入网址，执行Surfing获取到图片后再单击下载");
+                return;
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace CSharpCrawler.Util
 
 
         //匹配有效图像路径
-        public static string MatchImgPattern = "(ftp|http|https)://\\S*.(png|jpg|gif|jiff|jpeg|bmp)";
+        public static string MatchImgPattern = "(ftp|http|https)://(\\S*/)+\\S*.(png|jpg|gif|jiff|jpeg|bmp)";
 
         //标签通用 替换TagName和PropertyName即可
         public static string TagCommon = "(?<=<TagName)[\\s\\S]*?href=\"(?<PropertyName>\\S*)\"[\\s\\S]*?(?=</TagName>)";

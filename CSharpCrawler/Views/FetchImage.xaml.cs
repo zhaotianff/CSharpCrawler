@@ -169,7 +169,7 @@ namespace CSharpCrawler.Views
                     }
                     AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
                 }
-                ShowStatusText($"已抓取到{imgNodeCollection.Count}个图像");
+                ShowStatusText($"已抓取到{imageCollection.Count}个图像");
             }
             catch(Exception ex)
             {
@@ -201,7 +201,11 @@ namespace CSharpCrawler.Views
                 var query = imageCollection.Where(x => x.Url == urlStruct.Url).FirstOrDefault();
                 if (query != null)
                     return;
-                Dispatcher.Invoke(() => {
+
+                if (RegexUtil.IsInvalidImgUrl(urlStruct.Url) == false)
+                    return;
+
+                    Dispatcher.Invoke(() => {
                     imageCollection.Add(urlStruct);
                     ToVisitList.Add(urlStruct);
                 });
@@ -230,9 +234,8 @@ namespace CSharpCrawler.Views
             {
                 try
                 {
-                    string imgUrl = imageCollection[index].Url;
-                    if (RegexUtil.IsInvalidImgUrl(imgUrl))
-                        this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imgUrl));
+                    string imgUrl = imageCollection[index].Url;                    
+                    this.imgage_Thumbnail.Source = new BitmapImage(new Uri(imgUrl));
                 }
                 catch(Exception ex)
                 {
@@ -241,12 +244,98 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private void btn_Download_Click(object sender, RoutedEventArgs e)
+        private void listview_Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.listview_Image.SelectedIndex == -1)
+                return;
+
+            var url = this.listview_Image.SelectedItem as UrlStruct;
+            Clipboard.SetText(url.Url);
+        }
+
+        private async void btn_Download_Click(object sender, RoutedEventArgs e)
         {
             if(imageCollection.Count == 0)
             {
                 EMessageBox.Show("请先输入网址，执行Surfing获取到图片后再单击下载");
                 return;
+            }
+
+            var localFileList = await DownloadImage(imageCollection);
+
+            if(cbox_Filter.IsChecked.Value == true)
+            {
+                if(string.IsNullOrEmpty(tbox_Height.Text)|| string.IsNullOrEmpty(tbox_Width.Text))
+                {
+                    EMessageBox.Show("请输入要过滤的宽高");
+                    return;
+                }
+
+                //过滤
+                var width = 1024;
+                var height = 768;
+                int.TryParse(this.tbox_Width.Text, out width);
+                int.TryParse(this.tbox_Height.Text, out height);
+
+                FilterImage(localFileList, width, height);
+            }            
+        }
+
+
+        /// <summary>
+        /// 先下载到本地再过滤
+        /// 可以直接使用HttpWebResponse返回的流创建Bitmap进行判断，暂时不这么操作
+        /// </summary>
+        /// <param name="imageList"></param>
+        /// <returns></returns>
+        private async Task<List<string>> DownloadImage(ObservableCollection<UrlStruct> imageList)
+        {
+            List<string> localFileList = new List<string>();
+            foreach (var item in imageList)
+            {
+                this.lbl_Download.Content = $"正在下载:{item.Url}";
+                var file = await WebUtil.DownloadFileAsync(item.Url);
+                localFileList.Add(file);
+            }
+
+            this.lbl_Download.Content = "下载完成";
+            return localFileList;
+        }
+
+        private void FilterImage(List<string> list,int width,int height)
+        {
+            List<string> toDelFileList = new List<string>();
+
+            foreach (var item in list)
+            {
+                try
+                {                   
+                    using (var stream = new System.IO.FileStream(item, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read))
+                    {
+                        var bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.None);
+                        var imageWidth = bitmapFrame.PixelWidth;
+                        var imageHheight = bitmapFrame.PixelHeight;
+
+                        if (imageWidth < width || imageHheight < height)
+                            toDelFileList.Add(item);
+                    }                  
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+
+            foreach (var file in toDelFileList)
+            {
+                try
+                {
+                    System.IO.File.Delete(file);
+                }
+                catch
+                {
+
+                }
             }
         }
     }

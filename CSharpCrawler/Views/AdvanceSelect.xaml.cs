@@ -88,11 +88,24 @@ namespace CSharpCrawler.Views
             this.listview_CSSSelector.ItemsSource = list;
         }
 
+        private void InitXPathTable()
+        {
+            List<dynamic> list = new List<dynamic>()
+            {
+                new { XPath = "nodename", Example = ".intro", Description = "选择 class=\"intro\" 的所有元素"}
+            };
+        }
+
         private void InitPresetData()
         {
             this.rbox_Input.Document = new FlowDocument(new Paragraph(new Run(Properties.Resources.RegexHtml)));
         }
 
+        /// <summary>
+        /// 在 CSS 中，选择器是一种模式，用于选择需要添加样式的元素。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Query_Click(object sender, RoutedEventArgs e)
         {
             TextRange tr = new TextRange(rbox_Input.Document.ContentStart, rbox_Input.Document.ContentEnd);
@@ -119,6 +132,16 @@ namespace CSharpCrawler.Views
                 this.rbox_Output.Document = new FlowDocument(new Paragraph(new Run("未匹配到结果")));
             }
             
+        }
+
+        /// <summary>
+        /// XPath 是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_XPathQuery_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -54,7 +54,50 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="XPath查询" Width="100" Height="30"></TabItem>
+            <TabItem Header="XPath查询" Width="100" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Name="listview_XPathQuery" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding Selector}" Width="120"/>
+                                <GridViewColumn Header="例子" DisplayMemberBinding="{Binding Example}" Width="150"/>
+                                <GridViewColumn Header="描述" DisplayMemberBinding="{Binding Description}" Width="310"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+
+                            <RichTextBox Background="Transparent" BorderBrush="Transparent" Name="rbox_XPathInput" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <Grid Grid.Row="1">
+                                <Label Content="输入XPath路径" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Margin="100,0,100,0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Name="tbox_XPath"/>
+                                <Button Width="90" HorizontalAlignment="Right" Margin="0,0,5,0" Content="查询" Style="{StaticResource GlobalButtonStyle}" Name="btn_XPathQuery" Click="btn_XPathQuery_Click" IsDefault="True"/>
+                            </Grid>
+                        </Grid>
+
+                        <Border Grid.Row="1">
+                            <RichTextBox Background="Transparent" BorderBrush="Transparent" Name="rbox_XPathOutput" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

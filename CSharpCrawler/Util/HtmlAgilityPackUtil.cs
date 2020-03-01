@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CSharpCrawler.Util
 {
+    /// <summary>
+    /// AngleSharp支持CSS选择器，但暂不支持XPath选取元素
+    /// HtmlAgilityPack支持XPath，但暂不支持CSS选择器
+    /// </summary>
     public class HtmlAgilityPackUtil
     {
         public async static Task<List<TagImg>> GetImgFromHtml(string html,bool isHotspot = false)
@@ -99,6 +103,34 @@ namespace CSharpCrawler.Util
             {
                 doc.LoadHtml(html);
                 return doc.DocumentNode.SelectNodes("//" + tagName);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static HtmlAgilityPack.HtmlNodeCollection XPathQuery(string html,string pathExpression)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            try
+            {
+                doc.LoadHtml(html);
+                return doc.DocumentNode.SelectNodes(pathExpression);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static HtmlAgilityPack.HtmlNode XPathQuerySingle(string html,string pathExpression)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            try
+            {
+                doc.LoadHtml(html);
+                return doc.DocumentNode.SelectSingleNode(pathExpression);
             }
             catch
             {

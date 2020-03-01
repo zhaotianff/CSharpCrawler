@@ -418,6 +418,32 @@ namespace CSharpCrawler.Util
             return fileName;
         }
 
+        public static async Task<string> DownloadFileAsyncWithTimeout(string url,int millisecondsTimeout, string fileName = "")
+        {
+            //判断url指向是否可用
+            if (IsResourceAvailable(url) == false)
+                return "";
+
+            WebClient client = new WebClient();
+            if (string.IsNullOrEmpty(fileName))
+                fileName = "./download/" + ExtractFileName(url);
+ 
+            var task =  client.DownloadFileTaskAsync(new Uri(url), fileName);
+
+            var waitResult = false;
+            Task subTask = Task.Run(()=> {
+                //这个操作是阻塞的
+                //再增加一个线程跑
+                 task.Wait(millisecondsTimeout);
+            });
+            await subTask;
+
+            if (waitResult == true)
+                return fileName;
+            else
+                return "";
+        }
+
         public async static void DownloadFileWithProgress(string url,Action<string> act,string fileName = "")
         {
             //TODO thread count

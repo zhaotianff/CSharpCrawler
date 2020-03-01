@@ -83,7 +83,7 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 	
 * 使用CSS选择器和XPath选取元素
     * CSS选择器
-	* XPath(更新中)
+	* XPath
 	
 ### Roadmap
 * 抓包工具Charles的使用

@@ -61,15 +61,92 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <ListView Name="listview_XPathQuery" Style="{StaticResource ListViewStyle}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding Selector}" Width="120"/>
-                                <GridViewColumn Header="例子" DisplayMemberBinding="{Binding Example}" Width="150"/>
-                                <GridViewColumn Header="描述" DisplayMemberBinding="{Binding Description}" Width="310"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.6*"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="1.6*"/>
+                            <RowDefinition Height="0.8*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <GroupBox Header="路径表达式">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <ListView Name="listview_XPathQuery" Style="{StaticResource ListViewStyle}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                            <GridViewColumn Header="例子" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                                <ListView Grid.Row="1" Name="listview_XPathQueryExample" Style="{StaticResource ListViewStyle}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                            <GridViewColumn Header="说明" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+
+                        </GroupBox>
+
+                        <GroupBox Header="谓词" Grid.Row="1">
+                            <ListView Grid.Row="1" Name="listview_XPathPredicates" Style="{StaticResource ListViewStyle}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                        <GridViewColumn Header="说明" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </GroupBox>
+
+                        <GroupBox Header="通配符" Grid.Row="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <ListView Grid.Row="0" Name="listview_XPathWildcard" Style="{StaticResource ListViewStyle}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                            <GridViewColumn Header="说明" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                                <ListView Grid.Row="1" Name="listview_XPathWildcardExample" Style="{StaticResource ListViewStyle}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                            <GridViewColumn Header="说明" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="运算符" Grid.Row="3">
+                            <ListView Name="listview_XPathOperator" Style="{StaticResource ListViewStyle}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="路径表达式" DisplayMemberBinding="{Binding PathExpression}" Width="270"/>
+                                        <GridViewColumn Header="说明" DisplayMemberBinding="{Binding Description}" Width="320"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </GroupBox>
+                    </Grid>
 
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>

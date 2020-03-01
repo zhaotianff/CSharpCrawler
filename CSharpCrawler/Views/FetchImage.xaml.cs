@@ -294,8 +294,10 @@ namespace CSharpCrawler.Views
             foreach (var item in imageList)
             {
                 this.lbl_Download.Content = $"正在下载:{item.Url}";
-                var file = await WebUtil.DownloadFileAsync(item.Url);
-                localFileList.Add(file);
+                var file = await WebUtil.DownloadFileAsyncWithTimeout(item.Url,5000);
+
+                if(!string.IsNullOrEmpty(file))
+                    localFileList.Add(file);
             }
 
             this.lbl_Download.Content = "下载完成";

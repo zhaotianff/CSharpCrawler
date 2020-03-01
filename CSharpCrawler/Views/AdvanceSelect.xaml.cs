@@ -27,6 +27,7 @@ namespace CSharpCrawler.Views
             InitializeComponent();
 
             InitCSSSelectorTable();
+            InitXPathTable();
 
             InitPresetData();
         }
@@ -90,15 +91,75 @@ namespace CSharpCrawler.Views
 
         private void InitXPathTable()
         {
-            List<dynamic> list = new List<dynamic>()
+            List<dynamic> pathExpressionList = new List<dynamic>()
             {
-                new { XPath = "nodename", Example = ".intro", Description = "选择 class=\"intro\" 的所有元素"}
+                new { PathExpression = "nodename", Description = "选取此节点的所有子节点。"},
+                new { PathExpression = "/", Description = "	从根节点选取。"},
+                new { PathExpression = "//", Description = "从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。"},
+                new { PathExpression = ".", Description = "选取当前节点。"},
+                new { PathExpression = "..", Description = "选取当前节点的父节点。"},
+                new { PathExpression = "@", Description = "选取属性。"},
             };
+
+            List<dynamic> pathExpressionExampleList = new List<dynamic>()
+            {
+                new { PathExpression = "html", Description = "选取html元素的所有子节点。"},
+                new { PathExpression = "/html", Description = "	选取根元素html。"},
+                new { PathExpression = "body/div", Description = "选取属于body的子元素的所有div元素"},
+                new { PathExpression = "//img", Description = "选取所有img元素，而不管它们在文档中的位置。"},
+                new { PathExpression = "div//img", Description = "选择属于 div 元素的后代的所有 img 元素，而不管它们位于 div 之下的什么位置。。"},
+                new { PathExpression = "//@src", Description = "选取名为src的所有属性"},
+            };
+
+
+            //说明:Html文件的根元素是Html，下面的路径表达式不会返回任何结果 
+            //要返回结果要带上完整的路径 如：/html/body/div/img[1]
+            List<dynamic> predicatesList = new List<dynamic>()
+            {
+                new { PathExpression = "div/img[1]", Description = "选取属于 div 子元素的第一个 img 元素"},
+                new { PathExpression = "div/img[last()]", Description = "选取属于 div 子元素的最后一个 img 元素。"},
+                new { PathExpression = "div/img[last()-1]", Description = "选取属于 div 子元素的倒数第二个 img 元素。"},
+                new { PathExpression = "div/img[position()<3]", Description = "选取最前面的两个属于div元素的子元素的img元素"},
+                new { PathExpression = "//img[@src]", Description = "选取所有拥有名为src的属性的img元素"},
+                new { PathExpression = "//img[@src='abc']", Description = "选取所有img元素，且这些元素拥有值为abc的src属性"}               
+            };
+
+            List<dynamic> wildcardList = new List<dynamic>()
+            {
+                new { PathExpression = "*", Description = "匹配任何元素节点"},
+                new { PathExpression = "@*", Description = "匹配任何属性节点"},
+                new { PathExpression = "node()", Description = "匹配任何类型的节点"}                
+            };
+
+            List<dynamic> wildcardExampleList = new List<dynamic>()
+            {
+                new { PathExpression = "/html/*", Description = "选取html元素的所有子元素"},
+                new { PathExpression = "//*", Description = "选取文档中的所有元素"},
+                new { PathExpression = "//img[@*]", Description = "选取所有带有属性的img元素"}
+            };
+
+            //运算符下还有一些其它的运算符
+            //目前可能我用不到，所以这里不记录了
+            //https://www.w3schools.com/xml/xpath_operators.asp
+            List<dynamic> operatorList = new List<dynamic>()
+            {
+                new { PathExpression = "/html/head|/html/body", Description = "选取html元素的head和body元素"},
+                new { PathExpression = "//img|//p", Description = "选取文档中的所有img和p元素"},
+                new { PathExpression = "//img|/html", Description = "选取文档中的所有img和根节点下的html元素"},
+            };
+
+            this.listview_XPathQuery.ItemsSource = pathExpressionList;
+            this.listview_XPathQueryExample.ItemsSource = pathExpressionExampleList;
+            this.listview_XPathPredicates.ItemsSource = predicatesList;
+            this.listview_XPathWildcard.ItemsSource = wildcardList;
+            this.listview_XPathWildcardExample.ItemsSource = wildcardExampleList;
+            this.listview_XPathOperator.ItemsSource = operatorList;
         }
 
         private void InitPresetData()
         {
             this.rbox_Input.Document = new FlowDocument(new Paragraph(new Run(Properties.Resources.RegexHtml)));
+            this.rbox_XPathInput.Document = new FlowDocument(new Paragraph(new Run(Properties.Resources.RegexHtml)));
         }
 
         /// <summary>
@@ -141,7 +202,29 @@ namespace CSharpCrawler.Views
         /// <param name="e"></param>
         private void btn_XPathQuery_Click(object sender, RoutedEventArgs e)
         {
+            TextRange tr = new TextRange(rbox_XPathInput.Document.ContentStart,rbox_XPathInput.Document.ContentEnd);
+            var html = tr.Text;
 
+            if(string.IsNullOrEmpty(html))
+            {
+                EMessageBox.Show("请输入html");
+                return;
+            }
+
+            var result = HtmlAgilityPackUtil.XPathQuery(html,this.tbox_XPath.Text.Trim());
+            if(result != null)
+            {
+                Paragraph paragraph = new Paragraph();
+                foreach (var item in result)
+                {
+                    paragraph.Inlines.Add(new Run(item.OuterHtml + Environment.NewLine));
+                }
+                this.rbox_XPathOutput.Document = new FlowDocument(paragraph);
+            }
+            else
+            {
+                this.rbox_XPathOutput.Document.Blocks.Clear();
+            }
         }
     }
 }

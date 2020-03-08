@@ -8,62 +8,98 @@
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="FetchImage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="25"/>
-        </Grid.RowDefinitions>
-        <DockPanel>
-            <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-            <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}"/>
-            <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click" Style="{StaticResource GlobalButtonStyle}"/>
-            <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
-        </DockPanel>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="300"/>
-            </Grid.ColumnDefinitions>
-
-            <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged" Style="{StaticResource ListViewStyle}" MouseDoubleClick="listview_Image_MouseDoubleClick">
-                <ListView.Background>
-                    <SolidColorBrush Color="White" Opacity=".6"/>
-                </ListView.Background>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="30"/>
-                        <GridViewColumn Header="链接" Width="700" DisplayMemberBinding="{Binding Url}"/>
-                        <GridViewColumn Header="标题" Width="200" DisplayMemberBinding="{Binding Title}"/>
-                        <GridViewColumn Header="状态" Width="100" DisplayMemberBinding="{Binding Status}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <StackPanel Grid.Column="1">
-                <Label Height="30"/>
-                <Label Height="30"/>
-                <Label Height="30"/>
-                <Label Height="120"/>
-                <Image Height="500" Name="imgage_Thumbnail" Stretch="Uniform"></Image>
-            </StackPanel>
-        </Grid>
-
-        <GroupBox Header="图片下载" Grid.Row="2">
+    <TabControl Background="Transparent">
+        <TabItem Header="抓取img标签的图片" Style="{StaticResource StyleTabItem}">
             <Grid>
-                <CheckBox Content="过滤" Style="{StaticResource CheckBoxStyle}"  HorizontalAlignment="Left" Name="cbox_Filter"></CheckBox>
-                <Label Content="Width" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="70,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
-                <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="120,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Width"></TextBox>
-                <Label Content="Height" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
-                <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="250,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Height"></TextBox>
-                <Label HorizontalAlignment="Left" Margin="330,0,120,0" VerticalAlignment="Center" Name="lbl_Download"></Label>
-                <Button Content="下载" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,10,0" Name="btn_Download" Click="btn_Download_Click"></Button>
-            </Grid>
-        </GroupBox>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <DockPanel>
+                    <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
+                    <Button Width="28" Height="28" Content="?" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Click="btn_Surfing_Click" Style="{StaticResource GlobalButtonStyle}"/>
+                    <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
+                </DockPanel>
 
-        <Grid Grid.Row="3">
-            <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
-        </Grid>
-    </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged" Style="{StaticResource ListViewStyle}" MouseDoubleClick="listview_Image_MouseDoubleClick">
+                        <ListView.Background>
+                            <SolidColorBrush Color="White" Opacity=".6"/>
+                        </ListView.Background>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                <GridViewColumn Header="链接" Width="700" DisplayMemberBinding="{Binding Url}"/>
+                                <GridViewColumn Header="标题" Width="200" DisplayMemberBinding="{Binding Title}"/>
+                                <GridViewColumn Header="状态" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Label Height="30"/>
+                        <Label Height="30"/>
+                        <Label Height="30"/>
+                        <Label Height="120"/>
+                        <Image Height="500" Name="imgage_Thumbnail" Stretch="Uniform"></Image>
+                    </StackPanel>
+                </Grid>
+
+                <GroupBox Header="图片下载" Grid.Row="2">
+                    <Grid>
+                        <CheckBox Content="过滤" Style="{StaticResource CheckBoxStyle}"  HorizontalAlignment="Left" Name="cbox_Filter"></CheckBox>
+                        <Label Content="Width" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="70,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
+                        <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="120,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Width"></TextBox>
+                        <Label Content="Height" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}"></Label>
+                        <TextBox Width="70" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle}" Margin="250,0,0,0" IsEnabled="{Binding ElementName=cbox_Filter,Path=IsChecked}" Name="tbox_Height"></TextBox>
+                        <Label HorizontalAlignment="Left" Margin="330,0,120,0" VerticalAlignment="Center" Name="lbl_Download"></Label>
+                        <Button Content="下载" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,10,0" Name="btn_Download" Click="btn_Download_Click"></Button>
+                    </Grid>
+                </GroupBox>
+
+                <Grid Grid.Row="3">
+                    <Label Name="lbl_Status" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="抓取Background-image的图片" Style="{StaticResource StyleTabItem}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel>
+                    <Label Content="Url" VerticalContentAlignment="Center" Width="80" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
+                    <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SurfingBackgroundImage" Click="Btn_SurfingBackgroundImage_Click"/>
+                    <TextBox VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}" Name="tbox_UrlBackgroundIimage"/>
+                </DockPanel>
+
+                <Grid Grid.Row="1" Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListBox Name="listbox_BackgroundImage" Background="Transparent" SelectionChanged="Listbox_BackgroundImage_SelectionChanged">
+
+                    </ListBox>
+
+                    <Image Height="500" Name="imgage_BackgroundImageThumbnail" Stretch="Uniform" Grid.Column="1"></Image>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Label Name="lbl_BackgroundImageStatus" HorizontalAlignment="Left" FontWeight="Bold"></Label>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Page>

@@ -1,4 +1,5 @@
-﻿using CSharpCrawler.Model;
+﻿using CefSharp;
+using CSharpCrawler.Model;
 using CSharpCrawler.Util;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,7 @@ namespace CSharpCrawler.Views
         GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         object obj = new object();
         ObservableCollection<UrlStruct> imageCollection = new ObservableCollection<UrlStruct>();
-        List<UrlStruct> ToVisitList = new List<UrlStruct>();
-        List<UrlStruct> VisitedList = new List<UrlStruct>();
+        ObservableCollection<string> backgroundImageList = new ObservableCollection<string>();
 
         int globalIndex = 1;
         string baseUrl = "";
@@ -39,7 +39,10 @@ namespace CSharpCrawler.Views
         {
             InitializeComponent();
             this.listview_Image.ItemsSource = imageCollection;
+            this.listbox_BackgroundImage.ItemsSource = backgroundImageList;
         }
+
+        #region Img标签
 
         private void btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
@@ -207,7 +210,6 @@ namespace CSharpCrawler.Views
 
                     Dispatcher.Invoke(() => {
                     imageCollection.Add(urlStruct);
-                    ToVisitList.Add(urlStruct);
                 });
                 globalIndex++;
             }
@@ -340,5 +342,96 @@ namespace CSharpCrawler.Views
                 }
             }
         }
+
+        #endregion
+
+        #region Background-Image
+
+        private void Btn_SurfingBackgroundImage_Click(object sender, RoutedEventArgs e)
+        {
+            string url = this.tbox_UrlBackgroundIimage.Text;
+
+            if (string.IsNullOrEmpty(url))
+            {
+                ShowBackgroundImageStatusText("请输入Url");
+                return;
+            }
+
+            //许多购物网站图像不会用img标签，而是用div的background-image属性来实现
+            //有时候可能引入的css文件比较多，如果用正则可能会比较麻烦
+            //我这里的做法是直接用CEF执行js获取结果 
+            //getComputedStyle(document.getElementsByClassName('classname')[0]).backgroundImage
+
+            ShowBackgroundImageStatusText($"正在从{url}抓取图像");
+            globalData.Browser.GetHtmlSourceDynamic(url, ExtractBackgroundImageCallBack);
+        }
+
+        private void Listbox_BackgroundImage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = this.listbox_BackgroundImage.SelectedIndex;
+            if (index != -1)
+            {
+                try
+                {
+                    string imgUrl = backgroundImageList[index];
+                    this.imgage_BackgroundImageThumbnail.Source = new BitmapImage(new Uri(imgUrl));
+                }
+                catch (Exception ex)
+                {
+                    ShowStatusText(ex.Message);
+                }
+            }
+        }
+
+
+        private void ExtractBackgroundImageCallBack(string html)
+        {
+            new Thread(ExtractBackgroundImage) { IsBackground = true }.Start(html);
+        }
+
+        private async void ExtractBackgroundImage(object html)
+        {
+            //我这里是写的div，可能页面上用来显示图片的不一定是div，是其它元素也说不定，如li ol ul
+            var xpath = "//div";
+            var result = HtmlAgilityPackUtil.XPathQuery(html.ToString(), xpath);
+
+            foreach (var item in result)
+            {
+                var classAttribute = item.Attributes["class"];
+                if (classAttribute == null)
+                    continue;
+
+                var className = classAttribute.Value;
+
+                var script = $"getComputedStyle(document.getElementsByClassName('{className}')[0]).backgroundImage";
+                //执行js
+                var backgroundImage = await globalData.Browser.browser.EvaluateScriptAsync(script);
+
+                if (backgroundImage.Result != null && backgroundImage.Result.ToString() != "none")
+                {
+                    var mathch = RegexUtil.Match(backgroundImage.Result.ToString(), RegexPattern.MatchImgPattern);
+                    if (mathch.Success)
+                    {
+                        lock (obj)
+                        {
+                            Dispatcher.Invoke(() =>
+                            {
+                                backgroundImageList.Add(mathch.Value);
+                                ShowBackgroundImageStatusText($"已抓取到{backgroundImageList.Count}个图像");
+                            });
+                        }
+                    }
+                }
+            }         
+        }
+
+        public void ShowBackgroundImageStatusText(string content)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.lbl_BackgroundImageStatus.Content = content;
+            });
+        }
+
+        #endregion
     }
 }

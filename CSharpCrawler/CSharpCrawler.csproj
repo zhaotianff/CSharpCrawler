@@ -243,6 +243,9 @@
     <Compile Include="Views\SimulateLogin.xaml.cs">
       <DependentUpon>SimulateLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UniversalCrawl.xaml.cs">
+      <DependentUpon>UniversalCrawl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WaitingDailog.xaml.cs">
       <DependentUpon>WaitingDailog.xaml</DependentUpon>
     </Compile>
@@ -403,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SimulateLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UniversalCrawl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

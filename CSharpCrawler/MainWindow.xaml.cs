@@ -42,6 +42,7 @@ namespace CSharpCrawler
         SimulateLogin simulateLogin = new SimulateLogin();
         AnalysisPacket analysicPacket = new AnalysisPacket();
         AdvanceSelect advanceSelect = new AdvanceSelect();
+        UniversalCrawl universalCrawl = new UniversalCrawl();
 
         ToggleButton toggleButton = null;
 
@@ -237,6 +238,11 @@ namespace CSharpCrawler
         private void btn_AdvanceSelect_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = advanceSelect;
+        }
+
+        private void Btn_UniversalCrawl_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = universalCrawl;
         }
     }
 }

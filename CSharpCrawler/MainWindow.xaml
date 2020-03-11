@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CSharpCrawler.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="C#网络爬虫程序" Height="860" Width="1450" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}" Closed="Window_Closed" Icon="./crawler.png" Loaded="Window_Loaded">
+        Title="C#网络爬虫程序" Height="900" Width="1450" WindowStartupLocation="CenterScreen" Style="{StaticResource newStyle}" Closed="Window_Closed" Icon="./crawler.png" Loaded="Window_Loaded">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" Opacity=".8">
             <GradientStop Color="White"/>
@@ -50,6 +50,7 @@
                         <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="抓包工具使用" Name="btn_AnalysisPacket" Click="btn_AnalysisPacket_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="CSS选择器和XPath查询" Name="btn_AdvanceSelect" Click="btn_AdvanceSelect_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="通用抓取-以电商网站为例" Name="btn_UniversalCrawl" Click="Btn_UniversalCrawl_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     </WrapPanel>
                 </ScrollViewer>

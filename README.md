@@ -5,8 +5,11 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 > 总结的知识点如果什么错误之处，还恳请大家提个issue指正，一起学习进步♂（￣▽￣）/  
 
 ### 功能介绍
+
 * 基础知识
   * [爬虫基础知识](CSharpCrawler/PrerequisiteKnowledge.md)
+  * [如何避开反爬虫机制](CSharpCrawler/AvoidAnti-CrawlingMechanisms.md)
+  
 * 网页抓取原理
   * 使用套接字来获取网页源码
 
@@ -84,6 +87,8 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 使用CSS选择器和XPath选取元素
     * CSS选择器
 	* XPath
+	
+* 小例子-通用抓取(以电商网站为例)
 	
 ### Roadmap
 * 抓包工具Charles的使用

@@ -33,14 +33,21 @@ namespace CSharpCrawler.Views
              * 销量
              * 价格
              * 型号
-             * 详细（多为图片）
+             * 图片描述
+             * 详细参数
              * 评价/评分
              */
         }
 
         public class Goods
         {
-
+            public string Name { get; set; }
+            public string Sales { get; set; }
+            public string Price { get; set; }
+            public string Type { get; set; }
+            public List<string> DetailImageList { get; set; }
+            public string DetailContent { get; set; }
+            public List<Review> ReviewList { get; set; }
         }
 
         public class Review

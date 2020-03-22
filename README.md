@@ -8,7 +8,7 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 
 * 基础知识
   * [爬虫基础知识](CSharpCrawler/PrerequisiteKnowledge.md)
-  * [如何避开反爬虫机制](CSharpCrawler/AvoidAnti-CrawlingMechanisms.md)
+  * [如何绕开反爬虫机制](CSharpCrawler/AvoidAnti-CrawlingMechanisms.md)
   
 * 网页抓取原理
   * 使用套接字来获取网页源码

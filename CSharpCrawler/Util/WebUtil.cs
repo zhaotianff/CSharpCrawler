@@ -11,10 +11,15 @@ using System.Net.Security;
 using System.IO.Compression;
 using System.Net.Sockets;
 
+using CefSharp;
+
 namespace CSharpCrawler.Util
 {
     class WebUtil
     {
+        private static System.Threading.AutoResetEvent ieAutoResetEvent = new System.Threading.AutoResetEvent(false);
+        private static System.Threading.AutoResetEvent chromeAutoResetEvent = new System.Threading.AutoResetEvent(false);
+
         public static HttpHeader GetHeader(string url)
         {
             try
@@ -295,14 +300,122 @@ namespace CSharpCrawler.Util
         }
 
 
-        public static async Task<string> GetDynamicHtmlSourceWithIE(string url,Encoding encoding = null)
+        /// <summary>
+        /// 使用System.Windows.Forms.WebBrowser来抓取（支持动态跳转）
+        /// 需要连续且快速抓取不是动态跳转的页面，推荐使用HttpWebRequest类
+        /// </summary>
+        /// <param name="uIElement"></param>
+        /// <param name="url"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public static async Task<string> GetDynamicHtmlSourceWithIE(System.Windows.UIElement uIElement, string url,int timeout = 6000)
         {
-            return "";
+            System.Windows.Forms.WebBrowser webBrowser = new System.Windows.Forms.WebBrowser();
+            webBrowser.ScriptErrorsSuppressed = true;
+            var source = "";
+
+            //这里注意几点
+            //System.Windows.Forms.WebBrowser需要UI线程调用，所以传入UIElement
+            //动态网站会跳转多次，取最后一次DocumentText
+
+            try
+            {
+                await Task.Run(()=> {
+                    uIElement.Dispatcher.Invoke(()=> {                      
+                        webBrowser.Navigated += WebBrowser_Navigated;
+                        webBrowser.Navigate(url);
+                    });      
+                    
+                    while(true)
+                    {
+                        var waitResult = ieAutoResetEvent.WaitOne(timeout);
+
+                        if (waitResult == true)
+                        {
+                            uIElement.Dispatcher.Invoke(() =>
+                            {
+                                source = webBrowser.DocumentText;
+                            });
+                        }
+                        else
+                        {
+                            //这里目前只能借助等待超时来做，因为不知道动态页面会跳转多少次
+                            //正常访问时，跳转会比较快，最后一次需要等待设置的超时时间
+                            //超时后直接返回
+                            //如果不是需要多次跳转的页面，可以把while去掉，只等待一次
+                            break;
+                        }
+                    }                    
+                });
+                return source;
+            }
+            catch
+            {
+                return source;
+            }            
         }
 
-        public static async Task<string> GetDynamicHtmlSourceWithChromium(string url,Encoding encoding = null)
+        private static void WebBrowser_Navigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
         {
-            return "";
+            ieAutoResetEvent.Set();
+        }
+
+        /// <summary>
+        /// 使用CEFSharp来抓取（支持多次跳转的页面）
+        /// 需要连续且快速抓取不是动态跳转的页面，推荐使用HttpWebRequest类
+        /// </summary>
+        /// <param name="uIElement"></param>
+        /// <param name="url"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public static async Task<string> GetDynamicHtmlSourceWithChromium(System.Windows.UIElement uIElement, string url,int timeout = 10000)
+        {
+            //CEF使用参见 https://github.com/cefsharp/CefSharp/wiki
+            //这里不对ChromiumWebBrowser做任何设置
+            //真实生产环境需要对ChromiumWebBrowser做相关配置
+            //CEF初次打开页面会慢，给10秒超时时间
+            var source = "";
+
+            try
+            {
+                await Task.Run(() => {
+                    uIElement.Dispatcher.Invoke(()=> {
+                        GlobalDataUtil.GetInstance().Browser.GetHtmlSourceDynamic(url, ChromiumWebBrowserLoadEnd);
+                    });
+                    
+                    while (true)
+                    {
+                        var waitResult = chromeAutoResetEvent.WaitOne(timeout);
+                        if (waitResult == true)
+                        {
+                            uIElement.Dispatcher.Invoke(async () =>
+                            {
+                                source = await GlobalDataUtil.GetInstance().Browser.GetHtmlSource();
+                            });
+                        }
+                        else
+                        {
+                            //这里目前只能借助等待超时来做，因为不知道动态页面会跳转多少次
+                            //正常访问时，跳转会比较快，最后一次需要等待设置的超时时间
+                            //超时后直接返回
+                            //如果不是需要多次跳转的页面，可以把while去掉，只等待一次
+                            break;
+                        }
+                    }
+                });
+                return source;
+            }
+            catch
+            {
+                return source;
+            }
+        }
+
+        private static void ChromiumWebBrowserLoadEnd(string source)
+        {
+            //以前封装的函数是在回调中直接返回网页源码
+            //这里仅取通知，再获取一次
+            chromeAutoResetEvent.Set();
         }
 
         public async Task<List<string>> FetchImage(string source)

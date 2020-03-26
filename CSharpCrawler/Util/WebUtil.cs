@@ -20,6 +20,8 @@ namespace CSharpCrawler.Util
         private static System.Threading.AutoResetEvent ieAutoResetEvent = new System.Threading.AutoResetEvent(false);
         private static System.Threading.AutoResetEvent chromeAutoResetEvent = new System.Threading.AutoResetEvent(false);
 
+        private static System.Net.Http.HttpClient httpClient;
+
         public static HttpHeader GetHeader(string url)
         {
             try
@@ -416,6 +418,40 @@ namespace CSharpCrawler.Util
             //以前封装的函数是在回调中直接返回网页源码
             //这里仅取通知，再获取一次
             chromeAutoResetEvent.Set();
+        }
+
+
+        public static void InitializeHttpClient(int timeout = 3000,CookieCollection cookies = null, params KeyValuePair<string,string> [] headers)
+        {
+            if (httpClient == null)
+                httpClient = new System.Net.Http.HttpClient();
+
+            //超时时间
+            httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
+            
+            foreach (var item in headers)
+            {
+                //直接移除header
+                //不存在不会异常
+                httpClient.DefaultRequestHeaders.Remove(item.Key);
+                httpClient.DefaultRequestHeaders.Add(item.Key, item.Value);
+            }
+        }
+
+        public static async Task<System.Net.Http.HttpResponseMessage> HttpClientGetAsync(string url)
+        {
+            if (httpClient == null)
+                return null;
+
+            var message =  await httpClient.GetAsync(url);
+            return message;
+        }
+
+        public static async Task<string> HttpClientGetStringAsync(string url)
+        {
+            //TODO
+            await Task.Delay(2000);
+            return "";
         }
 
         public async Task<List<string>> FetchImage(string source)

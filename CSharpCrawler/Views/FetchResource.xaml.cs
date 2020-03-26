@@ -29,6 +29,8 @@ namespace CSharpCrawler.Views
             InitializeComponent();
         }
 
+        #region HttpWebRequest
+
         private void btn_Fetch_Click(object sender, RoutedEventArgs e)
         {            
             string url = this.tbox_Url.Text;
@@ -182,6 +184,43 @@ namespace CSharpCrawler.Views
             {
                 EMessageBox.Show(ex.Message);
             }
+        }
+
+        #endregion
+
+        #region HttpClient
+        /*
+         * HttpClient类提供用于发送 HTTP 请求并从 URI 标识的资源接收 HTTP 响应的基类。 
+         * 每个HttpClient使用自己的连接池，从而将其请求与其他 HttpClient 实例执行的请求隔离开来
+         * HttpClient类应该实例化一次，并在应用程序的整个生命周期内重复使用。构造太多的HttpClient实例化对象可能会导致异常
+         * HttpClient是一种高级API，它包装的是各个平台上可用的较低级别功能。 可运行于各种平台上 Windows/Linux/macOS
+         * https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netframework-4.8
+         */
+
+        #endregion
+
+        private async void btn_HttpClientFetch_Click(object sender, RoutedEventArgs e)
+        {
+            System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+            client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36");
+            client.DefaultRequestHeaders.Add("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+            var message = await client.GetAsync(this.tbox_HttpClientUrl.Text);
+            message = await client.GetAsync("http://www.qq.com");
+            message = await client.GetAsync("http://www.baidu.com");
+
+            var buffer = await message.Content.ReadAsByteArrayAsync();
+
+            var encoding = EncodingUtil.GetEncoding(buffer);
+
+            var html = encoding.GetString(buffer);
+            
+
+
+            RichTextBox richTextBox = new RichTextBox();
+            richTextBox.Height = this.stackpanel.ActualHeight - 180;
+            richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            richTextBox.Document = new FlowDocument(new Paragraph(new Run(html)));
+            this.stackpaneHttpClient.Children.Add(richTextBox);
         }
     }
 }

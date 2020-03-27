@@ -27,6 +27,7 @@ namespace CSharpCrawler.Views
         public FetchResource()
         {
             InitializeComponent();
+            InitHttpClient();
         }
 
         #region HttpWebRequest
@@ -196,31 +197,41 @@ namespace CSharpCrawler.Views
          * HttpClient是一种高级API，它包装的是各个平台上可用的较低级别功能。 可运行于各种平台上 Windows/Linux/macOS
          * https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netframework-4.8
          */
+   
 
-        #endregion
+        private void InitHttpClient()
+        {
+            var userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36";
+            var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+            WebUtil.InitializeHttpClient(3000, new KeyValuePair<string, string>("user-agent", userAgent), new KeyValuePair<string, string>("accept", accept));
+        }
 
         private async void btn_HttpClientFetch_Click(object sender, RoutedEventArgs e)
         {
-            System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-            client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36");
-            client.DefaultRequestHeaders.Add("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-            var message = await client.GetAsync(this.tbox_HttpClientUrl.Text);
-            message = await client.GetAsync("http://www.qq.com");
-            message = await client.GetAsync("http://www.baidu.com");
+            var url =  this.tbox_HttpClientUrl.Text.Trim();
 
-            var buffer = await message.Content.ReadAsByteArrayAsync();
+            if(string.IsNullOrEmpty(url))
+            {
+                EMessageBox.Show("请输入网址");
+                return;
+            }
 
-            var encoding = EncodingUtil.GetEncoding(buffer);
+            if(url.StartsWith("http") == false && url.StartsWith("https") == false)
+            {
+                url = "http://" + url;
+            }
 
-            var html = encoding.GetString(buffer);
-            
+            this.stackpaneHttpClient.Children.Clear();
 
-
+            var html = await WebUtil.HttpClientGetStringAsync(url);          
             RichTextBox richTextBox = new RichTextBox();
             richTextBox.Height = this.stackpanel.ActualHeight - 180;
             richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             richTextBox.Document = new FlowDocument(new Paragraph(new Run(html)));
             this.stackpaneHttpClient.Children.Add(richTextBox);
         }
+        
+
+        #endregion
     }
 }

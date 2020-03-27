@@ -421,7 +421,7 @@ namespace CSharpCrawler.Util
         }
 
 
-        public static void InitializeHttpClient(int timeout = 3000,CookieCollection cookies = null, params KeyValuePair<string,string> [] headers)
+        public static void InitializeHttpClient(int timeout, params KeyValuePair<string,string> [] headers)
         {
             if (httpClient == null)
                 httpClient = new System.Net.Http.HttpClient();
@@ -438,6 +438,12 @@ namespace CSharpCrawler.Util
             }
         }
 
+        public static void DisposeHttpClient()
+        {
+            if (httpClient != null)
+                httpClient.Dispose();
+        }
+
         public static async Task<System.Net.Http.HttpResponseMessage> HttpClientGetAsync(string url)
         {
             if (httpClient == null)
@@ -447,11 +453,29 @@ namespace CSharpCrawler.Util
             return message;
         }
 
-        public static async Task<string> HttpClientGetStringAsync(string url)
+        public static async Task<string> HttpClientGetStringAsync(string url,Encoding encoding = null,CookieCollection cookies = null)
         {
-            //TODO
-            await Task.Delay(2000);
-            return "";
+            if(cookies != null)
+            {
+                var cookiesStr = "";
+                foreach (System.Net.Cookie item in cookies)
+                {
+                    cookiesStr += $"{item.Name}={item.Value};";
+                }
+                var message = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, url);
+                message.Headers.Add("Cookie", cookiesStr);
+                await httpClient.SendAsync(message);
+            }
+
+            var source = "";           
+
+            var buffer = await httpClient.GetByteArrayAsync(url);
+
+            if (encoding == null)
+                encoding = EncodingUtil.GetEncoding(buffer);
+
+            source = encoding.GetString(buffer);
+            return source;
         }
 
         public async Task<List<string>> FetchImage(string source)

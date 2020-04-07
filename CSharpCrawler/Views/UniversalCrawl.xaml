@@ -8,20 +8,25 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UniversalCrawl">
 
-    <Grid Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <TabControl Background="Transparent">
+        <TabItem Header="简介" Style="{StaticResource StyleTabItem}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-        <DockPanel>
-            <Label Content="输入电商网站网址" VerticalContentAlignment="Center" Width="120" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-            <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Style="{StaticResource GlobalButtonStyle}"/>
-            <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
-        </DockPanel>
+                <DockPanel>
+                    <Label Content="输入电商网站网址" VerticalContentAlignment="Center" Width="120" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
+                    <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Style="{StaticResource GlobalButtonStyle}"/>
+                    <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
+                </DockPanel>
 
-        <GroupBox Header="抓取结果" Grid.Row="1">
-            <RichTextBox Name="rtbox_Result" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"></RichTextBox>
-        </GroupBox>
-    </Grid>
+                <GroupBox Header="抓取结果" Grid.Row="1">
+                    <RichTextBox Name="rtbox_Result" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"></RichTextBox>
+                </GroupBox>
+            </Grid>
+        </TabItem>
+    </TabControl>
+  
 </Page>

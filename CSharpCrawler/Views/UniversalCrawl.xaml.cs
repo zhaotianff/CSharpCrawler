@@ -69,6 +69,8 @@ namespace CSharpCrawler.Views
 
         private async void Btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
+            ScrollToEnd();
+
             var url = this.tbox_Url.Text.Trim();
 
             if(string.IsNullOrEmpty(url))
@@ -89,14 +91,18 @@ namespace CSharpCrawler.Views
             }
             else
             {
+                AppendText("分析完成，结果如下.");
                 ShowResult(good);
             }
         }
 
         private void AppendText(string text)
         {
+            if (string.IsNullOrEmpty(text))
+                return;
+
             this.Dispatcher.Invoke(()=> {
-                this.rtbox_Result.Document.Blocks.Add(new Paragraph(new Run(text)));
+                this.rtbox_Result.Document.Blocks.Add(new Paragraph(new Run(text.Trim().Replace("\n",""))));
             });
         }
 
@@ -104,6 +110,9 @@ namespace CSharpCrawler.Views
         {
             try
             {
+                if (string.IsNullOrEmpty(source))
+                    return null;
+
                 Good good = new Good();
                 angleSharpHelper.Init(source);
 
@@ -122,8 +131,17 @@ namespace CSharpCrawler.Views
                     }
                 }
 
-                good.Name = goodNameElement?.TextContent;
+                //商品详情一般会包含detail
+                var goodDetailElement = angleSharpHelper.CSSQuery("[id~=detail i]");
 
+                if(goodDetailElement == null)
+                {
+                    goodDetailElement = angleSharpHelper.CSSQuery("[class~=detail i]");                    
+                }
+
+                good.Name = goodNameElement?.TextContent;
+                good.DetailContent = goodDetailElement?.TextContent;
+                good.DetailImageList = goodDetailElement?.QuerySelectorAll("img").Select(x => x.Attributes["src"]?.Value).ToList();
 
                 return good;
             }
@@ -135,7 +153,15 @@ namespace CSharpCrawler.Views
 
         private void ShowResult(Good good)
         {
+            AppendText($"商品名称:{good.Name}");
+            AppendText($"商品详情:{good.DetailContent}");
+            AppendText($"商品图片");
+            good.DetailImageList.ForEach(x => AppendText(x));
+        }
 
+        private void ScrollToEnd()
+        {
+            this.rtbox_Result.ScrollToEnd();
         }
     }
 }

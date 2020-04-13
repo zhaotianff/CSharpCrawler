@@ -9,7 +9,7 @@
       Title="UniversalCrawl">
 
     <TabControl Background="Transparent">
-        <TabItem Header="简介" Style="{StaticResource StyleTabItem}">
+        <TabItem Header="抓取电商网站" Style="{StaticResource StyleTabItem}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -23,7 +23,7 @@
                 </DockPanel>
 
                 <GroupBox Header="抓取结果" Grid.Row="1">
-                    <RichTextBox Name="rtbox_Result" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"></RichTextBox>
+                    <RichTextBox Name="rtbox_Result" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
                 </GroupBox>
             </Grid>
         </TabItem>

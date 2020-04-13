@@ -18,7 +18,7 @@
 
                 <DockPanel>
                     <Label Content="输入电商网站网址" VerticalContentAlignment="Center" Width="120" DockPanel.Dock="Left" HorizontalContentAlignment="Center"/>
-                    <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Style="{StaticResource GlobalButtonStyle}"/>
+                    <Button Width="88" Height="28" Content="Surfing" DockPanel.Dock="Right" Margin="5,0,5,0" Name="btn_Surfing" Style="{StaticResource GlobalButtonStyle}" Click="Btn_Surfing_Click"/>
                     <TextBox VerticalContentAlignment="Center"  Name="tbox_Url" Style="{StaticResource TextBoxStyle}"/>
                 </DockPanel>
 

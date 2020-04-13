@@ -22,6 +22,8 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class AdvanceSelect : Page
     {
+        AngleSharpHelper angleSharpHelper = new AngleSharpHelper();
+
         public AdvanceSelect()
         {
             InitializeComponent();
@@ -180,7 +182,8 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-            var angleSharpObj = AngleSharpHelper.GetInstance(html).CSSQuery(selector);
+            angleSharpHelper.Init(html);
+            var angleSharpObj = angleSharpHelper.CSSQuery(selector);
 
             if(angleSharpObj != null)
             {

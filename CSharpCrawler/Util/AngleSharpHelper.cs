@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AngleSharp;
+﻿using AngleSharp;
 using AngleSharp.Dom;
 
 namespace CSharpCrawler.Util
@@ -15,30 +10,14 @@ namespace CSharpCrawler.Util
     /// </summary>
     public class AngleSharpHelper
     {
-        private static object obj = new object();
-        private static AngleSharpHelper instance;
-
         private IDocument doc;
 
-        public static AngleSharpHelper GetInstance(string html)
+        public AngleSharpHelper()
         {
-            if(instance == null)
-            {
-                lock(obj)
-                {
-                    if (instance == null)
-                        instance = new AngleSharpHelper(html);
-                }
-            }
-            return instance;
+            
         }
 
-        private AngleSharpHelper(string html)
-        {
-            Init(html);
-        }
-
-        private async void Init(string html)
+        public async void Init(string html)
         {
             var context = BrowsingContext.New(Configuration.Default);
             doc = await context.OpenAsync(x => x.Content(html));

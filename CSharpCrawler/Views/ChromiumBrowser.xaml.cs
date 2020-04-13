@@ -39,6 +39,14 @@ namespace CSharpCrawler.Views
             loadEndCallBack = act;                                     
         }
 
+        public void ExecuteJavaScript(string method,params string[] args)
+        {
+            if (args.Length > 0)
+                browser.ExecuteScriptAsync(method, args);
+            else
+                browser.ExecuteScriptAsync(method);
+        }
+
         private async void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
         {
             string source = await browser.GetSourceAsync();

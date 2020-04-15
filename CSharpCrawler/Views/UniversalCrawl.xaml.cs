@@ -119,16 +119,25 @@ namespace CSharpCrawler.Views
                 //大部分是使用h1标签做为商品标题
                 var goodNameElement = angleSharpHelper.CSSQuery("h1");
 
-                if(goodNameElement == null)
+                if (goodNameElement == null)
                 {
                     //如果h1没有找到，用name去找
                     //忽略大小写
                     goodNameElement = angleSharpHelper.CSSQuery("[class~=name i]");
 
-                    if(goodNameElement == null)
+                    if (goodNameElement == null)
                     {
                         goodNameElement = angleSharpHelper.CSSQuery("[id~=name i]");
                     }
+                }
+
+                //评价数/销量
+                //Func<AngleSharp.Dom.IElement, bool> predicate = x => x.ClassName.ToLower().Contains("comment") || x.ClassName.ToLower().Contains("pinglun");
+                var salesElement = angleSharpHelper.CSSQuery("[class~=comment]");
+
+                if(salesElement == null)
+                {
+                    salesElement = angleSharpHelper.CSSQuery("[id~=pinglun]");
                 }
 
                 //商品详情一般会包含detail
@@ -140,6 +149,7 @@ namespace CSharpCrawler.Views
                 }
 
                 good.Name = goodNameElement?.TextContent;
+                good.Sales = salesElement?.TextContent;
                 good.DetailContent = goodDetailElement?.TextContent;
                 good.DetailImageList = goodDetailElement?.QuerySelectorAll("img").Select(x => x.Attributes["src"]?.Value).ToList();
 
@@ -154,9 +164,10 @@ namespace CSharpCrawler.Views
         private void ShowResult(Good good)
         {
             AppendText($"商品名称:{good.Name}");
+            AppendText($"评价数:{good.Sales}");
             AppendText($"商品详情:{good.DetailContent}");
             AppendText($"商品图片");
-            good.DetailImageList.ForEach(x => AppendText(x));
+            good.DetailImageList?.ForEach(x => AppendText(x));
         }
 
         private void ScrollToEnd()

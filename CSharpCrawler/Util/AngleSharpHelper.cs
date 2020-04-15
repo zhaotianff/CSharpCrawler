@@ -1,5 +1,8 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace CSharpCrawler.Util
 {
@@ -31,6 +34,23 @@ namespace CSharpCrawler.Util
         public IHtmlCollection<IElement> CSSQueryAll(string selector)
         {
             return doc?.QuerySelectorAll(selector);
+        }
+
+        public IEnumerable<IElement> Query(Func<IElement,bool> predicate)
+        {
+            return doc.All.Where(predicate);
+        }
+
+        public IElement QueryNextElement(Func<IElement,bool> predicate)
+        {
+            var element = doc.All.Where(predicate).FirstOrDefault();
+
+            if(element != null)
+            {
+                return element.NextElementSibling;
+            }
+
+            return null;
         }
     }
 }

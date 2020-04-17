@@ -15,9 +15,9 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 
 * 法律与道德约束 
   * 爬虫协议
-    1. [爬虫协议介绍，以及它的语法规则;](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/RobotsExclusionProtocol.md)
-    2. C#如何获取网站的爬虫协议;
-    3. C#中如何解析爬虫协议;
+    * [爬虫协议介绍，以及它的语法规则;](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/RobotsExclusionProtocol.md)
+    * C#如何获取网站的爬虫协议;
+    * C#中如何解析爬虫协议;
   * 法律相关
 
 * [正则表达式的使用](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)

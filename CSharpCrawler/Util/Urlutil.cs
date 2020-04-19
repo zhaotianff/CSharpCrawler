@@ -93,13 +93,13 @@ namespace CSharpCrawler.Util
             var tempUrl = url.ToUpper();
             if (tempUrl.StartsWith("HTTP") || tempUrl.StartsWith("HTTPS"))
             {
-                var match = RegexUtil.Match(url, RegexPattern.MatchFileUrlWithHttpPattern);
+                var match = RegexUtil.RegexMatch(url, RegexPattern.MatchFileUrlWithHttpPattern);
                 return match.Success;
 
             }
             else if(tempUrl.StartsWith("/"))
             {
-                var match = RegexUtil.Match(url, RegexPattern.MatchFileUrlWithForwardSlash);
+                var match = RegexUtil.RegexMatch(url, RegexPattern.MatchFileUrlWithForwardSlash);
                 return match.Success;
             }
             else

@@ -113,43 +113,35 @@ namespace CSharpCrawler.Views
                 if (string.IsNullOrEmpty(source))
                     return null;
 
+                //AngleSharp貌似是不支持中文 有乱码啊
                 Good good = new Good();
                 angleSharpHelper.Init(source);
 
                 //大部分是使用h1标签做为商品标题
-                var goodNameElement = angleSharpHelper.CSSQuery("h1");
-
-                if (goodNameElement == null)
-                {
-                    //如果h1没有找到，用name去找
-                    //忽略大小写
-                    goodNameElement = angleSharpHelper.CSSQuery("[class~=name i]");
-
-                    if (goodNameElement == null)
-                    {
-                        goodNameElement = angleSharpHelper.CSSQuery("[id~=name i]");
-                    }
-                }
+                ////如果h1没有找到，用name去找
+                //忽略大小写
+                var goodNameElement = angleSharpHelper.CSSQueryRange("h1", "[class~=name i]", "[id~=name i]");
 
                 //评价数/销量
                 //Func<AngleSharp.Dom.IElement, bool> predicate = x => x.ClassName.ToLower().Contains("comment") || x.ClassName.ToLower().Contains("pinglun");
-                var salesElement = angleSharpHelper.CSSQuery("[class~=comment]");
+                var salesElement = angleSharpHelper.CSSQueryRange("[class~=comment i]", "[id~=pinglun i]","[class~=pinglun i]");
 
-                if(salesElement == null)
-                {
-                    salesElement = angleSharpHelper.CSSQuery("[id~=pinglun]");
-                }
+                //价格
+                var priceElement = angleSharpHelper.CSSQueryRange("[class~=price i]","[id~=price i]");
 
                 //商品详情一般会包含detail
-                var goodDetailElement = angleSharpHelper.CSSQuery("[id~=detail i]");
+                var goodDetailElement = angleSharpHelper.CSSQueryRange("[id~=detail i]", "[class~=detail i]");
 
-                if(goodDetailElement == null)
-                {
-                    goodDetailElement = angleSharpHelper.CSSQuery("[class~=detail i]");                    
-                }
+                //评论列表
+                //这里一般需要执行动态请求
+                //用抓包工具分析一下就出来的，一般返回json数据
+                //由于和评论数一样 都是用的comment
+                //这里需要定制抓取 就不做实现了
+
 
                 good.Name = goodNameElement?.TextContent;
-                good.Sales = salesElement?.TextContent;
+                good.Sales = RegexUtil.ExtractDigit(salesElement?.TextContent);
+                good.Price = RegexUtil.ExtractDigit(priceElement?.TextContent);
                 good.DetailContent = goodDetailElement?.TextContent;
                 good.DetailImageList = goodDetailElement?.QuerySelectorAll("img").Select(x => x.Attributes["src"]?.Value).ToList();
 
@@ -164,6 +156,7 @@ namespace CSharpCrawler.Views
         private void ShowResult(Good good)
         {
             AppendText($"商品名称:{good.Name}");
+            AppendText($"商品价格:￥{good.Price}");
             AppendText($"评价数:{good.Sales}");
             AppendText($"商品详情:{good.DetailContent}");
             AppendText($"商品图片");

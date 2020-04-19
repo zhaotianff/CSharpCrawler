@@ -206,7 +206,7 @@ namespace CSharpCrawler.Views
                 url = url.Replace("www", "m");
                 var cookieContainer = GetCityCookies(item.CityID);
                 originalHtml = await WebUtil.GetHtmlSource(url, accept, userAgent, Encoding.UTF8, cookieContainer);
-                var match = RegexUtil.Match(originalHtml, RegexPattern.DianPingContentArea);
+                var match = RegexUtil.RegexMatch(originalHtml, RegexPattern.DianPingContentArea);
 
                 if (match.Success == false)
                     continue;

@@ -73,7 +73,7 @@ namespace CSharpCrawler.Views
                 await WebUtil.GetHtmlSource(requesttLoginUrl,cookieContainer:cookieContainer);
 
                 var sourceGetToken = await WebUtil.GetHtmlSource(getTokenUrl,cookieContainer:cookieContainer);
-                var token = RegexUtil.Match(sourceGetToken.Item1, RegexPattern.Get360TokenPattern).Groups["token"].Value;
+                var token = RegexUtil.RegexMatch(sourceGetToken.Item1, RegexPattern.Get360TokenPattern).Groups["token"].Value;
 
                 password = EncryptionUtil.MD5_32(password);
                 var postData = $"src=pcw_i360&from=pcw_i360&charset=UTF-8&requestScema=https&quc_sdk_version=6.8.3&quc_sdk_name=jssdk&o=sso&m=login&lm=0&captFlag=1&rtype=data&validatelm=0&isKeepAlive=1&captchaApp=i360&userName={userName}&smDeviceId=&type=normal&account={userName}&password={password}&captcha=&token={token}&proxy=http%3A%2F%2Fi.360.cn%2Fpsp_jump.html&callback=QiUserJsonp331446237&func=QiUserJsonp331446237";
@@ -114,7 +114,7 @@ namespace CSharpCrawler.Views
             //如果captchaFlag = true,访问captchaUrl来获取验证码
 
             var source = await WebUtil.GetHtmlSource(captchaCheckUrl);
-            var jsonStr = RegexUtil.Match(source, RegexPattern.Get360CaptchaCheckJsonPattern).Value;
+            var jsonStr = RegexUtil.RegexMatch(source, RegexPattern.Get360CaptchaCheckJsonPattern).Value;
             var json = JsonUtil.ConvertToObject<Root>(jsonStr);
 
             if (json.captchaFlag == true)

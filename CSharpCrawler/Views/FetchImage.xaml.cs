@@ -409,7 +409,7 @@ namespace CSharpCrawler.Views
 
                 if (backgroundImage.Result != null && backgroundImage.Result.ToString() != "none")
                 {
-                    var mathch = RegexUtil.Match(backgroundImage.Result.ToString(), RegexPattern.MatchImgPattern);
+                    var mathch = RegexUtil.RegexMatch(backgroundImage.Result.ToString(), RegexPattern.MatchImgPattern);
                     if (mathch.Success)
                     {
                         lock (obj)

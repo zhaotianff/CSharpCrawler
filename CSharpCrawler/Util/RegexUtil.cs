@@ -43,11 +43,14 @@ namespace CSharpCrawler.Util
 
         public static bool IsInvalidImgUrl(string url)
         {
-            return Match(url, RegexPattern.MatchImgPattern).Success;
+            return RegexMatch(url, RegexPattern.MatchImgPattern).Success;
         }
 
-        public static Match Match(string text,string pattern)
+        public static Match RegexMatch(string text,string pattern)
         {
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(pattern))
+                return Match.Empty;
+
             return Regex.Match(text, pattern);
         }
 
@@ -87,12 +90,20 @@ namespace CSharpCrawler.Util
         public static string ExtractDianPingAveragePrice(string input)
         {
             var price = "0";
-            Match match = Match(input, RegexPattern.DianPingAveragePricePattern);
+            Match match = RegexMatch(input, RegexPattern.DianPingAveragePricePattern);
             if(match.Success && !string.IsNullOrEmpty(match.Groups["price"].Value))
             {
                 price = match.Groups["price"].Value;
             }
             return price;
+        }
+
+        public static string ExtractDigit(string input)
+        {
+            Match match = RegexMatch(input, RegexPattern.DigitPattern);
+            if (match.Success)
+                return match.Value;
+            return "";
         }
     }
 }

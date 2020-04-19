@@ -31,6 +31,18 @@ namespace CSharpCrawler.Util
             return doc?.QuerySelector(selector);
         }
 
+        public IElement CSSQueryRange(params string[] selectors)
+        {
+            IElement element = null;
+            foreach (var item in selectors)
+            {
+                element = doc?.QuerySelector(item);
+                if (element != null)
+                    return element;
+            }
+            return element;
+        }
+
         public IHtmlCollection<IElement> CSSQueryAll(string selector)
         {
             return doc?.QuerySelectorAll(selector);

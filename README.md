@@ -18,7 +18,7 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
     * [爬虫协议介绍，以及它的语法规则;](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/RobotsExclusionProtocol.md)
     * C#如何获取网站的爬虫协议;
     * C#中如何解析爬虫协议;
-  * 法律相关
+  * [法律相关](CSharpCrawler/CrawlerLaw.md)
 
 * [正则表达式的使用](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
   * 正则表达式的基础知识和基本使用;

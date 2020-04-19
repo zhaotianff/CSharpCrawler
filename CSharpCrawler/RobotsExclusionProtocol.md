@@ -9,7 +9,7 @@ https://www.taobao.com/robots.txt
 
 https://www.baidu.com/robots.txt  
 
-在写爬虫时，这一点是必须注意的。不能违反爬虫协议，否则后果很严重→_→  
+**爬虫协议属于道德协议，虽然违反也不会面临法律风险，但这里还是强烈建议你遵守，让爬虫细水长流** 
 
 **robots.txt**用法如下  
 

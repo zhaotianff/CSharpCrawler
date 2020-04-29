@@ -91,6 +91,8 @@ namespace CSharpCrawler.Views
                     url = url.Replace("https://", "");
                 }
 
+                url = url.Substring(0,url.IndexOf(UrlUtil.UrlPathSeparator));
+
                 WrapPanel wrapPanel = new WrapPanel();
                 Label hostIPLabel = new Label();
                 hostIPLabel.Width = 80;
@@ -223,7 +225,13 @@ namespace CSharpCrawler.Views
 
             this.stackpaneHttpClient.Children.Clear();
 
-            var html = await WebUtil.HttpClientGetStringAsync(url);          
+            Encoding encoding = null;
+            if(combox_HttpClientEncoding.SelectedIndex > 0)
+            {
+                encoding = Encoding.GetEncoding(combox_HttpClientEncoding.Text);
+            }
+
+            var html = await WebUtil.HttpClientGetStringAsync(url,encoding:encoding);          
             RichTextBox richTextBox = new RichTextBox();
             richTextBox.Height = this.stackpanel.ActualHeight - 180;
             richTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;

@@ -3,7 +3,7 @@
     <!--公共配置参数-->
     <Common>
 	    <!--Url是否合法标志-->
-	    <UrlCheck></UrlCheck>
+	    <UrlCheck>0</UrlCheck>
 	</Common>
 	<FetchUrl>
 		<Depth>1</Depth>

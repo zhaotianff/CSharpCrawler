@@ -105,5 +105,13 @@ namespace CSharpCrawler.Util
                 return match.Value;
             return "";
         }
+
+        public static string ExtractTitle(string input)
+        {
+            Match match = RegexMatch(input, RegexPattern.TagTitlePattern);
+            if (match.Success)
+                return match.Groups["title"].Value;
+            return "";
+        }
     }
 }

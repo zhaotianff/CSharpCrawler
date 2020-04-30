@@ -11,7 +11,7 @@ namespace CSharpCrawler.Util
         //匹配网址 RegexOptions.Multiline
         public const string MatchUrlWithHttpPattern = "^http://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)([/\\S]+)$";
         public const string MatchUrlWithHttpsPattern = "^https://\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)([/\\S]+)$";
-        public const string MatchUrlNoHttpPattern = "^\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)$";
+        public const string MatchUrlNoHttpPattern = "^\\S+\\.(com|cn|top|vip|ltd|shop|wang|club|online|store|site|tech|fun|biz|info|com.cn|org|org.cn|gov.cn|gov)([/\\S]+)$";
         public const string MatchFileUrlWithHttpPattern = "http\\S*\\.(jpg|png|bmp|mp4|exe|rar|zip)";
         public const string MatchFileUrlWithForwardSlash = "/\\S*\\.(jpg|png|bmp|mp4|exe|rar|zip)";
 

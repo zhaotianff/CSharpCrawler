@@ -232,6 +232,9 @@
     <Compile Include="Views\MessageUI.xaml.cs">
       <DependentUpon>MessageUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MultiThread.xaml.cs">
+      <DependentUpon>MultiThread.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegularExpressionUsage.xaml.cs">
       <DependentUpon>RegularExpressionUsage.xaml</DependentUpon>
     </Compile>
@@ -393,6 +396,10 @@
     <Page Include="Views\MessageUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultiThread.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegularExpressionUsage.xaml">
       <SubType>Designer</SubType>

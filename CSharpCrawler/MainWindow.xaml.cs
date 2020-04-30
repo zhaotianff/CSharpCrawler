@@ -43,6 +43,7 @@ namespace CSharpCrawler
         AnalysisPacket analysicPacket = new AnalysisPacket();
         AdvanceSelect advanceSelect = new AdvanceSelect();
         UniversalCrawl universalCrawl = new UniversalCrawl();
+        MultiThread multiThread = new MultiThread();
 
         ToggleButton toggleButton = null;
 
@@ -243,6 +244,11 @@ namespace CSharpCrawler
         private void Btn_UniversalCrawl_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = universalCrawl;
+        }
+
+        private void btn_MultiThread_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = multiThread;
         }
     }
 }

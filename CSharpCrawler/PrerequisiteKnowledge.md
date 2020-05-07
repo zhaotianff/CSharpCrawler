@@ -191,7 +191,7 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
 1. [正则表达式](正则表达式.md)  
    这种方式虽然需要学习正则表达式的相关知识，但功能强大，几乎无所不能。这里我做了一些总结，可以参考一下
 2. 使用[AngleSharp](https://github.com/AngleSharp/AngleSharp)/[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)等支持DOM的HTML解析库。  
-由于我最先使用的是HtmlAgilityPack，所以示例程序里不再介绍AngleSharp的使用方式,有兴趣的可以参照文档自行学习。
+   HtmlAgilityPack支持XPath查询，暂不支持CSS选择器。AngleSharp支持CSS选择器，暂不支持XPath查询
 
 * 保存数据  
 这里得看自己需求，推荐SQLite/Berkeley DB等嵌入式数据库.

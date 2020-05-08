@@ -23,13 +23,13 @@
                             <Setter Property="Background" TargetName="border" Value="Gainsboro"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Foreground" Value="#1fcc7b"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#1fcc7b"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentBaseColor}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource AccentBaseColor}"/>
                             <Setter Property="BorderThickness" TargetName="border" Value="5,0,0,0"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="true">
-                            <Setter Property="Foreground" Value="#1fcc7b"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#1fcc7b"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentBaseColor}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource AccentBaseColor}"/>
                             <Setter Property="BorderThickness" TargetName="border" Value="5,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
@@ -62,13 +62,13 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource AccentBaseColor}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource AccentBaseColor}"/>
                             <Setter Property="Opacity" TargetName="border" Value=".7"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="Silver"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource AccentBaseColor}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource AccentBaseColor}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="Silver"/>
                             <Setter Property="Opacity" Value=".8"/>
                             <Setter Property="Foreground" Value="White"/>

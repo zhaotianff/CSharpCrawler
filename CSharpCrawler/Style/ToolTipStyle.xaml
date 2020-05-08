@@ -4,7 +4,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="ToolTip">
-                    <Border Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource AccentBlueColor}">
+                    <Border Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="{DynamicResource AccentBlueColor}">
                         <Grid  Margin="5">
                             <Grid.Effect>
                                 <DropShadowEffect Opacity=".3"></DropShadowEffect>

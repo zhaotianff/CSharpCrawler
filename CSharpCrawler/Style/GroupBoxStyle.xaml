@@ -4,6 +4,6 @@
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBlueColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBlueColor}"/>
     </Style>
 </ResourceDictionary>

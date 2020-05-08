@@ -6,7 +6,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border  Width="20" Height="{TemplateBinding Height}" CornerRadius="3" Background="{StaticResource LightColor}">
+                    <Border  Width="20" Height="{TemplateBinding Height}" CornerRadius="3" Background="{DynamicResource LightColor}">
 
                     </Border>
 
@@ -27,7 +27,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid Background="Transparent">
-                        <Border Grid.Column="0"   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{StaticResource AccentBaseColor}" CornerRadius="5">
+                        <Border Grid.Column="0"   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{DynamicResource AccentBaseColor}" CornerRadius="5">
                             <Grid Grid.Column="0" Background="Transparent">
                                 <Track Grid.Column="0" Name="PART_Track">
                                     <Track.Thumb>

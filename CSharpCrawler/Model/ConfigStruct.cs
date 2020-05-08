@@ -73,5 +73,12 @@ namespace CSharpCrawler.Model
     public class Theme
     {
         public string Background { get; set; }
+        public BackgroundType BackgroundType { get; set; }
+    }
+
+    public enum BackgroundType
+    {
+        Static = 0,
+        Dynamic = 1
     }
 }

@@ -52,7 +52,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Border CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource AccentBaseColor}">
+                            <Border CornerRadius="5" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">
                                 <Image Stretch="Uniform" Name="img"/>
                             </Border>
 

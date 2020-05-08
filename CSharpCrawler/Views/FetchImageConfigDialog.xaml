@@ -31,7 +31,7 @@
         </TransformGroup>
     </Window.RenderTransform>
 
-    <Border CornerRadius="10" BorderBrush="{StaticResource AccentSkyBlueColor}" BorderThickness="1">
+    <Border CornerRadius="10" BorderBrush="{DynamicResource AccentSkyBlueColor}" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -39,11 +39,11 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="{StaticResource AccentSkyBlueColor}" MouseLeftButtonDown="Grid_MouseDown" CornerRadius="10,10,0,0">
-                <Label Content="图片抓取配置" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource LightColor}"></Label>
+            <Border Grid.Row="0" Background="{DynamicResource AccentSkyBlueColor}" MouseLeftButtonDown="Grid_MouseDown" CornerRadius="10,10,0,0">
+                <Label Content="图片抓取配置" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource LightColor}"></Label>
             </Border>
 
-            <Grid Grid.Row="1" Background="{StaticResource LightColor}">
+            <Grid Grid.Row="1" Background="{DynamicResource LightColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>

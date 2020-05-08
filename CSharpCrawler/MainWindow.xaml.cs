@@ -116,9 +116,16 @@ namespace CSharpCrawler
             mediaelement.Play();
         }
 
+        public void StopBackgroundVideo()
+        {
+            mediaelement.Stop();
+            mediaelement.Visibility = Visibility.Hidden;
+        }
+
         public void SetTransparentBackground()
         {
             this.Background = Brushes.Transparent;
+            mediaelement.Visibility = Visibility.Visible;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

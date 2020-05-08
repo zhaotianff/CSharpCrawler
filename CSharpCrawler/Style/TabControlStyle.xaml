@@ -25,7 +25,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Background" TargetName="bbb" Value="{StaticResource AccentBaseColor}"></Setter>
+                            <Setter Property="Background" TargetName="bbb" Value="{DynamicResource AccentBaseColor}"></Setter>
                             <Setter Property="Opacity" TargetName="bbb" Value=".7"/>
                         </Trigger>
 
@@ -35,7 +35,7 @@
                                 <Condition Binding="{Binding Path=TabStripPlacement, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" Value="Top" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Background" TargetName="bbb" Value="{StaticResource AccentBaseColor}"></Setter>
+                            <Setter Property="Background" TargetName="bbb" Value="{DynamicResource AccentBaseColor}"></Setter>
                             <Setter Property="Opacity" TargetName="bbb" Value=".7"/>
                         </MultiDataTrigger>
 

@@ -16,14 +16,14 @@
         </WrapPanel>
         <Label Content="全局设置" FontSize="25"></Label>
         <Separator></Separator>
-        <Label Content="主题"></Label>
-        <WrapPanel Name="GlobalSettingPanel">
-            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="DefaultTheme_MouseDown" BorderThickness="1" BorderBrush="{StaticResource AccentBaseColor}">
+        <Label Content="背景"></Label>
+        <WrapPanel Name="BackgroundSettingPanel">
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="ChangeBackground_MouseDown" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">
                 <Border.Background>
                     <SolidColorBrush Color="White" Opacity=".8"/>
                 </Border.Background>
             </Border>
-            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="DefaultTheme_MouseDown" BorderThickness="1" BorderBrush="{StaticResource AccentBaseColor}">
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="ChangeBackground_MouseDown" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity=".8">
                         <GradientStop Color="#FFFFF9F9" Offset="0"/>
@@ -34,5 +34,18 @@
         </WrapPanel>
         <Label Content="背景透明度"></Label>
         <Slider Style="{StaticResource SliderStyle}" Width="100" SnapsToDevicePixels="True" Minimum="0" Maximum="1" Height="10" HorizontalAlignment="Left" ValueChanged="slider_Opacity_ValueChanged" Margin="10" Name="slider_Opacity"/>
+        <Label Content="主题"></Label>
+        <WrapPanel Name="ThemeSettingPanel">
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="ChangeTheme_MouseDown" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">
+                <Border.Background>
+                    <SolidColorBrush Color="#1fcc7b"/>
+                </Border.Background>
+            </Border>
+            <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="ChangeTheme_MouseDown" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">
+                <Border.Background>
+                    <SolidColorBrush Color="#71c9ce"/>
+                </Border.Background>
+            </Border>
+        </WrapPanel>
     </StackPanel>
 </Page>

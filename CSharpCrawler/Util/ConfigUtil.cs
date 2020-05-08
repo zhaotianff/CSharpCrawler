@@ -55,7 +55,11 @@ namespace CSharpCrawler.Util
 
                 foreach (var item in eleThemeList)
                 {
-                    Theme theme = new Theme() {Background = item.Element("Background").Value };
+                    Theme theme = new Theme()
+                    {
+                        Background = item.Element("Background").Value ,
+                        BackgroundType = (BackgroundType)int.Parse(item.Element("Background").Attribute("Type").Value)
+                    };
                     themeList.Add(theme);
                 }
 

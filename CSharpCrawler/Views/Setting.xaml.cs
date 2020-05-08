@@ -23,6 +23,7 @@ namespace CSharpCrawler.Views
     {
         private GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         private int ignoreCount = 0;
+        private int SysBackgroundIndex = 2;
 
         public Setting()
         {
@@ -49,12 +50,22 @@ namespace CSharpCrawler.Views
                 imageBrush.Stretch = Stretch.UniformToFill;
                 imageBrush.Opacity = 0.8;
                 border.Background = imageBrush;
-                border.MouseDown += DefaultTheme_MouseDown;
+                border.MouseDown += ChangeBackground_MouseDown;
                 border.BorderBrush = accentBaseColor;
                 border.BorderThickness = new Thickness(1);
                 border.Margin = new Thickness(10);
 
-                GlobalSettingPanel.Children.Add(border);
+                if(item.BackgroundType == Model.BackgroundType.Dynamic)
+                {
+                    Label label = new Label();
+                    label.Content = "动态";
+                    label.FontSize = 18;
+                    label.Foreground = accentBaseColor;
+                    label.FontWeight = FontWeights.Bold;
+                    border.Child = label;
+                }
+
+                BackgroundSettingPanel.Children.Add(border);
             }              
         }
 
@@ -101,12 +112,25 @@ namespace CSharpCrawler.Views
                 globalData.CrawlerConfig.UrlConfig.IgnoreUrlCheck = false;
         }
 
-        private void DefaultTheme_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ChangeBackground_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var border = sender as Border;
             if(border != null)
             {
-                Application.Current.MainWindow.Background = border.Background;
+                var fileName = globalData.CrawlerConfig.ThemeList[BackgroundSettingPanel.Children.IndexOf(border) - SysBackgroundIndex].Background;
+                //一切从简，直接通过有没有内容来判断静态背景和动态背景
+                if (border.Child == null)
+                {
+                    (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
+                    Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = GetBitmapImage(fileName),Stretch = Stretch.UniformToFill };
+                    this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
+                }
+                else
+                {
+                    fileName = fileName.Replace(".jpg", ".mp4");
+                    (Application.Current.MainWindow as MainWindow).SetTransparentBackground();
+                    (Application.Current.MainWindow as MainWindow).SetBackgroundVideo(fileName);
+                }
             }          
         }
 
@@ -115,8 +139,36 @@ namespace CSharpCrawler.Views
             Application.Current.MainWindow.Background.Opacity = e.NewValue;
         }
 
-        #endregion
+        private void ChangeTheme_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //一切从简 
+            //先做两个
+            var uiElement = sender as UIElement;
+            var index = ThemeSettingPanel.Children.IndexOf(uiElement);
+            ResourceDictionary dic = new ResourceDictionary();
 
+            if(index == 0)
+            {
+                dic.Source = new Uri("./Themes/Green.xaml",UriKind.Relative);
+            }
+            else
+            {
+                dic.Source = new Uri("./Themes/LightBlue.xaml",UriKind.Relative);
+            }
+
+            Application.Current.Resources.MergedDictionaries[0] = dic;
+        }
+
+        private BitmapImage GetBitmapImage(string fileName)
+        {
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(fileName, UriKind.Relative);
+            bi.EndInit();
+            return bi;
+        }
+
+        #endregion
 
     }
 }

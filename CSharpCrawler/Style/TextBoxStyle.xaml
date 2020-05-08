@@ -4,7 +4,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AccentBaseColor}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Bottom"/>
-        <Setter Property="Foreground" Value="{StaticResource AccentBlueColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBlueColor}"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontFamily" Value="Myriad Hebrew"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -27,7 +27,7 @@
                             </Trigger.Value>
                         </Trigger>
                         <Trigger Property="UIElement.IsMouseOver">
-                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{StaticResource AccentBaseColor}">
+                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{DynamicResource AccentBaseColor}">
                             </Setter>
                             <Setter Property="Opacity" TargetName="border" Value=".9"/>
                             <Trigger.Value>
@@ -35,7 +35,7 @@
                             </Trigger.Value>
                         </Trigger>
                         <Trigger Property="UIElement.IsKeyboardFocused">
-                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{StaticResource AccentBaseColor}"></Setter>
+                            <Setter Property="Border.BorderBrush" TargetName="border" Value="{DynamicResource AccentBaseColor}"></Setter>
                             <Trigger.Value>
                                 <s:Boolean>True</s:Boolean>
                             </Trigger.Value>

@@ -1,4 +1,26 @@
 # C\#爬虫项目(更新中)
+
+<p align="center">
+<a href="https://github.com/zhaotianff/CSharpCrawler" target="_blank">
+<img align="center" alt="CSharpCrawler" src="CSharpCrawler/crawler.png" />
+</a>
+</p>
+<p align="center">
+<a href="https://github.com/zhaotianff/CSharpCrawler/stargazers" target="_blank">
+ <img alt="GitHub stars" src="https://img.shields.io/github/stars/zhaotianff/CSharpCrawler.svg" />
+</a>
+<a href="https://github.com/zhaotianff/CSharpCrawler/releases" target="_blank">
+ <img alt="All releases" src="https://img.shields.io/github/downloads/zhaotianff/CSharpCrawler/total.svg" />
+</a>
+<a href="https://github.com/zhaotianff/CSharpCrawler/network/members" target="_blank">
+ <img alt="All releases" src="https://img.shields.io/github/forks/zhaotianff/CSharpCrawler.svg" />
+</a>
+<a href="https://github.com/zhaotianff/CSharpCrawler/issues" target="_blank">
+ <img alt="All Chocolatey releases" src="https://img.shields.io/github/issues/zhaotianff/CSharpCrawler.svg" />
+</a>
+</p>
+<h1 align="center">CSharpCrawler :spider: </h1>
+
 ### 关于项目
 C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整的爬虫程序，只是一些示例。  
 > 为什么要拿C#开发爬虫项目，因为个人还是比较喜欢C#。C#虽然库少一点，但想要的功能基本还是能实现的。  

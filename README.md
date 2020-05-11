@@ -13,10 +13,10 @@
  <img alt="All releases" src="https://img.shields.io/github/downloads/zhaotianff/CSharpCrawler/total.svg" />
 </a>
 <a href="https://github.com/zhaotianff/CSharpCrawler/network/members" target="_blank">
- <img alt="All releases" src="https://img.shields.io/github/forks/zhaotianff/CSharpCrawler.svg" />
+ <img alt="Github forks" src="https://img.shields.io/github/forks/zhaotianff/CSharpCrawler.svg" />
 </a>
 <a href="https://github.com/zhaotianff/CSharpCrawler/issues" target="_blank">
- <img alt="All Chocolatey releases" src="https://img.shields.io/github/issues/zhaotianff/CSharpCrawler.svg" />
+ <img alt="All issues" src="https://img.shields.io/github/issues/zhaotianff/CSharpCrawler.svg" />
 </a>
 </p>
 <h1 align="center">CSharpCrawler :spider: </h1>

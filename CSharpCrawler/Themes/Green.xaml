@@ -2,6 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush Color="#1fcc7b" x:Key="AccentBaseColor"/>
     <SolidColorBrush Color="White" x:Key="LightColor"/>
-    <SolidColorBrush Color="#393e46" x:Key="AccentBlueColor"/>
+    <SolidColorBrush Color="#00b8a9" x:Key="AccentBlueColor"/>
     <SolidColorBrush Color="#FF68A7F0" x:Key="AccentSkyBlueColor"/>
 </ResourceDictionary>

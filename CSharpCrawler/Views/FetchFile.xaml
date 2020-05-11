@@ -14,7 +14,7 @@
 
         <Grid>
             <Label Content="输入文件下载地址" VerticalAlignment="Center"></Label>
-            <TextBox Margin="120,0,310,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}" Text="http://myfreetime.cn/jljt.mp4"></TextBox>
+            <TextBox Margin="120,0,310,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}" Text="http://myfreetime.cn/AngryBird.mp4"></TextBox>
             <Button Content="多线程下载" HorizontalAlignment="Right" Margin="0,0,210,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_MultiThreadDonwload" Click="btn_MultiThreadDonwload_Click"></Button>
             <Button Content="WebClient下载" HorizontalAlignment="Right" Margin="0,0,110,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_Donwload" Click="btn_Donwload_Click"></Button>
             <Button Content="从文件加载下载" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_DownLoadFromFile" Click="btn_DownLoadFromFile_Click"/>

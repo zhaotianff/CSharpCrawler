@@ -26,6 +26,13 @@ namespace CSharpCrawler.Util
             doc = await context.OpenAsync(x => x.Content(html));
         }
 
+        public static AngleSharpHelper FastInit(string html)
+        {
+            AngleSharpHelper angleSharpHelper = new AngleSharpHelper();
+            angleSharpHelper.Init(html);
+            return angleSharpHelper;
+        }
+
         public IElement CSSQuery(string selector)
         {
             return doc?.QuerySelector(selector);

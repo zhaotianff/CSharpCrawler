@@ -34,24 +34,24 @@
                     <WrapPanel>
                         <ToggleButton Content="原理" Name="btn_Basic" Click="btn_Basic_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="爬虫协议" Name="btn_RobotsProtocol" Click="btn_RobotsProtocol_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="正则表达式的使用" Name="btn_RegularExpression" Click="btn_RegularExpression_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="获取网页源码" Name="btn_FetchResource" Click="btn_FetchResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="获取动态网页源码" Name="btn_FetchDynamicResource" Click="btn_FetchDynamicResource_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="Web API调用" Name="btn_WebAPI" Click="btn_WebAPI_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="获取网页DOM" Name="btn_FetchResourceWithDOM" Click="btn_FetchResourceWithDOM_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="CSS选择器和XPath查询" Name="btn_AdvanceSelect" Click="btn_AdvanceSelect_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="正则表达式的使用" Name="btn_RegularExpression" Click="btn_RegularExpression_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton  Content="抓取Url" Name="btn_FetchUrl" Click="btn_FetchUrl_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton  Content="抓取图像" Name="btn_FetchImage" Click="btn_FetchImage_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton  Content="抓取图像╮(￣▽￣)╭" Name="btn_FetchImageEx" Click="btn_FetchImageEx_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="文件下载" Name="btn_FileDownLoad" Click="btn_FileDownLoad_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="多线程抓取" Name="btn_MultiThread" Click="btn_MultiThread_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="抓包工具使用" Name="btn_AnalysisPacket" Click="btn_AnalysisPacket_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
+                        <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="必应图片搜索" Name="btn_BingImageSearch" Click="btn_BingImageSearch_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="爬虫数据存储" Name="btn_DataStorage" Click="btn_DataStorage_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <!--<ToggleButton Content="网页相似度计算" Name="btn_SimilarityCalc" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>-->
                         <ToggleButton Content="小例子-全国家常菜价格统计" Name="btn_DishesPrice" Click="btn_DishesPrice_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="模拟登陆" Name="btn_SimulateLogin" Click="btn_SimulateLogin_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="抓包工具使用" Name="btn_AnalysisPacket" Click="btn_AnalysisPacket_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="CSS选择器和XPath查询" Name="btn_AdvanceSelect" Click="btn_AdvanceSelect_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="通用抓取" Name="btn_UniversalCrawl" Click="Btn_UniversalCrawl_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
-                        <ToggleButton Content="多线程抓取" Name="btn_MultiThread" Click="btn_MultiThread_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                         <ToggleButton Content="设置" Name="btn_Setting" Click="btn_Setting_Click" Style="{StaticResource ListButtonStyle}" Checked="ToggleButton_Checked"/>
                     </WrapPanel>
                 </ScrollViewer>

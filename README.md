@@ -41,33 +41,37 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
     * C#如何获取网站的爬虫协议;
     * C#中如何解析爬虫协议;
   * [法律相关](CSharpCrawler/CrawlerLaw.md)
-
-* [正则表达式的使用](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
-  * 正则表达式的基础知识和基本使用;
-  * 正则表达式中的分组构造;
-  * 常用匹配模式;
-
-* WebAPI调用
-    * 获取实时天气
-      * 调用中国天气网公开API接口来获取天气
-      
-    * 获取Bing每日图片
-      * 调用cn bing API接口来获取Bing每日图片
-      
+  
 * 抓取网页
   * HttpWebRequest类的使用
   * HttpClient类的使用
   * 获取指定url的IP地址
   * 获取指定url的网页头信息
   * 如何从网页源码中提取页面的编码
-
+   
 * 抓取动态网页
   * 使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页
   * 使用WebBrowser(IE)来抓取动态网页
   * 使用[Selenium](https://github.com/SeleniumHQ/selenium)来抓取动态网页
 
+* WebAPI调用
+  * 获取实时天气
+    * 调用中国天气网公开API接口来获取天气
+      
+  * 获取Bing每日图片
+    * 调用cn bing API接口来获取Bing每日图片
+
 * 获取网页DOM
   * 使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构
+  
+* 使用CSS选择器和XPath选取元素
+  * CSS选择器
+  * XPath
+  
+* [正则表达式的使用](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
+  * 正则表达式的基础知识和基本使用;
+  * 正则表达式中的分组构造;
+  * 常用匹配模式;
 
 * Url抓取(当Url太多时，UI会卡)
     * 抓取指定网址的全部链接
@@ -83,6 +87,17 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
   * 使用WebClient类下载文件
   * 多线程下载文件
   * 从文件加载批量下载
+  
+* 多线程抓取
+  
+* 抓包工具使用
+  * [Fiddler](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/AnalysisPacket_Fiddler.md)
+	
+* 模拟登录并获取登录后的内容
+  * 使用Cookie(实现中)
+  * [使用Selenium](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/Selenium.md)(实现中)
+	  * 说明：示例程序使用的是EdgeDriver，所以需要Windows10系统，如果需要其它浏览器Driver,可自行修改。
+      * 测试系统：Windows 10 1703 Edge 15.15063.0，如果Edge驱动版本不一致，需要手动更新至对应的版本。 	
 
 * 必应图片搜索(*仅供交流学习使用，请勿用作商业用途*)
   * 实现必应图片搜索的功能
@@ -98,26 +113,11 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 小例子-全国家常菜价格统计(*仅供交流学习使用，请勿用作商业用途*)
     * 获取全国城市，以及城市代码
 	* 抓取家常菜价格
-	* 生成统计图表
-	
-* 模拟登录并获取登录后的内容
-    * 使用Cookie(实现中)
-	* [使用Selenium](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/Selenium.md)(实现中)
-	  * 说明：示例程序使用的是EdgeDriver，所以需要Windows10系统，如果需要其它浏览器Driver,可自行修改。
-      * 测试系统：Windows 10 1703 Edge 15.15063.0，如果Edge驱动版本不一致，需要手动更新至对应的版本。 	  
-	  
-* 抓包工具使用
-    * [Fiddler](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/AnalysisPacket_Fiddler.md)
-	
-* 使用CSS选择器和XPath选取元素
-    * CSS选择器
-	* XPath
-	
+	* 生成统计图表	  
+	  	
 * 小例子-通用抓取
     * 电商类网站
 	* 新闻类网站(待更新)
-	
-* 多线程抓取
 	
 ### Roadmap
 * Url Encode/Decode 原理

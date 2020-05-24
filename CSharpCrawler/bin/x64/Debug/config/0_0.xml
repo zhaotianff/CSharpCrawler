@@ -33,6 +33,9 @@
 			<Background Type="0">./User Data/Theme/Default_3.jpg</Background>
 		</Theme>
 		<Theme>
+			<Background Type="0">./User Data/Theme/Default_4.jpg</Background>
+		</Theme>
+		<Theme>
 			<Background Type="1">./User Data/Theme/Default_Dynamic.jpg</Background>
 		</Theme>
 	</ThemeList>

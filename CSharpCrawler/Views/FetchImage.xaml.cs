@@ -433,5 +433,59 @@ namespace CSharpCrawler.Views
         }
 
         #endregion
+
+        #region 动态页面
+        /*
+         * 像知乎，微博这种页面，页面需要滑动到最底部才会去加载动态内容。如果去分析接口，费时费力，还得每个网站都分析一次。
+         * 个人觉得，可以控制浏览器一直滚动到最底部，待动态内容全部加载完成后，再进行抓取。这样就省了分析接口这一步，而且一劳永逸。
+         * 如果需要登录的，可以进行模拟登录，再进行抓取（一些网站只需关闭弹出的登录对话框，就可以直接抓取）
+         */
+
+
+        private void btn_SurfingDynamic_Click(object sender, RoutedEventArgs e)
+        {
+            //下面开始操作
+            var url = this.tbox_UrlDynamic.Text.Trim();
+
+            if(string.IsNullOrEmpty(url))
+            {
+                EMessageBox.Show("请输入网址");
+                return;
+            }
+
+            globalData.Browser.GetHtmlSourceDynamic(url, StartScroll);
+        }
+
+        private async void StartScroll(string html)
+        {
+            //第一次抓取内容完成，开始滚动页面
+
+            //获取高度 document.body.clientHeight
+            var getHeightJs = "document.body.clientHeight";
+
+            //滚动
+            var scrollJs = "window.scroll(0,{0})";
+            var height = await globalData.Browser.EvaluateJavaScriptAsync(getHeightJs);
+
+            //无限循环滚动
+            while (true)
+            {
+                globalData.Browser.ExecuteJavaScript(string.Format(scrollJs,height));
+                var oldHeight = height;
+                height = await globalData.Browser.EvaluateJavaScriptAsync(getHeightJs);
+
+                if (height == oldHeight)
+                    break;
+
+                //todo 登录操作
+
+                await Task.Delay(1000);
+            }
+
+            //到这里可以提取页面上的图片了
+
+        }
+        #endregion
+
     }
 }

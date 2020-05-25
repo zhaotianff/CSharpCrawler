@@ -47,6 +47,16 @@ namespace CSharpCrawler.Views
                 browser.ExecuteScriptAsync(method);
         }
 
+        public async Task<string> EvaluateJavaScriptAsync(string method,params string[] args)
+        {
+            JavascriptResponse response;
+            if (args.Length > 0)
+                response = await browser.EvaluateScriptAsync(method, args);
+            else
+                response = await browser.EvaluateScriptAsync(method);
+            return response.Result.ToString();
+        }
+
         private async void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
         {
             string source = await browser.GetSourceAsync();

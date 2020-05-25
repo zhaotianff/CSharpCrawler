@@ -27,7 +27,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Slider">
                     <Grid Background="Transparent">
-                        <Border Grid.Column="0"   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{DynamicResource AccentBaseColor}" CornerRadius="5">
+                        <Border Grid.Column="0"   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{DynamicResource AccentBaseColor}" CornerRadius="5" Name="border">
                             <Grid Grid.Column="0" Background="Transparent">
                                 <Track Grid.Column="0" Name="PART_Track">
                                     <Track.Thumb>
@@ -37,6 +37,12 @@
                             </Grid>
                         </Border>
                     </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" Value="Silver" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

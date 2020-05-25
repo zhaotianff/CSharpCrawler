@@ -47,6 +47,8 @@ namespace CSharpCrawler
 
         ToggleButton toggleButton = null;
 
+        public bool IsDynamicBackground { get; set; } = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -114,12 +116,16 @@ namespace CSharpCrawler
         {
             mediaelement.Source = new Uri(path, uriKind);
             mediaelement.Play();
+
+            IsDynamicBackground = true;
         }
 
         public void StopBackgroundVideo()
         {
             mediaelement.Stop();
             mediaelement.Visibility = Visibility.Hidden;
+
+            IsDynamicBackground = false;
         }
 
         public void SetTransparentBackground()
@@ -172,7 +178,9 @@ namespace CSharpCrawler
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
         {
-            setting.LoadSettingFromUI();
+            if(IsDynamicBackground == false)
+                setting.LoadSettingFromUI();
+
             this.frame.Content = setting;
         }
 

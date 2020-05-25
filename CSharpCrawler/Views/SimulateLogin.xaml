@@ -54,12 +54,12 @@
                                 </GroupBox>
 
                                 <GroupBox Grid.Row="1" Header="登录前">
-                                    <RichTextBox Name="rtbox_BeforeLoginContent"/>
+                                    <RichTextBox Name="rtbox_BeforeLoginContent" Background="Transparent"/>
                                 </GroupBox>
                             </Grid>
 
                             <GroupBox Grid.Column="1" Header="登录后">
-                                <RichTextBox Name="rtbox_AfterLoginContent"/>
+                                <RichTextBox Name="rtbox_AfterLoginContent" Background="Transparent"/>
                             </GroupBox>
                         </Grid>
 

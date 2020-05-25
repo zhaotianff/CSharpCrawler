@@ -25,7 +25,7 @@
 
                     <StackPanel Grid.Column="1">
                         <GroupBox Header="输入要匹配的内容" Foreground="Black" Height="300">
-                            <RichTextBox Name="rtbx_Content" Margin="3" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            <RichTextBox Name="rtbx_Content" Margin="3" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Transparent"/>
                         </GroupBox>
                         
                         <Label Content="输入pattern" Margin="0,20,0,0"/>
@@ -38,8 +38,8 @@
                                 <SolidColorBrush Color="White" Opacity=".6"/>
                             </ListView.Background>
                             <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="40"/>
                                     <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Result}"/>
 
                                 </GridView>
@@ -51,8 +51,8 @@
                                 <SolidColorBrush Color="White" Opacity=".6"/>
                             </ListView.Background>
                             <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="30"/>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                    <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="40"/>
                                     <GridViewColumn Header="结果" Width="400" DisplayMemberBinding="{Binding Result}"/>
 
                                 </GridView>

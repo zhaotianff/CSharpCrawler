@@ -23,7 +23,6 @@ namespace CSharpCrawler.Views
     {
         private GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         private int ignoreCount = 0;
-        private int SysBackgroundIndex = 2;
 
         public Setting()
         {
@@ -50,7 +49,7 @@ namespace CSharpCrawler.Views
                 imageBrush.Stretch = Stretch.UniformToFill;
                 imageBrush.Opacity = 0.8;
                 border.Background = imageBrush;
-                border.MouseDown += ChangeBackground_MouseDown;
+                border.MouseDown += ChangeImgBackground_MouseDown;
                 border.BorderBrush = accentBaseColor;
                 border.BorderThickness = new Thickness(1);
                 border.Margin = new Thickness(10);
@@ -59,13 +58,13 @@ namespace CSharpCrawler.Views
                 {
                     Label label = new Label();
                     label.Content = "动态";
-                    label.FontSize = 18;
+                    label.FontSize = 20;
                     label.Foreground = accentBaseColor;
                     label.FontWeight = FontWeights.Bold;
                     border.Child = label;
                 }
 
-                BackgroundSettingPanel.Children.Add(border);
+                ImgBackgroundSettingPanel.Children.Add(border);
             }              
         }
 
@@ -115,28 +114,54 @@ namespace CSharpCrawler.Views
         private void ChangeBackground_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var border = sender as Border;
-            if(border != null)
+
+            if (border == null)
+                return;
+                           
+            (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
+            Application.Current.MainWindow.Background = border.Background as Brush;
+            this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
+            EnableAdjustTransparency();           
+        }
+
+        private void ChangeImgBackground_MouseDown(object sender,MouseButtonEventArgs e)
+        {
+            var border = sender as Border;
+            if (border == null)
+                return;
+
+            var theme = globalData.CrawlerConfig.ThemeList[ImgBackgroundSettingPanel.Children.IndexOf(border)];
+            var fileName = theme.Background;
+
+            if (theme.BackgroundType == Model.BackgroundType.Dynamic)
             {
-                var fileName = globalData.CrawlerConfig.ThemeList[BackgroundSettingPanel.Children.IndexOf(border) - SysBackgroundIndex].Background;
-                //一切从简，直接通过有没有内容来判断静态背景和动态背景
-                if (border.Child == null)
-                {
-                    (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
-                    Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = GetBitmapImage(fileName),Stretch = Stretch.UniformToFill };
-                    this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
-                }
-                else
-                {
-                    fileName = fileName.Replace(".jpg", ".mp4");
-                    (Application.Current.MainWindow as MainWindow).SetTransparentBackground();
-                    (Application.Current.MainWindow as MainWindow).SetBackgroundVideo(fileName);
-                }
-            }          
+                fileName = fileName.Replace(".jpg", ".mp4");
+                (Application.Current.MainWindow as MainWindow).SetTransparentBackground();
+                (Application.Current.MainWindow as MainWindow).SetBackgroundVideo(fileName);
+                DisableAdjustTransparency();
+            }
+            else
+            {
+                (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
+                Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(fileName,UriKind.Relative)),Stretch = Stretch.UniformToFill};
+                this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
+                EnableAdjustTransparency();
+            }            
         }
 
         private void slider_Opacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Application.Current.MainWindow.Background.Opacity = e.NewValue;
+        }
+
+        private void DisableAdjustTransparency()
+        {
+            slider_Opacity.IsEnabled = false;
+        }
+
+        private void EnableAdjustTransparency()
+        {
+            slider_Opacity.IsEnabled = true;
         }
 
         private void ChangeTheme_MouseDown(object sender, MouseButtonEventArgs e)

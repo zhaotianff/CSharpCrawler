@@ -9,9 +9,9 @@
       Title="RobotsProtocol">
 
     <Grid>
-        <TabControl>
+        <TabControl Background="Transparent">
             <TabItem Header="简介" Style="{StaticResource StyleTabItem}">
-                <RichTextBox Name="lbl_Content"></RichTextBox>
+                <RichTextBox Name="lbl_Content" Background="Transparent"></RichTextBox>
             </TabItem>
 
             <TabItem Header="读取" Style="{StaticResource StyleTabItem}">

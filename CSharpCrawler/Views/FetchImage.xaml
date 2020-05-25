@@ -30,12 +30,9 @@
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged" Style="{StaticResource ListViewStyle}" MouseDoubleClick="listview_Image_MouseDoubleClick">
-                        <ListView.Background>
-                            <SolidColorBrush Color="White" Opacity=".6"/>
-                        </ListView.Background>
+                    <ListView Grid.Column="0" Name="listview_Image" SelectionChanged="listview_Image_SelectionChanged" Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemContainerStyle}" MouseDoubleClick="listview_Image_MouseDoubleClick">
                         <ListView.View>
-                            <GridView>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                                 <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="30"/>
                                 <GridViewColumn Header="链接" Width="700" DisplayMemberBinding="{Binding Url}"/>
                                 <GridViewColumn Header="标题" Width="200" DisplayMemberBinding="{Binding Title}"/>

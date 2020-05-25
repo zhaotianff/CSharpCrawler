@@ -19,7 +19,7 @@
 
                     <ListView Name="listview_CSSSelector" Style="{StaticResource ListViewStyle}">
                         <ListView.View>
-                            <GridView>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                                 <GridViewColumn Header="选择器" DisplayMemberBinding="{Binding Selector}" Width="120"/>
                                 <GridViewColumn Header="例子" DisplayMemberBinding="{Binding Example}" Width="150"/>
                                 <GridViewColumn Header="描述" DisplayMemberBinding="{Binding Description}" Width="310"/>

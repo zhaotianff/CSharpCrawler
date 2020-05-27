@@ -108,7 +108,7 @@
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Name="listbox_BackgroundImage" Background="Transparent" SelectionChanged="Listbox_BackgroundImage_SelectionChanged">
+                        <ListBox Name="listbox_BackgroundImage" SelectionChanged="Listbox_BackgroundImage_SelectionChanged" Style="{StaticResource ListBoxStyle}">
 
                         </ListBox>
 
@@ -136,7 +136,7 @@
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Column="0" Name="listbox_ImageDynamic" SelectionChanged="listbox_ImageDynamic_SelectionChanged" MouseDoubleClick="listbox_ImageDynamic_MouseDoubleClick" Background="Transparent">
+                        <ListBox Grid.Column="0" Name="listbox_ImageDynamic" SelectionChanged="listbox_ImageDynamic_SelectionChanged" MouseDoubleClick="listbox_ImageDynamic_MouseDoubleClick" Style="{StaticResource ListBoxStyle}">
 
                         </ListBox>
                         <StackPanel Grid.Column="1">

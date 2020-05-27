@@ -34,7 +34,10 @@ namespace CSharpCrawler.Views
         }
 
         public void GetHtmlSourceDynamic(string url,Action<string> act)
-        {           
+        {
+            //如果不清除Address，网页不会再次加载，就不会触发browser_FrameLoadEnd事件
+            if (browser.Address == url)
+                browser.Address = "";
             browser.Address = url;
             loadEndCallBack = act;                                     
         }

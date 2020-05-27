@@ -30,23 +30,46 @@ namespace CSharpCrawler.Views
         GlobalDataUtil globalData = GlobalDataUtil.GetInstance();
         object obj = new object();
         ObservableCollection<UrlStruct> imageCollection = new ObservableCollection<UrlStruct>();
-        ObservableCollection<string> backgroundImageList = new ObservableCollection<string>();
-
-        int globalIndex = 1;
-        string baseUrl = "";
+        ObservableCollection<string> backgroundImageList = new ObservableCollection<string>();        
+        private string BaseUrl { get; set; }
 
         public FetchImage()
         {
             InitializeComponent();
+
+            //直接绑定控件，后面只需要更新这两个ObservableCollection就可以了
             this.listview_Image.ItemsSource = imageCollection;
             this.listbox_BackgroundImage.ItemsSource = backgroundImageList;
         }
 
         #region Img标签
 
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox cbx = sender as CheckBox;
+
+            if (cbx.IsChecked == true)
+            {
+                var dockPanel = VisualTreeHelper.GetParent(cbx) as DockPanel;
+                var index = dockPanel.Children.IndexOf(cbx);
+
+                for (int i = 0; i < dockPanel.Children.Count; i++)
+                {
+                    if (i == index)
+                        continue;
+
+                    (dockPanel.Children[i] as CheckBox).IsChecked = false;
+                }
+            }
+            else
+            {
+                cbx.IsChecked = true;
+            }
+        }
+
         private void btn_Surfing_Click(object sender, RoutedEventArgs e)
         {
-            string url = this.tbox_Url.Text;
+            string url = this.tbox_Url.Text.Trim();
 
             if (string.IsNullOrEmpty(url))
             {
@@ -54,7 +77,7 @@ namespace CSharpCrawler.Views
                 return;
             }
 
-            if (globalData.CrawlerConfig.CommonConfig.UrlCheck == true)
+            if (cbx_HttpWebRequest.IsChecked == true)
             {
                 if (RegexUtil.IsUrl(url) == false)
                 {
@@ -63,114 +86,73 @@ namespace CSharpCrawler.Views
                 }
             }
 
-            baseUrl = UrlUtil.FixUrl(url);                 
+            imageCollection.Clear();
 
-            Reset();
+            BaseUrl = UrlUtil.FixUrl(url);                 
             Surfing(url);
-        }
-
-        public void ShowStatusText(string content)
-        {
-            this.Dispatcher.Invoke(() => {
-                this.lbl_Status.Content = content;
-            });
-        }
+        }      
 
         public void Surfing(string url)
         {
             ShowStatusText($"正在从{url}抓取图像");
-            if(globalData.CrawlerConfig.ImageConfig.DynamicGrab == true)
+
+            if(cbx_CEF.IsChecked == true)
             {
                 SurfingByCEF(url);
             }
             else
             {
-                SurfingByFCL(url);
+                SurfingByHttpWebRequest(url);
             }
         }
 
         private void SurfingByCEF(string url)
         {
-            globalData.Browser.GetHtmlSourceDynamic(url,ExtractImageCallBack);            
+            if (cbx_HtmlAgilityPack.IsChecked == true)
+            {
+                globalData.Browser.GetHtmlSourceDynamic(url, ExtractImageWithHtmlAgilityPack);
+            }
+            else
+            {
+                globalData.Browser.GetHtmlSourceDynamic(url, ExtractImageWithRegex);
+            }
         }
 
-        private async void SurfingByFCL(string url)
+        private async void SurfingByHttpWebRequest(string url)
         {
             try
             {
                 string html = await WebUtil.GetHtmlSource(url);
-                StartExtractThread(html);
+                if(cbx_HtmlAgilityPack.IsChecked == true)
+                {
+                    ExtractImageWithHtmlAgilityPack(html);
+                }
+                else
+                {
+                    ExtractImageWithRegex(html);
+                }
             }
             catch (Exception ex)
             {
-                //TODO
                 ShowStatusText(ex.Message);
             }
         }
 
-        private void ExtractImage(object html)
-        {                       
-           switch(globalData.CrawlerConfig.ImageConfig.FetchMode)
-            {
-                case 0:
-                    ExtractImageMixed(html);
-                    break;
-                case 1:
-                    ExtractImageWithRegex(html);
-                    break;
-                case 2:
-                    ExtractImageWithHtmlAgilityPack(html);
-                    break;
-                default:
-                    break;
-            }          
-        }
-
-        private void ExtractImageWithRegex(object html)
+        private void ExtractImageWithRegex(string html)
         {
             try
             {
                 string value = "";
-                MatchCollection mc = RegexUtil.Matches(html.ToString(), RegexPattern.TagImgPattern);
-                foreach (Match item in mc)
+                MatchCollection mc = RegexUtil.Matches(html, RegexPattern.TagImgPattern);
+
+                for (int i = 0; i < mc.Count; i++)
                 {
-                    value = item.Groups["image"].Value;
-                    if(value.Contains("//") == false)
+                    value = mc[i].Groups["image"].Value;
+                    if (value.Contains("//") == false)
                     {
-                        value = baseUrl + value;
+                        value = BaseUrl + value;
                     }
-                    AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
-                }
-                ShowStatusText($"已抓取到{mc.Count}个图像");
-            }
-            catch(Exception ex)
-            {
-                ShowStatusText(ex.Message);
-            }
-        }
-
-        private void ExtractImageWithHtmlAgilityPack(object html)
-        {
-            try
-            {
-                string value = "";
-                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(html.ToString());
-
-                HtmlAgilityPack.HtmlNodeCollection imgNodeCollection = doc.DocumentNode.SelectNodes("//img");
-                for (int i = 0; i < imgNodeCollection.Count; i++)
-                {
-                    value = imgNodeCollection[i].Attributes["src"].Value;
-                    if(value.StartsWith("//"))
-                    {
-                        value = "http:" + value;
-                    }
-
-                    if (value.Contains(":") == false)
-                    {
-                        value = baseUrl + value;
-                    }
-                    AddToCollection(new UrlStruct() { Id = globalIndex, Status = "", Title = "", Url = value });
+                    AddToCollection(new UrlStruct() { Id = i+1, Status = "", Title = "", Url = value });
                 }
                 ShowStatusText($"已抓取到{imageCollection.Count}个图像");
             }
@@ -180,21 +162,33 @@ namespace CSharpCrawler.Views
             }
         }
 
-        private void ExtractImageMixed(object html)
+        private async void ExtractImageWithHtmlAgilityPack(string html)
         {
+            try
+            {
+                string value = "";
 
-        }
+                var imageList = await HtmlAgilityPackUtil.GetImgFromHtmlAsync(html);
+                for (int i = 0; i < imageList.Count; i++)
+                {
+                    value = imageList[i];
+                    if(value.StartsWith("//"))
+                    {
+                        value = "http:" + value;
+                    }
 
-        private void StartExtractThread(object html)
-        {
-            Thread extractThread = new Thread(new ParameterizedThreadStart(ExtractImage));
-            extractThread.IsBackground = true;
-            extractThread.Start(html);
-        }
-
-        private void ExtractImageCallBack(string html)
-        {
-            StartExtractThread(html);
+                    if (value.Contains(":") == false)
+                    {
+                        value = BaseUrl + value;
+                    }
+                    AddToCollection(new UrlStruct() { Id = i+1, Status = "", Title = "", Url = value });
+                }
+                ShowStatusText($"已抓取到{imageCollection.Count}个图像");
+            }
+            catch(Exception ex)
+            {
+                ShowStatusText(ex.Message);
+            }
         }
 
         public void AddToCollection(UrlStruct urlStruct)
@@ -211,22 +205,7 @@ namespace CSharpCrawler.Views
                     Dispatcher.Invoke(() => {
                     imageCollection.Add(urlStruct);
                 });
-                globalIndex++;
             }
-        }
-
-        public void ClearCollection()
-        {
-            Dispatcher.Invoke(()=> {
-                imageCollection.Clear();
-            }); 
-        }
-
-        public void Reset()
-        {
-            ClearCollection();
-            globalIndex = 1;
-            ShowStatusText("");
         }
 
         private void listview_Image_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -244,7 +223,7 @@ namespace CSharpCrawler.Views
                     ShowStatusText(ex.Message);
                 }
             }
-        }
+        }     
 
         private void listview_Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -353,16 +332,18 @@ namespace CSharpCrawler.Views
 
             if (string.IsNullOrEmpty(url))
             {
-                ShowBackgroundImageStatusText("请输入Url");
+                ShowStatusText("请输入Url");
                 return;
             }
+
+            backgroundImageList.Clear();
 
             //许多购物网站图像不会用img标签，而是用div的background-image属性来实现
             //有时候可能引入的css文件比较多，如果用正则可能会比较麻烦
             //我这里的做法是直接用CEF执行js获取结果 
             //getComputedStyle(document.getElementsByClassName('classname')[0]).backgroundImage
 
-            ShowBackgroundImageStatusText($"正在从{url}抓取图像");
+            ShowStatusText($"正在从{url}抓取图像");
             globalData.Browser.GetHtmlSourceDynamic(url, ExtractBackgroundImageCallBack);
         }
 
@@ -417,19 +398,15 @@ namespace CSharpCrawler.Views
                             Dispatcher.Invoke(() =>
                             {
                                 backgroundImageList.Add(mathch.Value);
-                                ShowBackgroundImageStatusText($"已抓取到{backgroundImageList.Count}个图像");
+                                ShowStatusText($"已抓取到{backgroundImageList.Count}个图像");
                             });
                         }
                     }
                 }
-            }         
-        }
+            }
 
-        public void ShowBackgroundImageStatusText(string content)
-        {
-            this.Dispatcher.Invoke(() => {
-                this.lbl_BackgroundImageStatus.Content = content;
-            });
+            if (backgroundImageList.Count == 0)
+                ShowStatusText("解析已完成，未抓取到任何图像");         
         }
 
         #endregion
@@ -463,7 +440,8 @@ namespace CSharpCrawler.Views
             //获取高度 document.body.clientHeight
             var getHeightJs = "document.body.clientHeight";
 
-            //滚动
+            //用js控制滚动
+            //这里也可以直接用Selenium去驱动浏览器滚动
             var scrollJs = "window.scroll(0,{0})";
             var height = await globalData.Browser.EvaluateJavaScriptAsync(getHeightJs);
 
@@ -478,14 +456,37 @@ namespace CSharpCrawler.Views
                     break;
 
                 //todo 登录操作
-
+                //使用js填入登录框内容 模拟点击登录
+                //由于这里仅做示例不针对任何网站
                 await Task.Delay(1000);
             }
 
             //到这里可以提取页面上的图片了
+            html = await globalData.Browser.GetHtmlSource();
+            var list = await HtmlAgilityPackUtil.GetImgFromHtmlAsync(html);
+            this.Dispatcher.Invoke(()=> {
+                this.listbox_ImageDynamic.ItemsSource = list;
+            }); 
+        }
+
+        private void listbox_ImageDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listbox_ImageDynamic_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
         }
         #endregion
 
+        #region 公共
+        public void ShowStatusText(string content)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.lbl_Status.Content = content;
+            });
+        }
+        #endregion
     }
 }

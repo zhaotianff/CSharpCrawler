@@ -13,7 +13,7 @@ namespace CSharpCrawler.Util
     /// </summary>
     public class HtmlAgilityPackUtil
     {
-        public async static Task<List<TagImg>> GetImgFromHtml(string html,bool isHotspot = false)
+        public async static Task<List<TagImg>> GetBingImgFromHtmlAsync(string html,bool isHotspot = false)
         {
             Task<List<TagImg>> task = Task.Run(() => {
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -69,14 +69,32 @@ namespace CSharpCrawler.Util
             return await task;
         }
 
-        public async static Task<List<TagImg>> GetImgFromUrl(string url,bool isHotspot = false)
+        public async static Task<List<TagImg>> GetBingImgFromUrlAsync(string url,bool isHotspot = false)
         {
             var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
             var userAgent= "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 TheWorld 7";
             var html =await WebUtil.GetHtmlSource(url,accept,userAgent,Encoding.UTF8);
-            return await GetImgFromHtml(html,isHotspot);
+            return await GetBingImgFromHtmlAsync(html,isHotspot);
         }
 
+
+        public async static Task<List<string>> GetImgFromHtmlAsync(string html, string imgTagName = "img")
+        {
+            Task<List<string>> task = Task.Run(() =>
+            {
+                List<string> list = new List<string>();            
+                var imgTagList = GetTagList(html, imgTagName);
+                foreach (var item in imgTagList)
+                {
+                    var srcAttr = item.Attributes["src"];
+                    if (srcAttr == null)
+                        continue;
+                    list.Add(srcAttr.Value);
+                }
+                return list;
+            });
+            return await task;
+        }
 
         public async static Task<string> ExtractSingleImage(string url)
         {

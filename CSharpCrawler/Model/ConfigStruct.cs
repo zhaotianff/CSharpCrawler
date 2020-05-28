@@ -54,12 +54,12 @@ namespace CSharpCrawler.Model
         /// <summary>
         /// 0-Manual 1-Auto
         /// </summary>
-        public int PageDownRule { get; set; } = -1;
+        public PageDownRuleType PageDownRule { get; set; } = PageDownRuleType.Auto;
 
         /// <summary>
         /// 0-url 1-post
         /// </summary>
-        public int ManualPageDownMethod { get; set; } = -1;
+        public PageDownMethodType PageDownMethod { get; set; } = PageDownMethodType.Url;
 
         public string PageDownUrl { get; set; }
 
@@ -80,5 +80,17 @@ namespace CSharpCrawler.Model
     {
         Static = 0,
         Dynamic = 1
+    }
+
+    public enum PageDownRuleType
+    {
+        Manual = 0,
+        Auto = 1
+    }
+
+    public enum PageDownMethodType
+    {
+        Url = 0,
+        Post = 1
     }
 }

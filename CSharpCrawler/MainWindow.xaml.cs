@@ -128,6 +128,15 @@ namespace CSharpCrawler
             IsDynamicBackground = false;
         }
 
+        private void SetDefaultBackground()
+        {
+            //后面从配置文件加载吧 
+            var themeList = GlobalDataUtil.GetInstance().CrawlerConfig.ThemeList;
+            var fileName = themeList.Last().Background;
+            fileName = fileName.Replace(".jpg", ".mp4");
+            SetBackgroundVideo(fileName);
+        }          
+
         public void SetTransparentBackground()
         {
             this.Background = Brushes.Transparent;
@@ -137,6 +146,8 @@ namespace CSharpCrawler
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowUtil.BlurWindow(this);
+
+            SetDefaultBackground();
         }
 
         private void mediaelement_MediaEnded(object sender, RoutedEventArgs e)

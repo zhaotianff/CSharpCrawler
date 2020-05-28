@@ -139,77 +139,79 @@ namespace CSharpCrawler.Util
             }
         }
 
-        public static string GetPageDownUrl(int page,string baseUrl,string pageDownUrl)
+        public static string GetPageDownUrlManual(string baseUrl, string pageDownUrl)
         {
-            var suffix1 = baseUrl.Substring(baseUrl.LastIndexOf("/")); ;
-            var suffix2 = pageDownUrl.Substring(pageDownUrl.LastIndexOf("/")) ;
-            var pattern = "[0-9]+";
-            var match1 = Regex.Matches(suffix1, pattern);
-            var match2 = Regex.Matches(suffix2, pattern);
-            var pageCurrent = 0;
-            var pageNext = 0;
+            //目前只考虑简单的翻页，太复杂的翻页还是具体情况具体分析
             var url = "";
-
-            if(match1.Count > 0 && match2.Count > 0 && match1.Count == match2.Count)
+            int i;
+            for (i = 0; i < baseUrl.Length; i++)
             {
-                for (int i = 0; i < match1.Count; i++)
-                {
-                    if(match1[i].Value == match2[i].Value)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        pageCurrent = Convert.ToInt32(match1[i].Value);
-                        pageNext = Convert.ToInt32(match2[i].Value);
+                if (baseUrl[i] == pageDownUrl[i])
+                    continue;
 
-                        if(pageNext > pageCurrent)
-                        {
-                            page++;
-                            url = suffix1.Replace(match1[i].Value, page.ToString());
-                            url = baseUrl.Replace(suffix1, url);
-                            break;
-                        }
-                    }
-                }
+                break;
             }
+
+            url = pageDownUrl.Substring(i);
+
+            //补齐
+            baseUrl = baseUrl.PadLeft(pageDownUrl.Length, ' ');
+
+            for (i = pageDownUrl.Length - 1; i >= 0; i--)
+            {
+                if (pageDownUrl[i] == baseUrl[i])
+                    continue;
+
+                break;
+            }
+
+            url = pageDownUrl.Substring(i);
+
+            var pageStr = RegexUtil.ExtractDigit(url);
+
+            if (string.IsNullOrEmpty(pageStr))
+                return pageDownUrl;
+
+            var page = 0;
+            int.TryParse(pageStr, out page);
+
+            url = url.Replace(pageStr, (++page).ToString());
+
+            //防止前面有数字重合的，再获取最后一段url
+            var subUrl = pageDownUrl.Substring(pageDownUrl.LastIndexOf("/") + 1);
+            url = pageDownUrl.Replace(subUrl, subUrl.Replace(pageStr, url));
             return url;
         }
 
-        public static async Task<string> GetPageDownUrlAuto(string url, int page = 0)
+        public static List<string> GetPageDownUrlAuto(string baseUrl)
         {
-            //example1
-            // home
-            // home/page.html
+            //自动获取翻页
 
-            //example2
-            // home/xxx.html
-            // home/xxx_page.html
+            //1、直接在url后面加 _page
+            //2、将url最后一段转换成数字加1
 
+            List<string> list = new List<string>();
+            var urlSuffix = baseUrl.Substring(baseUrl.LastIndexOf("."));
+            var subUrl = baseUrl.Substring(baseUrl.LastIndexOf("/") + 1).Replace(urlSuffix, "");
+            var resultUrl = "";
+            var pageStr = "";
+            var page = 0;
 
+            //获取最后一段数字区域
+            pageStr = RegexUtil.ExtractDigit(subUrl);
 
-            Task<string> task = Task<string>.Factory.StartNew(()=> {
-                if(IsEndWithHtml(url))
-                {
-                    //使用正则，查找页码
-                    var suffix = url.Substring(url.LastIndexOf("/")+1);
-                    //使用简单的方式
-                    
-                }
-                else
-                {
-                    //直接使用page
-                    //如果available，访问
+            if (int.TryParse(pageStr, out page) == true)
+                resultUrl = subUrl.Replace(pageStr, (++page).ToString());
 
-                    //如果unavailable,访问当前url，看能不能找到下一页 todo
-                    //大多会使用相对地址 如list_3_3.html
-                    //这样查找可能会简单一点
-                    //睡觉
-                }
-                return "";
-            });
-            var pageDownUrl = await task;
-            return pageDownUrl;
+            resultUrl = baseUrl.Replace(subUrl, resultUrl);
+            //添加到url列表中
+            list.Add(resultUrl);
+
+            resultUrl = subUrl + "_2";
+            resultUrl = baseUrl.Replace(subUrl, resultUrl);
+            //添加到url列表中
+            list.Add(resultUrl);
+            return list;
         }
     }
 }

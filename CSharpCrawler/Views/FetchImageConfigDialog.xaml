@@ -39,7 +39,7 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="{DynamicResource AccentSkyBlueColor}" MouseLeftButtonDown="Grid_MouseDown" CornerRadius="10,10,0,0">
+            <Border Grid.Row="0" Background="{DynamicResource AccentBaseColor}" MouseLeftButtonDown="Grid_MouseDown" CornerRadius="10,10,0,0">
                 <Label Content="图片抓取配置" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource LightColor}"></Label>
             </Border>
 
@@ -94,7 +94,7 @@
 
             <Grid Grid.Row="2">
                 <Grid.Background>
-                    <SolidColorBrush Color="Silver" Opacity=".1"/>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" Opacity=".5"/>
                 </Grid.Background>
                 <Button Content="确定" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,100,0" Name="btn_OK" Click="btn_OK_Click"/>
                 <Button Content="取消" HorizontalAlignment="Right" Style="{StaticResource GlobalButtonStyle}" Margin="0,0,5,0" Name="btn_Cancel" Click="Btn_Cancel_Click"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,29 @@ namespace CSharpCrawler.Views
             {
                 this.scaleTransform.CenterY = value;
             }
+        }
+
+        public void Init(PageDownRuleType pageDownRule,PageDownMethodType pageDownMethod,string pageDownUrl,string postData)
+        {
+            if(pageDownRule == PageDownRuleType.Auto)
+            {
+                this.cbx_AutoRule.IsChecked = true;
+            }
+            else
+            {
+                this.cbx_ManualRule.IsChecked = true;
+                this.tbox_url.Text = pageDownUrl;
+
+                if (pageDownMethod == PageDownMethodType.Url)
+                {
+                    this.cbx_url.IsChecked = true;
+                }
+                else
+                {
+                    this.cbx_post.IsChecked = true;
+                    this.tbox_postdata.Text = postData;
+                }
+            }        
         }
 
         public FetchImageConfigDialog()

@@ -269,7 +269,9 @@ namespace CSharpCrawler.Views
 
         private void Btn_Config_Click(object sender, RoutedEventArgs e)
         {
+            var imageConfig = globalData.CrawlerConfig.ImageConfig;
             FetchImageConfigDialog fetchImageConfigDialog = new FetchImageConfigDialog();
+            fetchImageConfigDialog.Init(imageConfig.PageDownRule, imageConfig.PageDownMethod, imageConfig.PageDownUrl, imageConfig.PageDownPostData);
             Point point = this.btn_Config.PointToScreen(new Point(0,0));
             fetchImageConfigDialog.X = point.X;
             fetchImageConfigDialog.Y = point.Y;
@@ -277,37 +279,50 @@ namespace CSharpCrawler.Views
             {
                 if(fetchImageConfigDialog.cbx_ManualRule.IsChecked == true)
                 {
-                    globalData.CrawlerConfig.ImageConfig.PageDownRule = 0;
+                    imageConfig.PageDownRule = PageDownRuleType.Manual;
 
                     if(fetchImageConfigDialog.cbx_url.IsChecked == true)
                     {
-                        globalData.CrawlerConfig.ImageConfig.ManualPageDownMethod = 0;
-                        globalData.CrawlerConfig.ImageConfig.PageDownUrl = fetchImageConfigDialog.tbox_url.Text;
+                        imageConfig.PageDownMethod = PageDownMethodType.Url;
+                        imageConfig.PageDownUrl = fetchImageConfigDialog.tbox_url.Text;
                     }
                     else
                     {
-                        globalData.CrawlerConfig.ImageConfig.ManualPageDownMethod = 1;
-                        globalData.CrawlerConfig.ImageConfig.PageDownPostData = fetchImageConfigDialog.tbox_postdata.Text;
+                        imageConfig.PageDownMethod = PageDownMethodType.Post;
+                        imageConfig.PageDownPostData = fetchImageConfigDialog.tbox_postdata.Text;
                     }
                 }
                 else
                 {
-                    globalData.CrawlerConfig.ImageConfig.PageDownRule = 1;
+                    imageConfig.PageDownRule =  PageDownRuleType.Auto;
                 }
             }
         }
 
         private void btn_PageDown_Click(object sender, RoutedEventArgs e)
         {
-            if(globalData.CrawlerConfig.ImageConfig.PageDownRule == -1)
-            {
-                EMessageBox.Show("未配置翻页规则，无法跳转到下一页");
-                return;
-            }
+            var baseUrl = this.tbox_Url.Text.Trim();
 
-            var urlArray = globalData.CrawlerConfig.ImageConfig.PageDownUrl.Split(';');
-            var url = UrlUtil.GetPageDownUrl(Page++, urlArray[0], urlArray[1]);
-            this.tbox_Url.Text = url;
+            if(globalData.CrawlerConfig.ImageConfig.PageDownRule == PageDownRuleType.Auto)
+            {
+                var urlList = UrlUtil.GetPageDownUrlAuto(baseUrl);
+                var url = "";
+
+                foreach (var item in urlList)
+                {
+                    if (WebUtil.IsResourceAvailable(item) == true)
+                    {
+                        url = item;
+                        break;
+                    }
+                }
+                this.tbox_Url.Text = url;            
+            }
+            else
+            {
+                var url = UrlUtil.GetPageDownUrlManual(baseUrl,globalData.CrawlerConfig.ImageConfig.PageDownUrl);
+                this.tbox_Url.Text = url;
+            }
             btn_Surfing_Click(null, null);
         }
 

@@ -21,8 +21,14 @@ namespace CSharpCrawler.Views
     /// </summary>
     public partial class AnalysisPacket : Page
     {
+#if DEBUG
         private const string FiddlerMarkDownPath = "../../../AnalysisPacket_Fiddler.md";
         private const string FiddlerTempHtmlPath = "../../../AnalysisPacket_Fiddler.html";
+#else
+        private const string FiddlerMarkDownPath = "./AnalysisPacket_Fiddler.md";
+        private const string FiddlerTempHtmlPath = "./AnalysisPacket_Fiddler.html";
+#endif
+
         public AnalysisPacket()
         {
             InitializeComponent();

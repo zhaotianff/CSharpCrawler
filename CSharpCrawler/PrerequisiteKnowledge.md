@@ -67,7 +67,7 @@ User-Agent|简单UA，它是一个特殊的字符串头，可以使服务器识�
 Content-Type|也叫互联网媒体类型（Internet Media Type）或都MIME类型，在HTTP协议消息头中，它用来表示具体请求中的媒体类型信息。如text/html代表HTML格式，image/gif代表gif图片。如果MIME类型指定不对，可能会导致POST提交后，无法正常响应，从而获取不到自己想要的内容。如：Content-Type:application/x-www-form-urlencoded
 
 <p align="center">
- <img align="center" alt="Request Header" src="ScreenShots/RequestHeaders.png" />
+ <img align="center" alt="Request Header" src="doc/RequestHeaders.png" />
 </p>
 <p align="center">请求头</p>
 
@@ -113,7 +113,7 @@ Set-Cookie|设置Cookie。响应头中的Set-Cookie告诉浏览器需要将此�
 Expires|指定响应的过期时间，可以使代理服务器或浏览器将加载的内容更新到缓存中，如果再次访问时，就可以直接从缓存中加载，降低服务器的负载，缩短加载时间
 
 <p align="center">
- <img align="center" alt="Response Header" src="ScreenShots/ResponseHeaders.png" />
+ <img align="center" alt="Response Header" src="doc/ResponseHeaders.png" />
 </p>
 <p align="center">响应头</p>
 
@@ -122,7 +122,7 @@ Expires|指定响应的过期时间，可以使代理服务器或浏览器将加
   最重要的当属响应体的内容了。响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的 HTML 代码；请求一张图片时，它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的 内容就是响应体。
 
 <p align="center">
- <img align="center" alt="Response Body" src="ScreenShots/ResponseBody.png" />
+ <img align="center" alt="Response Body" src="doc/ResponseBody.png" />
 </p>
 <p align="center">响应体</p>
 
@@ -149,7 +149,7 @@ Session和 Cookies是为了保持 HTTP 连接状态。HTTP本身是一个无状�
 ## Cookie的结构  
 
 <p align="center">
- <img align="center" alt="Cookies" src="ScreenShots/Cookies.png" />
+ <img align="center" alt="Cookies" src="doc/Cookies.png" />
 </p>
 <p align="center">Cookie结构</p>
 
@@ -193,8 +193,12 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
 2. 使用[AngleSharp](https://github.com/AngleSharp/AngleSharp)/[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)等支持DOM的HTML解析库。  
    HtmlAgilityPack支持XPath查询，暂不支持CSS选择器。AngleSharp支持CSS选择器，暂不支持XPath查询
 
+附加：
+   1. 如果使用的是CEF，可以执行js来进行信息提取
+   2. 如果使用的是Selenium，可直接使用Selenium自带的CSS选择器和XPath查询来进行信息提取
+
 * 保存数据  
-这里得看自己需求，推荐SQLite/Berkeley DB等嵌入式数据库.
+这里得看自己需求，推荐SQLite/Berkeley DB等嵌入式数据库，Redis和Mongodb也是不错的选择。
 
 **如何抓取动态网页的内容**  
 
@@ -221,7 +225,7 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
 深网是Web的一部分，与浅网对立。浅网是互联网上搜索引擎可以抓到的那部分网络。据估计，互联网中其实约90%的网络都是深网。
 因为谷歌不能做像表单提交这类事情，也找不到那些没有直接链接到顶层域名上的网页，或者因为有robots.txt禁止而不能查看网站，
 所以浅网的数量相对深网还是比较少的。
-* 暗网
+* 暗网  
 暗网，也被称为darknet，则完全是另一种网络。它们也建立在已有的网络硬件基础上，但是使用Tor或者另一个客户端，带有运行在HTTP之上的应用协议，
 提供了一个信息交换的安全渠道。(可以查看这篇文章来获取暗网的更多介绍：https://www.cnblogs.com/lsdb/p/10018830.html)
 

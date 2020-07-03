@@ -193,9 +193,9 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
 2. 使用[AngleSharp](https://github.com/AngleSharp/AngleSharp)/[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)等支持DOM的HTML解析库。  
    HtmlAgilityPack支持XPath查询，暂不支持CSS选择器。AngleSharp支持CSS选择器，暂不支持XPath查询
 
-附加：
-   1. 如果使用的是CEF，可以执行js来进行信息提取
-   2. 如果使用的是Selenium，可直接使用Selenium自带的CSS选择器和XPath查询来进行信息提取
+    附加：   
+    1. 如果使用的是CEF，可以执行js来进行信息提取
+    2. 如果使用的是Selenium，可直接使用Selenium自带的CSS选择器和XPath查询来进行信息提取
 
 * 保存数据  
 这里得看自己需求，推荐SQLite/Berkeley DB等嵌入式数据库，Redis和Mongodb也是不错的选择。

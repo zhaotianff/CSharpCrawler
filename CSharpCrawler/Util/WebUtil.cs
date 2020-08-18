@@ -237,25 +237,23 @@ namespace CSharpCrawler.Util
 
             try
             {
-                using (request = (HttpWebRequest)WebRequest.Create(url))
-                {
-                    request.Method = "POST";
-                    byte[] postdatabyte = Encoding.UTF8.GetBytes(postData);
-                    request.ContentLength = postdatabyte.Length;
-                    request.AllowAutoRedirect = true;
-                    request.CookieContainer = cookieContainer;
-                    request.KeepAlive = true;
-                    request.ContentType = "application/x-www-form-urlencoded";
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                byte[] postdatabyte = Encoding.UTF8.GetBytes(postData);
+                request.ContentLength = postdatabyte.Length;
+                request.AllowAutoRedirect = true;
+                request.CookieContainer = cookieContainer;
+                request.KeepAlive = true;
+                request.ContentType = "application/x-www-form-urlencoded";
 
-                    Stream stream = await request.GetRequestStreamAsync();
-                    stream.Write(postdatabyte, 0, postdatabyte.Length);
-                    stream.Close();
+                Stream stream = await request.GetRequestStreamAsync();
+                stream.Write(postdatabyte, 0, postdatabyte.Length);
+                stream.Close();
 
-                    response = await request.GetResponseAsync();
-                    var cookies = ((HttpWebResponse)response).Cookies;
-                    cookieContainer.Add(cookies);
-                    return cookieContainer;
-                }                  
+                response = await request.GetResponseAsync();
+                var cookies = ((HttpWebResponse)response).Cookies;
+                cookieContainer.Add(cookies);
+                return cookieContainer;
             }
             catch (Exception ex)
             {

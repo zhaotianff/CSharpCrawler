@@ -79,7 +79,7 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
   * 动态网页链接抓取
   * 限定抓取当前页面的子链接
     
-* 图片抓取(更新中)
+* 图片抓取
   * 抓取指定url页面中的图片，通过配置url的页码规则，来进行翻页。
   * 自动获取下一页
 
@@ -118,13 +118,14 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 小例子-通用抓取
   * 电商类网站
   * 新闻类网站(待更新)
+  
+* 将网页保存为图片/PDF
 	
 ### Roadmap
 * Url Encode/Decode 原理
 * 抓包工具Charles的使用
 * 使用抓包工具分析网站接口
 * 使用抓包工具分析APP接口
-* 将网页保存为图片/PDF(使用puppeteer)
 * 验证码识别(字符验证码，滑块验证码)
 * BloomFilter算法
 * NLP基础
@@ -139,9 +140,10 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 	
     
 ### 开发环境
-Visual Studio 2013 + .Net 4.5<br/>
+~~Visual Studio 2013 + .Net 4.5<br/>~~
+Visual Studio 2015 + .Net 4.5.2<br/>
 
-**如果没有安装Blend，GAC中没有System.Windows.Interactivity.dll，需要自己引用bin/x64/Debug目录下的System.Windows.Interactivity.dll**
+**如果没有安装Blend SDK，GAC中没有System.Windows.Interactivity.dll，需要自己引用bin/x64/Debug目录下的System.Windows.Interactivity.dll**
 
 **编译时可能会显示各种库找不到，Nuget还原下包就可以正常编译了**
 
@@ -155,6 +157,7 @@ Visual Studio 2013 + .Net 4.5<br/>
 * [Json.NET](https://github.com/JamesNK/Newtonsoft.Json)
 * [Selenium](https://github.com/SeleniumHQ/selenium)
 * [AngleSharp](https://github.com/AngleSharp/AngleSharp)
+* [Puppeteer Sharp](https://github.com/hardkoded/puppeteer-sharp)
 
 ### 软件截图
 <p align="center">

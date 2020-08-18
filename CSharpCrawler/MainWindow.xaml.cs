@@ -276,5 +276,10 @@ namespace CSharpCrawler
         {
             this.frame.Content = multiThread;
         }
+
+        private void btn_SaveWebPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

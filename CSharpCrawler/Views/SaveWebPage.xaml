@@ -1,0 +1,39 @@
+﻿<Page x:Class="CSharpCrawler.Views.SaveWebPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CSharpCrawler.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="SaveWebPage">
+
+    <Grid>
+        <TabControl Background="Transparent">
+            <TabItem Header="保存网页为图片" Style="{StaticResource StyleTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Label Content="输入网址" VerticalAlignment="Center"></Label>
+                        <TextBox Margin="80,0,210,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>                       
+                        <Button Content="访问" HorizontalAlignment="Right" Margin="0,0,110,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_Surfing" Click="btn_Surfing_Click"></Button>
+                        <Button Content="保存网页为图片" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsImage" Click="btn_SaveAsImage_Click"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Column="0" Name="frame_Browser"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

@@ -44,6 +44,7 @@ namespace CSharpCrawler
         AdvanceSelect advanceSelect = new AdvanceSelect();
         UniversalCrawl universalCrawl = new UniversalCrawl();
         MultiThread multiThread = new MultiThread();
+        SaveWebPage saveWebPage = new SaveWebPage();
 
         ToggleButton toggleButton = null;
 
@@ -279,7 +280,7 @@ namespace CSharpCrawler
 
         private void btn_SaveWebPage_Click(object sender, RoutedEventArgs e)
         {
-
+            this.frame.Content = saveWebPage;
         }
     }
 }

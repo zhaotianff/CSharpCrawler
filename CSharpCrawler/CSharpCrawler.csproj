@@ -241,6 +241,9 @@
     <Compile Include="Views\RobotsProtocol.xaml.cs">
       <DependentUpon>RobotsProtocol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SaveWebPage.xaml.cs">
+      <DependentUpon>SaveWebPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
@@ -414,6 +417,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RobotsProtocol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaveWebPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,8 +19,13 @@
 
                     <Grid>
                         <Label Content="输入网址" VerticalAlignment="Center"></Label>
-                        <TextBox Margin="80,0,210,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>                       
-                        <Button Content="访问" HorizontalAlignment="Right" Margin="0,0,110,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_Surfing" Click="btn_Surfing_Click"></Button>
+                        <TextBox Margin="80,0,310,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
+                        <ComboBox Width="100" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Right" Margin="0,0,200,0" SelectedIndex="0" VerticalContentAlignment="Center" Name="comboxRenderMode">
+                            <ComboBoxItem>使用RenderTargetBitmap</ComboBoxItem>
+                            <ComboBoxItem>使用Puppeteer-Sharp</ComboBoxItem>
+                        </ComboBox>
+                        <Button Content="访问" HorizontalAlignment="Right" Margin="0,0,105,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_Surfing" Click="btn_Surfing_Click"></Button>
+                       
                         <Button Content="保存网页为图片" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsImage" Click="btn_SaveAsImage_Click"/>
                     </Grid>
 
@@ -31,6 +36,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Frame Grid.Column="0" Name="frame_Browser"/>
+
+                        <Image Grid.Column="1" Name="image" Stretch="UniformToFill">
+                            
+                        </Image>
                     </Grid>
                 </Grid>
             </TabItem>

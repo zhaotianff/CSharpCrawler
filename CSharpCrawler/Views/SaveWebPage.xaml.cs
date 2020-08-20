@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpCrawler.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZT.Enhance;
 
 namespace CSharpCrawler.Views
 {
@@ -25,14 +27,17 @@ namespace CSharpCrawler.Views
             InitializeComponent();
         }
 
-        private void btn_Surfing_Click(object sender, RoutedEventArgs e)
-        {
-            this.frame_Browser.Navigate(new Uri(this.tbox_Url.Text.Trim()));
-        }
 
         private void btn_SaveAsImage_Click(object sender, RoutedEventArgs e)
         {
-
+            var fileName = Environment.CurrentDirectory + "\\download\\web.jpg";
         }
+
+        private void SaveByRenderTargetBitmap()
+        {
+            
+            var result = ImageUtil.SaveControlContentAsImage(this, fileName);
+
+
     }
 }

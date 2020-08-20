@@ -165,6 +165,7 @@
     <Compile Include="Util\EncryptionUtil.cs" />
     <Compile Include="Util\GlobalDataUtil.cs" />
     <Compile Include="Util\HtmlAgilityPackUtil.cs" />
+    <Compile Include="Util\ImageUtil.cs" />
     <Compile Include="Util\JsonUtil.cs" />
     <Compile Include="Util\RegexPattern.cs" />
     <Compile Include="Util\RegexUtil.cs" />

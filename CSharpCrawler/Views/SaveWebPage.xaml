@@ -23,18 +23,10 @@
                         <Button Content="保存网页为图片" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsImage" Click="btn_SaveAsImage_Click"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Frame Grid.Column="0" Name="frame_Browser"/>
-
-                        <Image Grid.Column="1" Name="image" Stretch="UniformToFill">
-
+                    <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                        <Image Grid.Column="1" Name="image" Stretch="None">
                         </Image>
-                    </Grid>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
         </TabControl>

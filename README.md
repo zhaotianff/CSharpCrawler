@@ -141,7 +141,8 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
     
 ### 开发环境
 ~~Visual Studio 2013 + .Net 4.5<br/>~~
-Visual Studio 2015 + .Net 4.5.2<br/>
+~~Visual Studio 2015 + .Net 4.5.2<br/>~~
+Visual Studio 2017 + .Net 4.7.2
 
 **如果没有安装Blend SDK，GAC中没有System.Windows.Interactivity.dll，需要自己引用bin/x64/Debug目录下的System.Windows.Interactivity.dll**
 

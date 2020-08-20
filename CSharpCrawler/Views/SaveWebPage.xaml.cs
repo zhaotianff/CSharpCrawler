@@ -31,13 +31,20 @@ namespace CSharpCrawler.Views
         private void btn_SaveAsImage_Click(object sender, RoutedEventArgs e)
         {
             var fileName = Environment.CurrentDirectory + "\\download\\web.jpg";
-        }
-
-        private void SaveByRenderTargetBitmap()
-        {
-            
             var result = ImageUtil.SaveControlContentAsImage(this, fileName);
 
-
+            if (result == true)
+            {
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri(fileName, UriKind.Absolute);
+                bi.EndInit();
+                this.image.Source = bi;
+            }
+            else
+            {
+                EMessageBox.Show("保存网页截图失败");
+            }
+        }
     }
 }

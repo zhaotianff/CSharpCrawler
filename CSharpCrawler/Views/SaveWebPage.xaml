@@ -10,7 +10,7 @@
 
     <Grid>
         <TabControl Background="Transparent">
-            <TabItem Header="保存网页为图片" Style="{StaticResource StyleTabItem}">
+            <TabItem Header="保存网页为图片/PDF" Style="{StaticResource StyleTabItem}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -19,8 +19,9 @@
 
                     <Grid>
                         <Label Content="输入网址" VerticalAlignment="Center"></Label>
-                        <TextBox Margin="80,0,110,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
-                        <Button Content="保存网页为图片" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsImage" Click="btn_SaveAsImage_Click"/>
+                        <TextBox Margin="80,0,210,0" VerticalContentAlignment="Center" Name="tbox_Url" Style="{StaticResource TextBoxStyle}"></TextBox>
+                        <Button Content="保存网页为图片" HorizontalAlignment="Right" Margin="0,0,110,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsImage" Click="btn_SaveAsImage_Click"/>
+                        <Button Content="保存网页为PDF" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{StaticResource GlobalButtonStyle}" Name="btn_SaveAsPDF" Click="btn_SaveAsPDF_Click"/>
                     </Grid>
 
                     <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">

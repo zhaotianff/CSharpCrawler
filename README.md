@@ -52,6 +52,7 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 抓取动态网页
   * 使用[CEFSharp](https://github.com/cefsharp/CefSharp)来抓取动态网页
   * 使用WebBrowser(IE)来抓取动态网页
+  * 使用[Puppeteer](https://github.com/hardkoded/puppeteer-sharp)来抓取动态网页
   * 使用[Selenium](https://github.com/SeleniumHQ/selenium)来抓取动态网页
 
 * WebAPI调用

@@ -306,5 +306,72 @@ namespace CSharpCrawler.Views
         }
         #endregion
 
+        #region Puppeteer 事件
+
+        private async void btn_Fetch_Puppeteer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var url = this.tbox_Url_Puppeteer.Text.Trim();
+
+                if(string.IsNullOrEmpty(url))
+                {
+                    ShowStatusTextPuppeteer("请输入网址");
+                    return;
+                }
+
+                var html = await GetHtmlSourceByPuppeteer(url);
+                this.rtbox_Resource_Puppeteer.Document = new FlowDocument(new Paragraph(new Run(html)));
+            }
+            catch(Exception ex)
+            {
+                ShowStatusTextPuppeteer(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Puppeteer 方法
+
+        private async Task<string> GetHtmlSourceByPuppeteer(string url)
+        {
+            //增加一些状态消息 
+            ShowStatusTextPuppeteer("正在下载Chromium浏览器");
+
+            //下载Chromium浏览器
+            await new PuppeteerSharp.BrowserFetcher().DownloadAsync(PuppeteerSharp.BrowserFetcher.DefaultRevision);
+
+            ShowStatusTextPuppeteer("初始化浏览器");
+            var options = new PuppeteerSharp.LaunchOptions();
+
+            var showBrowerFlag = this.cbox_ShowChrome_Puppeteer.IsChecked.Value;
+            //如果显示浏览器，需要设置为false
+            options.Headless = showBrowerFlag == true ? false : true;
+            //启动浏览器
+            var browser = await PuppeteerSharp.Puppeteer.LaunchAsync(options);
+
+            //打开一个标签
+            var page = await browser.NewPageAsync();
+            ShowStatusTextPuppeteer($"打开网址{url}");
+            await page.GoToAsync(url);
+
+            var html =  await page.GetContentAsync();
+
+            //关闭浏览器
+            browser.Disconnect();
+            browser.Dispose();
+            ShowStatusTextPuppeteer("就绪");
+            return html;
+        }
+
+        private void ShowStatusTextPuppeteer(string text)
+        {
+            this.Dispatcher.Invoke(() => {
+                this.lbl_StatusText_Puppeteer.Content = text;
+            });
+        }
+        #endregion
+
+
     }
 }

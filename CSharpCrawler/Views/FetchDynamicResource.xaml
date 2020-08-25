@@ -95,6 +95,39 @@
                     </StatusBar>
                 </Grid>
             </TabItem>
+            <TabItem Header="PuppeteerSharp(Headless Chromium)" Style="{StaticResource StyleTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="网址" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Column="1" Name="tbox_Url_Puppeteer" VerticalContentAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+
+                        <Grid Grid.Column="2">
+                            <CheckBox Content="显示浏览器" VerticalAlignment="Center" HorizontalAlignment="Left" Name="cbox_ShowChrome_Puppeteer"  Style="{StaticResource CheckBoxStyle}"></CheckBox>
+                            <Button Content="获取" HorizontalAlignment="Right" Name="btn_Fetch_Puppeteer" Click="btn_Fetch_Puppeteer_Click" VerticalAlignment="Center" Style="{StaticResource GlobalButtonStyle}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Name="grid_Content_Puppeteer">
+                        <RichTextBox Name="rtbox_Resource_Puppeteer" ScrollViewer.VerticalScrollBarVisibility="Auto"  Background="Transparent"/>
+                    </Grid>
+
+                    <StatusBar Grid.Row="2" Background="Transparent">
+                        <Label Name="lbl_StatusText_Puppeteer" Content="就绪"/>
+                      
+                    </StatusBar>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>

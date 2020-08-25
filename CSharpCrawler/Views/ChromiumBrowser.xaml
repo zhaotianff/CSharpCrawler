@@ -10,6 +10,10 @@
     
     <!--示例程序中很多动态抓取都是由本窗体完成-->
     <!--我隐藏了本窗体，可以设置为显示(更改Visibility和Opacity)，以便查看网页加载状态-->
+    <!--有时可能会遇到XAML解析器无法解析 chrome:ChromiumWebBrowser的问题，提示无法找到ChromiumWebBrowser-->
+    <!--我的做法-->
+    <!--1、改变解决方案平台为Any CPU，再修改为x64-->
+    <!--2、退出Visual Studio，删除编译目录下的obj文件夹，再次打开项目-->
     <Grid>
         <chrome:ChromiumWebBrowser x:Name="browser" FrameLoadEnd="browser_FrameLoadEnd"/>
     </Grid>

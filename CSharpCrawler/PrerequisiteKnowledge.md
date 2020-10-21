@@ -181,8 +181,10 @@ Cookie的httponly属性。或此属性为true，则只有在HTTP头中会带有�
 这是.Net类库提供的类，可以方便的抓取网页源码，优点是使用方便，缺点是不能抓取动态页面。  
 2. [使用Selenium](https://www.cnblogs.com/zhaotianff/p/11330810.html)  
 Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬虫。通过使用不同的浏览器驱动，可以支持不同的浏览器，包括IE（7, 8, 9, 10, 11），Mozilla Firefox，Safari，Google Chrome，Opera等.  优点是可以获取动态页面，而且可以模拟鼠标点击，拖动等操作。缺点是会弹出浏览器窗体。·
-3. 嵌入浏览器  
-可以使用WebBrowser/[CEF](https://github.com/cefsharp/CefSharp).原理是使用内嵌浏览器打开一个页面，再获取页面源码。优点是可以抓取动态页面，缺点是抓取是被动的，你不能主动控制。
+3. [嵌入浏览器](https://www.cnblogs.com/zhaotianff/p/9556270.html)  
+可以使用WebBrowser/[CEF](https://github.com/cefsharp/CefSharp)等浏览器控件。抓取原理是使用内嵌浏览器打开一个页面，再获取页面源码。这种方式的优点是可以抓取动态页面，缺点是抓取是被动的，不能主动控制。
+4. [无头浏览器](https://www.cnblogs.com/zhaotianff/p/13528507.html)  
+无头浏览器和嵌入浏览器获取网页源码的原理是一样的，都是使用浏览器打开一个页面，再获取源码。但它是以Headless方式运行，可以不用显示在界面上。在C#中常用的是Puppeteer-Sharp，这个库还支持主动等待抓取结果。
 
 * 提取网页信息  
 
@@ -194,7 +196,7 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
    HtmlAgilityPack支持XPath查询，暂不支持CSS选择器。AngleSharp支持CSS选择器，暂不支持XPath查询
 
     附加：   
-    1. 如果使用的是CEF，可以执行js来进行信息提取
+    1. 如果使用的是CEF/Puppeteer-Sharp，可以执行js来进行信息提取
     2. 如果使用的是Selenium，可直接使用Selenium自带的CSS选择器和XPath查询来进行信息提取
 
 * 保存数据  
@@ -203,7 +205,7 @@ Selenium本身是一个自动化浏览器测试工具，但也可以被用于爬
 **如何抓取动态网页的内容**  
 
 动态网页指的是采用 了Ajax 、前端模块化工具来构建，整个网页由 JavaScript 动态渲染出来的页面。    
-对于这种情况，我们可以分析其后台 Ajax 接口，也可使用 Selenium/CEF这样的库来实现模拟 JavaScript渲染 。
+对于这种情况，我们可以分析其后台 Ajax 接口，也可使用 Selenium/CEF/Puppeteer-Sharp这样的库来实现模拟 JavaScript渲染 。
 
 
 

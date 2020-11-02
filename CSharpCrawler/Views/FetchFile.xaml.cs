@@ -165,6 +165,7 @@ namespace CSharpCrawler.Views
             this.Dispatcher.Invoke(()=> {
                 paragraph.Inlines.Add(new Run(DateTime.Now.ToString() + "\t" +  text + "\r\n"));
                 this.rtbox_Status.Document = new FlowDocument(paragraph);
+                this.rtbox_Status.ScrollToEnd();
             });
         }
     }

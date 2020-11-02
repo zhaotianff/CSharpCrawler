@@ -21,7 +21,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <RichTextBox Background="Transparent" Name="rtbox_Status"></RichTextBox>
+            <RichTextBox Background="Transparent" Name="rtbox_Status" ScrollViewer.VerticalScrollBarVisibility="Auto"></RichTextBox>
         </Grid>
     </Grid>
 </UserControl>

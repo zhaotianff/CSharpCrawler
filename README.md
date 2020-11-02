@@ -149,6 +149,8 @@ Visual Studio 2017 + .Net 4.7.2
 
 **编译时可能会显示各种库找不到，Nuget还原下包就可以正常编译了**
 
+**更新CEF至85.3.130版本后，会出现找不到ChromiumWebBrowser的问题。解决方法是：还原Nuget包后重新打开项目**
+
 **Berkeley DB需要引用bin/x64/Debug目录下的libdb_dotnet181.dll，运行时还需要libdb_csharp181.dll和libdb181.dll，已置于bin/x64/Debug目录下**
 
 ### 使用的三方组件

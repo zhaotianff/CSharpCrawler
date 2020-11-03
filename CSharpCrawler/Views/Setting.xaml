@@ -38,6 +38,8 @@
         </WrapPanel>
         <Label Content="背景透明度"></Label>
         <Slider Style="{StaticResource SliderStyle}" Width="100" SnapsToDevicePixels="True" Minimum="0" Maximum="1" Height="10" HorizontalAlignment="Left" ValueChanged="slider_Opacity_ValueChanged" Margin="10" Name="slider_Opacity"/>
+        <Label Content="背景嵌入"></Label>
+        <CheckBox Style="{StaticResource CheckBoxStyle}" Content="启用背景嵌入" Margin="5" ToolTip="启用背景嵌入功能后，毛玻璃效果会更加明显" Name="cbx_HostWindow" Checked="cbx_HostWindow_Checked" Unchecked="cbx_HostWindow_Unchecked"/>
         <Label Content="主题"></Label>
         <WrapPanel Name="ThemeSettingPanel">
             <Border Width="100" Height="100" Margin="10" CornerRadius="10" Cursor="Hand" MouseDown="ChangeTheme_MouseDown" BorderThickness="1" BorderBrush="{DynamicResource AccentBaseColor}">

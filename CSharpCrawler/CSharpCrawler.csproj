@@ -247,6 +247,7 @@
     <Compile Include="Util\SQLiteUtil.cs" />
     <Compile Include="Util\Urlutil.cs" />
     <Compile Include="Util\WebUtil.cs" />
+    <Compile Include="Util\WinAPI.cs" />
     <Compile Include="Util\WindowUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
     <Compile Include="Views\AdvanceSelect.xaml.cs">
@@ -300,6 +301,9 @@
     </Compile>
     <Compile Include="Views\FetchUrl.xaml.cs">
       <DependentUpon>FetchUrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HostWindow.xaml.cs">
+      <DependentUpon>HostWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InvokeWebAPI.xaml.cs">
       <DependentUpon>InvokeWebAPI.xaml</DependentUpon>
@@ -472,6 +476,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FetchUrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HostWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -48,7 +48,10 @@ namespace CSharpCrawler
 
         ToggleButton toggleButton = null;
 
+        HostWindow hostWindow = new HostWindow();
+
         public bool IsDynamicBackground { get; set; } = false;
+        public bool IsHostBackground { get; set; } = true;
 
         public MainWindow()
         {
@@ -56,6 +59,7 @@ namespace CSharpCrawler
             
             InitializeCommands();
             Application.Current.MainWindow = this;
+            hostWindow.Show();
         }
 
         #region Commands
@@ -113,7 +117,8 @@ namespace CSharpCrawler
         }
         #endregion
 
-        public void SetBackgroundVideo(string path,UriKind uriKind = UriKind.Relative)
+        #region Beautify
+        public void SetBackgroundVideo(string path, UriKind uriKind = UriKind.Relative)
         {
             mediaelement.Source = new Uri(path, uriKind);
             mediaelement.Play();
@@ -123,32 +128,69 @@ namespace CSharpCrawler
 
         public void StopBackgroundVideo()
         {
-            mediaelement.Stop();
-            mediaelement.Visibility = Visibility.Hidden;
+            if(IsHostBackground)
+            {
+                hostWindow.StopBackgroundVideo();
+            }
+            else
+            {
+                mediaelement.Stop();
+                mediaelement.Visibility = Visibility.Hidden;
+            }
 
             IsDynamicBackground = false;
         }
 
-        private void SetDefaultBackground()
+        public void SetDefaultBackground()
         {
             //后面从配置文件加载吧 
             var themeList = GlobalDataUtil.GetInstance().CrawlerConfig.ThemeList;
             var fileName = themeList.Last().Background;
             fileName = fileName.Replace(".jpg", ".mp4");
-            SetBackgroundVideo(fileName);
-        }          
+
+            if (IsHostBackground)
+            {
+               SetHostBackgroundVideo(fileName);
+               this.Activate();
+            }
+            else
+            {
+               SetBackgroundVideo(fileName);
+            }
+        }
+
+        public void SetHostBackgroundImage(string path)
+        {
+            hostWindow.StopBackgroundVideo();
+            hostWindow.SetBackgroundImage(path);
+            this.Visibility = Visibility.Hidden;
+            this.Visibility = Visibility.Visible;
+        }
+
+        public void SetHostBackgroundVideo(string path, UriKind uriKind = UriKind.Relative)
+        {
+            hostWindow.SetBackgroundVideo(path, uriKind);
+            this.Visibility = Visibility.Hidden;
+            this.Visibility = Visibility.Visible;
+        }
+
+        public void HideHostWindow()
+        {
+            hostWindow.StopBackgroundVideo();
+            hostWindow.Visibility = Visibility.Hidden;
+            IsHostBackground = false;
+        }
+
+        public void ShowHostWindow()
+        {
+            hostWindow.ShowWindow();
+            IsHostBackground = true;
+        }
 
         public void SetTransparentBackground()
         {
             this.Background = Brushes.Transparent;
             mediaelement.Visibility = Visibility.Visible;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            WindowUtil.BlurWindow(this);
-
-            SetDefaultBackground();
         }
 
         private void mediaelement_MediaEnded(object sender, RoutedEventArgs e)
@@ -157,6 +199,79 @@ namespace CSharpCrawler
             mediaelement.Play();
         }
 
+        #endregion
+
+        #region Initialization
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowUtil.BlurWindow(this);
+            InitializeHostWindow();
+            SetDefaultBackground();
+        }
+
+        private void InitializeHostWindow()
+        {
+            hostWindow.Left = this.Left;
+            hostWindow.Top = this.Top;
+            hostWindow.Width = this.Width;
+            hostWindow.Height = this.Height;
+            hostWindow.ShowInTaskbar = false;
+           
+            var handleCurrent = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            var handleHostWindow = new System.Windows.Interop.WindowInteropHelper(hostWindow).Handle;
+
+            WinAPI.SetWindowOrder(handleCurrent,handleHostWindow);
+            this.Activate();
+        }
+
+        #endregion
+
+        #region Hook
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            System.Windows.Interop.HwndSource hwndSource = PresentationSource.FromVisual(this) as System.Windows.Interop.HwndSource;
+            if (hwndSource != null)
+                hwndSource.AddHook(new System.Windows.Interop.HwndSourceHook(Hook));
+        }
+
+        private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            switch (msg)
+            {
+                case WinAPI.WM_SIZE:
+                    SyncWindowSize(hostWindow, lParam);
+                    break;
+                case WinAPI.WM_MOVING:
+                    SyncWindowPos(hostWindow, lParam);
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+        private void SyncWindowPos(Window window, IntPtr lParam)
+        {
+            RECT rECT = new RECT();
+            rECT = (RECT)System.Runtime.InteropServices.Marshal.PtrToStructure(lParam, typeof(RECT));
+
+            hostWindow.Left = rECT.left;
+            hostWindow.Top = rECT.top;
+        }
+
+        private void SyncWindowSize(Window window, IntPtr lParam)
+        {
+            var height = WinAPI.HIWORD((uint)lParam);
+            var width = WinAPI.LOWORD((uint)lParam);
+
+            hostWindow.Width = width;
+            hostWindow.Height = height;
+            hostWindow.Left = this.Left;
+            hostWindow.Top = this.Top;
+        }
+        #endregion
+
+        #region Navigation
         private void btn_FetchUrl_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = urlPage;
@@ -176,6 +291,8 @@ namespace CSharpCrawler
         {
             if (GlobalDataUtil.GetInstance().Browser != null)
                 GlobalDataUtil.GetInstance().Browser.Close();
+
+            hostWindow.Close();
         }
 
         private void btn_FetchDynamicResource_Click(object sender, RoutedEventArgs e)
@@ -190,8 +307,10 @@ namespace CSharpCrawler
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
         {
-            if(IsDynamicBackground == false)
+            if (IsDynamicBackground == false)
                 setting.LoadSettingFromUI();
+
+            setting.LoadHostWindowCheck(IsHostBackground);
 
             this.frame.Content = setting;
         }
@@ -282,5 +401,6 @@ namespace CSharpCrawler
         {
             this.frame.Content = saveWebPage;
         }
+        #endregion
     }
 }

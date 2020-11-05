@@ -21,8 +21,8 @@
 		<!--0 Mix 1-Regex 2-HtmlAgilityPack-->
 		<FetchMode>2</FetchMode>
 	</FetchImage>
-	<!--暂时只做图片-->
-	<ThemeList>
+	<!--类型：0-静态图像 1-动态视频-->
+	<ThemeList SelectedIndex="5">
 		<Theme>
 			<Background Type="0">./User Data/Theme/Default.jpg</Background>
 		</Theme>

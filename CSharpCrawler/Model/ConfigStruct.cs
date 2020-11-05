@@ -15,6 +15,8 @@ namespace CSharpCrawler.Model
         public CommonConfig CommonConfig { get; set; }
 
         public List<Theme> ThemeList { get; set; }
+
+        public int SelectedThemeIndex { get; set; }
     }
 
     public class CommonConfig

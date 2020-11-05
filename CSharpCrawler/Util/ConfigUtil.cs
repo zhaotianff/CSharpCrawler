@@ -63,10 +63,15 @@ namespace CSharpCrawler.Util
                     themeList.Add(theme);
                 }
 
+                var index =  0;
+                var strIndex = doc.Root.Element("ThemeList").Attribute("SelectedIndex").Value;
+                int.TryParse(strIndex,out index);
+
                 configStruct.ImageConfig = imageConfig;
                 configStruct.UrlConfig = urlConfig;
                 configStruct.CommonConfig = commonConfig;
                 configStruct.ThemeList = themeList;
+                configStruct.SelectedThemeIndex = index;
                 
             }
             catch (Exception ex)

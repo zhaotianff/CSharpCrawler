@@ -49,14 +49,11 @@ namespace CSharpCrawler
         ToggleButton toggleButton = null;
 
         HostWindow hostWindow = new HostWindow();
-
-        public bool IsDynamicBackground { get; set; } = false;
         public bool IsHostBackground { get; set; } = true;
 
         public MainWindow()
         {
-            InitializeComponent();
-            
+            InitializeComponent();         
             InitializeCommands();
             Application.Current.MainWindow = this;
             hostWindow.Show();
@@ -118,73 +115,99 @@ namespace CSharpCrawler
         #endregion
 
         #region Beautify
-        public void SetBackgroundVideo(string path, UriKind uriKind = UriKind.Relative)
-        {
-            mediaelement.Source = new Uri(path, uriKind);
-            mediaelement.Play();
-
-            IsDynamicBackground = true;
-        }
-
         public void StopBackgroundVideo()
         {
-            if(IsHostBackground)
-            {
-                hostWindow.StopBackgroundVideo();
-            }
-            else
-            {
-                mediaelement.Stop();
-                mediaelement.Visibility = Visibility.Hidden;
-            }
-
-            IsDynamicBackground = false;
+            hostWindow.StopBackgroundVideo();
+            mediaelement.Stop();
+            mediaelement.Visibility = Visibility.Hidden;
         }
 
         public void SetDefaultBackground()
         {
-            //后面从配置文件加载吧 
-            var themeList = GlobalDataUtil.GetInstance().CrawlerConfig.ThemeList;
-            var fileName = themeList.Last().Background;
-            fileName = fileName.Replace(".jpg", ".mp4");
+            var crawlerConfig = GlobalDataUtil.GetInstance().CrawlerConfig;
+            var theme = crawlerConfig.ThemeList[crawlerConfig.SelectedThemeIndex];
 
-            if (IsHostBackground)
+            if (theme.BackgroundType == BackgroundType.Dynamic)
             {
-               SetHostBackgroundVideo(fileName);
-               this.Activate();
+                var fileName = theme.Background.Replace(".jpg", ".mp4");
+                SetBackgroundVideo(fileName);
             }
             else
             {
-               SetBackgroundVideo(fileName);
+                SetBackgroundImage(theme.Background, 0.8);
             }
+
+            SetCurrentWindowToTop();
         }
 
-        public void SetHostBackgroundImage(string path)
+        public void SetBackgroundVideo(string path)
         {
-            hostWindow.StopBackgroundVideo();
-            hostWindow.SetBackgroundImage(path);
-            this.Visibility = Visibility.Hidden;
-            this.Visibility = Visibility.Visible;
+            StopBackgroundVideo();
+
+            if(IsHostBackground)
+            {
+                hostWindow.SetBackgroundVideo(path);   
+            }
+            else
+            {
+                SetTransparentBackground();
+                mediaelement.Source = new Uri(path,UriKind.Relative);
+                mediaelement.Play();
+            }
+
+            SetCurrentWindowToTop();
         }
 
-        public void SetHostBackgroundVideo(string path, UriKind uriKind = UriKind.Relative)
+        public void SetPureColorBackground(Brush brush,double opacity)
         {
-            hostWindow.SetBackgroundVideo(path, uriKind);
-            this.Visibility = Visibility.Hidden;
-            this.Visibility = Visibility.Visible;
+            StopBackgroundVideo();
+
+            if(IsHostBackground)
+            {
+                hostWindow.SetBackgroundColor(brush, opacity);
+            }
+            else
+            {
+                this.Background = brush;
+                this.Background.Opacity = opacity;
+            }
+
+            SetCurrentWindowToTop();
+        } 
+
+        public void SetBackgroundImage(string path,double opacity)
+        {
+            StopBackgroundVideo();
+
+            if(IsHostBackground)
+            {            
+                hostWindow.SetBackgroundImage(path);               
+            }
+            else
+            {
+                this.Background = new ImageBrush() 
+                { 
+                    Stretch = Stretch.UniformToFill, 
+                    ImageSource = new BitmapImage(new Uri(path, UriKind.Relative)), 
+                    Opacity = opacity
+                };
+            }
+
+            SetCurrentWindowToTop();
         }
 
-        public void HideHostWindow()
-        {
-            hostWindow.StopBackgroundVideo();
-            hostWindow.Visibility = Visibility.Hidden;
-            IsHostBackground = false;
-        }
+       
 
-        public void ShowHostWindow()
+        public void EnableHostWindow()
         {
-            hostWindow.ShowWindow();
             IsHostBackground = true;
+            SetDefaultBackground();
+        }
+
+        public void DisableHostWindow()
+        {
+            IsHostBackground = false;
+            hostWindow.StopBackgroundVideo();
         }
 
         public void SetTransparentBackground()
@@ -199,6 +222,15 @@ namespace CSharpCrawler
             mediaelement.Play();
         }
 
+        private void SetCurrentWindowToTop()
+        {
+            //目前除了让窗口置顶(TOP_MOST)，只找到这种方法能让窗口前置
+            if (IsHostBackground)
+            {
+                this.Visibility = Visibility.Hidden;
+                this.Visibility = Visibility.Visible;
+            }
+        }
         #endregion
 
         #region Initialization
@@ -287,14 +319,6 @@ namespace CSharpCrawler
             this.frame.Content = resourcePage;
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            if (GlobalDataUtil.GetInstance().Browser != null)
-                GlobalDataUtil.GetInstance().Browser.Close();
-
-            hostWindow.Close();
-        }
-
         private void btn_FetchDynamicResource_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = dynamicResourcePage;
@@ -307,11 +331,8 @@ namespace CSharpCrawler
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
         {
-            if (IsDynamicBackground == false)
-                setting.LoadSettingFromUI();
-
+            setting.LoadSettingFromUI(this.Background.Opacity);
             setting.LoadHostWindowCheck(IsHostBackground);
-
             this.frame.Content = setting;
         }
 
@@ -400,6 +421,16 @@ namespace CSharpCrawler
         private void btn_SaveWebPage_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = saveWebPage;
+        }
+        #endregion
+
+        #region Event
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (GlobalDataUtil.GetInstance().Browser != null)
+                GlobalDataUtil.GetInstance().Browser.Close();
+
+            hostWindow.Close();
         }
         #endregion
     }

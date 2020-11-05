@@ -78,9 +78,9 @@ namespace CSharpCrawler.Views
                 this.cbox_UrlCheck.IsChecked = false;
         }
 
-        public void LoadSettingFromUI()
+        public void LoadSettingFromUI(double opacity)
         {
-            this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
+            this.slider_Opacity.Value = opacity;
         }
 
         public void LoadHostWindowCheck(bool isChecked)
@@ -125,10 +125,7 @@ namespace CSharpCrawler.Views
             if (border == null)
                 return;
                            
-            (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
-            Application.Current.MainWindow.Background = border.Background as Brush;
-            this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
-            EnableAdjustTransparency();           
+            (Application.Current.MainWindow as MainWindow).SetPureColorBackground(border.Background,this.slider_Opacity.Value);     
         }
 
         private void ChangeImgBackground_MouseDown(object sender,MouseButtonEventArgs e)
@@ -143,66 +140,28 @@ namespace CSharpCrawler.Views
             if (theme.BackgroundType == Model.BackgroundType.Dynamic)
             {
                 fileName = fileName.Replace(".jpg", ".mp4");
-
-                if(cbx_HostWindow.IsChecked.Value == true)
-                {
-                    //TODO 没有时间啊
-                    (Application.Current.MainWindow as MainWindow).Background = new SolidColorBrush() { Color = Colors.White, Opacity = 0.8 };
-                    (Application.Current.MainWindow as MainWindow).SetHostBackgroundVideo(fileName);
-                    this.slider_Opacity.Value = 0.8;
-                }
-                else
-                {
-                    (Application.Current.MainWindow as MainWindow).SetTransparentBackground();
-                    (Application.Current.MainWindow as MainWindow).SetBackgroundVideo(fileName);
-                    DisableAdjustTransparency();
-                }                              
+                (Application.Current.MainWindow as MainWindow).SetBackgroundVideo(fileName);
+                                            
             }
             else
             {                
-                if(cbx_HostWindow.IsChecked.Value == true)
-                {
-                    (Application.Current.MainWindow as MainWindow).Background = new SolidColorBrush() { Color = Colors.White,Opacity = 0.8 };
-                    (Application.Current.MainWindow as MainWindow).SetHostBackgroundImage(fileName);
-                    this.slider_Opacity.Value = 0.8;
-                }
-                else
-                {
-                    (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
-                    Application.Current.MainWindow.Background = new ImageBrush() { ImageSource = new BitmapImage(new Uri(fileName, UriKind.Relative)), Stretch = Stretch.UniformToFill };
-                    this.slider_Opacity.Value = Application.Current.MainWindow.Background.Opacity;
-                    EnableAdjustTransparency();
-                }                              
+                (Application.Current.MainWindow as MainWindow).SetBackgroundImage(fileName,this.slider_Opacity.Value);                                           
             }            
         }
 
         private void slider_Opacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Application.Current.MainWindow.Background.Opacity = e.NewValue;
+        {         
+            (Application.Current.MainWindow as MainWindow).Background.Opacity = e.NewValue;           
         }
 
         private void cbx_HostWindow_Checked(object sender, RoutedEventArgs e)
         {
-            //这样的代码 维护性很低 先实现功能 
-            (Application.Current.MainWindow as MainWindow).StopBackgroundVideo();
-            (Application.Current.MainWindow as MainWindow).ShowHostWindow();
-            (Application.Current.MainWindow as MainWindow).Background = new SolidColorBrush() { Color = Colors.White,Opacity = 0.8 };
-            (Application.Current.MainWindow as MainWindow).SetDefaultBackground();
+            (Application.Current.MainWindow as MainWindow).EnableHostWindow();
         }
 
         private void cbx_HostWindow_Unchecked(object sender, RoutedEventArgs e)
         {
-            (Application.Current.MainWindow as MainWindow).HideHostWindow();
-        }
-
-        private void DisableAdjustTransparency()
-        {
-            slider_Opacity.IsEnabled = false;
-        }
-
-        private void EnableAdjustTransparency()
-        {
-            slider_Opacity.IsEnabled = true;
+            (Application.Current.MainWindow as MainWindow).DisableHostWindow();
         }
 
         private void ChangeTheme_MouseDown(object sender, MouseButtonEventArgs e)

@@ -20,11 +20,16 @@ namespace CSharpCrawler.Util
         private static uint SWP_NOMOVE = 0x0002;
         private static uint SWP_NOSIZE = 0x0001;
 
+        private static int SW_SHOW = 5;
+
         [DllImport("User32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
-        [DllImport("user32.dll")]
+        [DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("User32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd,int nCmdShow);
 
         public static void SetWindowOrder(IntPtr top,IntPtr bottom)
         {
@@ -34,7 +39,8 @@ namespace CSharpCrawler.Util
 
         public static void SetTopWindow(IntPtr hwnd)
         {
-            SetForegroundWindow(hwnd);
+            SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+            SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
         }
 
         public static ushort HIWORD(uint num)

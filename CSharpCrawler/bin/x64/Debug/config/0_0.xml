@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Crawler>
-    <!--公共配置参数-->
-    <Common>
-	    <!--Url是否合法标志-->
-	    <UrlCheck>0</UrlCheck>
-	</Common>
-	<FetchUrl>
-		<Depth>1</Depth>
-		<DynamicGrab>0</DynamicGrab>
-		<IgnoreUrlCheck>1</IgnoreUrlCheck>
-	</FetchUrl>
-	<FetchImage>
-		<Depth>1</Depth>
-		<IgnoreUrlCheck>1</IgnoreUrlCheck>
-		<DynamicGrab>1</DynamicGrab>
-		<MinSize>0</MinSize>
-		<MaxSize>0</MaxSize>
-		<MinResolution>0</MinResolution>
-		<MaxResolution>0</MaxResolution>
-		<!--0 Mix 1-Regex 2-HtmlAgilityPack-->
-		<FetchMode>2</FetchMode>
-	</FetchImage>
-	<!--类型：0-静态图像 1-动态视频-->
-	<ThemeList SelectedIndex="5">
-		<Theme>
-			<Background Type="0">./User Data/Theme/Default.jpg</Background>
-		</Theme>
-		<Theme>
-			<Background Type="0">./User Data/Theme/Default_2.jpg</Background>
-		</Theme>
-		<Theme>
-			<Background Type="0">./User Data/Theme/Default_3.jpg</Background>
-		</Theme>
-		<Theme>
-			<Background Type="0">./User Data/Theme/Default_4.jpg</Background>
-		</Theme>
-		<Theme>
-			<Background Type="1">./User Data/Theme/Default_Dynamic.jpg</Background>
-		</Theme>
-		<Theme>
-			<Background Type="1">./User Data/Theme/Default_Dynamic_2.jpg</Background>
-		</Theme>
-	</ThemeList>
+  <!--公共配置参数-->
+  <Common>
+    <!--Url是否合法标志-->
+    <UrlCheck>0</UrlCheck>
+  </Common>
+  <FetchUrl>
+    <Depth>1</Depth>
+    <DynamicGrab>0</DynamicGrab>
+    <IgnoreUrlCheck>1</IgnoreUrlCheck>
+  </FetchUrl>
+  <FetchImage>
+    <Depth>1</Depth>
+    <IgnoreUrlCheck>1</IgnoreUrlCheck>
+    <DynamicGrab>1</DynamicGrab>
+    <MinSize>0</MinSize>
+    <MaxSize>0</MaxSize>
+    <MinResolution>0</MinResolution>
+    <MaxResolution>0</MaxResolution>
+    <!--0 Mix 1-Regex 2-HtmlAgilityPack-->
+    <FetchMode>2</FetchMode>
+  </FetchImage>
+  <!--类型：0-静态图像 1-动态视频-->
+  <ThemeList SelectedIndex="5">
+    <Theme>
+      <Background Type="0">./User Data/Theme/Default.jpg</Background>
+    </Theme>
+    <Theme>
+      <Background Type="0">./User Data/Theme/Default_2.jpg</Background>
+    </Theme>
+    <Theme>
+      <Background Type="0">./User Data/Theme/Default_3.jpg</Background>
+    </Theme>
+    <Theme>
+      <Background Type="0">./User Data/Theme/Default_4.jpg</Background>
+    </Theme>
+    <Theme>
+      <Background Type="1">./User Data/Theme/Default_Dynamic.jpg</Background>
+    </Theme>
+    <Theme>
+      <Background Type="1">./User Data/Theme/Default_Dynamic_2.jpg</Background>
+    </Theme>
+  </ThemeList>
 </Crawler>

@@ -227,8 +227,12 @@ namespace CSharpCrawler
             //目前除了让窗口置顶(TOP_MOST)，只找到这种方法能让窗口前置
             if (IsHostBackground)
             {
+                var handleCurrent = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+                var handleHostWindow = new System.Windows.Interop.WindowInteropHelper(hostWindow).Handle;
+                WinAPI.SetWindowOrder(handleCurrent, handleHostWindow);
                 this.Visibility = Visibility.Hidden;
                 this.Visibility = Visibility.Visible;
+                this.Activate();
             }
         }
         #endregion

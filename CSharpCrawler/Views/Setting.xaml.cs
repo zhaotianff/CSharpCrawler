@@ -124,8 +124,9 @@ namespace CSharpCrawler.Views
 
             if (border == null)
                 return;
-                           
-            (Application.Current.MainWindow as MainWindow).SetPureColorBackground(border.Background,this.slider_Opacity.Value);     
+
+             Brush brush = border.Background.Clone();
+            (Application.Current.MainWindow as MainWindow).SetPureColorBackground(brush, this.slider_Opacity.Value);
         }
 
         private void ChangeImgBackground_MouseDown(object sender,MouseButtonEventArgs e)

@@ -193,6 +193,9 @@ Visual Studio 2017 + .Net 4.7.2
  <img align="center" alt="file download" src="https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/ScreenShots/6.png" />
 </p>
 
+### 爬虫项目
+* [MSDN-Magazine-To-PDF](https://github.com/zhaotianff/MSDN-Magazine-To-PDF)
+
 ### License
 
 [MIT License](LICENSE).

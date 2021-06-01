@@ -548,6 +548,7 @@
     </EmbeddedResource>
     <None Include="AnalysisPacket_Fiddler.md" />
     <None Include="app.config" />
+    <None Include="MongoDB.md" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

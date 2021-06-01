@@ -27,7 +27,7 @@ MongoDB分为社区版和企业版，区别如下：
 
 * 下载  
 打开MongoDB下载页面(https://www.mongodb.com/try/download/community)，下载MongoDB安装包  
-这里下载社区版(https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.6-signed.msi)[2021.06.01 v4.4.6]  
+这里下载社区版(https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.6-signed.msi) [2021.06.01 v4.4.6]  
 **说明：演示使用的是4.2.14.因为4.4.6需要Windows Server 2016/Windows 10，我的服务器装的是Windows Server 2012系统**
 
 * 执行安装  

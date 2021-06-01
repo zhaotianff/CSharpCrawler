@@ -106,10 +106,13 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 
 * 爬虫数据存储
   * Berkeley DB
-    * 介绍BerkeleyDB以及使用方式
+    * [介绍BerkeleyDB以及使用方式](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/BerkeleyDB介绍.txt)
     
   * SQLite
     * 介绍SQLite以及使用方式
+  
+  * MongoDB
+    * [介绍MongoDB以及使用方式](https://github.com/zhaotianff/CSharpCrawler/blob/master/CSharpCrawler/MongoDB.md)
 	 
 * 小例子-全国家常菜价格统计(*仅供交流学习使用，请勿用作商业用途*)
   * 获取全国城市，以及城市代码

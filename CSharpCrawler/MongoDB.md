@@ -82,6 +82,8 @@ column|field|数据字段/域
 index|index|索引
 table|joins|表连接,MongoDB不支持
 primary key|primary key|主键,MongoDB自动将_id字段设置为主键
+union|embedded/nested documents|表联合，MongoDB中是嵌入文档
+view|view|视图
 
 *SQL*
 ID|URL|Title|Tag
@@ -121,3 +123,52 @@ ID|URL|Title|Tag
    * 不能包含'\0'(空字符)，这个字符表示集合名的结尾
    * 不能以'system.'开头，这是为系统集合保留的前缀
    * 不能含有保留字符，如$
+
+### BSON
+在介绍Document之前需要了解一下BSON这种数据格式
+BSON:Binary JSON(二进制JSON)，能用于表示简单的数据结构、关联数组及MongoDB中的各种数据类型
+
+*JSON和BSON*
+BSON的类型名义上是JSON类型的一个超集（JSON没有date或字节数组类型），但一个例外是没有像JSON那样的通用“数字”（number）类型
+
+*BSON的常见数据类型*
+* string["CSharpCrawler"]
+* integer（32或64位）[520]
+* double（64位IEEE 754浮点数）[520.1314]
+* date（整数，自UNIX时间的毫秒数) [new Date("01/06/2012")]
+* boolean（true或false）[true]
+* null [null]
+* BSON对象[ObjectId(),ObjectId类似唯一主键，可以很快的去生成和排序，包含12bytes]  
+**ObjectId组成规则：前4个字节表示创建的时间戳(UTC时间)，接下来3个字节是机器标识码，紧接的2个字节由进程id和pid组成，最后3个字节是随机数**
+* BSON数组["abc","def","ghi"]
+* JavaScript代码[function(){/Test code/}]
+* 正则表达式（Perl兼容的正则表达式，即PCRE，版本8.41，含UTF-8支持；与Python不完全兼容）[/u01/i]
+
+### Document(文档)  
+文档是一组键值对(BSON)。MongoDB的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型  
+
+如  
+```
+{
+    Title: "Google",
+    Tag: "Search Engine"      
+}
+```
+
+*注意*
+* 区分类型和大小写  
+* 不能有重复的键  
+* 键是字符串。除了少数例外情况，键可以使用任意UTF-8字符  
+* 键不能含有'\0'  
+* .和$只能在特定环境下才能使用  
+* 避免使用'_'开头的键  
+
+## 图形客户端
+
+## 总结
+有了以上的理论知识，就可以在C#中使用MongoDB数据库了，具体使用步骤，可以参照示例程序中的【爬虫数据存储/MongoDB】
+如果觉得对理论的理解还不是很透彻的话，可以参考：  
+MongoDB官方手册  
+https://docs.mongodb.com/manual/
+菜鸟教程  
+https://www.runoob.com/mongodb/mongodb-tutorial.html

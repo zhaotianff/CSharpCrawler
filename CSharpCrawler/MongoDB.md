@@ -99,7 +99,7 @@ ID|URL|Title|Tag
 }
 ```
 
-* Database(数据库)  
+### Database(数据库)  
 数据库的概念和SQL基本一致。MongoDB的单个实例可以创建多个数据库,每个数据库都有自己的集合和权限，不同的数据库也放置在不同的文件中。  
 默认数据库为"db"，使用mongo shell的"show dbs"命令可以查看所有数据库  
 
@@ -111,7 +111,7 @@ ID|URL|Title|Tag
   * config  
     当Mongo用于分片设置时，config数据库在内部使用，用于保存分片的相关信息  
 
-* Collection(集合)  
+### Collection(集合)  
 集合就是MongoDB的文档组  
 集合类似于SQL中的Table  
 集合存在于数据库中，没有固定的结构  

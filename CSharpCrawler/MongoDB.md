@@ -163,7 +163,24 @@ BSON的类型名义上是JSON类型的一个超集（JSON没有date或字节数�
 * .和$只能在特定环境下才能使用  
 * 避免使用'_'开头的键  
 
-## 图形客户端
+## 可视化工具
+MongoDB推荐的可视化工具：
+* [RoboMongo](https://github.com/Studio3T/robomongo)
+* [Compass](https://docs.mongodb.com/compass/)
+RoboMongo是一款基于QT的开源软件  
+Compass是MongoDB自带的可视化管理工具
+
+### Compass使用教程
+
+* 连接数据库
+打开MongoDB Compass，在主界面可以看到输入连接字符串连接MongoDB数据库.  
+这里直接通过对话框填连接字符串的每个字段  
+单击"Fill in connection fields individually"  
+![MongoDBCompass](doc/MongoDBCompass.png)  
+基本没啥要修改的，直接使用localhost:27017  
+![CompassConnect](doc/CompassConnect.png)  
+连接成功后，打开Compass主界面
+![CompassMain](doc/CompassMain.png)
 
 ## 总结
 有了以上的理论知识，就可以在C#中使用MongoDB数据库了，具体使用步骤，可以参照示例程序中的【爬虫数据存储/MongoDB】

@@ -129,11 +129,11 @@ ID|URL|Title|Tag
 Capped Collections：就是大小固定的集合，支持基于插入顺序插入和检索文档的高吞吐量操作
 
 ### BSON
-在介绍Document之前需要了解一下BSON这种数据格式
-BSON:Binary JSON(二进制JSON)，能用于表示简单的数据结构、关联数组及MongoDB中的各种数据类型
+在介绍Document之前需要了解一下BSON这种数据格式  
+BSON:Binary JSON(二进制JSON)，能用于表示简单的数据结构、关联数组及MongoDB中的各种数据类型  
 
 *JSON和BSON*
-BSON的类型名义上是JSON类型的一个超集（JSON没有date或字节数组类型），但一个例外是没有像JSON那样的通用“数字”（number）类型
+BSON的类型名义上是JSON类型的一个超集（JSON没有date或字节数组类型），但一个例外是没有像JSON那样的通用“数字”（number）类型  
 
 *BSON的常见数据类型*
 * string["CSharpCrawler"]
@@ -169,43 +169,43 @@ BSON的类型名义上是JSON类型的一个超集（JSON没有date或字节数�
 
 ## 可视化工具
 MongoDB推荐的可视化工具：
-* [RoboMongo](https://github.com/Studio3T/robomongo)
-* [Compass](https://docs.mongodb.com/compass/)
+* [RoboMongo](https://github.com/Studio3T/robomongo)  
+* [Compass](https://docs.mongodb.com/compass/)  
 RoboMongo是一款基于QT的开源软件  
 Compass是MongoDB自带的可视化管理工具
 
 ### Compass使用教程
 
-* 连接数据库
+* 连接数据库  
 打开MongoDB Compass，在主界面可以看到输入连接字符串连接MongoDB数据库.  
 这里直接通过对话框填连接字符串的每个字段  
 单击"Fill in connection fields individually"  
 ![MongoDBCompass](doc/MongoDBCompass.png)  
 基本没啥要修改的，直接使用localhost:27017  
 ![CompassConnect](doc/CompassConnect.png)  
-连接成功后，打开Compass主界面
-![CompassMain](doc/CompassMain.png)
+连接成功后，打开Compass主界面  
+![CompassMain](doc/CompassMain.png)  
 
 * 创建数据库  
 单击"Create Database"  
 ![CompassCreateDatabase](doc/CompassCreateDatabase.png)  
 输入数据库和第一个集合名称  
-![CompassCreateDatabase](doc/CompassCreateDatabase_2.png)
-*说明*
-Capped Collection复选框：代表是否创建Capped Collection（前面在介绍集合的时候提到过这种Capped Collection）
-Use Custom Collation复选框：使用自定义Collation,Collation允许用户为字符串比较指定特定于语言的规则，例如字母和重音符号的规则。
+![CompassCreateDatabase](doc/CompassCreateDatabase_2.png)  
+*说明*  
+Capped Collection复选框：代表是否创建Capped Collection（前面在介绍集合的时候提到过这种Capped Collection）  
+Use Custom Collation复选框：使用自定义Collation,Collation允许用户为字符串比较指定特定于语言的规则，例如字母和重音符号的规则。  
 
 * 删除数据库  
-单击数据库后面的垃圾桶按钮即可删除数据库
+单击数据库后面的垃圾桶按钮即可删除数据库  
 
-* 创建集合
-在左侧选中要创建集合的数据库，单击"Create Collection"按钮，输入集合信息，即可创建集合
-![CompassCreateCollection](doc/CompassCreateCollection.png)
+* 创建集合  
+在左侧选中要创建集合的数据库，单击"Create Collection"按钮，输入集合信息，即可创建集合  
+![CompassCreateCollection](doc/CompassCreateCollection.png)  
 
 * 删除集合  
 单击集合后面的垃圾桶按钮即可删除集合  
 
-* 添加文档 
+* 添加文档  
 先选中数据库，在集合列表中选中要添加文档的集合，再单击"Add Data"按钮，可以从文件导入，也可以手动创建，这里选择手动创建  
 ![CompassAddDocument](doc/CompassAddDocument.png)  
 输入文档数据  
@@ -218,13 +218,13 @@ Use Custom Collation复选框：使用自定义Collation,Collation允许用户�
     "Name":"夏日小清新唯美"    
 }
 ```
-单击"Insert"按钮，即可插入文档。在文档的最右边有四个按钮可以对文档进行操作，分别是编辑、复制（复制字符串到剪贴板）、克隆（克隆当前文档）、删除功能  
+单击"Insert"按钮，即可插入文档。在文档的最右边有四个按钮可以对文档进行操作，分别是编辑、复制（复制字符串到剪贴板）、克隆（克隆当前文档）、删除功能    
 ![CompassDocumentManagement](doc/CompassDocumentManagement.png)  
 
 ## 总结
 有了以上的理论知识，就可以在C#中使用MongoDB数据库了，具体使用步骤，可以参照示例程序中的【爬虫数据存储/MongoDB】
 如果觉得对MongoDB理论的理解还不是很透彻的话，可以参考：  
 MongoDB官方手册  
-https://docs.mongodb.com/manual/
+https://docs.mongodb.com/manual/  
 菜鸟教程  
-https://www.runoob.com/mongodb/mongodb-tutorial.html
+https://www.runoob.com/mongodb/mongodb-tutorial.html  

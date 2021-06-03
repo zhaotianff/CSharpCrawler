@@ -191,9 +191,9 @@ Compass是MongoDB自带的可视化管理工具
 ![CompassCreateDatabase](doc/CompassCreateDatabase.png)  
 输入数据库和第一个集合名称  
 ![CompassCreateDatabase](doc/CompassCreateDatabase_2.png)  
-*说明*  
-Capped Collection复选框：代表是否创建Capped Collection（前面在介绍集合的时候提到过这种Capped Collection）  
-Use Custom Collation复选框：使用自定义Collation,Collation允许用户为字符串比较指定特定于语言的规则，例如字母和重音符号的规则。  
+*说明*    
+**Capped Collection复选框：代表是否创建Capped Collection（前面在介绍集合的时候提到过这种Capped Collection）**    
+**Use Custom Collation复选框：使用自定义Collation,Collation允许用户为字符串比较指定特定于语言的规则，例如字母和重音符号的规则。**    
 
 * 删除数据库  
 单击数据库后面的垃圾桶按钮即可删除数据库  

@@ -124,6 +124,10 @@ ID|URL|Title|Tag
    * 不能以'system.'开头，这是为系统集合保留的前缀
    * 不能含有保留字符，如$
 
+*说明*
+创建集合时可以指定为Capped Collections
+Capped Collections：就是大小固定的集合，支持基于插入顺序插入和检索文档的高吞吐量操作
+
 ### BSON
 在介绍Document之前需要了解一下BSON这种数据格式
 BSON:Binary JSON(二进制JSON)，能用于表示简单的数据结构、关联数组及MongoDB中的各种数据类型
@@ -182,9 +186,44 @@ Compass是MongoDB自带的可视化管理工具
 连接成功后，打开Compass主界面
 ![CompassMain](doc/CompassMain.png)
 
+* 创建数据库  
+单击"Create Database"  
+![CompassCreateDatabase](doc/CompassCreateDatabase.png)  
+输入数据库和第一个集合名称  
+![CompassCreateDatabase](doc/CompassCreateDatabase_2.png)
+*说明*
+Capped Collection复选框：代表是否创建Capped Collection（前面在介绍集合的时候提到过这种Capped Collection）
+Use Custom Collation复选框：使用自定义Collation,Collation允许用户为字符串比较指定特定于语言的规则，例如字母和重音符号的规则。
+
+* 删除数据库  
+单击数据库后面的垃圾桶按钮即可删除数据库
+
+* 创建集合
+在左侧选中要创建集合的数据库，单击"Create Collection"按钮，输入集合信息，即可创建集合
+![CompassCreateCollection](doc/CompassCreateCollection.png)
+
+* 删除集合  
+单击集合后面的垃圾桶按钮即可删除集合  
+
+* 添加文档 
+先选中数据库，在集合列表中选中要添加文档的集合，再单击"Add Data"按钮，可以从文件导入，也可以手动创建，这里选择手动创建  
+![CompassAddDocument](doc/CompassAddDocument.png)  
+输入文档数据  
+```
+{
+    "_id": {
+        "$oid": "60b84647190d503e5912d2c2"
+    },
+    "Url":"http://pic1.win4000.com/wallpaper/2018-07-13/5b485cc737348.jpg",
+    "Name":"夏日小清新唯美"    
+}
+```
+单击"Insert"按钮，即可插入文档。在文档的最右边有四个按钮可以对文档进行操作，分别是编辑、复制（复制字符串到剪贴板）、克隆（克隆当前文档）、删除功能  
+![CompassDocumentManagement](doc/CompassDocumentManagement.png)  
+
 ## 总结
 有了以上的理论知识，就可以在C#中使用MongoDB数据库了，具体使用步骤，可以参照示例程序中的【爬虫数据存储/MongoDB】
-如果觉得对理论的理解还不是很透彻的话，可以参考：  
+如果觉得对MongoDB理论的理解还不是很透彻的话，可以参考：  
 MongoDB官方手册  
 https://docs.mongodb.com/manual/
 菜鸟教程  

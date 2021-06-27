@@ -690,6 +690,74 @@ namespace CSharpCrawler.Util
             act($"Download {url} success");
         }
 
+        /// <summary>
+        /// 使用HttpClient/IProgress 实现
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="progress"></param>
+        public async static void DownloadFileWithProgress(string url,IProgress<double> progress,int threadCount = 3,string fileName = "")
+        {
+            var header = GetHeader(url);
+            int index = 0;
+
+            if (header.StatusCode != HttpStatusCode.OK)
+                return;
+
+            var length = header.ContentLength;
+            var httpclient = new System.Net.Http.HttpClient();           
+            var rangeArray = GetPartFileRange(length, 3);
+            var tasks = new List<Task<byte[]>>();
+            for (int i = 0; i < threadCount*2; i++)
+            {
+                tasks.Add(Task.Run(()=> { return DownloadPartFileHttpClient(rangeArray[i], rangeArray[i + 1], url); }));
+            }
+
+            await Task.WhenAll(tasks);
+
+            for (int i = 0; i < threadCount * 2; i += 2)
+            {
+                long start = rangeArray[i];
+                long end = rangeArray[i + 1];
+                byte[] buffer = await tasks[index];
+
+                using (System.IO.FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    fs.Seek(start, SeekOrigin.Begin);
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+
+                index++;
+            }
+
+        }
+
+        public static long[] GetPartFileRange(long fileSize, int threadCount)
+        {
+            long[] rangeArray = new long[threadCount * 2];
+            long blockSize = fileSize / threadCount;
+
+            for (int i = 0; i < threadCount * 2; i += 2)
+            {
+                if (i == 0)
+                {
+                    rangeArray[i] = 0;
+                    rangeArray[i + 1] = blockSize;
+                }
+                else if (i == threadCount * 2 - 2)
+                {
+                    rangeArray[i] = rangeArray[i - 1] + 1;
+                    rangeArray[i + 1] = fileSize;
+                }
+                else
+                {
+                    rangeArray[i] = rangeArray[i - 1] + 1;
+                    rangeArray[i + 1] = rangeArray[i] + blockSize;
+                }
+            }
+
+            return rangeArray;
+        }
+
         private static byte[] DownloadPartFile(long start,long end,string url)
         {
             try
@@ -726,6 +794,62 @@ namespace CSharpCrawler.Util
                 return DownloadPartFile(start, end, url);
             }
             
+        }
+
+        private static byte[] DownloadPartFileHttpClient(long start,long end,string url)
+        {
+            //TODO 尚未测试
+            //要指定范围下载，需要在请求头中设置Range值
+            //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range
+            //如：<unit>=<range-start>-<range-end>  bytes=0-1024
+
+            //HttpClient 用于在应用程序的整个生存期内实例化一次并重复使用。
+            //实例化每个请求的 HttpClient 类将耗尽重负载下可用的插槽数。 这将导致 SocketException 错误。
+            //官方推荐是使用只实例化一个HttpClient类，由于我这里使用了线程同时去操作，所以用了多个HttpClient对象
+            //以后再测试使用一个HttpClient对象能否并发使用
+            System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36");
+
+            //设置请求范围
+            httpClient.DefaultRequestHeaders.Add("Range", string.Format( "bytes={0}-{1}",start,end));
+
+            //通过流读取
+            var length = end - start;
+            var buffer = new byte[length];
+            var streamTask = httpClient.GetStreamAsync(url);
+            streamTask.Wait();
+            var stream = streamTask.Result;
+            var left = length;
+            var binaryReader = new System.IO.BinaryReader(stream);
+            var count = 1024;
+            var offset = 0;
+            var tempbuffer = new byte[count];
+            var readCount = 0;
+
+            if (stream != null)
+            {
+                while (left > 0)
+                {
+                    if (left < count)
+                    {
+                        readCount = binaryReader.Read(tempbuffer, 0, (int)left);
+                    }
+                    else
+                    {
+                        readCount = binaryReader.Read(tempbuffer, 0, count);
+                    }
+
+                    if (readCount == 0)
+                        break;
+
+                    Array.Copy(tempbuffer, 0, buffer, offset, readCount);
+                    offset += readCount;
+                    left = left - readCount;
+                }
+            }
+
+            //返回结果 
+            return buffer;
         }
 
         /// <summary>

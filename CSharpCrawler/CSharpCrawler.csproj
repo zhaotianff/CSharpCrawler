@@ -216,6 +216,7 @@
     <Compile Include="Controls\ListImage.cs" />
     <Compile Include="Controls\TextImage.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
+    <Compile Include="Converters\ItemCountConverter.cs" />
     <Compile Include="Model\BingImageInfo.cs" />
     <Compile Include="Model\ConfigStruct.cs" />
     <Compile Include="Model\Dianpin\City.cs" />
@@ -231,6 +232,9 @@
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="Model\UrlStruct.cs" />
     <Compile Include="Model\WeatherInfo.cs" />
+    <Compile Include="UserControls\SQLiteParameterUI.xaml.cs">
+      <DependentUpon>SQLiteParameterUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\AngleSharpHelper.cs" />
     <Compile Include="Util\BDBHelper.cs" />
     <Compile Include="Util\ConfigUtil.cs" />
@@ -412,6 +416,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\LightBlue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SQLiteParameterUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpCrawler.Views"
+      xmlns:converter="clr-namespace:CSharpCrawler.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1024"
       Title="DataStorage">
-
+    <Page.Resources>
+        <converter:ItemCountConverter x:Key="item_Converter"/>
+    </Page.Resources>
     <Grid>
         <TabControl Background="Transparent">
             <TabItem Header="Berkeley DB" Style="{StaticResource StyleTabItem}">
@@ -67,6 +70,48 @@
 
             <TabItem Header="SQLite" Style="{StaticResource StyleTabItem}">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="操作" Grid.Row="0">
+                        <Grid>
+                            <Label Content="连接字符串" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBox VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Margin="70,0,320,0"/>
+                            <Button Content="打开数据库" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,220,0"/>
+                            <Button Content="关闭数据库" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,120,0"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="执行SQL" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Label Content="SQL" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <TextBox VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Margin="40,0,100,0"/>
+                                <Button Content="执行" Style="{StaticResource GlobalButtonStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <CheckBox Content="包含参数" HorizontalAlignment="Left" Margin="3,3,0,3" VerticalAlignment="Center" Style="{StaticResource CheckBoxStyle}" Name="cbx_IsIncludeParameters"/>
+                                <Button Content="+" ToolTip="添加参数" Style="{StaticResource GlobalButtonStyle}" Width="30" HorizontalAlignment="Left" Margin="95,3,0,3" IsEnabled="{Binding ElementName=cbx_IsIncludeParameters,Path=IsChecked}" Click="btnAddParameters_Click"></Button>
+                                <Button Content="-" ToolTip="移除参数" Style="{StaticResource GlobalButtonStyle}" Width="30" HorizontalAlignment="Left" Margin="135,3,0,3"  Click="btnRemoveParameters_Click" IsEnabled="{Binding ElementName=stackPanel_Parameters,Path=Children.Count,Converter={StaticResource item_Converter},ConverterParameter=Children.Count,UpdateSourceTrigger=PropertyChanged}"></Button>
+                            </Grid>
+
+                            <StackPanel Grid.Row="2" Name="stackPanel_Parameters">
+                                
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="执行结果" Grid.Row="2">
+                        <ListView Background="Transparent" Margin="5"></ListView>
+                    </GroupBox>
                 </Grid>
             </TabItem>
 

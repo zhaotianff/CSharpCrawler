@@ -40,6 +40,7 @@ namespace CSharpCrawler.Views
             bdb = new BDBHelper(DBPath);
         }
 
+        #region Oracle BDB
         private void btn_WriteStringToBDB_Click(object sender, RoutedEventArgs e)
         {
             string guid = this.tbox_Key.Text;
@@ -126,6 +127,25 @@ namespace CSharpCrawler.Views
             this.img.Source = bi;
             ms.Close();
         }
+        #endregion
+
+        #region SQLite
+        private void btnAddParameters_Click(object sender, RoutedEventArgs e)
+        {
+            CSharpCrawler.UserControls.SQLiteParameterUI sQLiteParameterUI = new UserControls.SQLiteParameterUI();
+            this.stackPanel_Parameters.Children.Add(sQLiteParameterUI);
+        }
+
+        private void btnRemoveParameters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region MongoDB
+
+        #endregion
+
     }
 
     [Serializable]
@@ -146,4 +166,5 @@ namespace CSharpCrawler.Views
             return bytes;
         }
     }
+
 }

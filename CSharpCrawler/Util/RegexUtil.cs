@@ -60,6 +60,12 @@ namespace CSharpCrawler.Util
             //http%3a%2f%2fi2.chinanews.com%2fsimg%2fhd%2f2018%2f04%2f19%2f27fdf774f284408f8a3e1299cefd18c3.jpg
             string pattern = "url=(?<url>\\S*(.jpg|.png|.bmp))";
             Match match = Regex.Match(url, pattern);
+            if (match.Value.Contains("mm.cn.bing.net"))
+            {
+                //match = Regex.Match(url, "url=(?<url>\\S*\\s)");
+                match = Regex.Match(url, "http%253a%252f%252f\\S*(jpg|png|bmp)");
+                return new Tuple<bool, string>(true, match.Value.Replace("%253a", ":").Replace("%252f", "/"));
+            }
             //http%3a%2f%2fi2.chinanews.com%2fsimg%2fhd%2f2018%2f04%2f19%2f27fdf774f284408f8a3e1299cefd18c3.jpg
             if (match.Success)
                 return new Tuple<bool, string>(true, match.Groups["url"].Value.Replace("%2f", "/").Replace("%3a", ":"));

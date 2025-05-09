@@ -65,6 +65,9 @@ C#开发爬虫的知识总结，目前还在更新中。这并不是一个完整
 * 获取网页DOM
   * 使用[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)来获取网页的DOM结构
   
+* 获取网络请求/响应列表
+  * 类似DevTools里网络页的功能，可以获取打开一个页面时的全部请求/响应数据
+  
 * 使用CSS选择器和XPath选取元素
   * CSS选择器
   * XPath

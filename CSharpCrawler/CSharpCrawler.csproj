@@ -251,6 +251,7 @@
     <Compile Include="Model\HtmlTag.cs" />
     <Compile Include="Model\HttpHeader.cs" />
     <Compile Include="Model\CityCode.cs" />
+    <Compile Include="Model\NetworkResponse.cs" />
     <Compile Include="Model\NodeStruct.cs" />
     <Compile Include="Model\RobotsExclusionProtocol.cs" />
     <Compile Include="Model\TreeNode.cs" />
@@ -341,6 +342,9 @@
     </Compile>
     <Compile Include="Views\MultiThread.xaml.cs">
       <DependentUpon>MultiThread.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GetNetworkResponse.xaml.cs">
+      <DependentUpon>GetNetworkResponse.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegularExpressionUsage.xaml.cs">
       <DependentUpon>RegularExpressionUsage.xaml</DependentUpon>
@@ -528,6 +532,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MultiThread.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GetNetworkResponse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

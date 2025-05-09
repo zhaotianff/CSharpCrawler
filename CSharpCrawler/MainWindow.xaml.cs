@@ -30,6 +30,7 @@ namespace CSharpCrawler
         FetchResource resourcePage = new FetchResource();
         FetchDynamicResource dynamicResourcePage = new FetchDynamicResource();
         FetchResourceWithDOM fetchResourceWithDOM = new FetchResourceWithDOM();
+        GetNetworkResponse getNetworkResponse = new GetNetworkResponse();
         Setting setting = new Setting();
         Basic basic = new Basic();
         InvokeWebAPI invokeWeb = new InvokeWebAPI();
@@ -332,6 +333,12 @@ namespace CSharpCrawler
         private void btn_FetchResourceWithDOM_Click(object sender, RoutedEventArgs e)
         {
             this.frame.Content = fetchResourceWithDOM;
+        }
+
+
+        private void btn_GetNetworkResponse_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Content = getNetworkResponse;
         }
 
         private void btn_Setting_Click(object sender, RoutedEventArgs e)
